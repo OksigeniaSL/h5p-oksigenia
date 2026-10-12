@@ -188,6 +188,21 @@ test('finishing early asks twice and leaves the open letters without a point', a
   expect((await verbs(frame)).filter((v) => v === 'attempted')).toHaveLength(2);
 });
 
+test('the size of the H5P theme changes the text and the wheel', async ({ page }) => {
+  const frame = await open(page, 'es');
+  await frame.locator('.aw-intro button').click();
+  const measure = () => frame.evaluate(() => ({
+    text: parseFloat(getComputedStyle(document.querySelector('.aw-clue')).fontSize),
+    wheel: document.querySelector('.aw-wheel').getBoundingClientRect().width,
+  }));
+  const size = (name) => page.evaluate((n) => /** @type {HTMLElement} */ (document.querySelector(`.button-theme-size.${n}`)).click(), name);
+  await size('small');
+  const small = await measure();
+  await size('large');
+  await expect.poll(async () => (await measure()).wheel).toBeGreaterThan(small.wheel * 1.2);
+  expect((await measure()).text).toBeGreaterThan(small.text);
+});
+
 /** @type {Array<[number, string]>} */
 const SCREENS = [[320, 'core'], [1100, 'core'], [320, 'dark'], [1100, 'dark']];
 for (const [width, theme] of SCREENS) {

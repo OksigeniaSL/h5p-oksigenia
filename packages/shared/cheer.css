@@ -7,8 +7,8 @@
 
 .h5p-oksigenia-ring {
   display: block;
-  width: 7.5rem;
-  height: 7.5rem;
+  width: calc(4.5em + 3em * var(--h5p-theme-scaling, 1));
+  height: calc(4.5em + 3em * var(--h5p-theme-scaling, 1));
   flex: none;
 }
 
@@ -110,15 +110,20 @@
   border-radius: 50%;
 }
 
+/* The pieces fade out before the bottom of the layer, so none of them stays lined up at its edge. */
 @keyframes h5p-oksigenia-fall {
   0% {
     opacity: 1;
     transform: translate(0, 0) rotate(0);
   }
 
+  70% {
+    opacity: 1;
+  }
+
   100% {
-    opacity: 0.9;
-    transform: translate(var(--drift), 32rem) rotate(var(--spin));
+    opacity: 0;
+    transform: translate(var(--drift), 30rem) rotate(var(--spin));
   }
 }
 
