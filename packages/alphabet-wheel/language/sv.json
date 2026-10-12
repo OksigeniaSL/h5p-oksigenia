@@ -231,16 +231,16 @@
           "default": "Omgång @round"
         },
         {
-          "label": "Antal rätta svar",
-          "default": "Rätt"
+          "label": "Antal rätta svar (@count)",
+          "default": "Rätt: @count"
         },
         {
-          "label": "Antal fel svar",
-          "default": "Fel"
+          "label": "Antal fel svar (@count)",
+          "default": "Fel: @count"
         },
         {
-          "label": "Antal bokstäver kvar",
-          "default": "Kvar"
+          "label": "Antal bokstäver kvar (@count)",
+          "default": "Kvar: @count"
         },
         {
           "label": "Resultat (@score, @total)",
@@ -261,6 +261,10 @@
         {
           "label": "Slutmeddelande: mindre än 50 %",
           "default": "Fortsätt öva!"
+        },
+        {
+          "label": "En bokstav och dess läge (@letter, @status)",
+          "default": "@letter: @status"
         },
         {
           "label": "Bokstav: rätt",

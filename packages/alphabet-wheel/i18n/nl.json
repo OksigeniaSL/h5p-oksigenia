@@ -99,12 +99,6 @@
     "Ten seconds left.": "Nog tien seconden.",
     "Round (@round)": "Ronde (@round)",
     "Round @round": "Ronde @round",
-    "Count of right answers": "Aantal goede antwoorden",
-    "Correct": "Goed",
-    "Count of wrong answers": "Aantal foute antwoorden",
-    "Wrong": "Fout",
-    "Count of letters left": "Aantal letters te gaan",
-    "Left": "Te gaan",
     "Result (@score, @total)": "Resultaat (@score, @total)",
     "@score of @total letters right": "@score van de @total letters goed",
     "End message: every letter right": "Eindbericht: alle letters goed",
@@ -138,6 +132,14 @@
     "The letters of the wheel (for screen readers)": "De letters van het wiel (voor schermlezers)",
     "Letters of the wheel": "Letters van het wiel",
     "Wheel without letters": "Wiel zonder letters",
-    "This wheel has no letters with a clue and an answer yet.": "Dit wiel heeft nog geen letters met een hint en een antwoord."
+    "This wheel has no letters with a clue and an answer yet.": "Dit wiel heeft nog geen letters met een hint en een antwoord.",
+    "Count of right answers (@count)": "Aantal goede antwoorden (@count)",
+    "Correct: @count": "Goed: @count",
+    "Count of wrong answers (@count)": "Aantal foute antwoorden (@count)",
+    "Wrong: @count": "Fout: @count",
+    "Count of letters left (@count)": "Aantal letters te gaan (@count)",
+    "Left: @count": "Te gaan: @count",
+    "A letter and its state (@letter, @status)": "Een letter en zijn stand (@letter, @status)",
+    "@letter: @status": "@letter: @status"
   }
 }

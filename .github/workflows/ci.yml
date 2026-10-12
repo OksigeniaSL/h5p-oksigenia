@@ -36,6 +36,9 @@ jobs:
       - name: Types
         run: npm run typecheck
 
+      - name: Lint
+        run: npm run lint
+
       - name: Language files up to date
         run: node tools/language.mjs --check
 

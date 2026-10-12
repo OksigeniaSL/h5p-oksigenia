@@ -99,12 +99,6 @@
     "Ten seconds left.": "Noch zehn Sekunden.",
     "Round (@round)": "Runde (@round)",
     "Round @round": "Runde @round",
-    "Count of right answers": "Anzahl der richtigen Antworten",
-    "Correct": "Richtig",
-    "Count of wrong answers": "Anzahl der falschen Antworten",
-    "Wrong": "Falsch",
-    "Count of letters left": "Anzahl der offenen Buchstaben",
-    "Left": "Offen",
     "Result (@score, @total)": "Ergebnis (@score, @total)",
     "@score of @total letters right": "@score von @total Buchstaben richtig",
     "End message: every letter right": "Schlussmeldung: alle Buchstaben richtig",
@@ -138,6 +132,14 @@
     "The letters of the wheel (for screen readers)": "Die Buchstaben des Rades (für Screenreader)",
     "Letters of the wheel": "Buchstaben des Rades",
     "Wheel without letters": "Rad ohne Buchstaben",
-    "This wheel has no letters with a clue and an answer yet.": "Dieses Rad hat noch keine Buchstaben mit Hinweis und Antwort."
+    "This wheel has no letters with a clue and an answer yet.": "Dieses Rad hat noch keine Buchstaben mit Hinweis und Antwort.",
+    "Count of right answers (@count)": "Anzahl der richtigen Antworten (@count)",
+    "Correct: @count": "Richtig: @count",
+    "Count of wrong answers (@count)": "Anzahl der falschen Antworten (@count)",
+    "Wrong: @count": "Falsch: @count",
+    "Count of letters left (@count)": "Anzahl der offenen Buchstaben (@count)",
+    "Left: @count": "Offen: @count",
+    "A letter and its state (@letter, @status)": "Ein Buchstabe und sein Stand (@letter, @status)",
+    "@letter: @status": "@letter: @status"
   }
 }

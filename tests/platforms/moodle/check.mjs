@@ -36,7 +36,8 @@ const check = (name, ok, detail) => {
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${detail ? ` · ${detail}` : ''}`);
 };
 
-const browser = await chromium.launch({ channel: process.env.CI ? undefined : 'chrome', headless: true });
+// Muted: the games have sound, and these checks answer letter after letter.
+const browser = await chromium.launch({ channel: process.env.CI ? undefined : 'chrome', headless: true, args: ['--mute-audio'] });
 try {
   const page = await browser.newPage({ viewport: { width: 1200, height: 1000 } });
   const login = async (user, password) => {

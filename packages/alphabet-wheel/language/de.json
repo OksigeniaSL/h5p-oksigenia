@@ -231,16 +231,16 @@
           "default": "Runde @round"
         },
         {
-          "label": "Anzahl der richtigen Antworten",
-          "default": "Richtig"
+          "label": "Anzahl der richtigen Antworten (@count)",
+          "default": "Richtig: @count"
         },
         {
-          "label": "Anzahl der falschen Antworten",
-          "default": "Falsch"
+          "label": "Anzahl der falschen Antworten (@count)",
+          "default": "Falsch: @count"
         },
         {
-          "label": "Anzahl der offenen Buchstaben",
-          "default": "Offen"
+          "label": "Anzahl der offenen Buchstaben (@count)",
+          "default": "Offen: @count"
         },
         {
           "label": "Ergebnis (@score, @total)",
@@ -261,6 +261,10 @@
         {
           "label": "Schlussmeldung: weniger als 50 %",
           "default": "Weiter üben!"
+        },
+        {
+          "label": "Ein Buchstabe und sein Stand (@letter, @status)",
+          "default": "@letter: @status"
         },
         {
           "label": "Buchstabe: richtig",

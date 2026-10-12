@@ -146,6 +146,7 @@
 .h5p-alphabet-wheel .aw-title {
   margin: 0;
   font-size: 1.5em;
+  font-weight: 800;
   line-height: 1.2;
 }
 
@@ -445,6 +446,7 @@
   margin: 0;
   color: var(--aw-ink);
   font-size: 1.9em;
+  font-weight: 800;
   line-height: 1.15;
 }
 

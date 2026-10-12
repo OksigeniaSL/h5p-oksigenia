@@ -99,12 +99,6 @@
     "Ten seconds left.": "Tio sekunder kvar.",
     "Round (@round)": "Omgång (@round)",
     "Round @round": "Omgång @round",
-    "Count of right answers": "Antal rätta svar",
-    "Correct": "Rätt",
-    "Count of wrong answers": "Antal fel svar",
-    "Wrong": "Fel",
-    "Count of letters left": "Antal bokstäver kvar",
-    "Left": "Kvar",
     "Result (@score, @total)": "Resultat (@score, @total)",
     "@score of @total letters right": "@score av @total bokstäver rätt",
     "End message: every letter right": "Slutmeddelande: alla bokstäver rätt",
@@ -138,6 +132,14 @@
     "The letters of the wheel (for screen readers)": "Hjulets bokstäver (för skärmläsare)",
     "Letters of the wheel": "Hjulets bokstäver",
     "Wheel without letters": "Hjul utan bokstäver",
-    "This wheel has no letters with a clue and an answer yet.": "Det här hjulet har ännu inga bokstäver med ledtråd och svar."
+    "This wheel has no letters with a clue and an answer yet.": "Det här hjulet har ännu inga bokstäver med ledtråd och svar.",
+    "Count of right answers (@count)": "Antal rätta svar (@count)",
+    "Correct: @count": "Rätt: @count",
+    "Count of wrong answers (@count)": "Antal fel svar (@count)",
+    "Wrong: @count": "Fel: @count",
+    "Count of letters left (@count)": "Antal bokstäver kvar (@count)",
+    "Left: @count": "Kvar: @count",
+    "A letter and its state (@letter, @status)": "En bokstav och dess läge (@letter, @status)",
+    "@letter: @status": "@letter: @status"
   }
 }

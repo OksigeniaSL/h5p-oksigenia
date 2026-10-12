@@ -231,16 +231,16 @@
           "default": "Tour @round"
         },
         {
-          "label": "Nombre de bonnes réponses",
-          "default": "Trouvées"
+          "label": "Nombre de bonnes réponses (@count)",
+          "default": "Trouvées : @count"
         },
         {
-          "label": "Nombre de mauvaises réponses",
-          "default": "Ratées"
+          "label": "Nombre de mauvaises réponses (@count)",
+          "default": "Ratées : @count"
         },
         {
-          "label": "Nombre de lettres restantes",
-          "default": "Restantes"
+          "label": "Nombre de lettres restantes (@count)",
+          "default": "Restantes : @count"
         },
         {
           "label": "Résultat (@score, @total)",
@@ -261,6 +261,10 @@
         {
           "label": "Message final : moins de 50 %",
           "default": "Continue à t'entraîner !"
+        },
+        {
+          "label": "Une lettre et son état (@letter, @status)",
+          "default": "@letter : @status"
         },
         {
           "label": "Lettre : trouvée",

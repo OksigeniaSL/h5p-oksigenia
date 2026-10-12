@@ -51,7 +51,6 @@
     "Enable \"Retry\"": "Activar «Volver a jugar»",
     "Enable \"Show the answers\"": "Activar «Ver las respuestas»",
     "User interface": "Interfaz de usuario",
-
     "Start button": "Botón de empezar",
     "Start": "Empezar",
     "Number of letters (@count)": "Número de letras (@count)",
@@ -100,12 +99,6 @@
     "Ten seconds left.": "Quedan diez segundos.",
     "Round (@round)": "Ronda (@round)",
     "Round @round": "Ronda @round",
-    "Count of right answers": "Recuento de aciertos",
-    "Correct": "Aciertos",
-    "Count of wrong answers": "Recuento de fallos",
-    "Wrong": "Fallos",
-    "Count of letters left": "Recuento de letras que faltan",
-    "Left": "Faltan",
     "Result (@score, @total)": "Resultado (@score, @total)",
     "@score of @total letters right": "@score de @total letras acertadas",
     "End message: every letter right": "Mensaje final: todas las letras acertadas",
@@ -139,6 +132,14 @@
     "The letters of the wheel (for screen readers)": "Las letras de la rueda (para lectores de pantalla)",
     "Letters of the wheel": "Letras de la rueda",
     "Wheel without letters": "Rueda sin letras",
-    "This wheel has no letters with a clue and an answer yet.": "Esta rueda aún no tiene letras con pista y respuesta."
+    "This wheel has no letters with a clue and an answer yet.": "Esta rueda aún no tiene letras con pista y respuesta.",
+    "Count of right answers (@count)": "Recuento de aciertos (@count)",
+    "Correct: @count": "Aciertos: @count",
+    "Count of wrong answers (@count)": "Recuento de fallos (@count)",
+    "Wrong: @count": "Fallos: @count",
+    "Count of letters left (@count)": "Recuento de letras que faltan (@count)",
+    "Left: @count": "Faltan: @count",
+    "A letter and its state (@letter, @status)": "Una letra y su estado (@letter, @status)",
+    "@letter: @status": "@letter: @status"
   }
 }

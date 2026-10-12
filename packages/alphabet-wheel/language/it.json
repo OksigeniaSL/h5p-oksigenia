@@ -231,16 +231,16 @@
           "default": "Giro @round"
         },
         {
-          "label": "Numero di risposte giuste",
-          "default": "Giuste"
+          "label": "Numero di risposte giuste (@count)",
+          "default": "Giuste: @count"
         },
         {
-          "label": "Numero di risposte sbagliate",
-          "default": "Sbagliate"
+          "label": "Numero di risposte sbagliate (@count)",
+          "default": "Sbagliate: @count"
         },
         {
-          "label": "Numero di lettere rimaste",
-          "default": "Mancano"
+          "label": "Numero di lettere rimaste (@count)",
+          "default": "Mancano: @count"
         },
         {
           "label": "Risultato (@score, @total)",
@@ -261,6 +261,10 @@
         {
           "label": "Messaggio finale: meno del 50 %",
           "default": "Continua a esercitarti!"
+        },
+        {
+          "label": "Una lettera e il suo stato (@letter, @status)",
+          "default": "@letter: @status"
         },
         {
           "label": "Lettera: giusta",

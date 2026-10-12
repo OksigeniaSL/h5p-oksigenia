@@ -230,16 +230,16 @@
           "default": "Round @round"
         },
         {
-          "label": "Count of right answers",
-          "default": "Correct"
+          "label": "Count of right answers (@count)",
+          "default": "Correct: @count"
         },
         {
-          "label": "Count of wrong answers",
-          "default": "Wrong"
+          "label": "Count of wrong answers (@count)",
+          "default": "Wrong: @count"
         },
         {
-          "label": "Count of letters left",
-          "default": "Left"
+          "label": "Count of letters left (@count)",
+          "default": "Left: @count"
         },
         {
           "label": "Result (@score, @total)",
@@ -260,6 +260,10 @@
         {
           "label": "End message: less than 50 %",
           "default": "Keep practising!"
+        },
+        {
+          "label": "A letter and its state (@letter, @status)",
+          "default": "@letter: @status"
         },
         {
           "label": "Letter: right",

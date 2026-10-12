@@ -1,13 +1,18 @@
 // Builds each game into build/<MachineName>-<major>.<minor>/, the folder H5P installs: library.json, semantics.json,
 // icon.svg, language/ and dist/ with the bundled script and styles (the shared code goes inside each game).
 //
+// With --watch it keeps rebuilding on every change and copies each build into the dev server (.h5p-dev), whose live
+// reload shows it.
+//
 // @copyright 2026 Oksigenia <dev@oksigenia.cc>
 // @license   MIT
 
-import { build } from 'esbuild';
+import { context } from 'esbuild';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { packages, ROOT } from './packages.mjs';
+
+const watch = process.argv.includes('--watch');
 
 const out = join(ROOT, 'build');
 mkdirSync(out, { recursive: true });
@@ -43,7 +48,19 @@ for (const pkg of packages()) {
     recursive: true,
     filter: (src) => !basename(src).startsWith('.'),
   });
-  await build({
+  const toDev = {
+    name: 'to-dev-server',
+    setup(b) {
+      b.onEnd((result) => {
+        const dev = join(ROOT, '.h5p-dev', 'libraries');
+        if (watch && !result.errors.length && existsSync(dev)) {
+          cpSync(target, join(dev, pkg.folder), { recursive: true });
+          console.log(`rebuilt ${pkg.folder} into the dev server`);
+        }
+      });
+    },
+  };
+  const ctx = await context({
     entryPoints: [join(pkg.dir, 'src', `${pkg.name}.js`)],
     bundle: true,
     format: 'iife',
@@ -56,8 +73,14 @@ for (const pkg of packages()) {
       css: `/*! ${pkg.library.machineName} ${pkg.version} | MIT | (c) 2026 Oksigenia */`,
     },
     outdir: join(target, 'dist'),
-    plugins: [slimSemantics],
+    plugins: [slimSemantics, toDev],
     logLevel: 'warning',
   });
+  await ctx.rebuild();
   console.log(`built ${pkg.folder} (${pkg.version})`);
+  if (watch) {
+    await ctx.watch();
+  } else {
+    await ctx.dispose();
+  }
 }

@@ -99,12 +99,6 @@
     "Ten seconds left.": "Mancano dieci secondi.",
     "Round (@round)": "Giro (@round)",
     "Round @round": "Giro @round",
-    "Count of right answers": "Numero di risposte giuste",
-    "Correct": "Giuste",
-    "Count of wrong answers": "Numero di risposte sbagliate",
-    "Wrong": "Sbagliate",
-    "Count of letters left": "Numero di lettere rimaste",
-    "Left": "Mancano",
     "Result (@score, @total)": "Risultato (@score, @total)",
     "@score of @total letters right": "@score lettere giuste su @total",
     "End message: every letter right": "Messaggio finale: tutte le lettere giuste",
@@ -138,6 +132,14 @@
     "The letters of the wheel (for screen readers)": "Le lettere della ruota (per i lettori di schermo)",
     "Letters of the wheel": "Lettere della ruota",
     "Wheel without letters": "Ruota senza lettere",
-    "This wheel has no letters with a clue and an answer yet.": "Questa ruota non ha ancora lettere con indizio e risposta."
+    "This wheel has no letters with a clue and an answer yet.": "Questa ruota non ha ancora lettere con indizio e risposta.",
+    "Count of right answers (@count)": "Numero di risposte giuste (@count)",
+    "Correct: @count": "Giuste: @count",
+    "Count of wrong answers (@count)": "Numero di risposte sbagliate (@count)",
+    "Wrong: @count": "Sbagliate: @count",
+    "Count of letters left (@count)": "Numero di lettere rimaste (@count)",
+    "Left: @count": "Mancano: @count",
+    "A letter and its state (@letter, @status)": "Una lettera e il suo stato (@letter, @status)",
+    "@letter: @status": "@letter: @status"
   }
 }

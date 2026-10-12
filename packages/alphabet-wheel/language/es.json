@@ -231,16 +231,16 @@
           "default": "Ronda @round"
         },
         {
-          "label": "Recuento de aciertos",
-          "default": "Aciertos"
+          "label": "Recuento de aciertos (@count)",
+          "default": "Aciertos: @count"
         },
         {
-          "label": "Recuento de fallos",
-          "default": "Fallos"
+          "label": "Recuento de fallos (@count)",
+          "default": "Fallos: @count"
         },
         {
-          "label": "Recuento de letras que faltan",
-          "default": "Faltan"
+          "label": "Recuento de letras que faltan (@count)",
+          "default": "Faltan: @count"
         },
         {
           "label": "Resultado (@score, @total)",
@@ -261,6 +261,10 @@
         {
           "label": "Mensaje final: menos del 50 %",
           "default": "¡Sigue practicando!"
+        },
+        {
+          "label": "Una letra y su estado (@letter, @status)",
+          "default": "@letter: @status"
         },
         {
           "label": "Letra: acertada",

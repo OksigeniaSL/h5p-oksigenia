@@ -115,7 +115,10 @@ test('without motion when the system asks for it', async ({ page }) => {
   await expect(frame.locator('.h5p-oksigenia-confetti')).toHaveCount(0);
 });
 
-/** Counts the oscillators the game creates: a sound is a handful of them. */
+/**
+ * Counts the oscillators the game creates (a sound is a handful of them) and sends the sound to a zero gain, so the
+ * test is silent on any browser.
+ */
 const countSounds = (frame) => frame.evaluate(() => {
   const proto = window.AudioContext.prototype;
   const original = proto.createOscillator;
@@ -124,16 +127,35 @@ const countSounds = (frame) => frame.evaluate(() => {
     window.oscillators++;
     return original.call(this);
   };
+  const connect = AudioNode.prototype.connect;
+  AudioNode.prototype.connect = function (target, ...rest) {
+    if (target instanceof AudioDestinationNode) {
+      const silence = this.context.createGain();
+      silence.gain.value = 0;
+      connect.call(silence, target);
+      return connect.call(this, silence, ...rest);
+    }
+    return connect.call(this, target, ...rest);
+  };
 });
 const oscillators = (frame) => frame.evaluate(() => window.oscillators);
 
 test('answers sound, and the mute button silences them and is remembered', async ({ page }) => {
+  // The tests start muted (playwright.config.mjs): the speaker button brings the sound.
   let frame = await open(page, 'es');
   await countSounds(frame);
   await frame.locator('.aw-intro button').click();
+  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Activar el sonido');
+  await frame.locator('.aw-sound').click();
+  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Silenciar');
   await frame.locator('.aw-input').fill('abeja');
   await frame.locator('.aw-input').press('Enter');
   await expect.poll(() => oscillators(frame)).toBeGreaterThan(0);
+
+  await page.reload();
+  frame = await open(page, 'es');
+  await countSounds(frame);
+  await frame.locator('.aw-intro button').click();
   await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Silenciar');
   await frame.locator('.aw-sound').click();
   await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Activar el sonido');
@@ -143,13 +165,6 @@ test('answers sound, and the mute button silences them and is remembered', async
   await frame.locator('.aw-row button.aw-secondary').click();
   await page.waitForTimeout(300);
   expect(await oscillators(frame)).toBe(before);
-
-  await page.reload();
-  frame = await open(page, 'es');
-  await frame.locator('.aw-intro button').click();
-  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Activar el sonido');
-  await frame.locator('.aw-sound').click();
-  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Silenciar');
 });
 
 test('authors can leave the sounds out', async ({ page }) => {
@@ -184,6 +199,49 @@ for (const [lang, start] of Object.entries(START)) {
     expect(errors).toEqual([]);
   });
 }
+
+test('odd content: no letters, very long text, encoded characters and markup in a clue', async ({ page }) => {
+  const frame = await open(page, 'es');
+  const result = await frame.evaluate(() => {
+    const mount = (params) => {
+      const box = document.createElement('div');
+      box.style.width = '320px';
+      document.body.append(box);
+      const wheel = new H5P.AlphabetWheel(params, 990);
+      wheel.attach(H5P.jQuery(box));
+      return { box, wheel };
+    };
+    // Saved with nothing but a title.
+    const empty = mount({});
+    // H5P stores plain text fields with entities; a platform might also hand over raw markup.
+    const odd = mount({
+      items: [
+        { letter: 'A', kind: 'starts', clue: 'L&#039;été &amp; l&#039;automne', answer: 'Automne' },
+        { letter: 'B', kind: 'starts', clue: '<img src="x" onerror="window.injected = 1">', answer: 'Bien' },
+        { letter: 'C', kind: 'contains', clue: 'Muy larga '.repeat(30), answer: 'Cosa' },
+      ],
+    });
+    odd.wheel.start();
+    const clue1 = odd.box.querySelector('.aw-clue').textContent;
+    odd.wheel.pass();
+    const clue2 = odd.box.querySelector('.aw-clue').textContent;
+    const images = odd.box.querySelectorAll('img').length;
+    odd.wheel.pass();
+    const wide = odd.box.querySelector('.aw').scrollWidth - odd.box.querySelector('.aw').clientWidth;
+    return {
+      emptyShown: !/** @type {HTMLElement} */ (empty.box.querySelector('.aw-empty')).hidden,
+      emptyIntro: !/** @type {HTMLElement} */ (empty.box.querySelector('.aw-intro')).hidden,
+      clue1, clue2, images, injected: /** @type {any} */ (window).injected, wide,
+    };
+  });
+  expect(result.emptyShown).toBe(true);
+  expect(result.emptyIntro).toBe(false);
+  expect(result.clue1).toBe("L'été & l'automne");
+  expect(result.clue2).toBe('<img src="x" onerror="window.injected = 1">');
+  expect(result.images).toBe(0);
+  expect(result.injected).toBeUndefined();
+  expect(result.wide).toBeLessThanOrEqual(0);
+});
 
 test('the Ñ is not the N', async ({ page }) => {
   const frame = await open(page, 'es');

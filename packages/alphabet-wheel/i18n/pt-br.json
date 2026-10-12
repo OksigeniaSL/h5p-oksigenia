@@ -99,12 +99,6 @@
     "Ten seconds left.": "Faltam dez segundos.",
     "Round (@round)": "Rodada (@round)",
     "Round @round": "Rodada @round",
-    "Count of right answers": "Número de acertos",
-    "Correct": "Acertos",
-    "Count of wrong answers": "Número de erros",
-    "Wrong": "Erros",
-    "Count of letters left": "Número de letras que faltam",
-    "Left": "Faltam",
     "Result (@score, @total)": "Resultado (@score, @total)",
     "@score of @total letters right": "@score de @total letras certas",
     "End message: every letter right": "Mensagem final: todas as letras certas",
@@ -138,6 +132,14 @@
     "The letters of the wheel (for screen readers)": "As letras da roda (para leitores de tela)",
     "Letters of the wheel": "Letras da roda",
     "Wheel without letters": "Roda sem letras",
-    "This wheel has no letters with a clue and an answer yet.": "Esta roda ainda não tem letras com pista e resposta."
+    "This wheel has no letters with a clue and an answer yet.": "Esta roda ainda não tem letras com pista e resposta.",
+    "Count of right answers (@count)": "Número de acertos (@count)",
+    "Correct: @count": "Acertos: @count",
+    "Count of wrong answers (@count)": "Número de erros (@count)",
+    "Wrong: @count": "Erros: @count",
+    "Count of letters left (@count)": "Número de letras que faltam (@count)",
+    "Left: @count": "Faltam: @count",
+    "A letter and its state (@letter, @status)": "Uma letra e seu estado (@letter, @status)",
+    "@letter: @status": "@letter: @status"
   }
 }

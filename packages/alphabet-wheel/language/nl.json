@@ -231,16 +231,16 @@
           "default": "Ronde @round"
         },
         {
-          "label": "Aantal goede antwoorden",
-          "default": "Goed"
+          "label": "Aantal goede antwoorden (@count)",
+          "default": "Goed: @count"
         },
         {
-          "label": "Aantal foute antwoorden",
-          "default": "Fout"
+          "label": "Aantal foute antwoorden (@count)",
+          "default": "Fout: @count"
         },
         {
-          "label": "Aantal letters te gaan",
-          "default": "Te gaan"
+          "label": "Aantal letters te gaan (@count)",
+          "default": "Te gaan: @count"
         },
         {
           "label": "Resultaat (@score, @total)",
@@ -261,6 +261,10 @@
         {
           "label": "Eindbericht: minder dan 50 %",
           "default": "Blijf oefenen!"
+        },
+        {
+          "label": "Een letter en zijn stand (@letter, @status)",
+          "default": "@letter: @status"
         },
         {
           "label": "Letter: goed",

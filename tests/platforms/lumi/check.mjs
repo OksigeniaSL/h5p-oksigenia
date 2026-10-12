@@ -59,7 +59,8 @@ const user = { id: '1', name: 'Lucía Pruebas', email: 'alumno1@example.org', ty
   canInstallRecommended: true, canUpdateAndInstallLibraries: true, canCreateRestricted: true };
 
 let server;
-const browser = await chromium.launch({ channel: process.env.CI ? undefined : 'chrome', headless: true });
+// Muted: the games have sound, and these checks answer letter after letter.
+const browser = await chromium.launch({ channel: process.env.CI ? undefined : 'chrome', headless: true, args: ['--mute-audio'] });
 try {
   // The same package, asking for core 1.28: Lumi must refuse it, which proves the check below means something.
   const unzip = (file) => {
