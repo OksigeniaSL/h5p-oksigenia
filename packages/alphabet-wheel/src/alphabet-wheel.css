@@ -1,0 +1,488 @@
+/*
+ * H5P.AlphabetWheel. Colours follow the H5P theme (core 1.28) when there is one, with fallbacks for older cores.
+ * Every state has a shape or a sign besides its colour.
+ *
+ * @copyright 2026 Oksigenia <dev@oksigenia.cc>
+ * @license   MIT
+ */
+
+.h5p-alphabet-wheel .aw {
+  --aw-main: var(--h5p-theme-main-cta-base, #1a5fb4);
+  --aw-on-main: var(--h5p-theme-contrast-cta, #fff);
+  --aw-ink: #1f2328;
+  --aw-soft-ink: #4b5563;
+  --aw-surface: var(--h5p-theme-background, #fff);
+  --aw-hub: #eef3fa;
+  --aw-ok: #1b6e37;
+  --aw-bad: #b42318;
+  --aw-passed: #7a4a00;
+  --aw-focus: #111827;
+  --aw-radius: var(--h5p-theme-border-radius-medium, 0.6rem);
+
+  container-type: inline-size;
+  padding: 1rem;
+  color: var(--aw-ink);
+  background: var(--aw-surface);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.h5p-alphabet-wheel .aw [hidden] {
+  display: none !important;
+}
+
+.h5p-alphabet-wheel .h5p-oksigenia-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.h5p-alphabet-wheel .aw p {
+  margin: 0;
+}
+
+/* Buttons and field */
+
+.h5p-alphabet-wheel .aw-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--aw-main);
+  border-radius: var(--aw-radius);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.h5p-alphabet-wheel .aw-primary {
+  background: var(--aw-main);
+  color: var(--aw-on-main);
+}
+
+.h5p-alphabet-wheel .aw-secondary {
+  background: #fff;
+  color: var(--aw-main);
+}
+
+.h5p-alphabet-wheel .aw-tertiary {
+  border-color: transparent;
+  background: transparent;
+  color: var(--aw-soft-ink);
+  text-decoration: underline;
+}
+
+.h5p-alphabet-wheel .aw-button:hover {
+  filter: brightness(1.08);
+}
+
+.h5p-alphabet-wheel .aw-button:focus-visible,
+.h5p-alphabet-wheel .aw-input:focus-visible,
+.h5p-alphabet-wheel .aw-result-title:focus-visible {
+  outline: 3px solid var(--aw-focus);
+  outline-offset: 2px;
+}
+
+.h5p-alphabet-wheel .aw-input {
+  flex: 1 1 10rem;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.7rem;
+  border: 2px solid #6b7280;
+  border-radius: var(--aw-radius);
+  font: inherit;
+  font-size: 1.15rem;
+}
+
+.h5p-alphabet-wheel .aw-icon {
+  display: inline-flex;
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+}
+
+.h5p-alphabet-wheel .aw-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Before the game */
+
+.h5p-alphabet-wheel .aw-intro,
+.h5p-alphabet-wheel .aw-results,
+.h5p-alphabet-wheel .aw-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.h5p-alphabet-wheel .aw-title,
+.h5p-alphabet-wheel .aw-result-title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.h5p-alphabet-wheel .aw-summary {
+  color: var(--aw-soft-ink);
+  font-weight: 700;
+}
+
+/* The game: the wheel above the panel, side by side when there is room */
+
+.h5p-alphabet-wheel .aw-game {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+
+@container (min-width: 40rem) {
+  .h5p-alphabet-wheel .aw-game {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 1fr);
+  }
+}
+
+.h5p-alphabet-wheel .aw-wheel {
+  position: relative;
+  width: min(100%, 26rem);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.h5p-alphabet-wheel .aw-letters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h5p-alphabet-wheel .aw-letter {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--aw-dot, 8cqi);
+  aspect-ratio: 1;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: var(--aw-main);
+  color: var(--aw-on-main);
+  font-size: calc(var(--aw-dot, 8cqi) * 0.52);
+  font-weight: 800;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.h5p-alphabet-wheel .aw-letter.aw-ok {
+  background: var(--aw-ok);
+  color: #fff;
+}
+
+.h5p-alphabet-wheel .aw-letter.aw-bad {
+  background: var(--aw-bad);
+  color: #fff;
+}
+
+.h5p-alphabet-wheel .aw-letter.aw-passed {
+  border: 2px dashed var(--aw-passed);
+  background: #fff;
+  color: var(--aw-passed);
+}
+
+.h5p-alphabet-wheel .aw-letter.aw-current {
+  z-index: 1;
+  outline: 3px solid var(--aw-focus);
+  outline-offset: 2px;
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.h5p-alphabet-wheel .aw-badge {
+  position: absolute;
+  top: calc(50% + var(--aw-y, -1) * 72%);
+  left: calc(50% + var(--aw-x, 0) * 72%);
+  display: none;
+  width: 50%;
+  height: 50%;
+  padding: 6%;
+  transform: translate(-50%, -50%);
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.h5p-alphabet-wheel .aw-ok .aw-badge,
+.h5p-alphabet-wheel .aw-bad .aw-badge,
+.h5p-alphabet-wheel .aw-passed .aw-badge {
+  display: grid;
+  place-items: center;
+}
+
+.h5p-alphabet-wheel .aw-ok .aw-badge {
+  color: var(--aw-ok);
+}
+
+.h5p-alphabet-wheel .aw-bad .aw-badge {
+  color: var(--aw-bad);
+}
+
+.h5p-alphabet-wheel .aw-passed .aw-badge {
+  color: var(--aw-passed);
+}
+
+.h5p-alphabet-wheel .aw-badge .aw-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.h5p-alphabet-wheel .aw-hub {
+  position: absolute;
+  inset: 22%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--aw-hub);
+}
+
+.h5p-alphabet-wheel .aw-hub-letter {
+  color: var(--aw-main);
+  font-size: 26cqi;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.h5p-alphabet-wheel .aw-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.h5p-alphabet-wheel .aw-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  color: var(--aw-soft-ink);
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-clock {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-inline-start: auto;
+}
+
+.h5p-alphabet-wheel .aw-clock-value {
+  color: var(--aw-ink);
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.h5p-alphabet-wheel .aw-clock.aw-low .aw-clock-value {
+  color: var(--aw-bad);
+  text-decoration: underline;
+}
+
+.h5p-alphabet-wheel .aw-question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.h5p-alphabet-wheel .aw-kind {
+  color: var(--aw-soft-ink);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.h5p-alphabet-wheel .aw-clue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.h5p-alphabet-wheel .aw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.h5p-alphabet-wheel .aw-label {
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.h5p-alphabet-wheel .aw-paused {
+  padding: 0.8rem;
+  border-radius: var(--aw-radius);
+  background: var(--aw-hub);
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  min-height: 1.4em;
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-feedback .aw-icon {
+  margin-top: 0.15em;
+}
+
+.h5p-alphabet-wheel .aw-feedback-ok {
+  color: var(--aw-ok);
+}
+
+.h5p-alphabet-wheel .aw-feedback-bad {
+  color: var(--aw-bad);
+}
+
+.h5p-alphabet-wheel .aw-feedback-passed {
+  color: var(--aw-passed);
+}
+
+.h5p-alphabet-wheel .aw-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  color: var(--aw-soft-ink);
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.h5p-alphabet-wheel .aw-count-ok {
+  color: var(--aw-ok);
+}
+
+.h5p-alphabet-wheel .aw-count-bad {
+  color: var(--aw-bad);
+}
+
+.h5p-alphabet-wheel .aw-finish {
+  align-self: flex-start;
+}
+
+/* After the game */
+
+.h5p-alphabet-wheel .aw-end-reason {
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-review {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h5p-alphabet-wheel .aw-review-item {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid #d1d5db;
+  border-radius: var(--aw-radius);
+}
+
+.h5p-alphabet-wheel .aw-review-item.aw-ok {
+  border-color: var(--aw-ok);
+}
+
+.h5p-alphabet-wheel .aw-review-item.aw-bad {
+  border-color: var(--aw-bad);
+}
+
+.h5p-alphabet-wheel .aw-review-item.aw-passed {
+  border-style: dashed;
+  border-color: var(--aw-passed);
+}
+
+.h5p-alphabet-wheel .aw-review-letter {
+  flex: none;
+  width: 2rem;
+  color: var(--aw-main);
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.h5p-alphabet-wheel .aw-review-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.h5p-alphabet-wheel .aw-review-status {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 800;
+}
+
+.h5p-alphabet-wheel .aw-ok .aw-review-status {
+  color: var(--aw-ok);
+}
+
+.h5p-alphabet-wheel .aw-bad .aw-review-status {
+  color: var(--aw-bad);
+}
+
+.h5p-alphabet-wheel .aw-passed .aw-review-status {
+  color: var(--aw-passed);
+}
+
+.h5p-alphabet-wheel .aw-review-kind {
+  color: var(--aw-soft-ink);
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-review-solution {
+  font-weight: 700;
+}
+
+.h5p-alphabet-wheel .aw-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h5p-alphabet-wheel .aw-letter {
+    transition: none;
+  }
+}

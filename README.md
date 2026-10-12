@@ -27,6 +27,24 @@ user allowed to install H5P content types (in Moodle, the capability `moodle/h5p
 The whole game is played with the keyboard, the letter, the clue and the result are announced to screen readers,
 nothing relies on colour alone, any timer can be paused, and the layout works at 320 px wide and at 200 % zoom.
 
+## Development
+
+One folder per H5P library in `packages/`, and the code the games share in `packages/shared/`, built into each
+game rather than shipped as a library of its own. Each game is released on its own, with a tag such as
+`alphabet-wheel-v1.0.0` and its example `.h5p` files. Node 22 or later.
+
+```
+npm install
+npm test             # unit tests
+npm run typecheck    # types, from the JSDoc comments
+npm run dev          # the H5P dev server (h5p-cli) with every game and its examples
+npm run e2e          # end-to-end tests in a browser against that server
+npm run pack         # build/ with each library and dist/ with the example .h5p files
+npm run lang         # language/*.json from semantics.json and the dictionaries in i18n/
+```
+
+The same sources always give the same `.h5p`, byte for byte.
+
 ## On the classroom board
 
 The same games for the whole class at once, with the teacher keeping score, are in

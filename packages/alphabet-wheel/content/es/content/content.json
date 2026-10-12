@@ -1,0 +1,179 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Insecto que fabrica miel",
+      "answer": "Abeja"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Vehículo de dos ruedas que se mueve con pedales",
+      "answer": "Bicicleta",
+      "alternatives": "bici"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Animal que lleva su casa a cuestas y deja un rastro brillante",
+      "answer": "Caracol"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Reptil enorme que vivió hace millones de años",
+      "answer": "Dinosaurio"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Animal con trompa que vive en África y en Asia",
+      "answer": "Elefante"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Fruta roja y pequeña con las semillas por fuera",
+      "answer": "Fresa",
+      "alternatives": "frutilla"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Animal que maúlla",
+      "answer": "Gato"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Agua congelada",
+      "answer": "Hielo"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Porción de tierra rodeada de agua por todas partes",
+      "answer": "Isla"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Animal con el cuello muy largo",
+      "answer": "Jirafa"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Fruta de piel marrón y peluda, verde por dentro",
+      "answer": "Kiwi"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Satélite natural de la Tierra",
+      "answer": "Luna"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Gran masa de agua salada que rodea las islas",
+      "answer": "Mar"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Agua helada que cae del cielo en copos blancos",
+      "answer": "Nieve"
+    },
+    {
+      "letter": "Ñ",
+      "kind": "contains",
+      "clue": "Animal pequeño de ocho patas que teje telas para cazar insectos",
+      "answer": "Araña"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Estación del año en la que caen las hojas de los árboles",
+      "answer": "Otoño"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Ave blanca y negra que vive en el Polo Sur y no vuela",
+      "answer": "Pingüino"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "Alimento que se elabora con leche cuajada",
+      "answer": "Queso"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Lo usamos para saber la hora",
+      "answer": "Reloj"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Estrella que nos da luz y calor",
+      "answer": "Sol"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Animal con caparazón que camina muy despacio",
+      "answer": "Tortuga"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Fruta pequeña que crece en racimos",
+      "answer": "Uva"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Montaña que puede expulsar lava",
+      "answer": "Volcán"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Conexión a internet sin cables",
+      "answer": "Wifi",
+      "alternatives": "wi-fi"
+    },
+    {
+      "letter": "X",
+      "kind": "contains",
+      "clue": "Vehículo con conductor que nos lleva a donde le pidamos, pagando",
+      "answer": "Taxi"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Alimento hecho con leche que se toma con cuchara",
+      "answer": "Yogur",
+      "alternatives": "yogurt / yoghurt"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Calzado que nos ponemos en los pies",
+      "answer": "Zapato"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "es",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

@@ -28,6 +28,24 @@ eso hace falta un usuario con permiso para instalar tipos de contenido H5P (en M
 La partida entera se juega con el teclado. La letra, la pista y el resultado se anuncian al lector de pantalla, nada
 depende solo del color, el temporizador se puede pausar y todo se ve bien a 320 px de ancho y con zoom al 200 %.
 
+## Desarrollo
+
+Una carpeta por librería H5P en `packages/` y, en `packages/shared/`, el código que comparten los juegos, que se
+compila dentro de cada juego en vez de instalarse como una librería más. Cada juego se publica por separado, con una
+etiqueta como `alphabet-wheel-v1.0.0` y sus `.h5p` de ejemplo. Hace falta Node 22 o posterior.
+
+```
+npm install
+npm test             # pruebas unitarias
+npm run typecheck    # tipos, a partir de los comentarios JSDoc
+npm run dev          # el servidor de pruebas de H5P (h5p-cli) con todos los juegos y sus ejemplos
+npm run e2e          # pruebas de extremo a extremo en un navegador contra ese servidor
+npm run pack         # build/ con cada librería y dist/ con los .h5p de ejemplo
+npm run lang         # language/*.json a partir de semantics.json y de los diccionarios de i18n/
+```
+
+Las mismas fuentes dan siempre el mismo `.h5p`, byte a byte.
+
 ## En la pizarra de clase
 
 Los mismos juegos, para toda la clase a la vez y con el docente llevando la cuenta, están en

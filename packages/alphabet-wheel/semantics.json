@@ -1,0 +1,205 @@
+[
+  {
+    "name": "items",
+    "type": "list",
+    "label": "Letters",
+    "description": "One item per letter, in the order the wheel goes round.",
+    "importance": "high",
+    "entity": "letter",
+    "min": 1,
+    "max": 40,
+    "field": {
+      "name": "item",
+      "type": "group",
+      "label": "Letter",
+      "importance": "high",
+      "fields": [
+        {
+          "name": "letter",
+          "type": "text",
+          "label": "Letter",
+          "importance": "high",
+          "maxLength": 3
+        },
+        {
+          "name": "kind",
+          "type": "select",
+          "label": "The answer",
+          "importance": "medium",
+          "options": [
+            {
+              "value": "starts",
+              "label": "Starts with the letter"
+            },
+            {
+              "value": "contains",
+              "label": "Contains the letter"
+            }
+          ],
+          "default": "starts"
+        },
+        {
+          "name": "clue",
+          "type": "text",
+          "label": "Clue",
+          "importance": "high",
+          "maxLength": 300
+        },
+        {
+          "name": "answer",
+          "type": "text",
+          "label": "Answer",
+          "importance": "high",
+          "maxLength": 100
+        },
+        {
+          "name": "alternatives",
+          "type": "text",
+          "label": "Other valid answers",
+          "description": "Optional. Separate them with a slash: glasses / spectacles",
+          "importance": "low",
+          "optional": true,
+          "maxLength": 300
+        }
+      ]
+    }
+  },
+  {
+    "name": "timeLimit",
+    "type": "number",
+    "label": "Time limit, in seconds",
+    "description": "0 or empty for no time limit. Players can pause the clock at any time.",
+    "importance": "medium",
+    "optional": true,
+    "min": 0,
+    "max": 3600,
+    "default": 0
+  },
+  {
+    "name": "language",
+    "type": "select",
+    "label": "Language of the answers",
+    "description": "Decides which letters never count as another one (such as Ñ in Spanish) and which accents can be ignored.",
+    "importance": "medium",
+    "options": [
+      { "value": "es", "label": "Spanish" },
+      { "value": "ca", "label": "Catalan" },
+      { "value": "eu", "label": "Basque" },
+      { "value": "gl", "label": "Galician" },
+      { "value": "en", "label": "English" },
+      { "value": "de", "label": "German" },
+      { "value": "fr", "label": "French" },
+      { "value": "it", "label": "Italian" },
+      { "value": "nl", "label": "Dutch" },
+      { "value": "pt", "label": "Portuguese" },
+      { "value": "sv", "label": "Swedish" },
+      { "value": "other", "label": "Other" }
+    ],
+    "default": "en"
+  },
+  {
+    "name": "extraLetters",
+    "type": "text",
+    "label": "Other letters that count apart",
+    "description": "Optional, for languages not in the list: letters that must never be taken for another one, such as Ñ or Ç.",
+    "importance": "low",
+    "optional": true,
+    "maxLength": 60
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Behavioural settings",
+    "description": "These options let you control how the game behaves.",
+    "importance": "low",
+    "optional": false,
+    "fields": [
+      {
+        "name": "ignoreCase",
+        "type": "boolean",
+        "label": "Ignore capital letters",
+        "importance": "low",
+        "default": true
+      },
+      {
+        "name": "ignoreAccents",
+        "type": "boolean",
+        "label": "Ignore accents",
+        "description": "The letters of the language still count apart (Ñ is not N in Spanish).",
+        "importance": "low",
+        "default": true
+      },
+      {
+        "name": "showAnswerOnWrong",
+        "type": "boolean",
+        "label": "Show the right answer after a wrong one",
+        "importance": "low",
+        "default": true
+      },
+      {
+        "name": "enableRetry",
+        "type": "boolean",
+        "label": "Enable \"Retry\"",
+        "importance": "low",
+        "default": true
+      },
+      {
+        "name": "enableSolutionsButton",
+        "type": "boolean",
+        "label": "Enable \"Show the answers\"",
+        "importance": "low",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "label": "User interface",
+    "common": true,
+    "importance": "low",
+    "fields": [
+      { "name": "start", "type": "text", "label": "Start button", "importance": "low", "default": "Start" },
+      { "name": "introLetters", "type": "text", "label": "Number of letters (@count)", "importance": "low", "default": "@count letters" },
+      { "name": "introTime", "type": "text", "label": "Time limit (@time)", "importance": "low", "default": "Time: @time" },
+      { "name": "introNoTime", "type": "text", "label": "No time limit", "importance": "low", "default": "No time limit" },
+      { "name": "introHelp", "type": "text", "label": "How to play", "importance": "low", "default": "Type the answer for each letter. If you do not know it, pass: the letter comes back in the next round." },
+      { "name": "startsWith", "type": "text", "label": "The answer starts with (@letter)", "importance": "low", "default": "Starts with @letter" },
+      { "name": "contains", "type": "text", "label": "The answer contains (@letter)", "importance": "low", "default": "Contains @letter" },
+      { "name": "yourAnswer", "type": "text", "label": "Answer field", "importance": "low", "default": "Your answer" },
+      { "name": "check", "type": "text", "label": "Check button", "importance": "low", "default": "Check" },
+      { "name": "pass", "type": "text", "label": "Pass button", "importance": "low", "default": "Pass" },
+      { "name": "pause", "type": "text", "label": "Pause button", "importance": "low", "default": "Pause" },
+      { "name": "resume", "type": "text", "label": "Resume button", "importance": "low", "default": "Resume" },
+      { "name": "paused", "type": "text", "label": "Paused", "importance": "low", "default": "Paused. The clue comes back when you resume." },
+      { "name": "finish", "type": "text", "label": "Finish button", "importance": "low", "default": "Finish" },
+      { "name": "finishConfirm", "type": "text", "label": "Finish, to confirm", "importance": "low", "default": "Finish now? Press again" },
+      { "name": "emptyAnswer", "type": "text", "label": "No answer typed", "importance": "low", "default": "Type an answer or pass." },
+      { "name": "correctFeedback", "type": "text", "label": "Right answer", "importance": "low", "default": "Correct!" },
+      { "name": "wrongFeedback", "type": "text", "label": "Wrong answer", "importance": "low", "default": "Not this time." },
+      { "name": "answerWas", "type": "text", "label": "The right answer was (@answer)", "importance": "low", "default": "The answer was “@answer”." },
+      { "name": "passedFeedback", "type": "text", "label": "Letter passed (@letter)", "importance": "low", "default": "@letter comes back in the next round." },
+      { "name": "timeLeft", "type": "text", "label": "Time left", "importance": "low", "default": "Time left" },
+      { "name": "timeUp", "type": "text", "label": "Time is up", "importance": "low", "default": "Time is up." },
+      { "name": "oneMinuteLeft", "type": "text", "label": "One minute left", "importance": "low", "default": "One minute left." },
+      { "name": "tenSecondsLeft", "type": "text", "label": "Ten seconds left", "importance": "low", "default": "Ten seconds left." },
+      { "name": "round", "type": "text", "label": "Round (@round)", "importance": "low", "default": "Round @round" },
+      { "name": "countCorrect", "type": "text", "label": "Count of right answers", "importance": "low", "default": "Correct" },
+      { "name": "countWrong", "type": "text", "label": "Count of wrong answers", "importance": "low", "default": "Wrong" },
+      { "name": "countLeft", "type": "text", "label": "Count of letters left", "importance": "low", "default": "Left" },
+      { "name": "resultTitle", "type": "text", "label": "Result (@score, @total)", "importance": "low", "default": "@score of @total letters right" },
+      { "name": "statusCorrect", "type": "text", "label": "Letter: right", "importance": "low", "default": "correct" },
+      { "name": "statusWrong", "type": "text", "label": "Letter: wrong", "importance": "low", "default": "wrong" },
+      { "name": "statusPassed", "type": "text", "label": "Letter: passed", "importance": "low", "default": "passed" },
+      { "name": "statusPending", "type": "text", "label": "Letter: to answer", "importance": "low", "default": "to answer" },
+      { "name": "statusUnanswered", "type": "text", "label": "Letter: not answered", "importance": "low", "default": "not answered" },
+      { "name": "statusCurrent", "type": "text", "label": "Letter: now playing", "importance": "low", "default": "now" },
+      { "name": "yourAnswerWas", "type": "text", "label": "Your answer was (@answer)", "importance": "low", "default": "Your answer: @answer" },
+      { "name": "solution", "type": "text", "label": "The right answer (@answer)", "importance": "low", "default": "Answer: @answer" },
+      { "name": "showSolutions", "type": "text", "label": "Show the answers button", "importance": "low", "default": "Show the answers" },
+      { "name": "retry", "type": "text", "label": "Retry button", "importance": "low", "default": "Retry" },
+      { "name": "wheel", "type": "text", "label": "The letters of the wheel (for screen readers)", "importance": "low", "default": "Letters of the wheel" },
+      { "name": "noItems", "type": "text", "label": "Wheel without letters", "importance": "low", "default": "This wheel has no letters with a clue and an answer yet." }
+    ]
+  }
+]

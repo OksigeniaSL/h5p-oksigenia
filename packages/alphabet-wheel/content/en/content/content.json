@@ -1,0 +1,173 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Fruit that can be red or green and grows on trees",
+      "answer": "Apple"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Vehicle with two wheels that moves with pedals",
+      "answer": "Bicycle",
+      "alternatives": "bike"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Animal that purrs and says miaow",
+      "answer": "Cat"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Huge reptile that lived millions of years ago",
+      "answer": "Dinosaur"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Animal with a trunk that lives in Africa and Asia",
+      "answer": "Elephant"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Green animal that hops and croaks",
+      "answer": "Frog"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Animal with a very long neck",
+      "answer": "Giraffe"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Animal that neighs and can be ridden",
+      "answer": "Horse"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Frozen water",
+      "answer": "Ice"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Sweet spread made with fruit and sugar",
+      "answer": "Jam",
+      "alternatives": "jelly"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Small fruit, brown and hairy outside, green inside",
+      "answer": "Kiwi"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Yellow fruit with a sour taste",
+      "answer": "Lemon"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Natural satellite of the Earth",
+      "answer": "Moon"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Time of the day when it is dark and we sleep",
+      "answer": "Night"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Huge mass of salt water that covers most of the Earth",
+      "answer": "Ocean"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Black and white bird that lives near the South Pole and cannot fly",
+      "answer": "Penguin"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "The wife of a king",
+      "answer": "Queen"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Arc of colours in the sky after the rain",
+      "answer": "Rainbow"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Star that gives us light and heat",
+      "answer": "Sun"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Animal with a shell that walks very slowly",
+      "answer": "Tortoise",
+      "alternatives": "turtle"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "We open it when it rains",
+      "answer": "Umbrella"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Mountain that can throw out lava",
+      "answer": "Volcano"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "The coldest season of the year",
+      "answer": "Winter"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Picture of your bones taken at the hospital",
+      "answer": "X-ray",
+      "alternatives": "xray / x ray"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Colour of a banana",
+      "answer": "Yellow"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Striped animal that looks like a horse",
+      "answer": "Zebra"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "en",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

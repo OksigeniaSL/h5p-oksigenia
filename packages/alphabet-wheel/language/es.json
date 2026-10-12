@@ -1,0 +1,280 @@
+{
+  "semantics": [
+    {
+      "label": "Letras",
+      "description": "Un elemento por letra, en el orden en que gira la rueda.",
+      "entity": "letra",
+      "field": {
+        "label": "Letra",
+        "fields": [
+          {
+            "label": "Letra"
+          },
+          {
+            "label": "La respuesta",
+            "options": [
+              {
+                "label": "Empieza por la letra"
+              },
+              {
+                "label": "Contiene la letra"
+              }
+            ]
+          },
+          {
+            "label": "Pista"
+          },
+          {
+            "label": "Respuesta"
+          },
+          {
+            "label": "Otras respuestas válidas",
+            "description": "Opcional. Sepáralas con una barra: gafas / anteojos / lentes"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Tiempo límite, en segundos",
+      "description": "0 o vacío para jugar sin tiempo. El alumno puede pausar el reloj cuando quiera."
+    },
+    {
+      "label": "Idioma de las respuestas",
+      "description": "Decide qué letras nunca se toman por otra (como la Ñ en español) y qué tildes se pueden pasar por alto.",
+      "default": "es",
+      "options": [
+        {
+          "label": "Español"
+        },
+        {
+          "label": "Catalán"
+        },
+        {
+          "label": "Euskera"
+        },
+        {
+          "label": "Gallego"
+        },
+        {
+          "label": "Inglés"
+        },
+        {
+          "label": "Alemán"
+        },
+        {
+          "label": "Francés"
+        },
+        {
+          "label": "Italiano"
+        },
+        {
+          "label": "Neerlandés"
+        },
+        {
+          "label": "Portugués"
+        },
+        {
+          "label": "Sueco"
+        },
+        {
+          "label": "Otro"
+        }
+      ]
+    },
+    {
+      "label": "Otras letras que cuentan aparte",
+      "description": "Opcional, para idiomas que no están en la lista: letras que nunca se deben tomar por otra, como la Ñ o la Ç."
+    },
+    {
+      "label": "Configuración del comportamiento",
+      "description": "Estas opciones permiten controlar cómo se comporta el juego.",
+      "fields": [
+        {
+          "label": "No distinguir mayúsculas y minúsculas"
+        },
+        {
+          "label": "No tener en cuenta las tildes",
+          "description": "Las letras propias del idioma siguen contando aparte (en español, la Ñ no es la N)."
+        },
+        {
+          "label": "Mostrar la respuesta correcta después de un fallo"
+        },
+        {
+          "label": "Activar «Volver a jugar»"
+        },
+        {
+          "label": "Activar «Ver las respuestas»"
+        }
+      ]
+    },
+    {
+      "label": "Interfaz de usuario",
+      "fields": [
+        {
+          "label": "Botón de empezar",
+          "default": "Empezar"
+        },
+        {
+          "label": "Número de letras (@count)",
+          "default": "@count letras"
+        },
+        {
+          "label": "Tiempo límite (@time)",
+          "default": "Tiempo: @time"
+        },
+        {
+          "label": "Sin límite de tiempo",
+          "default": "Sin límite de tiempo"
+        },
+        {
+          "label": "Cómo se juega",
+          "default": "Escribe la respuesta de cada letra. Si no la sabes, pasa y la letra volverá en la siguiente ronda."
+        },
+        {
+          "label": "La respuesta empieza por (@letter)",
+          "default": "Empieza por la @letter"
+        },
+        {
+          "label": "La respuesta contiene (@letter)",
+          "default": "Contiene la @letter"
+        },
+        {
+          "label": "Campo de respuesta",
+          "default": "Tu respuesta"
+        },
+        {
+          "label": "Botón de comprobar",
+          "default": "Comprobar"
+        },
+        {
+          "label": "Botón de pasar",
+          "default": "Paso"
+        },
+        {
+          "label": "Botón de pausa",
+          "default": "Pausa"
+        },
+        {
+          "label": "Botón de seguir",
+          "default": "Seguir"
+        },
+        {
+          "label": "En pausa",
+          "default": "En pausa. La pista vuelve cuando sigas."
+        },
+        {
+          "label": "Botón de terminar",
+          "default": "Terminar"
+        },
+        {
+          "label": "Terminar, para confirmar",
+          "default": "¿Terminar ya? Pulsa otra vez"
+        },
+        {
+          "label": "Sin respuesta escrita",
+          "default": "Escribe una respuesta o pasa."
+        },
+        {
+          "label": "Respuesta correcta",
+          "default": "¡Correcto!"
+        },
+        {
+          "label": "Respuesta incorrecta",
+          "default": "Esta vez no."
+        },
+        {
+          "label": "La respuesta correcta era (@answer)",
+          "default": "Era «@answer»."
+        },
+        {
+          "label": "Letra pasada (@letter)",
+          "default": "La @letter vuelve en la siguiente ronda."
+        },
+        {
+          "label": "Tiempo restante",
+          "default": "Tiempo restante"
+        },
+        {
+          "label": "Se acabó el tiempo",
+          "default": "Se acabó el tiempo."
+        },
+        {
+          "label": "Queda un minuto",
+          "default": "Queda un minuto."
+        },
+        {
+          "label": "Quedan diez segundos",
+          "default": "Quedan diez segundos."
+        },
+        {
+          "label": "Ronda (@round)",
+          "default": "Ronda @round"
+        },
+        {
+          "label": "Recuento de aciertos",
+          "default": "Aciertos"
+        },
+        {
+          "label": "Recuento de fallos",
+          "default": "Fallos"
+        },
+        {
+          "label": "Recuento de letras que faltan",
+          "default": "Faltan"
+        },
+        {
+          "label": "Resultado (@score, @total)",
+          "default": "@score de @total letras acertadas"
+        },
+        {
+          "label": "Letra: acertada",
+          "default": "acertada"
+        },
+        {
+          "label": "Letra: fallada",
+          "default": "fallada"
+        },
+        {
+          "label": "Letra: pasada",
+          "default": "pasada"
+        },
+        {
+          "label": "Letra: por contestar",
+          "default": "por contestar"
+        },
+        {
+          "label": "Letra: sin contestar",
+          "default": "sin contestar"
+        },
+        {
+          "label": "Letra: en juego",
+          "default": "ahora"
+        },
+        {
+          "label": "Tu respuesta (@answer)",
+          "default": "Tu respuesta: @answer"
+        },
+        {
+          "label": "La respuesta correcta (@answer)",
+          "default": "Respuesta: @answer"
+        },
+        {
+          "label": "Botón de ver las respuestas",
+          "default": "Ver las respuestas"
+        },
+        {
+          "label": "Botón de volver a jugar",
+          "default": "Volver a jugar"
+        },
+        {
+          "label": "Las letras de la rueda (para lectores de pantalla)",
+          "default": "Letras de la rueda"
+        },
+        {
+          "label": "Rueda sin letras",
+          "default": "Esta rueda aún no tiene letras con pista y respuesta."
+        }
+      ]
+    }
+  ]
+}

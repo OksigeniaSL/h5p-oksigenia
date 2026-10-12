@@ -1,0 +1,279 @@
+{
+  "semantics": [
+    {
+      "label": "Letters",
+      "description": "One item per letter, in the order the wheel goes round.",
+      "entity": "letter",
+      "field": {
+        "label": "Letter",
+        "fields": [
+          {
+            "label": "Letter"
+          },
+          {
+            "label": "The answer",
+            "options": [
+              {
+                "label": "Starts with the letter"
+              },
+              {
+                "label": "Contains the letter"
+              }
+            ]
+          },
+          {
+            "label": "Clue"
+          },
+          {
+            "label": "Answer"
+          },
+          {
+            "label": "Other valid answers",
+            "description": "Optional. Separate them with a slash: glasses / spectacles"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Time limit, in seconds",
+      "description": "0 or empty for no time limit. Players can pause the clock at any time."
+    },
+    {
+      "label": "Language of the answers",
+      "description": "Decides which letters never count as another one (such as Ñ in Spanish) and which accents can be ignored.",
+      "options": [
+        {
+          "label": "Spanish"
+        },
+        {
+          "label": "Catalan"
+        },
+        {
+          "label": "Basque"
+        },
+        {
+          "label": "Galician"
+        },
+        {
+          "label": "English"
+        },
+        {
+          "label": "German"
+        },
+        {
+          "label": "French"
+        },
+        {
+          "label": "Italian"
+        },
+        {
+          "label": "Dutch"
+        },
+        {
+          "label": "Portuguese"
+        },
+        {
+          "label": "Swedish"
+        },
+        {
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "label": "Other letters that count apart",
+      "description": "Optional, for languages not in the list: letters that must never be taken for another one, such as Ñ or Ç."
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options let you control how the game behaves.",
+      "fields": [
+        {
+          "label": "Ignore capital letters"
+        },
+        {
+          "label": "Ignore accents",
+          "description": "The letters of the language still count apart (Ñ is not N in Spanish)."
+        },
+        {
+          "label": "Show the right answer after a wrong one"
+        },
+        {
+          "label": "Enable \"Retry\""
+        },
+        {
+          "label": "Enable \"Show the answers\""
+        }
+      ]
+    },
+    {
+      "label": "User interface",
+      "fields": [
+        {
+          "label": "Start button",
+          "default": "Start"
+        },
+        {
+          "label": "Number of letters (@count)",
+          "default": "@count letters"
+        },
+        {
+          "label": "Time limit (@time)",
+          "default": "Time: @time"
+        },
+        {
+          "label": "No time limit",
+          "default": "No time limit"
+        },
+        {
+          "label": "How to play",
+          "default": "Type the answer for each letter. If you do not know it, pass: the letter comes back in the next round."
+        },
+        {
+          "label": "The answer starts with (@letter)",
+          "default": "Starts with @letter"
+        },
+        {
+          "label": "The answer contains (@letter)",
+          "default": "Contains @letter"
+        },
+        {
+          "label": "Answer field",
+          "default": "Your answer"
+        },
+        {
+          "label": "Check button",
+          "default": "Check"
+        },
+        {
+          "label": "Pass button",
+          "default": "Pass"
+        },
+        {
+          "label": "Pause button",
+          "default": "Pause"
+        },
+        {
+          "label": "Resume button",
+          "default": "Resume"
+        },
+        {
+          "label": "Paused",
+          "default": "Paused. The clue comes back when you resume."
+        },
+        {
+          "label": "Finish button",
+          "default": "Finish"
+        },
+        {
+          "label": "Finish, to confirm",
+          "default": "Finish now? Press again"
+        },
+        {
+          "label": "No answer typed",
+          "default": "Type an answer or pass."
+        },
+        {
+          "label": "Right answer",
+          "default": "Correct!"
+        },
+        {
+          "label": "Wrong answer",
+          "default": "Not this time."
+        },
+        {
+          "label": "The right answer was (@answer)",
+          "default": "The answer was “@answer”."
+        },
+        {
+          "label": "Letter passed (@letter)",
+          "default": "@letter comes back in the next round."
+        },
+        {
+          "label": "Time left",
+          "default": "Time left"
+        },
+        {
+          "label": "Time is up",
+          "default": "Time is up."
+        },
+        {
+          "label": "One minute left",
+          "default": "One minute left."
+        },
+        {
+          "label": "Ten seconds left",
+          "default": "Ten seconds left."
+        },
+        {
+          "label": "Round (@round)",
+          "default": "Round @round"
+        },
+        {
+          "label": "Count of right answers",
+          "default": "Correct"
+        },
+        {
+          "label": "Count of wrong answers",
+          "default": "Wrong"
+        },
+        {
+          "label": "Count of letters left",
+          "default": "Left"
+        },
+        {
+          "label": "Result (@score, @total)",
+          "default": "@score of @total letters right"
+        },
+        {
+          "label": "Letter: right",
+          "default": "correct"
+        },
+        {
+          "label": "Letter: wrong",
+          "default": "wrong"
+        },
+        {
+          "label": "Letter: passed",
+          "default": "passed"
+        },
+        {
+          "label": "Letter: to answer",
+          "default": "to answer"
+        },
+        {
+          "label": "Letter: not answered",
+          "default": "not answered"
+        },
+        {
+          "label": "Letter: now playing",
+          "default": "now"
+        },
+        {
+          "label": "Your answer was (@answer)",
+          "default": "Your answer: @answer"
+        },
+        {
+          "label": "The right answer (@answer)",
+          "default": "Answer: @answer"
+        },
+        {
+          "label": "Show the answers button",
+          "default": "Show the answers"
+        },
+        {
+          "label": "Retry button",
+          "default": "Retry"
+        },
+        {
+          "label": "The letters of the wheel (for screen readers)",
+          "default": "Letters of the wheel"
+        },
+        {
+          "label": "Wheel without letters",
+          "default": "This wheel has no letters with a clue and an answer yet."
+        }
+      ]
+    }
+  ]
+}

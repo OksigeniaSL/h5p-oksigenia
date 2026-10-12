@@ -1,0 +1,33 @@
+{
+  "title": "Alphabet Wheel",
+  "description": "A clue for each letter of the alphabet: the player types the answer or passes the letter to the next round. One point per letter.",
+  "machineName": "H5P.AlphabetWheel",
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
+  "runnable": 1,
+  "author": "Oksigenia",
+  "license": "MIT",
+  "embedTypes": [
+    "iframe"
+  ],
+  "fullscreen": 0,
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 24
+  },
+  "preloadedJs": [
+    {
+      "path": "dist/alphabet-wheel.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/alphabet-wheel.css"
+    }
+  ],
+  "metadataSettings": {
+    "disable": 0,
+    "disableExtraTitleField": 1
+  }
+}
