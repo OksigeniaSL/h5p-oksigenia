@@ -151,6 +151,8 @@ test('finishing early asks twice and leaves the open letters without a point', a
   await frame.locator('.aw-actions button.aw-primary').click();
   await expect(frame.locator('.aw-input')).toBeFocused();
   await expect(frame.locator('.aw-letter.aw-ok')).toHaveCount(0);
+  // The retry is a new attempt, announced as such.
+  expect((await verbs(frame)).filter((v) => v === 'attempted')).toHaveLength(2);
 });
 
 for (const width of [320, 1100]) {

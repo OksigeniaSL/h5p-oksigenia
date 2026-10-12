@@ -488,6 +488,8 @@ AlphabetWheel.prototype.showSolutions = function () {
 
 AlphabetWheel.prototype.resetTask = function () {
   this.game.reset();
+  // A new attempt: its duration in the xAPI result counts from its own start.
+  this.activityStartTime = undefined;
   this.feedback = null;
   this.paused = false;
   this.confirmingFinish = false;
