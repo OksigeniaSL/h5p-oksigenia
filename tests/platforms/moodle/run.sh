@@ -30,7 +30,12 @@ DB_ROOT_PASSWORD=$(od -An -N12 -tx1 /dev/urandom | tr -d ' \n')
 ADMIN_PASSWORD=$admin_password
 ENV
 compose() { docker compose --project-directory "$work" -f "$work/compose.yaml" "$@"; }
-trap 'compose down -v >/dev/null 2>&1 || true; rm -f "$work/.env"' EXIT INT TERM
+# H5P_KEEP=1 leaves the site running to look into a failure; remove it then with the same compose project.
+if [ "${H5P_KEEP:-}" = 1 ]; then
+  trap 'echo "Site kept: docker compose --project-directory $work down -v"' EXIT
+else
+  trap 'compose down -v >/dev/null 2>&1 || true; rm -f "$work/.env"' EXIT INT TERM
+fi
 
 compose up -d
 echo "Waiting for Moodle $branch to install…"

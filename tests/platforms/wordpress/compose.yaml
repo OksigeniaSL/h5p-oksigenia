@@ -1,0 +1,41 @@
+# Throwaway WordPress to test the H5P games of Oksigenia with the official H5P plugin, used by run.sh. Fictitious
+# data only; removed after each run. Memory and CPU capped: the laptop runs other agents.
+name: h5p-wordpress
+services:
+  db:
+    image: mariadb:11.4
+    restart: "no"
+    mem_limit: 512m
+    cpus: 1.0
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    command: ["--innodb-buffer-pool-size=128M"]
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 60
+  wordpress:
+    image: wordpress:php8.3-apache
+    restart: "no"
+    mem_limit: 768m
+    cpus: 1.5
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8098:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress:/var/www/html
+volumes:
+  db: {}
+  wordpress: {}

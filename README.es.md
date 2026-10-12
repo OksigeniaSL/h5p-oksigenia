@@ -46,6 +46,15 @@ npm run lang         # language/*.json a partir de semantics.json y de los dicci
 
 Las mismas fuentes dan siempre el mismo `.h5p`, byte a byte.
 
+En plataformas reales, con datos ficticios y sitios de usar y tirar que se borran al acabar (Docker, con tope de
+memoria y de CPU):
+
+```
+tests/platforms/moodle/run.sh 4.5     # o 5.3: intentos, notas y reanudación en la actividad H5P de Moodle
+tests/platforms/wordpress/run.sh      # el plugin oficial de H5P: instalación, resultados y reanudación
+node tests/platforms/lumi/check.mjs   # el motor H5P de Lumi Desktop 1.0.3, con el núcleo 1.27
+```
+
 ## En la pizarra de clase
 
 Los mismos juegos, para toda la clase a la vez y con el docente llevando la cuenta, están en
