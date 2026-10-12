@@ -55,6 +55,23 @@ try {
     await game().locator('.aw').waitFor({ timeout: 60_000 });
   };
   const letter = () => game().locator('.aw-letter[aria-current] .aw-letter-text').textContent();
+  /**
+   * Waits until the two nested frames of Moodle's player (Moodle's iframe and H5P's) have grown to the game's height,
+   * with nothing cut off at the bottom. Returns the time it took, or null if they never did.
+   */
+  const fits = async (ms = 5000) => {
+    const started = Date.now();
+    while (Date.now() - started < ms) {
+      const outer = await page.locator('iframe.h5p-player').boundingBox();
+      const inner = await page.frameLocator('iframe.h5p-player').locator('iframe.h5p-iframe').boundingBox();
+      const needed = await game().locator('.aw').evaluate((el) => el.getBoundingClientRect().height);
+      if (outer && inner && inner.height + 1 >= needed && outer.height + 1 >= inner.height) {
+        return Date.now() - started;
+      }
+      await page.waitForTimeout(100);
+    }
+    return null;
+  };
   /** Answers `wrong` letters wrong (the first ones) and the rest right; returns when the results show. */
   const play = async (wrong) => {
     let n = 0;
@@ -74,11 +91,22 @@ try {
   console.log(`Moodle ${report.moodle}`);
   check('the student starts with no attempts', attempts().length === 0);
 
+
   // Ten games, each one with a different number of wrong letters: 27, 26 … right.
   for (let g = 0; g < games; g++) {
     await openActivity();
+    if (g === 0) {
+      // A first load, with an empty browser cache: the frames take the height of the start screen, then of the game.
+      const introFit = await fits();
+      check('first load: the frames fit the start screen', introFit !== null, introFit === null ? 'cut off' : `${introFit} ms`);
+    }
     await game().locator('.aw-intro button').click();
     if (g === 0) {
+      const gameFit = await fits();
+      check('after «Start», the frames grow to the whole game', gameFit !== null, gameFit === null ? 'cut off' : `${gameFit} ms`);
+      const pass = await game().locator('.aw-row button.aw-secondary').boundingBox();
+      const frame = await page.locator('iframe.h5p-player').boundingBox();
+      check('the «Pass» button is inside the visible frame', pass && frame && pass.y + pass.height <= frame.y + frame.height);
       await page.screenshot({ path: `${opt.shots}/moodle-game.png` });
     }
     await play(g);
@@ -86,6 +114,7 @@ try {
     // Moodle stores the attempt from the web service call that follows the result.
     await expect(() => attempts().length === g + 1, 15_000);
     if (g === 0) {
+      await fits();
       await page.waitForTimeout(1500);
       await page.screenshot({ path: `${opt.shots}/moodle-cheer.png` });
     }
@@ -122,6 +151,7 @@ try {
     `paused: ${resumed}, right: ${okLetters}, passed: ${passed}`);
   await game().locator('.aw-pause').click();
   check('it goes on from the same letter', (await letter()) === before, before);
+  await fits();
   await page.screenshot({ path: `${opt.shots}/moodle-resumed.png` });
   check('the resumed game made no attempt of its own', attempts().length === games);
 

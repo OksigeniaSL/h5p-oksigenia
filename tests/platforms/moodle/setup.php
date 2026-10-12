@@ -13,10 +13,6 @@ require_once($CFG->libdir . '/enrollib.php');
 
 [, $package, $grademethod] = $argv + [null, null, 3];
 $admin = get_admin();
-// The test site runs on plain http on localhost: a secure-only session cookie would never come back.
-if (strpos($CFG->wwwroot, 'http://localhost') === 0) {
-    set_config('cookiesecure', 0);
-}
 \core\session\manager::set_user($admin);
 
 $course = $DB->get_record('course', ['shortname' => 'AW-TEST']);

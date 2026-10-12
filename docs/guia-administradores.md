@@ -32,6 +32,19 @@ los gestores y los administradores. Los docentes con permiso de edición (`moodl
 de tipos que ya estén instalados, pero no instalar tipos nuevos. Los dos permisos llevan el aviso de riesgo XSS de
 Moodle, porque un tipo de contenido ejecuta su propio código: por eso la instalación la hace quien administra el sitio.
 
+### Moodle desde la línea de órdenes
+
+Para quien administra el servidor, `tools/moodle-install-library.php` (en el repositorio) instala la librería sin
+crear contenido, por el mismo camino que el formulario de Moodle. Se ejecuta como el usuario del servidor web:
+
+```
+php moodle-install-library.php --package=alphabet-wheel-1.0.0-es.h5p --sums=SHA256SUMS
+```
+
+Comprueba antes el SHA-256 del paquete con el `SHA256SUMS` de la versión publicada, no hace nada si el sitio ya tiene
+esa versión o una más nueva, y termina con un código distinto de 0 si algo falla (2 si la huella no coincide). Admite
+`--moodle=<carpeta de config.php>` si Moodle no está en `/var/www/moodle`. Probado en Moodle 4.5 y 5.3.
+
 ### WordPress con el plugin H5P
 
 1. En *Contenido H5P > Añadir nuevo* (*H5P Content > Add New*), elegir *Subir* (*Upload*), seleccionar el `.h5p`
