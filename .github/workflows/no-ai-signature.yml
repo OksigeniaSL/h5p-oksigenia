@@ -1,0 +1,43 @@
+name: no-ai-signature
+
+# Second lock of the rule «no AI signature» (see .githooks/commit-msg): checks the commits of each pull request or
+# push and the text of the pull request. The rule holds from the first commit, so the whole history is checked.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  signature:
+    name: No AI signature
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Commits and pull request text
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          pattern='(<noreply@anthropic\.com>|^Claude-Session:|^Co-Authored-By:.*\bClaude\b|Generated with \[|claude\.ai/code/)'
+          failed=0
+          for c in $(git rev-list "$HEAD_SHA"); do
+            if git log -1 --format=%B "$c" | grep -nEi "$pattern"; then
+              echo "::error::Commit $c carries an AI signature"
+              failed=1
+            fi
+          done
+          if printf '%s\n%s\n' "$PR_TITLE" "$PR_BODY" | grep -nEi "$pattern"; then
+            echo "::error::The pull request text carries an AI signature"
+            failed=1
+          fi
+          exit $failed

@@ -1,0 +1,10 @@
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.swp
+*.bak
+node_modules/
+dist/
+# Working folders of the h5p-cli dev server
+.h5p-dev/
