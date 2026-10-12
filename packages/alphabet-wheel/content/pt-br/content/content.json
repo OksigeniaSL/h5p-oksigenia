@@ -1,0 +1,172 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Inseto que produz mel",
+      "answer": "Abelha"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Veículo de duas rodas que anda com pedais",
+      "answer": "Bicicleta",
+      "alternatives": "bike"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Animal que carrega a casa nas costas e deixa um rastro brilhante",
+      "answer": "Caracol"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Réptil enorme que viveu há milhões de anos",
+      "answer": "Dinossauro"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Animal com tromba que vive na África e na Ásia",
+      "answer": "Elefante"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Inseto pequeno que vive em grupo e carrega pedacinhos de folhas",
+      "answer": "Formiga"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Animal que mia",
+      "answer": "Gato"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Animal enorme que passa boa parte do dia dentro da água dos rios",
+      "answer": "Hipopótamo"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Porção de terra cercada de água por todos os lados",
+      "answer": "Ilha"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Abertura na parede por onde entram a luz e o ar",
+      "answer": "Janela"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Fruta marrom e peluda por fora, verde por dentro",
+      "answer": "Kiwi"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Satélite natural da Terra",
+      "answer": "Lua"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Grande massa de água salgada que cerca as ilhas",
+      "answer": "Mar"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Água congelada que cai do céu em flocos brancos",
+      "answer": "Neve"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Animal que nos dá lã",
+      "answer": "Ovelha"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Ave preta e branca que vive no Polo Sul e não voa",
+      "answer": "Pinguim"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "Alimento feito com leite coalhado",
+      "answer": "Queijo"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Usamos para saber as horas",
+      "answer": "Relógio"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Estrela que nos dá luz e calor",
+      "answer": "Sol"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Animal com casco que anda muito devagar",
+      "answer": "Tartaruga"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Fruta pequena que cresce em cachos",
+      "answer": "Uva"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Montanha que pode lançar lava",
+      "answer": "Vulcão"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Conexão com a internet sem fio",
+      "answer": "Wi-fi",
+      "alternatives": "wifi"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Recipiente pequeno com asa em que tomamos leite ou chá",
+      "answer": "Xícara"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Prática de posturas e respiração que relaxa o corpo e a mente",
+      "answer": "Yoga"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Animal listrado parecido com um cavalo",
+      "answer": "Zebra"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "pt",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableSound": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

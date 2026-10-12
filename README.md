@@ -14,6 +14,12 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
 - **Alphabet Wheel** (`H5P.AlphabetWheel`): a clue for each letter of the alphabet. The student types the answer or
   passes the letter to the next round. One point per letter.
 
+## Languages
+
+English, Spanish, German, French, Italian, Dutch, Portuguese (Brazil) and Swedish, both for players and for authors
+in the H5P editor, each with an example wheel. Answers are checked by the rules of their own language: the Ñ, the Ä
+or the Å never count as another letter.
+
 ## Where they run
 
 Anywhere H5P runs: the H5P activity of Moodle 4.5 or later, WordPress with the H5P plugin, and Lumi Desktop. The

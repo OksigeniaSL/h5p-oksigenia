@@ -1,0 +1,172 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Insecte qui fabrique le miel",
+      "answer": "Abeille"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Le plus grand animal de la mer, qui souffle de l'eau par un trou sur sa tête",
+      "answer": "Baleine"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Animal qui miaule et ronronne",
+      "answer": "Chat"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Énorme reptile qui vivait il y a des millions d'années",
+      "answer": "Dinosaure"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Petit animal qui porte sa coquille sur le dos et laisse une trace brillante",
+      "answer": "Escargot"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Petit fruit rouge qui a ses graines à l'extérieur",
+      "answer": "Fraise"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Animal qui a un très long cou",
+      "answer": "Girafe"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Oiseau de nuit aux grands yeux ronds",
+      "answer": "Hibou"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Morceau de terre entouré d'eau de tous les côtés",
+      "answer": "Île"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Couleur du citron et de la banane",
+      "answer": "Jaune"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Petit fruit à la peau marron et poilue, vert à l'intérieur",
+      "answer": "Kiwi"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Satellite naturel de la Terre",
+      "answer": "Lune"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Grande étendue d'eau salée où vivent les poissons et les dauphins",
+      "answer": "Mer"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Eau gelée qui tombe du ciel en flocons blancs",
+      "answer": "Neige"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Animal qui a des plumes, un bec et des ailes",
+      "answer": "Oiseau"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Insecte aux ailes colorées qui a d'abord été une chenille",
+      "answer": "Papillon"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "Le nombre qui vient juste après trois",
+      "answer": "Quatre"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Animal roux à la queue touffue, très rusé dans les contes",
+      "answer": "Renard"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Étoile qui nous donne la lumière et la chaleur",
+      "answer": "Soleil"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Animal à carapace qui marche très lentement",
+      "answer": "Tortue"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Tout ce qui existe : les étoiles, les planètes et les galaxies",
+      "answer": "Univers"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Montagne qui peut cracher de la lave",
+      "answer": "Volcan"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Voiture d'un train dans laquelle voyagent les passagers",
+      "answer": "Wagon",
+      "alternatives": "wagon-voyageurs"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Instrument de musique à lames que l'on frappe avec des baguettes",
+      "answer": "Xylophone"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Aliment fait avec du lait que l'on mange à la cuillère",
+      "answer": "Yaourt",
+      "alternatives": "yogourt"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Animal rayé noir et blanc qui ressemble à un cheval",
+      "answer": "Zèbre"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "fr",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableSound": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

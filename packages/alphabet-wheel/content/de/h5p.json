@@ -1,0 +1,24 @@
+{
+  "title": "Beispiel-Buchstabenrad",
+  "language": "de",
+  "defaultLanguage": "de",
+  "mainLibrary": "H5P.AlphabetWheel",
+  "embedTypes": [
+    "iframe"
+  ],
+  "license": "CC BY",
+  "licenseVersion": "4.0",
+  "authors": [
+    {
+      "name": "Oksigenia",
+      "role": "Author"
+    }
+  ],
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.AlphabetWheel",
+      "majorVersion": "1",
+      "minorVersion": "0"
+    }
+  ]
+}

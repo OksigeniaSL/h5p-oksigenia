@@ -1,0 +1,316 @@
+{
+  "semantics": [
+    {
+      "label": "Letters",
+      "description": "Eén item per letter, in de volgorde waarin het wiel draait.",
+      "entity": "letter",
+      "field": {
+        "label": "Letter",
+        "fields": [
+          {
+            "label": "Letter"
+          },
+          {
+            "label": "Het antwoord",
+            "options": [
+              {
+                "label": "Begint met de letter"
+              },
+              {
+                "label": "Bevat de letter"
+              }
+            ]
+          },
+          {
+            "label": "Hint"
+          },
+          {
+            "label": "Antwoord"
+          },
+          {
+            "label": "Andere goede antwoorden",
+            "description": "Optioneel. Scheid ze met een schuine streep: fiets / rijwiel"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Tijdslimiet, in seconden",
+      "description": "0 of leeg: geen tijdslimiet. Spelers kunnen de klok op elk moment pauzeren."
+    },
+    {
+      "label": "Taal van de antwoorden",
+      "description": "Bepaalt welke letters nooit als een andere letter tellen (zoals de Ñ in het Spaans) en welke accenten genegeerd mogen worden.",
+      "default": "nl",
+      "options": [
+        {
+          "label": "Spaans"
+        },
+        {
+          "label": "Catalaans"
+        },
+        {
+          "label": "Baskisch"
+        },
+        {
+          "label": "Galicisch"
+        },
+        {
+          "label": "Engels"
+        },
+        {
+          "label": "Duits"
+        },
+        {
+          "label": "Frans"
+        },
+        {
+          "label": "Italiaans"
+        },
+        {
+          "label": "Nederlands"
+        },
+        {
+          "label": "Portugees"
+        },
+        {
+          "label": "Zweeds"
+        },
+        {
+          "label": "Anders"
+        }
+      ]
+    },
+    {
+      "label": "Andere letters die apart tellen",
+      "description": "Optioneel, voor talen die niet in de lijst staan: letters die nooit voor een andere letter mogen worden aangezien, zoals Ñ of Ç."
+    },
+    {
+      "label": "Instellingen voor het gedrag",
+      "description": "Met deze opties bepaal je hoe het spel zich gedraagt.",
+      "fields": [
+        {
+          "label": "Hoofdletters negeren"
+        },
+        {
+          "label": "Accenten negeren",
+          "description": "De eigen letters van de taal blijven apart tellen (in het Spaans is de Ñ geen N)."
+        },
+        {
+          "label": "Na een fout het goede antwoord tonen"
+        },
+        {
+          "label": "Met geluid",
+          "description": "Spelers kunnen het geluid tijdens het spel uitzetten."
+        },
+        {
+          "label": "‘Opnieuw spelen’ inschakelen"
+        },
+        {
+          "label": "‘Antwoorden tonen’ inschakelen"
+        }
+      ]
+    },
+    {
+      "label": "Gebruikersinterface",
+      "fields": [
+        {
+          "label": "Knop om te beginnen",
+          "default": "Beginnen"
+        },
+        {
+          "label": "Aantal letters (@count)",
+          "default": "@count letters"
+        },
+        {
+          "label": "Tijdslimiet (@time)",
+          "default": "Tijd: @time"
+        },
+        {
+          "label": "Geen tijdslimiet",
+          "default": "Geen tijdslimiet"
+        },
+        {
+          "label": "Zo speel je",
+          "default": "Typ het antwoord bij elke letter. Weet je het niet, pas dan: de letter komt terug in de volgende ronde."
+        },
+        {
+          "label": "Het antwoord begint met (@letter)",
+          "default": "Begint met de @letter"
+        },
+        {
+          "label": "Het antwoord bevat (@letter)",
+          "default": "Bevat de @letter"
+        },
+        {
+          "label": "Antwoordveld",
+          "default": "Jouw antwoord"
+        },
+        {
+          "label": "Knop om te controleren",
+          "default": "Controleren"
+        },
+        {
+          "label": "Knop om te passen",
+          "default": "Pas"
+        },
+        {
+          "label": "Pauzeknop",
+          "default": "Pauze"
+        },
+        {
+          "label": "Knop om verder te gaan",
+          "default": "Verder"
+        },
+        {
+          "label": "Gepauzeerd",
+          "default": "Gepauzeerd. De hint komt terug als je verdergaat."
+        },
+        {
+          "label": "Knop om het geluid uit te zetten",
+          "default": "Geluid uit"
+        },
+        {
+          "label": "Knop om het geluid aan te zetten",
+          "default": "Geluid aan"
+        },
+        {
+          "label": "Geluid uitgezet (voor schermlezers)",
+          "default": "Geluid uit."
+        },
+        {
+          "label": "Geluid weer aan (voor schermlezers)",
+          "default": "Geluid aan."
+        },
+        {
+          "label": "Knop om te stoppen",
+          "default": "Stoppen"
+        },
+        {
+          "label": "Stoppen, ter bevestiging",
+          "default": "Nu stoppen? Druk nog een keer"
+        },
+        {
+          "label": "Geen antwoord getypt",
+          "default": "Typ een antwoord of pas."
+        },
+        {
+          "label": "Goed antwoord",
+          "default": "Goed zo!"
+        },
+        {
+          "label": "Fout antwoord",
+          "default": "Deze keer niet."
+        },
+        {
+          "label": "Het goede antwoord was (@answer)",
+          "default": "Het antwoord was ‘@answer’."
+        },
+        {
+          "label": "Letter gepast (@letter)",
+          "default": "De @letter komt terug in de volgende ronde."
+        },
+        {
+          "label": "Resterende tijd",
+          "default": "Resterende tijd"
+        },
+        {
+          "label": "De tijd is om",
+          "default": "De tijd is om."
+        },
+        {
+          "label": "Nog één minuut",
+          "default": "Nog één minuut."
+        },
+        {
+          "label": "Nog tien seconden",
+          "default": "Nog tien seconden."
+        },
+        {
+          "label": "Ronde (@round)",
+          "default": "Ronde @round"
+        },
+        {
+          "label": "Aantal goede antwoorden",
+          "default": "Goed"
+        },
+        {
+          "label": "Aantal foute antwoorden",
+          "default": "Fout"
+        },
+        {
+          "label": "Aantal letters te gaan",
+          "default": "Te gaan"
+        },
+        {
+          "label": "Resultaat (@score, @total)",
+          "default": "@score van de @total letters goed"
+        },
+        {
+          "label": "Eindbericht: alle letters goed",
+          "default": "Wiel compleet!"
+        },
+        {
+          "label": "Eindbericht: 80 % of meer",
+          "default": "Heel goed!"
+        },
+        {
+          "label": "Eindbericht: 50 % of meer",
+          "default": "Goed gedaan!"
+        },
+        {
+          "label": "Eindbericht: minder dan 50 %",
+          "default": "Blijf oefenen!"
+        },
+        {
+          "label": "Letter: goed",
+          "default": "goed"
+        },
+        {
+          "label": "Letter: fout",
+          "default": "fout"
+        },
+        {
+          "label": "Letter: gepast",
+          "default": "gepast"
+        },
+        {
+          "label": "Letter: nog te doen",
+          "default": "nog te doen"
+        },
+        {
+          "label": "Letter: niet beantwoord",
+          "default": "niet beantwoord"
+        },
+        {
+          "label": "Letter: nu aan de beurt",
+          "default": "nu"
+        },
+        {
+          "label": "Jouw antwoord was (@answer)",
+          "default": "Jouw antwoord: @answer"
+        },
+        {
+          "label": "Het goede antwoord (@answer)",
+          "default": "Antwoord: @answer"
+        },
+        {
+          "label": "Knop ‘Antwoorden tonen’",
+          "default": "Antwoorden tonen"
+        },
+        {
+          "label": "Knop ‘Opnieuw spelen’",
+          "default": "Opnieuw spelen"
+        },
+        {
+          "label": "De letters van het wiel (voor schermlezers)",
+          "default": "Letters van het wiel"
+        },
+        {
+          "label": "Wiel zonder letters",
+          "default": "Dit wiel heeft nog geen letters met een hint en een antwoord."
+        }
+      ]
+    }
+  ]
+}

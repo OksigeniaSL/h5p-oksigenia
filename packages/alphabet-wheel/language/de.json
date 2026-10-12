@@ -1,0 +1,316 @@
+{
+  "semantics": [
+    {
+      "label": "Buchstaben",
+      "description": "Ein Eintrag pro Buchstabe, in der Reihenfolge, in der sich das Rad dreht.",
+      "entity": "Buchstabe",
+      "field": {
+        "label": "Buchstabe",
+        "fields": [
+          {
+            "label": "Buchstabe"
+          },
+          {
+            "label": "Die Antwort",
+            "options": [
+              {
+                "label": "Beginnt mit dem Buchstaben"
+              },
+              {
+                "label": "Enthält den Buchstaben"
+              }
+            ]
+          },
+          {
+            "label": "Hinweis"
+          },
+          {
+            "label": "Antwort"
+          },
+          {
+            "label": "Weitere richtige Antworten",
+            "description": "Optional. Mit Schrägstrich trennen: Fahrrad / Rad"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Zeitlimit in Sekunden",
+      "description": "0 oder leer: ohne Zeitlimit. Die Spieler können die Uhr jederzeit anhalten."
+    },
+    {
+      "label": "Sprache der Antworten",
+      "description": "Legt fest, welche Buchstaben nie als andere gelten (wie Ä im Deutschen) und welche Akzente ignoriert werden können.",
+      "default": "de",
+      "options": [
+        {
+          "label": "Spanisch"
+        },
+        {
+          "label": "Katalanisch"
+        },
+        {
+          "label": "Baskisch"
+        },
+        {
+          "label": "Galicisch"
+        },
+        {
+          "label": "Englisch"
+        },
+        {
+          "label": "Deutsch"
+        },
+        {
+          "label": "Französisch"
+        },
+        {
+          "label": "Italienisch"
+        },
+        {
+          "label": "Niederländisch"
+        },
+        {
+          "label": "Portugiesisch"
+        },
+        {
+          "label": "Schwedisch"
+        },
+        {
+          "label": "Andere"
+        }
+      ]
+    },
+    {
+      "label": "Weitere eigenständige Buchstaben",
+      "description": "Optional, für Sprachen, die nicht in der Liste stehen: Buchstaben, die nie mit einem anderen verwechselt werden dürfen, wie Ñ oder Ç."
+    },
+    {
+      "label": "Verhaltenseinstellungen",
+      "description": "Mit diesen Optionen legst du fest, wie sich das Spiel verhält.",
+      "fields": [
+        {
+          "label": "Groß- und Kleinschreibung ignorieren"
+        },
+        {
+          "label": "Akzente ignorieren",
+          "description": "Die eigenen Buchstaben der Sprache zählen weiterhin für sich (Ä ist nicht A)."
+        },
+        {
+          "label": "Nach einer falschen Antwort die richtige zeigen"
+        },
+        {
+          "label": "Mit Tönen",
+          "description": "Die Spieler können sie während des Spiels stumm schalten."
+        },
+        {
+          "label": "„Nochmal spielen“ aktivieren"
+        },
+        {
+          "label": "„Antworten zeigen“ aktivieren"
+        }
+      ]
+    },
+    {
+      "label": "Benutzeroberfläche",
+      "fields": [
+        {
+          "label": "Schaltfläche zum Starten",
+          "default": "Starten"
+        },
+        {
+          "label": "Anzahl der Buchstaben (@count)",
+          "default": "@count Buchstaben"
+        },
+        {
+          "label": "Zeitlimit (@time)",
+          "default": "Zeit: @time"
+        },
+        {
+          "label": "Ohne Zeitlimit",
+          "default": "Ohne Zeitlimit"
+        },
+        {
+          "label": "So wird gespielt",
+          "default": "Schreib die Antwort zu jedem Buchstaben. Wenn du sie nicht weißt, passe: Der Buchstabe kommt in der nächsten Runde wieder."
+        },
+        {
+          "label": "Die Antwort beginnt mit (@letter)",
+          "default": "Beginnt mit @letter"
+        },
+        {
+          "label": "Die Antwort enthält (@letter)",
+          "default": "Enthält @letter"
+        },
+        {
+          "label": "Antwortfeld",
+          "default": "Deine Antwort"
+        },
+        {
+          "label": "Schaltfläche zum Prüfen",
+          "default": "Prüfen"
+        },
+        {
+          "label": "Schaltfläche zum Passen",
+          "default": "Passen"
+        },
+        {
+          "label": "Schaltfläche für die Pause",
+          "default": "Pause"
+        },
+        {
+          "label": "Schaltfläche zum Weiterspielen",
+          "default": "Weiter"
+        },
+        {
+          "label": "Pausiert",
+          "default": "Pause. Der Hinweis erscheint wieder, wenn du weiterspielst."
+        },
+        {
+          "label": "Schaltfläche zum Stummschalten",
+          "default": "Ton aus"
+        },
+        {
+          "label": "Schaltfläche zum Einschalten des Tons",
+          "default": "Ton an"
+        },
+        {
+          "label": "Ton stumm geschaltet (für Screenreader)",
+          "default": "Ton aus."
+        },
+        {
+          "label": "Ton wieder an (für Screenreader)",
+          "default": "Ton an."
+        },
+        {
+          "label": "Schaltfläche zum Beenden",
+          "default": "Beenden"
+        },
+        {
+          "label": "Beenden, zur Bestätigung",
+          "default": "Jetzt beenden? Noch einmal drücken"
+        },
+        {
+          "label": "Keine Antwort eingegeben",
+          "default": "Schreib eine Antwort oder passe."
+        },
+        {
+          "label": "Richtige Antwort",
+          "default": "Richtig!"
+        },
+        {
+          "label": "Falsche Antwort",
+          "default": "Diesmal nicht."
+        },
+        {
+          "label": "Die richtige Antwort war (@answer)",
+          "default": "Die Antwort war „@answer“."
+        },
+        {
+          "label": "Buchstabe gepasst (@letter)",
+          "default": "Das @letter kommt in der nächsten Runde wieder."
+        },
+        {
+          "label": "Restzeit",
+          "default": "Restzeit"
+        },
+        {
+          "label": "Die Zeit ist um",
+          "default": "Die Zeit ist um."
+        },
+        {
+          "label": "Noch eine Minute",
+          "default": "Noch eine Minute."
+        },
+        {
+          "label": "Noch zehn Sekunden",
+          "default": "Noch zehn Sekunden."
+        },
+        {
+          "label": "Runde (@round)",
+          "default": "Runde @round"
+        },
+        {
+          "label": "Anzahl der richtigen Antworten",
+          "default": "Richtig"
+        },
+        {
+          "label": "Anzahl der falschen Antworten",
+          "default": "Falsch"
+        },
+        {
+          "label": "Anzahl der offenen Buchstaben",
+          "default": "Offen"
+        },
+        {
+          "label": "Ergebnis (@score, @total)",
+          "default": "@score von @total Buchstaben richtig"
+        },
+        {
+          "label": "Schlussmeldung: alle Buchstaben richtig",
+          "default": "Rad komplett!"
+        },
+        {
+          "label": "Schlussmeldung: 80 % oder mehr",
+          "default": "Sehr gut!"
+        },
+        {
+          "label": "Schlussmeldung: 50 % oder mehr",
+          "default": "Gut gemacht!"
+        },
+        {
+          "label": "Schlussmeldung: weniger als 50 %",
+          "default": "Weiter üben!"
+        },
+        {
+          "label": "Buchstabe: richtig",
+          "default": "richtig"
+        },
+        {
+          "label": "Buchstabe: falsch",
+          "default": "falsch"
+        },
+        {
+          "label": "Buchstabe: gepasst",
+          "default": "gepasst"
+        },
+        {
+          "label": "Buchstabe: noch offen",
+          "default": "noch offen"
+        },
+        {
+          "label": "Buchstabe: nicht beantwortet",
+          "default": "nicht beantwortet"
+        },
+        {
+          "label": "Buchstabe: jetzt im Spiel",
+          "default": "jetzt"
+        },
+        {
+          "label": "Deine Antwort war (@answer)",
+          "default": "Deine Antwort: @answer"
+        },
+        {
+          "label": "Die richtige Antwort (@answer)",
+          "default": "Antwort: @answer"
+        },
+        {
+          "label": "Schaltfläche „Antworten zeigen“",
+          "default": "Antworten zeigen"
+        },
+        {
+          "label": "Schaltfläche „Nochmal spielen“",
+          "default": "Nochmal spielen"
+        },
+        {
+          "label": "Die Buchstaben des Rades (für Screenreader)",
+          "default": "Buchstaben des Rades"
+        },
+        {
+          "label": "Rad ohne Buchstaben",
+          "default": "Dieses Rad hat noch keine Buchstaben mit Hinweis und Antwort."
+        }
+      ]
+    }
+  ]
+}

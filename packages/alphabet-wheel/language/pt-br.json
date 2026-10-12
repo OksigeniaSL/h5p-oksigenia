@@ -1,0 +1,316 @@
+{
+  "semantics": [
+    {
+      "label": "Letras",
+      "description": "Um item por letra, na ordem em que a roda gira.",
+      "entity": "letra",
+      "field": {
+        "label": "Letra",
+        "fields": [
+          {
+            "label": "Letra"
+          },
+          {
+            "label": "A resposta",
+            "options": [
+              {
+                "label": "Começa com a letra"
+              },
+              {
+                "label": "Contém a letra"
+              }
+            ]
+          },
+          {
+            "label": "Pista"
+          },
+          {
+            "label": "Resposta"
+          },
+          {
+            "label": "Outras respostas válidas",
+            "description": "Opcional. Separe-as com uma barra: geladeira / refrigerador"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Limite de tempo, em segundos",
+      "description": "0 ou vazio: sem limite de tempo. Os jogadores podem pausar o relógio a qualquer momento."
+    },
+    {
+      "label": "Idioma das respostas",
+      "description": "Define quais letras nunca contam como outra (como o Ñ em espanhol) e quais acentos podem ser ignorados.",
+      "default": "pt",
+      "options": [
+        {
+          "label": "Espanhol"
+        },
+        {
+          "label": "Catalão"
+        },
+        {
+          "label": "Basco"
+        },
+        {
+          "label": "Galego"
+        },
+        {
+          "label": "Inglês"
+        },
+        {
+          "label": "Alemão"
+        },
+        {
+          "label": "Francês"
+        },
+        {
+          "label": "Italiano"
+        },
+        {
+          "label": "Holandês"
+        },
+        {
+          "label": "Português"
+        },
+        {
+          "label": "Sueco"
+        },
+        {
+          "label": "Outro"
+        }
+      ]
+    },
+    {
+      "label": "Outras letras que contam à parte",
+      "description": "Opcional, para idiomas que não estão na lista: letras que nunca devem ser confundidas com outra, como Ñ ou Ç."
+    },
+    {
+      "label": "Configurações de comportamento",
+      "description": "Estas opções permitem controlar como o jogo se comporta.",
+      "fields": [
+        {
+          "label": "Ignorar maiúsculas"
+        },
+        {
+          "label": "Ignorar acentos",
+          "description": "As letras próprias do idioma continuam contando à parte (em espanhol, o Ñ não é o N)."
+        },
+        {
+          "label": "Mostrar a resposta certa depois de um erro"
+        },
+        {
+          "label": "Com sons",
+          "description": "Os jogadores podem silenciá-los durante a partida."
+        },
+        {
+          "label": "Ativar “Jogar de novo”"
+        },
+        {
+          "label": "Ativar “Ver as respostas”"
+        }
+      ]
+    },
+    {
+      "label": "Interface do usuário",
+      "fields": [
+        {
+          "label": "Botão para começar",
+          "default": "Começar"
+        },
+        {
+          "label": "Número de letras (@count)",
+          "default": "@count letras"
+        },
+        {
+          "label": "Limite de tempo (@time)",
+          "default": "Tempo: @time"
+        },
+        {
+          "label": "Sem limite de tempo",
+          "default": "Sem limite de tempo"
+        },
+        {
+          "label": "Como jogar",
+          "default": "Escreva a resposta de cada letra. Se não souber, passe: a letra volta na próxima rodada."
+        },
+        {
+          "label": "A resposta começa com (@letter)",
+          "default": "Começa com @letter"
+        },
+        {
+          "label": "A resposta contém (@letter)",
+          "default": "Contém @letter"
+        },
+        {
+          "label": "Campo de resposta",
+          "default": "Sua resposta"
+        },
+        {
+          "label": "Botão para verificar",
+          "default": "Verificar"
+        },
+        {
+          "label": "Botão para passar",
+          "default": "Passar"
+        },
+        {
+          "label": "Botão de pausa",
+          "default": "Pausar"
+        },
+        {
+          "label": "Botão para continuar",
+          "default": "Continuar"
+        },
+        {
+          "label": "Em pausa",
+          "default": "Em pausa. A pista volta quando você continuar."
+        },
+        {
+          "label": "Botão para silenciar",
+          "default": "Silenciar"
+        },
+        {
+          "label": "Botão para ativar o som",
+          "default": "Ativar som"
+        },
+        {
+          "label": "Som silenciado (para leitores de tela)",
+          "default": "Som desativado."
+        },
+        {
+          "label": "Som ativado de novo (para leitores de tela)",
+          "default": "Som ativado."
+        },
+        {
+          "label": "Botão para terminar",
+          "default": "Terminar"
+        },
+        {
+          "label": "Terminar, para confirmar",
+          "default": "Terminar agora? Pressione de novo"
+        },
+        {
+          "label": "Nenhuma resposta escrita",
+          "default": "Escreva uma resposta ou passe."
+        },
+        {
+          "label": "Resposta certa",
+          "default": "Certo!"
+        },
+        {
+          "label": "Resposta errada",
+          "default": "Desta vez não."
+        },
+        {
+          "label": "A resposta certa era (@answer)",
+          "default": "A resposta era “@answer”."
+        },
+        {
+          "label": "Letra passada (@letter)",
+          "default": "O @letter volta na próxima rodada."
+        },
+        {
+          "label": "Tempo restante",
+          "default": "Tempo restante"
+        },
+        {
+          "label": "O tempo acabou",
+          "default": "O tempo acabou."
+        },
+        {
+          "label": "Falta um minuto",
+          "default": "Falta um minuto."
+        },
+        {
+          "label": "Faltam dez segundos",
+          "default": "Faltam dez segundos."
+        },
+        {
+          "label": "Rodada (@round)",
+          "default": "Rodada @round"
+        },
+        {
+          "label": "Número de acertos",
+          "default": "Acertos"
+        },
+        {
+          "label": "Número de erros",
+          "default": "Erros"
+        },
+        {
+          "label": "Número de letras que faltam",
+          "default": "Faltam"
+        },
+        {
+          "label": "Resultado (@score, @total)",
+          "default": "@score de @total letras certas"
+        },
+        {
+          "label": "Mensagem final: todas as letras certas",
+          "default": "Roda completa!"
+        },
+        {
+          "label": "Mensagem final: 80 % ou mais",
+          "default": "Muito bem!"
+        },
+        {
+          "label": "Mensagem final: 50 % ou mais",
+          "default": "Bom trabalho!"
+        },
+        {
+          "label": "Mensagem final: menos de 50 %",
+          "default": "Continue praticando!"
+        },
+        {
+          "label": "Letra: certa",
+          "default": "certa"
+        },
+        {
+          "label": "Letra: errada",
+          "default": "errada"
+        },
+        {
+          "label": "Letra: passada",
+          "default": "passada"
+        },
+        {
+          "label": "Letra: a responder",
+          "default": "a responder"
+        },
+        {
+          "label": "Letra: sem resposta",
+          "default": "sem resposta"
+        },
+        {
+          "label": "Letra: em jogo",
+          "default": "agora"
+        },
+        {
+          "label": "Sua resposta foi (@answer)",
+          "default": "Sua resposta: @answer"
+        },
+        {
+          "label": "A resposta certa (@answer)",
+          "default": "Resposta: @answer"
+        },
+        {
+          "label": "Botão “Ver as respostas”",
+          "default": "Ver as respostas"
+        },
+        {
+          "label": "Botão “Jogar de novo”",
+          "default": "Jogar de novo"
+        },
+        {
+          "label": "As letras da roda (para leitores de tela)",
+          "default": "Letras da roda"
+        },
+        {
+          "label": "Roda sem letras",
+          "default": "Esta roda ainda não tem letras com pista e resposta."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Fågel som säger kvack och simmar i dammen",
+      "answer": "Anka"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Insekt som gör honung",
+      "answer": "Bi"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Fordon med två hjul som man trampar fram",
+      "answer": "Cykel"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Jättestort kräldjur som levde för miljontals år sedan",
+      "answer": "Dinosaurie"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Djur med snabel som lever i Afrika och Asien",
+      "answer": "Elefant"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Insekt med stora, färgglada vingar",
+      "answer": "Fjäril"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Djur med en väldigt lång hals",
+      "answer": "Giraff"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Djur som gnäggar och som man kan rida på",
+      "answer": "Häst"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Fruset vatten",
+      "answer": "Is"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Planeten som vi bor på",
+      "answer": "Jorden",
+      "alternatives": "jord"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Djur som spinner och säger mjau",
+      "answer": "Katt"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Djurens kung, med stor man",
+      "answer": "Lejon"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Jordens naturliga satellit",
+      "answer": "Månen",
+      "alternatives": "måne"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Tid på dygnet när det är mörkt och vi sover",
+      "answer": "Natt"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Mat som görs av mjölk och som möss sägs älska",
+      "answer": "Ost"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Svartvit fågel som lever nära sydpolen och inte kan flyga",
+      "answer": "Pingvin"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "Tävling med frågor där man kan vinna poäng",
+      "answer": "Quiz"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Båge i alla färger på himlen efter regnet",
+      "answer": "Regnbåge"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Stjärnan som ger oss ljus och värme",
+      "answer": "Solen",
+      "alternatives": "sol"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Stort, randigt kattdjur",
+      "answer": "Tiger"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Fågel som jagar på natten och har stora ögon",
+      "answer": "Uggla"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Berg som kan spruta ut lava",
+      "answer": "Vulkan"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Trådlös uppkoppling till internet",
+      "answer": "Wifi",
+      "alternatives": "wi-fi"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Musikinstrument med träplattor som man slår på",
+      "answer": "Xylofon"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Verktyg som man hugger ved med",
+      "answer": "Yxa"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Randigt djur som liknar en häst",
+      "answer": "Zebra"
+    },
+    {
+      "letter": "Å",
+      "kind": "starts",
+      "clue": "Väder med blixtar och muller",
+      "answer": "Åska"
+    },
+    {
+      "letter": "Ä",
+      "kind": "starts",
+      "clue": "Rund frukt som kan vara röd eller grön",
+      "answer": "Äpple"
+    },
+    {
+      "letter": "Ö",
+      "kind": "starts",
+      "clue": "Kroppsdel som vi hör med",
+      "answer": "Öra"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "sv",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableSound": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "semantics": [
+    {
+      "label": "Bokstäver",
+      "description": "En post per bokstav, i den ordning hjulet snurrar.",
+      "entity": "bokstav",
+      "field": {
+        "label": "Bokstav",
+        "fields": [
+          {
+            "label": "Bokstav"
+          },
+          {
+            "label": "Svaret",
+            "options": [
+              {
+                "label": "Börjar på bokstaven"
+              },
+              {
+                "label": "Innehåller bokstaven"
+              }
+            ]
+          },
+          {
+            "label": "Ledtråd"
+          },
+          {
+            "label": "Svar"
+          },
+          {
+            "label": "Andra godtagna svar",
+            "description": "Valfritt. Skilj dem åt med ett snedstreck: mobil / mobiltelefon"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Tidsgräns i sekunder",
+      "description": "0 eller tomt: ingen tidsgräns. Spelarna kan pausa klockan när som helst."
+    },
+    {
+      "label": "Svarens språk",
+      "description": "Avgör vilka bokstäver som aldrig räknas som en annan (som Å på svenska) och vilka accenter som kan ignoreras.",
+      "default": "sv",
+      "options": [
+        {
+          "label": "Spanska"
+        },
+        {
+          "label": "Katalanska"
+        },
+        {
+          "label": "Baskiska"
+        },
+        {
+          "label": "Galiciska"
+        },
+        {
+          "label": "Engelska"
+        },
+        {
+          "label": "Tyska"
+        },
+        {
+          "label": "Franska"
+        },
+        {
+          "label": "Italienska"
+        },
+        {
+          "label": "Nederländska"
+        },
+        {
+          "label": "Portugisiska"
+        },
+        {
+          "label": "Svenska"
+        },
+        {
+          "label": "Annat"
+        }
+      ]
+    },
+    {
+      "label": "Andra egna bokstäver",
+      "description": "Valfritt, för språk som inte finns i listan: bokstäver som aldrig får tas för en annan, som Ñ eller Ç."
+    },
+    {
+      "label": "Inställningar för beteende",
+      "description": "Med de här alternativen styr du hur spelet beter sig.",
+      "fields": [
+        {
+          "label": "Ignorera versaler"
+        },
+        {
+          "label": "Ignorera accenter",
+          "description": "Språkets egna bokstäver räknas fortfarande för sig (Å är inte A)."
+        },
+        {
+          "label": "Visa rätt svar efter ett fel"
+        },
+        {
+          "label": "Med ljud",
+          "description": "Spelarna kan stänga av ljudet under spelet."
+        },
+        {
+          "label": "Aktivera ”Spela igen”"
+        },
+        {
+          "label": "Aktivera ”Visa svaren”"
+        }
+      ]
+    },
+    {
+      "label": "Användargränssnitt",
+      "fields": [
+        {
+          "label": "Knapp för att starta",
+          "default": "Starta"
+        },
+        {
+          "label": "Antal bokstäver (@count)",
+          "default": "@count bokstäver"
+        },
+        {
+          "label": "Tidsgräns (@time)",
+          "default": "Tid: @time"
+        },
+        {
+          "label": "Ingen tidsgräns",
+          "default": "Ingen tidsgräns"
+        },
+        {
+          "label": "Så spelar du",
+          "default": "Skriv svaret för varje bokstav. Om du inte kan det, säg pass: bokstaven kommer tillbaka i nästa omgång."
+        },
+        {
+          "label": "Svaret börjar på (@letter)",
+          "default": "Börjar på @letter"
+        },
+        {
+          "label": "Svaret innehåller (@letter)",
+          "default": "Innehåller @letter"
+        },
+        {
+          "label": "Svarsfält",
+          "default": "Ditt svar"
+        },
+        {
+          "label": "Knapp för att kontrollera",
+          "default": "Kontrollera"
+        },
+        {
+          "label": "Knapp för att säga pass",
+          "default": "Pass"
+        },
+        {
+          "label": "Pausknapp",
+          "default": "Paus"
+        },
+        {
+          "label": "Knapp för att fortsätta",
+          "default": "Fortsätt"
+        },
+        {
+          "label": "Pausat",
+          "default": "Pausat. Ledtråden kommer tillbaka när du fortsätter."
+        },
+        {
+          "label": "Knapp för att stänga av ljudet",
+          "default": "Stäng av ljud"
+        },
+        {
+          "label": "Knapp för att slå på ljudet",
+          "default": "Slå på ljud"
+        },
+        {
+          "label": "Ljudet avstängt (för skärmläsare)",
+          "default": "Ljudet är av."
+        },
+        {
+          "label": "Ljudet påslaget igen (för skärmläsare)",
+          "default": "Ljudet är på."
+        },
+        {
+          "label": "Knapp för att avsluta",
+          "default": "Avsluta"
+        },
+        {
+          "label": "Avsluta, för att bekräfta",
+          "default": "Avsluta nu? Tryck igen"
+        },
+        {
+          "label": "Inget svar skrivet",
+          "default": "Skriv ett svar eller säg pass."
+        },
+        {
+          "label": "Rätt svar",
+          "default": "Rätt!"
+        },
+        {
+          "label": "Fel svar",
+          "default": "Inte den här gången."
+        },
+        {
+          "label": "Rätt svar var (@answer)",
+          "default": "Svaret var ”@answer”."
+        },
+        {
+          "label": "Bokstav passad (@letter)",
+          "default": "@letter kommer tillbaka i nästa omgång."
+        },
+        {
+          "label": "Tid kvar",
+          "default": "Tid kvar"
+        },
+        {
+          "label": "Tiden är slut",
+          "default": "Tiden är slut."
+        },
+        {
+          "label": "En minut kvar",
+          "default": "En minut kvar."
+        },
+        {
+          "label": "Tio sekunder kvar",
+          "default": "Tio sekunder kvar."
+        },
+        {
+          "label": "Omgång (@round)",
+          "default": "Omgång @round"
+        },
+        {
+          "label": "Antal rätta svar",
+          "default": "Rätt"
+        },
+        {
+          "label": "Antal fel svar",
+          "default": "Fel"
+        },
+        {
+          "label": "Antal bokstäver kvar",
+          "default": "Kvar"
+        },
+        {
+          "label": "Resultat (@score, @total)",
+          "default": "@score av @total bokstäver rätt"
+        },
+        {
+          "label": "Slutmeddelande: alla bokstäver rätt",
+          "default": "Hela hjulet!"
+        },
+        {
+          "label": "Slutmeddelande: 80 % eller mer",
+          "default": "Mycket bra!"
+        },
+        {
+          "label": "Slutmeddelande: 50 % eller mer",
+          "default": "Bra jobbat!"
+        },
+        {
+          "label": "Slutmeddelande: mindre än 50 %",
+          "default": "Fortsätt öva!"
+        },
+        {
+          "label": "Bokstav: rätt",
+          "default": "rätt"
+        },
+        {
+          "label": "Bokstav: fel",
+          "default": "fel"
+        },
+        {
+          "label": "Bokstav: passad",
+          "default": "passad"
+        },
+        {
+          "label": "Bokstav: kvar att svara på",
+          "default": "kvar att svara på"
+        },
+        {
+          "label": "Bokstav: obesvarad",
+          "default": "obesvarad"
+        },
+        {
+          "label": "Bokstav: spelas nu",
+          "default": "nu"
+        },
+        {
+          "label": "Ditt svar var (@answer)",
+          "default": "Ditt svar: @answer"
+        },
+        {
+          "label": "Rätt svar (@answer)",
+          "default": "Svar: @answer"
+        },
+        {
+          "label": "Knappen ”Visa svaren”",
+          "default": "Visa svaren"
+        },
+        {
+          "label": "Knappen ”Spela igen”",
+          "default": "Spela igen"
+        },
+        {
+          "label": "Hjulets bokstäver (för skärmläsare)",
+          "default": "Hjulets bokstäver"
+        },
+        {
+          "label": "Hjul utan bokstäver",
+          "default": "Det här hjulet har ännu inga bokstäver med ledtråd och svar."
+        }
+      ]
+    }
+  ]
+}

@@ -14,6 +14,12 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
 - **Rueda de letras** (`H5P.AlphabetWheel`): una pista por cada letra del alfabeto. El alumno escribe la respuesta o
   pasa la letra a la siguiente vuelta. Un punto por letra.
 
+## Idiomas
+
+Inglés, español, alemán, francés, italiano, neerlandés, portugués de Brasil y sueco, tanto para quien juega como para
+quien crea la rueda en el editor de H5P, y cada uno con su rueda de ejemplo. Las respuestas se corrigen con las reglas
+de su idioma: la Ñ, la Ä o la Å nunca cuentan como otra letra.
+
 ## Dónde funcionan
 
 En cualquier plataforma con H5P: la actividad H5P de Moodle 4.5 o posterior, WordPress con el plugin de H5P y Lumi

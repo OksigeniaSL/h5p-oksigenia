@@ -168,6 +168,23 @@ test('authors can leave the sounds out', async ({ page }) => {
   expect(button).toBe(0);
 });
 
+const START = { es: 'Empezar', en: 'Start', de: 'Starten', fr: 'Commencer', it: 'Inizia', nl: 'Beginnen', 'pt-br': 'Começar', sv: 'Starta' };
+for (const [lang, start] of Object.entries(START)) {
+  test(`the ${lang} example plays in its own language`, async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    const frame = await open(page, lang);
+    await expect(frame.locator('.aw-intro button')).toHaveText(start);
+    await frame.locator('.aw-intro button').click();
+    const first = example(lang).items[0];
+    await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText(first.letter);
+    await frame.locator('.aw-input').fill(first.answer.toLowerCase());
+    await frame.locator('.aw-input').press('Enter');
+    await expect(frame.locator('.aw-letter.aw-ok')).toHaveCount(1);
+    expect(errors).toEqual([]);
+  });
+}
+
 test('the Ñ is not the N', async ({ page }) => {
   const frame = await open(page, 'es');
   await frame.locator('.aw-intro button').click();

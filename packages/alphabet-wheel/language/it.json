@@ -1,0 +1,316 @@
+{
+  "semantics": [
+    {
+      "label": "Lettere",
+      "description": "Un elemento per lettera, nell'ordine in cui gira la ruota.",
+      "entity": "lettera",
+      "field": {
+        "label": "Lettera",
+        "fields": [
+          {
+            "label": "Lettera"
+          },
+          {
+            "label": "La risposta",
+            "options": [
+              {
+                "label": "Inizia con la lettera"
+              },
+              {
+                "label": "Contiene la lettera"
+              }
+            ]
+          },
+          {
+            "label": "Indizio"
+          },
+          {
+            "label": "Risposta"
+          },
+          {
+            "label": "Altre risposte valide",
+            "description": "Facoltativo. Separale con una barra: bici / bicicletta"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Limite di tempo, in secondi",
+      "description": "0 o vuoto: senza limite di tempo. I giocatori possono mettere in pausa l'orologio in qualsiasi momento."
+    },
+    {
+      "label": "Lingua delle risposte",
+      "description": "Decide quali lettere non contano mai come un'altra (come la Ñ in spagnolo) e quali accenti si possono ignorare.",
+      "default": "it",
+      "options": [
+        {
+          "label": "Spagnolo"
+        },
+        {
+          "label": "Catalano"
+        },
+        {
+          "label": "Basco"
+        },
+        {
+          "label": "Galiziano"
+        },
+        {
+          "label": "Inglese"
+        },
+        {
+          "label": "Tedesco"
+        },
+        {
+          "label": "Francese"
+        },
+        {
+          "label": "Italiano"
+        },
+        {
+          "label": "Olandese"
+        },
+        {
+          "label": "Portoghese"
+        },
+        {
+          "label": "Svedese"
+        },
+        {
+          "label": "Altra"
+        }
+      ]
+    },
+    {
+      "label": "Altre lettere distinte",
+      "description": "Facoltativo, per le lingue che non sono nell'elenco: lettere che non devono mai essere scambiate per un'altra, come la Ñ o la Ç."
+    },
+    {
+      "label": "Impostazioni di comportamento",
+      "description": "Queste opzioni permettono di controllare come si comporta il gioco.",
+      "fields": [
+        {
+          "label": "Ignora le maiuscole"
+        },
+        {
+          "label": "Ignora gli accenti",
+          "description": "Le lettere proprie della lingua restano distinte (in spagnolo la Ñ non è la N)."
+        },
+        {
+          "label": "Mostra la risposta giusta dopo un errore"
+        },
+        {
+          "label": "Con i suoni",
+          "description": "I giocatori possono disattivarli durante la partita."
+        },
+        {
+          "label": "Attiva «Gioca ancora»"
+        },
+        {
+          "label": "Attiva «Mostra le risposte»"
+        }
+      ]
+    },
+    {
+      "label": "Interfaccia utente",
+      "fields": [
+        {
+          "label": "Pulsante per iniziare",
+          "default": "Inizia"
+        },
+        {
+          "label": "Numero di lettere (@count)",
+          "default": "@count lettere"
+        },
+        {
+          "label": "Limite di tempo (@time)",
+          "default": "Tempo: @time"
+        },
+        {
+          "label": "Senza limite di tempo",
+          "default": "Senza limite di tempo"
+        },
+        {
+          "label": "Come si gioca",
+          "default": "Scrivi la risposta per ogni lettera. Se non la sai, passa: la lettera tornerà nel giro successivo."
+        },
+        {
+          "label": "La risposta inizia con (@letter)",
+          "default": "Inizia con la @letter"
+        },
+        {
+          "label": "La risposta contiene (@letter)",
+          "default": "Contiene la @letter"
+        },
+        {
+          "label": "Campo della risposta",
+          "default": "La tua risposta"
+        },
+        {
+          "label": "Pulsante per controllare",
+          "default": "Controlla"
+        },
+        {
+          "label": "Pulsante per passare",
+          "default": "Passo"
+        },
+        {
+          "label": "Pulsante di pausa",
+          "default": "Pausa"
+        },
+        {
+          "label": "Pulsante per riprendere",
+          "default": "Riprendi"
+        },
+        {
+          "label": "In pausa",
+          "default": "In pausa. L'indizio torna quando riprendi."
+        },
+        {
+          "label": "Pulsante per disattivare l'audio",
+          "default": "Disattiva audio"
+        },
+        {
+          "label": "Pulsante per attivare l'audio",
+          "default": "Attiva audio"
+        },
+        {
+          "label": "Audio disattivato (per i lettori di schermo)",
+          "default": "Audio disattivato."
+        },
+        {
+          "label": "Audio riattivato (per i lettori di schermo)",
+          "default": "Audio attivato."
+        },
+        {
+          "label": "Pulsante per terminare",
+          "default": "Termina"
+        },
+        {
+          "label": "Termina, per confermare",
+          "default": "Terminare ora? Premi di nuovo"
+        },
+        {
+          "label": "Nessuna risposta scritta",
+          "default": "Scrivi una risposta o passa."
+        },
+        {
+          "label": "Risposta giusta",
+          "default": "Giusto!"
+        },
+        {
+          "label": "Risposta sbagliata",
+          "default": "Questa volta no."
+        },
+        {
+          "label": "La risposta giusta era (@answer)",
+          "default": "La risposta era «@answer»."
+        },
+        {
+          "label": "Lettera passata (@letter)",
+          "default": "La @letter torna nel giro successivo."
+        },
+        {
+          "label": "Tempo rimasto",
+          "default": "Tempo rimasto"
+        },
+        {
+          "label": "Tempo scaduto",
+          "default": "Tempo scaduto."
+        },
+        {
+          "label": "Manca un minuto",
+          "default": "Manca un minuto."
+        },
+        {
+          "label": "Mancano dieci secondi",
+          "default": "Mancano dieci secondi."
+        },
+        {
+          "label": "Giro (@round)",
+          "default": "Giro @round"
+        },
+        {
+          "label": "Numero di risposte giuste",
+          "default": "Giuste"
+        },
+        {
+          "label": "Numero di risposte sbagliate",
+          "default": "Sbagliate"
+        },
+        {
+          "label": "Numero di lettere rimaste",
+          "default": "Mancano"
+        },
+        {
+          "label": "Risultato (@score, @total)",
+          "default": "@score lettere giuste su @total"
+        },
+        {
+          "label": "Messaggio finale: tutte le lettere giuste",
+          "default": "Ruota completa!"
+        },
+        {
+          "label": "Messaggio finale: 80 % o più",
+          "default": "Ottimo lavoro!"
+        },
+        {
+          "label": "Messaggio finale: 50 % o più",
+          "default": "Ben fatto!"
+        },
+        {
+          "label": "Messaggio finale: meno del 50 %",
+          "default": "Continua a esercitarti!"
+        },
+        {
+          "label": "Lettera: giusta",
+          "default": "giusta"
+        },
+        {
+          "label": "Lettera: sbagliata",
+          "default": "sbagliata"
+        },
+        {
+          "label": "Lettera: passata",
+          "default": "passata"
+        },
+        {
+          "label": "Lettera: da rispondere",
+          "default": "da rispondere"
+        },
+        {
+          "label": "Lettera: senza risposta",
+          "default": "senza risposta"
+        },
+        {
+          "label": "Lettera: in gioco",
+          "default": "ora"
+        },
+        {
+          "label": "La tua risposta era (@answer)",
+          "default": "La tua risposta: @answer"
+        },
+        {
+          "label": "La risposta giusta (@answer)",
+          "default": "Risposta: @answer"
+        },
+        {
+          "label": "Pulsante «Mostra le risposte»",
+          "default": "Mostra le risposte"
+        },
+        {
+          "label": "Pulsante «Gioca ancora»",
+          "default": "Gioca ancora"
+        },
+        {
+          "label": "Le lettere della ruota (per i lettori di schermo)",
+          "default": "Lettere della ruota"
+        },
+        {
+          "label": "Ruota senza lettere",
+          "default": "Questa ruota non ha ancora lettere con indizio e risposta."
+        }
+      ]
+    }
+  ]
+}

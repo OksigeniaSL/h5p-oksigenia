@@ -173,6 +173,7 @@
     "ignoreCase": true,
     "ignoreAccents": true,
     "showAnswerOnWrong": true,
+    "enableSound": true,
     "enableRetry": true,
     "enableSolutionsButton": true
   }

@@ -1,0 +1,172 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Insetto che produce il miele",
+      "answer": "Ape"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Veicolo a due ruote che si muove con i pedali",
+      "answer": "Bicicletta",
+      "alternatives": "bici"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Animale che porta la casa sulla schiena e lascia una scia luccicante",
+      "answer": "Chiocciola"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Enorme rettile vissuto milioni di anni fa",
+      "answer": "Dinosauro"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Animale con la proboscide che vive in Africa e in Asia",
+      "answer": "Elefante"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Piccolo frutto rosso con i semi all'esterno",
+      "answer": "Fragola"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Animale che fa le fusa e miagola",
+      "answer": "Gatto"
+    },
+    {
+      "letter": "H",
+      "kind": "contains",
+      "clue": "Oggetto che serve per aprire e chiudere una porta",
+      "answer": "Chiave"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Pezzo di terra circondato dall'acqua da tutte le parti",
+      "answer": "Isola"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Pantaloni di tessuto blu, robusti e comodi",
+      "answer": "Jeans"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Piccolo frutto con la buccia marrone e pelosa, verde dentro",
+      "answer": "Kiwi"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Satellite naturale della Terra",
+      "answer": "Luna"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Grande distesa di acqua salata dove vivono i pesci e i delfini",
+      "answer": "Mare"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Acqua ghiacciata che cade dal cielo in fiocchi bianchi",
+      "answer": "Neve"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Lo guardiamo per sapere che ore sono",
+      "answer": "Orologio"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Uccello bianco e nero che vive vicino al Polo Sud e non vola",
+      "answer": "Pinguino"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "A scuola ci scriviamo e ci facciamo gli esercizi",
+      "answer": "Quaderno"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Piccolo animale con otto zampe che tesse la tela",
+      "answer": "Ragno"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Stella che ci dà luce e calore",
+      "answer": "Sole"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Animale con il guscio che cammina molto lentamente",
+      "answer": "Tartaruga"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Piccolo frutto che cresce a grappoli",
+      "answer": "Uva"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Montagna che può eruttare lava",
+      "answer": "Vulcano"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Connessione a internet senza fili",
+      "answer": "Wifi",
+      "alternatives": "wi-fi"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Strumento musicale con lamelle che si suonano con le bacchette",
+      "answer": "Xilofono"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Alimento fatto con il latte che si mangia con il cucchiaino",
+      "answer": "Yogurt"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Animale a strisce bianche e nere che assomiglia a un cavallo",
+      "answer": "Zebra"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "it",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableSound": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

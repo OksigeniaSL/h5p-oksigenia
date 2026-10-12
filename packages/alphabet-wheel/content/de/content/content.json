@@ -1,0 +1,200 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Rote oder grüne Frucht, die an Bäumen wächst",
+      "answer": "Apfel"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Insekt, das Honig macht",
+      "answer": "Biene"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Lustiger Künstler im Zirkus mit roter Nase",
+      "answer": "Clown"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Riesiges Reptil, das vor Millionen von Jahren lebte",
+      "answer": "Dinosaurier"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Tier mit Rüssel, das in Afrika und Asien lebt",
+      "answer": "Elefant"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Grünes Tier, das hüpft und quakt",
+      "answer": "Frosch"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Tier mit einem sehr langen Hals",
+      "answer": "Giraffe"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Tier mit langen Ohren, das gern Möhren frisst",
+      "answer": "Hase"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Land, das ringsum von Wasser umgeben ist",
+      "answer": "Insel"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Kleidungsstück, das wir anziehen, wenn es draußen kalt ist",
+      "answer": "Jacke"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Tier, das schnurrt und miaut",
+      "answer": "Katze"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "König der Tiere, mit einer großen Mähne",
+      "answer": "Löwe",
+      "alternatives": "Loewe"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Natürlicher Begleiter der Erde, der nachts am Himmel leuchtet",
+      "answer": "Mond"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Zeit des Tages, in der es dunkel ist und wir schlafen",
+      "answer": "Nacht"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Riesige Menge Salzwasser, die den größten Teil der Erde bedeckt",
+      "answer": "Ozean"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Schwarz-weißer Vogel, der am Südpol lebt und nicht fliegen kann",
+      "answer": "Pinguin"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "Durchsichtiges Meerestier, das brennen kann",
+      "answer": "Qualle"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Bunter Bogen am Himmel nach dem Regen",
+      "answer": "Regenbogen"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Stern, der uns Licht und Wärme gibt",
+      "answer": "Sonne"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Große, gestreifte Raubkatze",
+      "answer": "Tiger"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Damit sehen wir, wie spät es ist",
+      "answer": "Uhr"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Berg, der Lava ausspucken kann",
+      "answer": "Vulkan"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Die kälteste Jahreszeit",
+      "answer": "Winter"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Musikinstrument mit Holzplättchen, auf die man mit Schlägeln schlägt",
+      "answer": "Xylofon",
+      "alternatives": "Xylophon"
+    },
+    {
+      "letter": "Y",
+      "kind": "contains",
+      "clue": "Kleines Pferd",
+      "answer": "Pony"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Gestreiftes Tier, das wie ein Pferd aussieht",
+      "answer": "Zebra"
+    },
+    {
+      "letter": "Ä",
+      "kind": "starts",
+      "clue": "Teil der Jacke, in dem der Arm steckt",
+      "answer": "Ärmel",
+      "alternatives": "Aermel"
+    },
+    {
+      "letter": "Ö",
+      "kind": "starts",
+      "clue": "Flüssigkeit aus Oliven oder Sonnenblumen, mit der man kocht",
+      "answer": "Öl",
+      "alternatives": "Oel"
+    },
+    {
+      "letter": "Ü",
+      "kind": "starts",
+      "clue": "Etwas Schönes, mit dem niemand gerechnet hat",
+      "answer": "Überraschung",
+      "alternatives": "Ueberraschung"
+    },
+    {
+      "letter": "ß",
+      "kind": "contains",
+      "clue": "Körperteil am Ende des Beins, mit dem wir gehen",
+      "answer": "Fuß",
+      "alternatives": "Fuss"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "de",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableSound": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}

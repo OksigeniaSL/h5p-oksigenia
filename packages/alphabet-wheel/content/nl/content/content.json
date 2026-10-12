@@ -1,0 +1,172 @@
+{
+  "items": [
+    {
+      "letter": "A",
+      "kind": "starts",
+      "clue": "Rode of groene vrucht die aan een boom groeit",
+      "answer": "Appel"
+    },
+    {
+      "letter": "B",
+      "kind": "starts",
+      "clue": "Insect dat honing maakt",
+      "answer": "Bij"
+    },
+    {
+      "letter": "C",
+      "kind": "starts",
+      "clue": "Apparaat met een scherm en een toetsenbord",
+      "answer": "Computer"
+    },
+    {
+      "letter": "D",
+      "kind": "starts",
+      "clue": "Reusachtig reptiel dat miljoenen jaren geleden leefde",
+      "answer": "Dinosaurus"
+    },
+    {
+      "letter": "E",
+      "kind": "starts",
+      "clue": "Klein dier met stekels op zijn rug",
+      "answer": "Egel"
+    },
+    {
+      "letter": "F",
+      "kind": "starts",
+      "clue": "Voertuig met twee wielen dat je met pedalen laat rijden",
+      "answer": "Fiets"
+    },
+    {
+      "letter": "G",
+      "kind": "starts",
+      "clue": "Dier met een heel lange nek",
+      "answer": "Giraf"
+    },
+    {
+      "letter": "H",
+      "kind": "starts",
+      "clue": "Dier dat blaft en kwispelt",
+      "answer": "Hond"
+    },
+    {
+      "letter": "I",
+      "kind": "starts",
+      "clue": "Zeedier met acht armen dat inkt kan spuiten",
+      "answer": "Inktvis"
+    },
+    {
+      "letter": "J",
+      "kind": "starts",
+      "clue": "Kledingstuk dat je aantrekt als het buiten koud is",
+      "answer": "Jas"
+    },
+    {
+      "letter": "K",
+      "kind": "starts",
+      "clue": "Dier dat spint en miauwt",
+      "answer": "Kat"
+    },
+    {
+      "letter": "L",
+      "kind": "starts",
+      "clue": "Koning van de dieren, met grote manen",
+      "answer": "Leeuw"
+    },
+    {
+      "letter": "M",
+      "kind": "starts",
+      "clue": "Natuurlijke satelliet van de aarde",
+      "answer": "Maan"
+    },
+    {
+      "letter": "N",
+      "kind": "starts",
+      "clue": "Deel van de dag waarin het donker is en we slapen",
+      "answer": "Nacht"
+    },
+    {
+      "letter": "O",
+      "kind": "starts",
+      "clue": "Dier met een slurf dat in Afrika en Azië leeft",
+      "answer": "Olifant"
+    },
+    {
+      "letter": "P",
+      "kind": "starts",
+      "clue": "Zwart-witte vogel die bij de Zuidpool leeft en niet kan vliegen",
+      "answer": "Pinguïn",
+      "alternatives": "pinguin"
+    },
+    {
+      "letter": "Q",
+      "kind": "starts",
+      "clue": "Spel met vragen waarmee je punten kunt verdienen",
+      "answer": "Quiz"
+    },
+    {
+      "letter": "R",
+      "kind": "starts",
+      "clue": "Boog van kleuren aan de hemel na de regen",
+      "answer": "Regenboog"
+    },
+    {
+      "letter": "S",
+      "kind": "starts",
+      "clue": "Witte, koude vlokken die in de winter uit de lucht vallen",
+      "answer": "Sneeuw"
+    },
+    {
+      "letter": "T",
+      "kind": "starts",
+      "clue": "Grote gestreepte roofkat",
+      "answer": "Tijger"
+    },
+    {
+      "letter": "U",
+      "kind": "starts",
+      "clue": "Vogel die 's nachts jaagt en grote ogen heeft",
+      "answer": "Uil"
+    },
+    {
+      "letter": "V",
+      "kind": "starts",
+      "clue": "Berg die lava kan uitspuwen",
+      "answer": "Vulkaan"
+    },
+    {
+      "letter": "W",
+      "kind": "starts",
+      "clue": "Het koudste seizoen van het jaar",
+      "answer": "Winter"
+    },
+    {
+      "letter": "X",
+      "kind": "starts",
+      "clue": "Muziekinstrument met houten staafjes waarop je slaat",
+      "answer": "Xylofoon"
+    },
+    {
+      "letter": "Y",
+      "kind": "starts",
+      "clue": "Zuivel van melk die je met een lepel eet",
+      "answer": "Yoghurt",
+      "alternatives": "yogurt"
+    },
+    {
+      "letter": "Z",
+      "kind": "starts",
+      "clue": "Ster die ons licht en warmte geeft",
+      "answer": "Zon"
+    }
+  ],
+  "timeLimit": 300,
+  "language": "nl",
+  "behaviour": {
+    "ignoreCase": true,
+    "ignoreAccents": true,
+    "showAnswerOnWrong": true,
+    "enableSound": true,
+    "enableRetry": true,
+    "enableSolutionsButton": true
+  }
+}
