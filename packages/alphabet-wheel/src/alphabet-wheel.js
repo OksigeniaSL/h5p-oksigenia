@@ -11,6 +11,7 @@ import { createMatcher, splitAlternatives } from '../../shared/answer.js';
 import { Countdown, formatTime } from '../../shared/timer.js';
 import { Announcer, el, fill, plain } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
+import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { WheelGame } from './game.js';
 import './alphabet-wheel.css';
 
@@ -201,14 +202,20 @@ AlphabetWheel.prototype.build = function () {
   ]);
   this.gameView = el('div', { class: 'aw-game' }, [this.wheel, this.panel]);
 
-  // After the game.
-  this.resultTitle = el('h2', { class: 'aw-result-title', tabindex: '-1' });
+  // After the game: a cheer that matches the score, then the review of every letter.
+  this.ring = el('div', { class: 'aw-ring' });
+  this.cheerTitle = el('h2', { class: 'aw-cheer-title', tabindex: '-1' });
+  this.resultTitle = el('p', { class: 'aw-result-title' });
   this.endReason = el('p', { class: 'aw-end-reason' });
+  this.cheer = el('div', { class: 'aw-cheer' }, [
+    this.ring,
+    el('div', { class: 'aw-cheer-text' }, [this.cheerTitle, this.resultTitle, this.endReason]),
+  ]);
   this.review = el('ol', { class: 'aw-review' });
   this.solutionsButton = el('button', { type: 'button', class: 'aw-button aw-secondary', text: t.showSolutions, onclick: () => this.showSolutions() });
   this.retryButton = el('button', { type: 'button', class: 'aw-button aw-primary', text: t.retry, onclick: () => this.retry() });
   this.results = el('div', { class: 'aw-results' }, [
-    this.resultTitle, this.endReason, this.review,
+    this.cheer, this.review,
     el('div', { class: 'aw-actions' }, [this.solutionsButton, this.retryButton]),
   ]);
 
@@ -284,6 +291,10 @@ AlphabetWheel.prototype.paintFeedback = function () {
 
 AlphabetWheel.prototype.renderResults = function () {
   const g = this.game, t = this.l10n;
+  const tier = cheerTier(g.score, g.maxScore);
+  this.cheer.className = `aw-cheer aw-cheer-${tier}`;
+  this.ring.replaceChildren(scoreRing(g.score, g.maxScore));
+  this.cheerTitle.textContent = this.cheerText(tier);
   this.resultTitle.textContent = fill(t.resultTitle, { score: g.score, total: g.maxScore });
   this.endReason.textContent = g.endReason === 'time' ? t.timeUp : '';
   this.endReason.hidden = g.endReason !== 'time';
@@ -444,9 +455,18 @@ AlphabetWheel.prototype.afterFinish = function (said) {
   if (this.isRoot && this.isRoot() && H5P.deleteUserData && this.contentId !== undefined) {
     H5P.deleteUserData(this.contentId, 'state', 0);
   }
-  this.resultTitle.focus();
+  this.cheerTitle.focus();
+  const tier = cheerTier(this.game.score, this.game.maxScore);
+  // Confetti only for a game that went well, and more of it for a full wheel.
+  confetti(this.root, { perfect: 90, great: 40 }[tier] || 0);
   const result = fill(this.l10n.resultTitle, { score: this.game.score, total: this.game.maxScore });
-  this.announcer.say(`${said ? `${said} ` : ''}${result}`);
+  this.announcer.say(`${said ? `${said} ` : ''}${this.cheerText(tier)} ${result}`);
+};
+
+/** @param {'perfect'|'great'|'good'|'keep'} tier */
+AlphabetWheel.prototype.cheerText = function (tier) {
+  const t = this.l10n;
+  return { perfect: t.cheerPerfect, great: t.cheerGreat, good: t.cheerGood, keep: t.cheerKeep }[tier];
 };
 
 AlphabetWheel.prototype.retry = function () {

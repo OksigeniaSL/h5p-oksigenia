@@ -58,7 +58,8 @@ test('a whole wheel played with the keyboard sends one result, with one point pe
   }
 
   await expect(frame.locator('.aw-result-title')).toHaveText('25 de 27 letras acertadas');
-  await expect(frame.locator('.aw-result-title')).toBeFocused();
+  await expect(frame.locator('.aw-cheer-title')).toHaveText('¡Muy bien!');
+  await expect(frame.locator('.aw-cheer-title')).toBeFocused();
   expect(passedE).toBe(true);
 
   const sent = await verbs(frame);
@@ -80,6 +81,38 @@ test('a whole wheel played with the keyboard sends one result, with one point pe
   // «pinguino» was taken as right, so the report counts it among the accepted answers of the P.
   const p = Object.keys(answers).indexOf('P');
   expect(data.object.definition.extensions['https://h5p.org/x-api/alternatives'][p]).toContain('pinguino');
+});
+
+/** Answers every letter of an example wheel right, straight through the form. */
+async function playPerfect(frame, lang) {
+  const answers = answersOf(lang);
+  await frame.locator('.aw-intro button').click();
+  for (let turn = 0; turn < 40 && await frame.locator('.aw-results').isHidden(); turn++) {
+    await frame.locator('.aw-input').fill(answers[await currentLetter(frame)]);
+    await frame.locator('.aw-input').press('Enter');
+  }
+}
+
+test('a full wheel is celebrated, with confetti', async ({ page }) => {
+  const frame = await open(page, 'en');
+  await playPerfect(frame, 'en');
+  await expect(frame.locator('.aw-cheer-title')).toHaveText('Perfect wheel!');
+  await expect(frame.locator('.aw-cheer-title')).toBeFocused();
+  await expect(frame.locator('.aw-result-title')).toHaveText('26 of 26 letters right');
+  await expect(frame.locator('.h5p-oksigenia-ring-star')).toHaveCount(1);
+  await expect(frame.locator('.h5p-oksigenia-ring-text')).toHaveText('26/26');
+  await expect(frame.locator('.h5p-oksigenia-confetti')).toHaveCount(1);
+  await expect(frame.locator('.h5p-oksigenia-confetti')).toHaveAttribute('aria-hidden', 'true');
+  // The list of letters is still there, under the cheer.
+  await expect(frame.locator('.aw-review-item.aw-ok')).toHaveCount(26);
+});
+
+test('without motion when the system asks for it', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const frame = await open(page, 'en');
+  await playPerfect(frame, 'en');
+  await expect(frame.locator('.aw-cheer-title')).toHaveText('Perfect wheel!');
+  await expect(frame.locator('.h5p-oksigenia-confetti')).toHaveCount(0);
 });
 
 test('the Ñ is not the N', async ({ page }) => {
@@ -155,10 +188,18 @@ test('finishing early asks twice and leaves the open letters without a point', a
   expect((await verbs(frame)).filter((v) => v === 'attempted')).toHaveLength(2);
 });
 
-for (const width of [320, 1100]) {
-  test(`no sideways scrolling and no axe violations at ${width} px`, async ({ page }) => {
+/** @type {Array<[number, string]>} */
+const SCREENS = [[320, 'core'], [1100, 'core'], [320, 'dark'], [1100, 'dark']];
+for (const [width, theme] of SCREENS) {
+  test(`no sideways scrolling and no axe violations at ${width} px, ${theme} theme`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     const frame = await open(page, 'es');
+    // The theme buttons of the dev server set the H5P core 1.28 theme variables inside the game.
+    await page.evaluate((name) => /** @type {HTMLElement} */ (document.querySelector(`.button-theme-color.${name}`)).click(), theme);
+    if (theme === 'dark') {
+      await expect.poll(() => frame.evaluate(() => getComputedStyle(document.querySelector('.aw')).backgroundColor))
+        .toBe('rgb(0, 0, 0)');
+    }
     const axe = async (step) => {
       const scroll = await frame.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(scroll, `sideways scroll on ${step}`).toBeLessThanOrEqual(0);

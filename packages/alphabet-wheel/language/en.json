@@ -226,6 +226,22 @@
           "default": "@score of @total letters right"
         },
         {
+          "label": "End message: every letter right",
+          "default": "Perfect wheel!"
+        },
+        {
+          "label": "End message: 80 % or more",
+          "default": "Great job!"
+        },
+        {
+          "label": "End message: 50 % or more",
+          "default": "Well done!"
+        },
+        {
+          "label": "End message: less than 50 %",
+          "default": "Keep practising!"
+        },
+        {
           "label": "Letter: right",
           "default": "correct"
         },

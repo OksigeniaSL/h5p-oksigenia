@@ -227,6 +227,22 @@
           "default": "@score de @total letras acertadas"
         },
         {
+          "label": "Mensaje final: todas las letras acertadas",
+          "default": "¡Rueda completa!"
+        },
+        {
+          "label": "Mensaje final: 80 % o más",
+          "default": "¡Muy bien!"
+        },
+        {
+          "label": "Mensaje final: 50 % o más",
+          "default": "¡Bien hecho!"
+        },
+        {
+          "label": "Mensaje final: menos del 50 %",
+          "default": "¡Sigue practicando!"
+        },
+        {
           "label": "Letra: acertada",
           "default": "acertada"
         },
