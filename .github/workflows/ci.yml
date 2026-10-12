@@ -16,7 +16,7 @@ jobs:
   test:
     name: Test and pack
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
         run: npm run pack
 
       - name: Browser
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chromium firefox webkit
 
       - name: End-to-end tests
         run: npx playwright test
