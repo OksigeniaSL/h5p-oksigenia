@@ -1,7 +1,7 @@
 # Juegos de Oksigenia para H5P
 
 [![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
-![Estado](https://img.shields.io/badge/estado-en%20desarrollo-yellow)
+[![Versión](https://img.shields.io/github/v/release/OksigeniaSL/h5p-oksigenia?label=versi%C3%B3n)](https://github.com/OksigeniaSL/h5p-oksigenia/releases)
 [![Patrocinio](https://img.shields.io/badge/patrocinio-Oksigenia-00d4ff)](https://oksigenia.com/en/open-source#sponsor)
 
 Juegos de palabras convertidos en tipos de contenido H5P. Cada alumno juega solo, el juego corrige y la nota llega al

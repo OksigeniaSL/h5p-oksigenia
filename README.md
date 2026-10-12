@@ -1,7 +1,7 @@
 # Oksigenia games for H5P
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
+[![Release](https://img.shields.io/github/v/release/OksigeniaSL/h5p-oksigenia?label=release)](https://github.com/OksigeniaSL/h5p-oksigenia/releases)
 [![Sponsor](https://img.shields.io/badge/sponsor-Oksigenia-00d4ff)](https://oksigenia.com/en/open-source#sponsor)
 
 Word games as H5P content types. Each student plays on their own, the game checks the answers and the score goes
