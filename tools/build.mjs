@@ -5,12 +5,29 @@
 // @license   MIT
 
 import { build } from 'esbuild';
-import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { packages, ROOT } from './packages.mjs';
 
 const out = join(ROOT, 'build');
 mkdirSync(out, { recursive: true });
+
+// The games import semantics.json only for the defaults of their texts and settings: the bundle gets the names and
+// defaults, without the labels and descriptions of the editor.
+const slimSemantics = {
+  name: 'slim-semantics',
+  setup(b) {
+    b.onLoad({ filter: /semantics\.json$/ }, (args) => {
+      const slim = (field) => ({
+        name: field.name,
+        default: field.default,
+        ...(Array.isArray(field.fields) ? { fields: field.fields.map(slim) } : {}),
+      });
+      const semantics = JSON.parse(readFileSync(args.path, 'utf8'));
+      return { contents: JSON.stringify(semantics.map(slim)), loader: 'json' };
+    });
+  },
+};
 
 for (const pkg of packages()) {
   const target = join(out, pkg.folder);
@@ -39,6 +56,7 @@ for (const pkg of packages()) {
       css: `/*! ${pkg.library.machineName} ${pkg.version} | MIT | (c) 2026 Oksigenia */`,
     },
     outdir: join(target, 'dist'),
+    plugins: [slimSemantics],
     logLevel: 'warning',
   });
   console.log(`built ${pkg.folder} (${pkg.version})`);
