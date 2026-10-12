@@ -1,0 +1,47 @@
+# Throwaway Moodle to test the H5P games of Oksigenia, used by run.sh. Fictitious data only; removed after each run.
+# MOODLE_IMAGE picks the branch (oksigenia/moodle:4.5 or :5.3). Memory and CPU capped: the laptop runs other agents.
+name: h5p-moodle
+services:
+  db:
+    image: mariadb:11.4
+    restart: "no"
+    mem_limit: 768m
+    cpus: 1.0
+    environment:
+      MARIADB_DATABASE: moodle
+      MARIADB_USER: moodle
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    command: ["--innodb-buffer-pool-size=192M"]
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 60
+  moodle:
+    image: ${MOODLE_IMAGE}
+    restart: "no"
+    mem_limit: 1536m
+    cpus: 2.0
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8096:8080"
+    environment:
+      MOODLE_URL: http://localhost:8096
+      MOODLE_DB_PASSWORD: ${DB_PASSWORD}
+      MOODLE_ADMIN_USER: admin
+      MOODLE_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      MOODLE_SITE_NAME: "Pruebas H5P (datos ficticios)"
+      MOODLE_LANG: es
+      MOODLE_TIMEZONE: Europe/Madrid
+      APACHE_MAX_REQUEST_WORKERS: "6"
+    volumes:
+      - moodle:/var/www/moodle
+      - moodledata:/var/www/moodledata
+volumes:
+  db: {}
+  moodle: {}
+  moodledata: {}

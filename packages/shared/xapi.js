@@ -1,12 +1,12 @@
 // The xAPI definition of a game made of gaps (one per letter or per word), as H5P Fill in the Blanks sends it, so
-// the Moodle report shows each gap with the player's answer and the accepted ones.
+// the Moodle report shows each gap with the player's answer and the accepted ones. The description is only the
+// title: Moodle strips its markup and would run every clue into one paragraph above the table of gaps.
 //
 // @copyright 2026 Oksigenia <dev@oksigenia.cc>
 // @license   MIT
 
 export const XAPI_ALTERNATIVES = 'https://h5p.org/x-api/alternatives';
 export const XAPI_CASE_SENSITIVITY = 'https://h5p.org/x-api/case-sensitivity';
-const GAP = '__________';
 const SEPARATOR = '[,]';
 
 // The xAPI response format uses «[,]» between gaps and «[.]» and «[:]» inside them.
@@ -14,15 +14,14 @@ const clean = (s) => String(s ?? '').replace(/\[[,.:]\]/g, ' ').replace(/_{10,}/
 
 /**
  * @param {object} options
- * @param {string} options.intro Text before the gaps (the title of the game).
- * @param {Array<{prompt: string, accepted: string[]}>} options.gaps One line per gap, with the accepted answers.
+ * @param {string} options.intro The title of the game.
+ * @param {Array<{accepted: string[]}>} options.gaps The accepted answers of each gap, the main one first.
  * @param {boolean} options.caseSensitive
  * @returns {Object} The `object.definition` of the statement.
  */
 export function fillInDefinition({ intro, gaps, caseSensitive }) {
-  const lines = gaps.map((g) => `${clean(g.prompt)} ${GAP}`);
   return {
-    description: { 'en-US': `<p>${clean(intro)}</p>${lines.map((l) => `<p>${l}</p>`).join('')}` },
+    description: { 'en-US': clean(intro) },
     type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
     interactionType: 'fill-in',
     correctResponsesPattern: [`{case_matters=${caseSensitive}}` + gaps.map((g) => clean(g.accepted[0])).join(SEPARATOR)],

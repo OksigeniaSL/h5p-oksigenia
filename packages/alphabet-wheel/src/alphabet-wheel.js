@@ -530,17 +530,16 @@ AlphabetWheel.prototype.getCurrentState = function () {
 };
 
 AlphabetWheel.prototype.answeredEvent = function () {
-  const g = this.game, t = this.l10n;
+  const g = this.game;
   const event = this.createXAPIEventTemplate('answered');
   const definition = event.getVerifiedStatementValue(['object', 'definition']) || {};
   const gaps = this.items.map((it, i) => {
-    const kind = fill(it.kind === 'contains' ? t.contains : t.startsWith, { letter: it.letter });
     const accepted = it.answers.slice();
     // An answer taken as right with the tolerances (no accents, other capitals) counts as accepted in the report.
     if (g.status[i] === 'ok' && !accepted.includes(g.given[i])) {
       accepted.push(g.given[i]);
     }
-    return { prompt: `${kind}: ${it.clue}`, accepted };
+    return { accepted };
   });
   const fillIn = fillInDefinition({
     intro: this.title || 'Alphabet Wheel',
@@ -552,7 +551,8 @@ AlphabetWheel.prototype.answeredEvent = function () {
     ...fillIn,
     extensions: { ...(definition.extensions || {}), ...fillIn.extensions },
   };
-  event.setScoredResult(g.score, g.maxScore, this, true, g.score === g.maxScore);
+  // No pass or fail: a game has a score, not a pass mark, and Moodle would show «Fail» for 26 letters out of 27.
+  event.setScoredResult(g.score, g.maxScore, this, true, undefined);
   event.data.statement.result.response = fillInResponse(g.given);
   return event;
 };

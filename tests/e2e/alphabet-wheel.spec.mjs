@@ -69,7 +69,7 @@ test('a whole wheel played with the keyboard sends one result, with one point pe
   const result = await frame.evaluate(() => window.statements.at(-1).result);
   expect(result.score).toMatchObject({ raw: 25, max: 27 });
   expect(result.completion).toBe(true);
-  expect(result.success).toBe(false);
+  expect(result.success).toBeUndefined();
 
   // What Moodle asks for when the game is over: the same score, as a fill-in with one gap per letter.
   const data = await frame.evaluate(() => H5P.instances[0].getXAPIData().statement);
