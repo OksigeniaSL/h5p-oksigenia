@@ -25,7 +25,7 @@ or the Å never count as another letter.
 Anywhere H5P runs: the H5P activity of Moodle 4.5 or later, WordPress with the H5P plugin, and Lumi Desktop. The
 games do not depend on H5P core 1.28, so they also install on sites with core 1.27.
 
-Each release comes with an example `.h5p` per language. Uploading it installs the game on the site; that needs a
+Each release comes with an example `.h5p` per language; [the guide for administrators](docs/guia-administradores.md), in Spanish, explains installation, permissions and grading. Uploading it installs the game on the site; that needs a
 user allowed to install H5P content types (in Moodle, the capability `moodle/h5p:updatelibraries`).
 
 ## Accessibility

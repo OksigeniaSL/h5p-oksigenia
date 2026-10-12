@@ -25,7 +25,7 @@ de su idioma: la Ñ, la Ä o la Å nunca cuentan como otra letra.
 En cualquier plataforma con H5P: la actividad H5P de Moodle 4.5 o posterior, WordPress con el plugin de H5P y Lumi
 Desktop. Los juegos no dependen del núcleo H5P 1.28, así que también se instalan en sitios con el núcleo 1.27.
 
-Cada versión publicada trae un `.h5p` de ejemplo por idioma. Al subirlo, el juego queda instalado en el sitio. Para
+Cada versión publicada trae un `.h5p` de ejemplo por idioma. La [guía para administradores](docs/guia-administradores.md) explica la instalación, los permisos y la nota. Al subirlo, el juego queda instalado en el sitio. Para
 eso hace falta un usuario con permiso para instalar tipos de contenido H5P (en Moodle, el permiso
 `moodle/h5p:updatelibraries`).
 
