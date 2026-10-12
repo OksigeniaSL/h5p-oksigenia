@@ -45,6 +45,21 @@ jobs:
       - name: Build and pack
         run: npm run pack
 
+      # Release tags are read by machines (installations that follow this repository): <game>-v<version>, matching
+      # the game's library.json, with every example package and SHA256SUMS ready to attach.
+      - name: Tag matches a game version
+        if: github.ref_type == 'tag'
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          game="${tag%-v*}"
+          version="${tag##*-v}"
+          lib="packages/$game/library.json"
+          test -f "$lib" || { echo "::error::$tag: no game called $game"; exit 1; }
+          actual=$(node -p "const l=require('./$lib'); [l.majorVersion,l.minorVersion,l.patchVersion].join('.')")
+          test "$version" = "$actual" || { echo "::error::$tag says $version, $lib says $actual"; exit 1; }
+          ls "dist/$game-$version-"*.h5p
+          (cd dist && sha256sum "$game-$version-"*.h5p > SHA256SUMS && cat SHA256SUMS)
+
       - name: Browser
         run: npx playwright install --with-deps chromium firefox webkit
 
@@ -57,7 +72,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: h5p-packages
-          path: dist/*.h5p
+          path: |
+            dist/*.h5p
+            dist/SHA256SUMS
           if-no-files-found: error
 
       - name: Test traces
