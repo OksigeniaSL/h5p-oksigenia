@@ -168,7 +168,9 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
   /** Builds the three screens once: before, during and after the game. */
   build() {
     const t = this.l10n;
-    const ids = { clue: `${this.id}-clue`, kind: `${this.id}-kind`, input: `${this.id}-input` };
+    const ids = {
+      input: `${this.id}-input`, lastMove: `${this.id}-last`, cheer: `${this.id}-cheer`, result: `${this.id}-result`,
+    };
     this.announcer = new Announcer();
 
     this.introButton = el('button', { type: 'button', class: 'aw-button aw-primary', text: t.start, onclick: () => this.start() });
@@ -212,11 +214,13 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     ]);
     this.pauseButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pause', onclick: () => this.setPaused(!this.paused, true) });
     this.soundButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-sound', onclick: () => this.toggleSound() });
-    this.kind = el('p', { class: 'aw-kind', id: ids.kind });
-    this.clue = el('p', { class: 'aw-clue', id: ids.clue });
+    this.kind = el('p', { class: 'aw-kind' });
+    this.clue = el('p', { class: 'aw-clue' });
     this.input = /** @type {HTMLInputElement} */ (el('input', {
       id: ids.input, class: 'aw-input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false',
-      enterkeyhint: 'done', maxlength: '100', 'aria-describedby': `${ids.kind} ${ids.clue}`,
+      // No description pointing at the clue: screen readers would read it again each time it changes, before the
+      // result of the last letter. The clue is announced once, after that result (announceCurrent).
+      enterkeyhint: 'done', maxlength: '100',
     }));
     this.passButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pass', onclick: () => this.pass() }, [icon('passed'), t.pass]);
     const onsubmit = (e) => {
@@ -246,12 +250,18 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
 
     // After the game: a cheer that matches the score, then the review of every letter.
     this.ring = el('div', { class: 'aw-ring' });
-    this.cheerTitle = el('p', { class: 'aw-cheer-title', tabindex: '-1' });
-    this.resultTitle = el('p', { class: 'aw-result-title' });
+    // The end takes the focus, and with it everything a screen reader has to say: what happened with the last letter,
+    // the message and the score. A live announcement at that moment would be cut off by the focus.
+    this.lastMove = el('span', { class: 'aw-last-move h5p-oksigenia-sr-only', id: ids.lastMove });
+    this.cheerTitle = el('p', { class: 'aw-cheer-title', id: ids.cheer });
+    this.resultTitle = el('p', { class: 'aw-result-title', id: ids.result });
     this.endReason = el('p', { class: 'aw-end-reason' });
     this.cheer = el('div', { class: 'aw-cheer' }, [
       this.ring,
-      el('div', { class: 'aw-cheer-text' }, [this.cheerTitle, this.resultTitle, this.endReason]),
+      this.cheerBox = el('div', {
+        class: 'aw-cheer-text', role: 'group', tabindex: '-1',
+        'aria-labelledby': `${ids.lastMove} ${ids.cheer} ${ids.result}`,
+      }, [this.lastMove, this.cheerTitle, this.resultTitle, this.endReason]),
     ]);
     this.review = el('ol', { class: 'aw-review' });
     this.solutionsButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-show-solutions', text: t.showSolutions, onclick: () => this.showSolutions() });
@@ -538,7 +548,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     if (this.isRoot() && H5P.deleteUserData && this.contentId !== undefined) {
       H5P.deleteUserData(this.contentId, 'state', 0);
     }
-    this.cheerTitle.focus();
+    this.lastMove.textContent = said;
+    this.cheerBox.focus();
     const tier = cheerTier(this.game.score, this.game.maxScore);
     // Confetti only for a game that went well, and more of it for a full wheel. The bells come just after the sound of
     // the last answer; when the time ran out, its own sound already said so.
@@ -546,8 +557,6 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     if (this.game.endReason !== 'time') {
       setTimeout(() => this.sounds.play(tier === 'perfect' || tier === 'great' ? 'cheer' : 'done'), CHEER_DELAY_MS);
     }
-    const result = fill(this.l10n.resultTitle, { score: this.game.score, total: this.game.maxScore });
-    this.announcer.say(`${said ? `${said} ` : ''}${this.cheerText(tier)} ${result}`);
   }
 
   /** The speaker button: mutes or brings the sound back, and remembers it. */
@@ -614,6 +623,9 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
   /** Back to the start, as a new attempt. */
   resetTask() {
     this.game.reset();
+    if (this.lastMove) {
+      this.lastMove.textContent = '';
+    }
     // A new attempt: its duration in the xAPI result counts from its own start.
     this.activityStartTime = undefined;
     this.feedback = null;

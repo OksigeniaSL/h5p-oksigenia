@@ -4,12 +4,14 @@
 // @copyright 2026 Oksigenia <dev@oksigenia.cc>
 // @license   MIT
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { packages, ROOT, withTexts } from './packages.mjs';
 import { zip } from './zip.mjs';
 
+// dist/ holds only this build: packages of an earlier version must never end up in a release.
 const out = join(ROOT, 'dist');
+rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
 const walk = (dir) => readdirSync(dir).flatMap((name) => {

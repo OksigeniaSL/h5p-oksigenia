@@ -455,8 +455,8 @@
   animation: aw-cheer-in 0.6s 0.3s ease-out both;
 }
 
-/* The title takes the focus only so screen readers read it out; it is not a control, so no focus ring. */
-.h5p-alphabet-wheel .aw-cheer-title:focus {
+/* The end message takes the focus only so screen readers read it out; it is not a control, so no focus ring. */
+.h5p-alphabet-wheel .aw-cheer-text:focus {
   outline: none;
 }
 

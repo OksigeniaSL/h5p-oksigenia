@@ -59,7 +59,10 @@ test('a whole wheel played with the keyboard sends one result, with one point pe
 
   await expect(frame.locator('.aw-result-title')).toHaveText('25 de 27 letras acertadas');
   await expect(frame.locator('.aw-cheer-title')).toHaveText('¡Muy bien!');
-  await expect(frame.locator('.aw-cheer-title')).toBeFocused();
+  await expect(frame.locator('.aw-cheer-text')).toBeFocused();
+  // What a screen reader gets with the focus: the message and the score, once (checked with Orca, tests/platforms/orca).
+  await expect(frame.locator('.aw-cheer-text')).toHaveAccessibleName(/¡Muy bien!\s+25 de 27 letras acertadas/);
+  await expect(frame.locator('.aw-input')).not.toHaveAttribute('aria-describedby', /./);
   expect(passedE).toBe(true);
 
   const sent = await verbs(frame);
@@ -97,7 +100,7 @@ test('a full wheel is celebrated, with confetti', async ({ page }) => {
   const frame = await open(page, 'en');
   await playPerfect(frame, 'en');
   await expect(frame.locator('.aw-cheer-title')).toHaveText('Perfect wheel!');
-  await expect(frame.locator('.aw-cheer-title')).toBeFocused();
+  await expect(frame.locator('.aw-cheer-text')).toBeFocused();
   await expect(frame.locator('.aw-result-title')).toHaveText('26 of 26 letters right');
   await expect(frame.locator('.h5p-oksigenia-ring-star')).toHaveCount(1);
   await expect(frame.locator('.h5p-oksigenia-ring-text')).toHaveText('26/26');

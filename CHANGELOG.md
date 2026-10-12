@@ -2,6 +2,15 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Alphabet Wheel 1.0.1 (12 October 2026)
+
+Screen readers, after listening to the game with Orca:
+
+- Each clue is read once, after the result of the previous letter. The answer field no longer points to the clue as
+  its description, which screen readers read again whenever it changed, before the result.
+- At the end, the focus carries what happened with the last letter, the message and the score, read once; before,
+  the score could be cut off.
+
 ## Alphabet Wheel 1.0.0 (12 October 2026)
 
 First release of `H5P.AlphabetWheel`.
