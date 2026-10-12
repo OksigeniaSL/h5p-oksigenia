@@ -21,7 +21,9 @@ export default defineConfig({
   },
   webServer: {
     command: `node tools/dev.mjs --port ${port} --no-watch`,
-    url: `http://localhost:${port}/dashboard`,
+    // A game page, not the dashboard: the first view makes h5p-cli fetch its library registry, which can take a
+    // while on a fresh machine, and that wait belongs here, not in the first test.
+    url: `http://localhost:${port}/view/h5p-alphabet-wheel/alphabet-wheel-en?session=null`,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,
   },
