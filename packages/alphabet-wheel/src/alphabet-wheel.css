@@ -299,6 +299,16 @@
   font-weight: 700;
 }
 
+.h5p-alphabet-wheel .aw-sound {
+  min-width: 2.75rem;
+  padding-inline: 0.5em;
+}
+
+.h5p-alphabet-wheel .aw-sound .aw-icon {
+  width: 1.3em;
+  height: 1.3em;
+}
+
 .h5p-alphabet-wheel .aw-clock {
   display: inline-flex;
   align-items: baseline;

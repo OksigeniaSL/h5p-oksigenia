@@ -115,6 +115,59 @@ test('without motion when the system asks for it', async ({ page }) => {
   await expect(frame.locator('.h5p-oksigenia-confetti')).toHaveCount(0);
 });
 
+/** Counts the oscillators the game creates: a sound is a handful of them. */
+const countSounds = (frame) => frame.evaluate(() => {
+  const proto = window.AudioContext.prototype;
+  const original = proto.createOscillator;
+  window.oscillators = 0;
+  proto.createOscillator = function () {
+    window.oscillators++;
+    return original.call(this);
+  };
+});
+const oscillators = (frame) => frame.evaluate(() => window.oscillators);
+
+test('answers sound, and the mute button silences them and is remembered', async ({ page }) => {
+  let frame = await open(page, 'es');
+  await countSounds(frame);
+  await frame.locator('.aw-intro button').click();
+  await frame.locator('.aw-input').fill('abeja');
+  await frame.locator('.aw-input').press('Enter');
+  await expect.poll(() => oscillators(frame)).toBeGreaterThan(0);
+  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Silenciar');
+  await frame.locator('.aw-sound').click();
+  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Activar el sonido');
+  const before = await oscillators(frame);
+  await frame.locator('.aw-input').fill('bote');
+  await frame.locator('.aw-input').press('Enter');
+  await frame.locator('.aw-row button.aw-secondary').click();
+  await page.waitForTimeout(300);
+  expect(await oscillators(frame)).toBe(before);
+
+  await page.reload();
+  frame = await open(page, 'es');
+  await frame.locator('.aw-intro button').click();
+  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Activar el sonido');
+  await frame.locator('.aw-sound').click();
+  await expect(frame.locator('.aw-sound')).toHaveAttribute('aria-label', 'Silenciar');
+});
+
+test('authors can leave the sounds out', async ({ page }) => {
+  const frame = await open(page, 'es');
+  const button = await frame.evaluate(() => {
+    const box = document.createElement('div');
+    document.body.append(box);
+    const wheel = new H5P.AlphabetWheel({
+      items: [{ letter: 'A', kind: 'starts', clue: 'Insecto que fabrica miel', answer: 'Abeja' }],
+      behaviour: { enableSound: false },
+    }, 999);
+    wheel.attach(H5P.jQuery(box));
+    wheel.start();
+    return box.querySelectorAll('.aw-sound').length;
+  });
+  expect(button).toBe(0);
+});
+
 test('the Ñ is not the N', async ({ page }) => {
   const frame = await open(page, 'es');
   await frame.locator('.aw-intro button').click();

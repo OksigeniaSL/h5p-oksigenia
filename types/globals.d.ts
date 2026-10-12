@@ -7,6 +7,7 @@ declare var H5P: any;
 interface Window {
   H5P: any;
   statements: any[];
+  oscillators: number;
 }
 
 declare module '*.css';

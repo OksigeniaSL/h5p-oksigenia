@@ -100,6 +100,10 @@
           "label": "Mostrar la respuesta correcta después de un fallo"
         },
         {
+          "label": "Con sonidos",
+          "description": "Cada alumno puede silenciarlos durante la partida."
+        },
+        {
           "label": "Activar «Volver a jugar»"
         },
         {
@@ -161,6 +165,22 @@
         {
           "label": "En pausa",
           "default": "En pausa. La pista vuelve cuando sigas."
+        },
+        {
+          "label": "Botón de silenciar",
+          "default": "Silenciar"
+        },
+        {
+          "label": "Botón de activar el sonido",
+          "default": "Activar el sonido"
+        },
+        {
+          "label": "Sonido silenciado (para lectores de pantalla)",
+          "default": "Sonido silenciado."
+        },
+        {
+          "label": "Sonido activado (para lectores de pantalla)",
+          "default": "Sonido activado."
         },
         {
           "label": "Botón de terminar",

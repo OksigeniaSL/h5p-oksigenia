@@ -99,6 +99,10 @@
           "label": "Show the right answer after a wrong one"
         },
         {
+          "label": "Play sounds",
+          "description": "Players can mute them during the game."
+        },
+        {
           "label": "Enable \"Retry\""
         },
         {
@@ -160,6 +164,22 @@
         {
           "label": "Paused",
           "default": "Paused. The clue comes back when you resume."
+        },
+        {
+          "label": "Mute button",
+          "default": "Mute"
+        },
+        {
+          "label": "Sound on button",
+          "default": "Sound on"
+        },
+        {
+          "label": "Sound muted (for screen readers)",
+          "default": "Sound off."
+        },
+        {
+          "label": "Sound on again (for screen readers)",
+          "default": "Sound on."
         },
         {
           "label": "Finish button",

@@ -12,6 +12,7 @@ import { Countdown, formatTime } from '../../shared/timer.js';
 import { Announcer, el, fill, plain } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
+import { Sounds } from '../../shared/sound.js';
 import { WheelGame } from './game.js';
 import './alphabet-wheel.css';
 
@@ -28,6 +29,8 @@ const ICONS = {
   ok: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.2 8.6l3 3 6.6-7" /></svg>',
   bad: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.2 4.2l7.6 7.6M11.8 4.2l-7.6 7.6" /></svg>',
   passed: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.8 8h9.4M8.8 4.4L12.4 8l-3.6 3.6" /></svg>',
+  soundOn: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 5.6a3.4 3.4 0 0 1 0 4.8M12.6 3.6a6.2 6.2 0 0 1 0 8.8" /></svg>',
+  soundOff: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 6.2l3.6 3.6M14.2 6.2l-3.6 3.6" /></svg>',
 };
 const icon = (name) => {
   const span = el('span', { class: `aw-icon aw-icon-${name}`, 'aria-hidden': 'true' });
@@ -67,6 +70,7 @@ function AlphabetWheel(params, contentId, extras = {}) {
     ignoreAccents: this.behaviour.ignoreAccents !== false,
   }));
 
+  this.sounds = new Sounds({ enabled: this.behaviour.enableSound !== false });
   this.timeLimit = Math.max(0, Math.floor(Number(params && params.timeLimit) || 0));
   this.paused = false;
   this.confirmingFinish = false;
@@ -93,6 +97,9 @@ AlphabetWheel.prototype.newTimer = function (seconds) {
     seconds,
     onTick: (left) => {
       this.paintClock();
+      if (left > 0 && left <= 5) {
+        this.sounds.play('tick');
+      }
       if (left === 60) {
         this.announcer.say(this.l10n.oneMinuteLeft);
       } else if (left === 10) {
@@ -100,6 +107,7 @@ AlphabetWheel.prototype.newTimer = function (seconds) {
       }
     },
     onEnd: () => {
+      this.sounds.play('timeUp');
       this.game.finish('time');
       this.afterFinish(this.l10n.timeUp);
     },
@@ -176,6 +184,7 @@ AlphabetWheel.prototype.build = function () {
     el('span', { class: 'aw-clock-label', text: t.timeLeft }), this.clockValue,
   ]);
   this.pauseButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pause', onclick: () => this.setPaused(!this.paused, true) });
+  this.soundButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-sound', onclick: () => this.toggleSound() });
   this.kind = el('p', { class: 'aw-kind', id: ids.kind });
   this.clue = el('p', { class: 'aw-clue', id: ids.clue });
   this.input = el('input', {
@@ -197,7 +206,9 @@ AlphabetWheel.prototype.build = function () {
   this.counts = el('p', { class: 'aw-counts' });
   this.finishButton = el('button', { type: 'button', class: 'aw-button aw-tertiary aw-finish', onclick: () => this.askFinish() });
   this.panel = el('div', { class: 'aw-panel' }, [
-    el('div', { class: 'aw-bar' }, [this.round, this.timer ? this.clock : '', this.timer ? this.pauseButton : '']),
+    el('div', { class: 'aw-bar' }, [
+      this.round, this.timer ? this.clock : '', this.timer ? this.pauseButton : '', this.sounds.enabled ? this.soundButton : '',
+    ]),
     this.question, this.pausedNote, this.feedbackLine, this.counts, this.finishButton,
   ]);
   this.gameView = el('div', { class: 'aw-game' }, [this.wheel, this.panel]);
@@ -256,6 +267,11 @@ AlphabetWheel.prototype.render = function () {
     this.question.hidden = this.paused;
     this.pausedNote.hidden = !this.paused;
     this.pauseButton.textContent = this.paused ? t.resume : t.pause;
+    // An icon button: the speaker is known to everyone, and its name is there for screen readers and as a tooltip.
+    const soundLabel = this.sounds.muted ? t.soundOn : t.soundOff;
+    this.soundButton.replaceChildren(icon(this.sounds.muted ? 'soundOff' : 'soundOn'));
+    this.soundButton.setAttribute('aria-label', soundLabel);
+    this.soundButton.title = soundLabel;
     this.paintClock();
     this.paintFeedback();
     this.counts.replaceChildren(
@@ -336,6 +352,8 @@ AlphabetWheel.prototype.start = function () {
   if (typeof this.setActivityStarted === 'function') {
     this.setActivityStarted();
   }
+  // The click on «Start» is the gesture the browser asks for before any sound.
+  this.sounds.wake();
   this.game.start();
   this.feedback = null;
   if (this.timer) {
@@ -370,6 +388,7 @@ AlphabetWheel.prototype.check = function () {
     return;
   }
   const it = this.items[index];
+  this.sounds.play(result === 'ok' ? 'ok' : 'bad');
   let text = `${it.letter}: ${result === 'ok' ? t.correctFeedback : t.wrongFeedback}`;
   if (result === 'bad' && this.behaviour.showAnswerOnWrong) {
     text += ` ${fill(t.answerWas, { answer: it.answers[0] })}`;
@@ -384,6 +403,7 @@ AlphabetWheel.prototype.pass = function () {
     return;
   }
   const index = this.game.pass();
+  this.sounds.play('pass');
   const text = fill(this.l10n.passedFeedback, { letter: this.items[index].letter });
   this.feedback = { result: 'passed', text };
   this.input.value = '';
@@ -457,10 +477,21 @@ AlphabetWheel.prototype.afterFinish = function (said) {
   }
   this.cheerTitle.focus();
   const tier = cheerTier(this.game.score, this.game.maxScore);
-  // Confetti only for a game that went well, and more of it for a full wheel.
+  // Confetti only for a game that went well, and more of it for a full wheel. The bells come just after the sound of
+  // the last answer; when the time ran out, its own sound already said so.
   confetti(this.root, { perfect: 90, great: 40 }[tier] || 0);
+  if (this.game.endReason !== 'time') {
+    setTimeout(() => this.sounds.play(tier === 'perfect' || tier === 'great' ? 'cheer' : 'done'), 500);
+  }
   const result = fill(this.l10n.resultTitle, { score: this.game.score, total: this.game.maxScore });
   this.announcer.say(`${said ? `${said} ` : ''}${this.cheerText(tier)} ${result}`);
+};
+
+AlphabetWheel.prototype.toggleSound = function () {
+  this.sounds.setMuted(!this.sounds.muted);
+  this.render();
+  this.announcer.say(this.sounds.muted ? this.l10n.soundMuted : this.l10n.soundUnmuted);
+  this.sounds.play('tick');
 };
 
 /** @param {'perfect'|'great'|'good'|'keep'} tier */

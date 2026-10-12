@@ -137,6 +137,14 @@
         "default": true
       },
       {
+        "name": "enableSound",
+        "type": "boolean",
+        "label": "Play sounds",
+        "description": "Players can mute them during the game.",
+        "importance": "low",
+        "default": true
+      },
+      {
         "name": "enableRetry",
         "type": "boolean",
         "label": "Enable \"Retry\"",
@@ -172,6 +180,10 @@
       { "name": "pause", "type": "text", "label": "Pause button", "importance": "low", "default": "Pause" },
       { "name": "resume", "type": "text", "label": "Resume button", "importance": "low", "default": "Resume" },
       { "name": "paused", "type": "text", "label": "Paused", "importance": "low", "default": "Paused. The clue comes back when you resume." },
+      { "name": "soundOff", "type": "text", "label": "Mute button", "importance": "low", "default": "Mute" },
+      { "name": "soundOn", "type": "text", "label": "Sound on button", "importance": "low", "default": "Sound on" },
+      { "name": "soundMuted", "type": "text", "label": "Sound muted (for screen readers)", "importance": "low", "default": "Sound off." },
+      { "name": "soundUnmuted", "type": "text", "label": "Sound on again (for screen readers)", "importance": "low", "default": "Sound on." },
       { "name": "finish", "type": "text", "label": "Finish button", "importance": "low", "default": "Finish" },
       { "name": "finishConfirm", "type": "text", "label": "Finish, to confirm", "importance": "low", "default": "Finish now? Press again" },
       { "name": "emptyAnswer", "type": "text", "label": "No answer typed", "importance": "low", "default": "Type an answer or pass." },
