@@ -2,6 +2,10 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Alphabet Wheel, not released yet
+
+- The text kept for screen readers is hidden with `clip-path`, instead of the deprecated `clip`.
+
 ## Alphabet Wheel 1.0.1 (12 October 2026)
 
 Screen readers, after listening to the game with Orca:
