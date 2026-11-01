@@ -9,10 +9,21 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
 
 [Read in English](README.md)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/alphabet-wheel-game-es-dark.webp">
+  <img src="docs/img/alphabet-wheel-game-es.webp" width="676" alt="La Rueda de letras a mitad de partida: las letras en círculo con sus resultados, la letra actual en el centro y, al lado, la pista y el campo de respuesta.">
+</picture>
+
+**[Juega ahora](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D19)** en un aula de demostración, con un clic y sin registrarte, o
+[descárgala](https://github.com/OksigeniaSL/h5p-oksigenia/releases/latest) con un ejemplo en tu idioma.
+
 ## Juegos
 
 - **Rueda de letras** (`H5P.AlphabetWheel`): una pista por cada letra del alfabeto. El alumno escribe la respuesta o
-  pasa la letra a la siguiente vuelta. Un punto por letra.
+  pasa la letra a la siguiente vuelta. Un punto por letra. Al terminar, el alumno ve su nota y cómo le fue en cada letra,
+  y el docente tiene cada intento en el informe de la actividad.
+
+  <img src="docs/img/alphabet-wheel-end-es.webp" width="676" alt="El final de una partida: un anillo con 25 de 27, un mensaje, los botones para ver las respuestas o volver a jugar, y las primeras letras con sus respuestas.">
 
 ## Idiomas
 

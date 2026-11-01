@@ -9,10 +9,21 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
 
 [Leer en español](README.es.md)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/alphabet-wheel-game-dark.webp">
+  <img src="docs/img/alphabet-wheel-game.webp" width="676" alt="The Alphabet Wheel in the middle of a game: the letters in a ring with their results, the current letter in the centre, and beside it the clue and the answer field.">
+</picture>
+
+**[Play it now](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D19)** in a demo classroom in Spanish, with one click and no sign-up, or
+[download it](https://github.com/OksigeniaSL/h5p-oksigenia/releases/latest) with an example in your language.
+
 ## Games
 
 - **Alphabet Wheel** (`H5P.AlphabetWheel`): a clue for each letter of the alphabet. The student types the answer or
-  passes the letter to the next round. One point per letter.
+  passes the letter to the next round. One point per letter. At the end, the student sees the score and how each letter
+  went, and the teacher has every attempt in the report of the activity.
+
+  <img src="docs/img/alphabet-wheel-end.webp" width="676" alt="The end of a game: a score ring with 24 of 26, a message, the buttons to see the answers or play again, and the first letters with their answers.">
 
 ## Languages
 
