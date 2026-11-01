@@ -2,10 +2,18 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Number Line 1.0.0 (not released yet)
+## Number Line 1.0.0 (1 November 2026)
 
 First release of `H5P.NumberLine`: addition, subtraction, times tables, whole numbers and fractions as jumps on a number
 line. The jumps are the answer, not a question before them. Each game makes up its own numbers.
+
+- What to practise is chosen by the author or, by default, on the first screen: addition and subtraction up to 20 or 100,
+  times tables, whole numbers up to 1000 and fractions. There is also a free line with no points, for a board.
+- Three pieces to choose from, so it does not feel childish at any age: a spring with a face, a rocket and a plain die.
+- Each round goes to the report of the activity and the score to the gradebook. No clock; the level goes up with three good
+  rounds in a row; a wrong try shows where it landed.
+- Jumps with the buttons or drawn with a finger. Keyboard, screen readers, dark mode of the page, 320 px wide.
+- Eight languages for players and authors, each with an example.
 
 ## Alphabet Wheel 1.0.2 (1 November 2026)
 
