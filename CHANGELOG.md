@@ -2,6 +2,11 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Not released yet
+
+- Both games: a game taken up again comes into view with the focus where it goes on: the answer field, the button that resumes
+  it or, in the Number Line, the first thing to press. Before, what was typed went nowhere until the field was tapped.
+
 ## Number Line 1.0.0 (1 November 2026)
 
 First release of `H5P.NumberLine`: addition, subtraction, times tables, whole numbers and fractions as jumps on a number

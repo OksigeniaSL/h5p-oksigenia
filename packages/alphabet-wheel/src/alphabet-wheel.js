@@ -107,6 +107,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       // A timed game comes back paused: the clock does not run while the page loads and the player looks.
       this.paused = this.game.phase === 'playing' && this.timeLimit > 0;
     }
+    /** Taken up again in the middle: there is no «Start» to bring the game into view. */
+    this.takenUp = this.game.phase === 'playing';
     this.timer = this.timeLimit ? this.newTimer(timeLeft) : null;
   }
 
@@ -154,6 +156,13 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     container.replaceChildren(this.root);
     this.render();
+    if (this.takenUp && this.isRoot()) {
+      this.takenUp = false;
+      // What is typed has to go somewhere: to the field or, if the game came back paused, to the button that resumes it.
+      const next = this.paused ? this.pauseButton : this.input;
+      next.focus({ preventScroll: true });
+      bringIntoView(next, { keyboard: !this.paused });
+    }
     // Inside another content type, the game keeps the colours of what is around it.
     if (this.isRoot() && !this.colourWatched) {
       this.colourWatched = true;

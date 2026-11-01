@@ -212,6 +212,7 @@ test('a reload in the middle takes the game up again, with the same numbers', as
   await expect(frame.locator('.nl-challenge')).toContainText(`${r.target}`);
   await expect(frame.locator('.nl-round')).toContainText('2');
   expect((await round(frame)).target).toBe(r.target);
+  await expect(frame.locator('.nl-count').first()).toBeFocused();
 });
 
 test('a reload in the middle of a sum keeps the jumps already made', async ({ page }) => {

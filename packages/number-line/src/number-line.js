@@ -126,6 +126,8 @@ export default class NumberLine extends H5P.EventDispatcher {
       const game = this.newGame(saved);
       if (game.restore(state)) {
         this.game = game;
+        /** Taken up again in the middle: there is no «Start» to bring the game into view. */
+        this.takenUp = true;
       }
     }
     if (!this.game && this.topic !== 'choose' && this.topic !== 'free') {
@@ -227,6 +229,15 @@ export default class NumberLine extends H5P.EventDispatcher {
       this.openRound();
     }
     this.render();
+    if (this.takenUp && this.isRoot() && this.game.phase === 'playing') {
+      this.takenUp = false;
+      const first = this.game.roundOver ? this.nextButton
+        : this.game.current.mode === 'place' ? this.line.node : this.controls.querySelector('button:not(:disabled)');
+      if (first) {
+        /** @type {HTMLElement} */ (first).focus({ preventScroll: true });
+      }
+      bringIntoView(this.game.roundOver ? this.nextButton : this.challenge);
+    }
     // Inside another content type, the game keeps the colours of what is around it.
     if (this.isRoot() && !this.colourWatched) {
       this.colourWatched = true;

@@ -283,6 +283,33 @@ test('a reload in the middle of the game takes it up again, paused', async ({ pa
   await expect(frame.locator('.aw-clue')).toHaveText(example('en').items[3].clue);
 });
 
+test('a game taken up again has the focus where it goes on, unless it is inside another content', async ({ page }) => {
+  const frame = await open(page, 'es');
+  const focused = await frame.evaluate(() => {
+    const params = { items: [
+      { letter: 'A', kind: 'starts', clue: 'Insecto que fabrica miel', answer: 'Abeja' },
+      { letter: 'B', kind: 'starts', clue: 'Vehículo de dos ruedas', answer: 'Bici' },
+    ] };
+    const place = () => {
+      const box = document.createElement('div'); document.body.append(box); return H5P.jQuery(box); 
+    };
+    const first = new H5P.AlphabetWheel(params, 999);
+    first.attach(place());
+    first.start();
+    first.input.value = 'Abeja';
+    first.check();
+    const previousState = first.getCurrentState();
+    /** @type {HTMLElement} */ (document.activeElement).blur();
+    const inside = new H5P.AlphabetWheel(params, 999, { previousState });
+    inside.attach(place());
+    const stayed = document.activeElement === inside.input;
+    const back = new H5P.AlphabetWheel(params, 999, { previousState, standalone: true });
+    back.attach(place());
+    return { stayed, back: document.activeElement === back.input };
+  });
+  expect(focused).toEqual({ stayed: false, back: true });
+});
+
 test('the pause hides the clue and stops the clock', async ({ page }) => {
   const frame = await open(page, 'en');
   await frame.locator('.aw-intro button').click();
