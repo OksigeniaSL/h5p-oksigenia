@@ -6,7 +6,7 @@
 # Needs Docker, the built example packages (npm run pack) and the oksigenia/moodle image of the branch. The site gets
 # random passwords, runs with capped memory and CPU (compose.yaml) and is removed with its volumes at the end, also
 # when something fails. Screenshots go to $H5P_PLATFORM_DIR/report-moodle-<branch> (default ~/.cache/h5p-oksigenia).
-# H5P_MOODLE_PORT picks another port when 8096 is taken.
+# H5P_MOODLE_PORT picks another port when 8096 is taken. H5P_ONLY=number-line leaves out the Alphabet Wheel, for a quick run.
 #
 # @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
@@ -48,8 +48,9 @@ until [ "$(docker inspect -f '{{.State.Health.Status}}' h5p-moodle-moodle-1 2>/d
   sleep 5
 done
 
-# The library first, as a hosted site gets it: with the command-line installer, checked against the checksums.
 c=h5p-moodle-moodle-1
+if [ "${H5P_ONLY:-}" != number-line ]; then
+# The library first, as a hosted site gets it: with the command-line installer, checked against the checksums.
 (cd "$root/dist" && sha256sum "$(basename "$package")") > "$work/SHA256SUMS"
 docker cp "$root/tools/moodle-install-library.php" $c:/tmp/install-library.php
 docker cp "$package" $c:/tmp/$(basename "$package")
@@ -91,7 +92,10 @@ docker exec -u www-data $c php /tmp/install-library.php --package=/tmp/newer.h5p
   || { echo "FAIL the newer copy did not install" >&2; exit 1; }
 install --sums=/tmp/SHA256SUMS | grep -q 'already has 1.0.99' || { echo "FAIL the released package touched a newer version" >&2; exit 1; }
 echo "ok   with a newer version on the site, the installer leaves it alone"
+fi
 
+docker cp "$here/setup.php" $c:/tmp/setup.php
+docker exec $c chown www-data /tmp/setup.php
 # The number line, on the same site: the second game of the repository.
 line_package="$root/dist/number-line-$(node -p "const l=require('$root/packages/number-line/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
 docker cp "$line_package" $c:/tmp/number-line-es.h5p
