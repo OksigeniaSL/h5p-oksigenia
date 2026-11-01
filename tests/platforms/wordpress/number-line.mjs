@@ -89,7 +89,8 @@ try {
   await game.locator('.nl-choice-tables').click();
   await playRight();
   const asked = await current();
-  await page.waitForTimeout(1500);
+  // H5P saves the state three seconds after the game says it has progressed.
+  await page.waitForTimeout(4500);
   await open();
   const same = await current().catch(() => null);
   check('a reload in the middle takes the game up again', !!same && same.target === asked.target && same.size === asked.size);

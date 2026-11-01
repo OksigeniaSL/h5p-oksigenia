@@ -82,7 +82,8 @@ try {
   await game.locator('.nl-choice-tables').click();
   await playRight();
   const asked = await current();
-  await page.waitForTimeout(1500);
+  // H5P saves the state three seconds after the game says it has progressed.
+  await page.waitForTimeout(4500);
   await open();
   const round = await game.locator('.nl-round').textContent().catch(() => '');
   const same = await current().catch(() => null);

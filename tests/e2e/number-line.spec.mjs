@@ -169,6 +169,8 @@ test('the free line: jumps, a drawn jump, undo and another range, without points
   const frame = await open(page);
   await frame.locator('.nl-choice-free').click();
   await expect(frame.locator('.nl-message')).toContainText('0');
+  // The line comes into view a moment after it opens: the buttons move with it.
+  await page.waitForTimeout(700);
   await frame.locator('.nl-jump', { hasText: /^\+5$/ }).click();
   await expect(frame.locator('.nl-message')).toContainText('5');
   await frame.locator('.nl-jump', { hasText: /^\+2$/ }).click();
