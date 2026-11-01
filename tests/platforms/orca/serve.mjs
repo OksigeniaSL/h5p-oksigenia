@@ -1,7 +1,7 @@
-// Serves the Spanish example wheel with the H5P engine of @lumieducation/h5p-server and the H5P core of the dev server
+// Serves the Spanish example of a game with the H5P engine of @lumieducation/h5p-server and the H5P core of the dev server
 // (.h5p-dev), in the page itself, for the Orca check. Prints the URL and runs until it is stopped.
 //
-//   node tests/platforms/orca/serve.mjs [--port 8093]
+//   node tests/platforms/orca/serve.mjs [--port 8093] [--game alphabet-wheel]
 //
 // @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
@@ -16,16 +16,17 @@ import { packages, ROOT } from '../../../tools/packages.mjs';
 
 const port = Number(process.argv[process.argv.indexOf('--port') + 1]) || 8093;
 const core = join(ROOT, '.h5p-dev', 'libraries', 'h5p-php-library');
-const wheel = packages().find((p) => p.name === 'alphabet-wheel');
+const gameName = process.argv.includes('--game') ? process.argv[process.argv.indexOf('--game') + 1] : 'alphabet-wheel';
+const game = packages().find((p) => p.name === gameName);
 const work = mkdtempSync(join(tmpdir(), 'h5p-orca-'));
 const config = new LumiH5P.H5PConfig(undefined, { baseUrl: '/h5p', contentUserStateSaveInterval: false });
 const editor = LumiH5P.fs(config, join(work, 'libraries'), join(work, 'tmp'), join(work, 'content'));
 const user = { id: '1', name: 'Lucía Pruebas', email: 'alumno1@example.org', type: 'local',
   canInstallRecommended: true, canUpdateAndInstallLibraries: true, canCreateRestricted: true };
-const pkg = readFileSync(join(ROOT, 'dist', `alphabet-wheel-${wheel.version}-es.h5p`));
+const pkg = readFileSync(join(ROOT, 'dist', `${game.name}-${game.version}-es.h5p`));
 const { metadata, parameters } = await editor.uploadPackage(pkg, user);
 const contentId = await editor.saveOrUpdateContent(undefined, parameters, metadata,
-  `H5P.AlphabetWheel ${wheel.library.majorVersion}.${wheel.library.minorVersion}`, user);
+  `${game.library.machineName} ${game.library.majorVersion}.${game.library.minorVersion}`, user);
 const player = new LumiH5P.H5PPlayer(editor.libraryStorage, editor.contentStorage, config);
 
 const app = express();

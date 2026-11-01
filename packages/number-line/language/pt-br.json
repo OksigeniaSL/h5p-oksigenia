@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "O que praticar",
+      "description": "Com “Escolher ao começar”, quem joga escolhe na primeira tela: prático no meio da aula.",
+      "options": [
+        {
+          "label": "Escolher ao começar"
+        },
+        {
+          "label": "Adição e subtração até 20"
+        },
+        {
+          "label": "Adição e subtração até 100"
+        },
+        {
+          "label": "Tabuada"
+        },
+        {
+          "label": "Números até 1000"
+        },
+        {
+          "label": "Frações"
+        },
+        {
+          "label": "Reta livre, sem pontos"
+        }
+      ]
+    },
+    {
+      "label": "Rodadas por partida"
+    },
+    {
+      "label": "Ajuste fino",
+      "description": "Opcional. O que você preencher aqui cria um único nível com esses números. O resto pode ficar vazio.",
+      "fields": [
+        {
+          "label": "Fim da reta",
+          "description": "Para contas e para colocar números: 30, 200, 1000…"
+        },
+        {
+          "label": "Saltos para adição e subtração",
+          "description": "Por exemplo: +1 +5 +10 -1"
+        },
+        {
+          "label": "Tabuada",
+          "description": "Por exemplo: 7, 8, 9"
+        },
+        {
+          "label": "Denominadores das frações",
+          "description": "Por exemplo: 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Comportamento",
+      "fields": [
+        {
+          "label": "Com sons",
+          "description": "Quem joga pode abaixá-los ou desligá-los."
+        },
+        {
+          "label": "Oferecer jogar de novo"
+        }
+      ]
+    },
+    {
+      "label": "Textos e traduções",
+      "fields": [
+        {
+          "label": "Botão de começar",
+          "default": "Começar"
+        },
+        {
+          "label": "Título das opções",
+          "default": "O que você quer praticar?"
+        },
+        {
+          "label": "Opção: contas até 20",
+          "default": "Adição e subtração até 20"
+        },
+        {
+          "label": "Opção: contas até 100",
+          "default": "Adição e subtração até 100"
+        },
+        {
+          "label": "Opção: tabuada",
+          "default": "Tabuada"
+        },
+        {
+          "label": "Opção: números",
+          "default": "Números até 1000"
+        },
+        {
+          "label": "Opção: frações",
+          "default": "Frações"
+        },
+        {
+          "label": "Opção: reta livre",
+          "default": "Reta livre, sem pontos"
+        },
+        {
+          "label": "Resumo (@count)",
+          "default": "Rodadas: @count. Sem relógio."
+        },
+        {
+          "label": "Como jogar as contas",
+          "default": "Salte pela reta com os botões, ou desenhe o salto com o dedo."
+        },
+        {
+          "label": "Como jogar a tabuada",
+          "default": "Escolha quantos saltos são precisos para cair na bandeira."
+        },
+        {
+          "label": "Como colocar os números",
+          "default": "Toque a reta onde você acha que está o número."
+        },
+        {
+          "label": "Rodada (@round, @total)",
+          "default": "Rodada @round de @total"
+        },
+        {
+          "label": "Pontos (@count)",
+          "default": "Pontos: @count"
+        },
+        {
+          "label": "Primeiro nível",
+          "default": "Trilha do Rio"
+        },
+        {
+          "label": "Segundo nível",
+          "default": "Ponte de Pedra"
+        },
+        {
+          "label": "Terceiro nível",
+          "default": "Pico da Montanha"
+        },
+        {
+          "label": "Próximo nível (@place)",
+          "default": "Três seguidas: você passa para @place."
+        },
+        {
+          "label": "Botão de silenciar",
+          "default": "Silenciar"
+        },
+        {
+          "label": "Botão de ativar o som",
+          "default": "Ativar o som"
+        },
+        {
+          "label": "Anunciado ao silenciar",
+          "default": "Som desativado"
+        },
+        {
+          "label": "Anunciado ao ativar o som",
+          "default": "Ativar o som"
+        },
+        {
+          "label": "Controle de volume",
+          "default": "Volume"
+        },
+        {
+          "label": "Dica: chegar à bandeira",
+          "default": "Chegue à bandeira com o menor número de saltos que puder."
+        },
+        {
+          "label": "Dica: fazer a conta",
+          "default": "Dê os saltos, com os botões ou com o dedo."
+        },
+        {
+          "label": "Pergunta de onde caiu",
+          "default": "Onde você caiu?"
+        },
+        {
+          "label": "Dica: quantos saltos (@size)",
+          "default": "Quantos saltos de @size para cair na bandeira?"
+        },
+        {
+          "label": "Dica: colocar o número",
+          "default": "Onde está? Toque a reta e aperte “Aqui”."
+        },
+        {
+          "label": "Nome de um botão: para a frente (@count)",
+          "default": "Saltar @count para a frente"
+        },
+        {
+          "label": "Nome de um botão: para trás (@count)",
+          "default": "Saltar @count para trás"
+        },
+        {
+          "label": "Nome de um botão: quantos (@count)",
+          "default": "Saltos: @count"
+        },
+        {
+          "label": "Botão de recomeçar",
+          "default": "Recomeçar"
+        },
+        {
+          "label": "Botão de fazer juntos",
+          "default": "Vamos fazer juntos"
+        },
+        {
+          "label": "Botão de desfazer",
+          "default": "Desfazer"
+        },
+        {
+          "label": "Onde está quem joga (@position, @target)",
+          "default": "Você está no @position. A bandeira está no @target."
+        },
+        {
+          "label": "Onde está quem joga, numa conta (@position, @done, @amount)",
+          "default": "Você está no @position. Já saltou @done de @amount."
+        },
+        {
+          "label": "Passou da conta (@position, @amount)",
+          "default": "Você está no @position: passou de @amount. Recomece."
+        },
+        {
+          "label": "Um salto para o lado errado",
+          "default": "Esse salto vai para o outro lado."
+        },
+        {
+          "label": "Chegou com os saltos certos",
+          "default": "Com os saltos certos! 2 pontos."
+        },
+        {
+          "label": "Chegou (@used, @best)",
+          "default": "Você chegou em @used saltos. Dava para fazer em @best. 1 ponto."
+        },
+        {
+          "label": "Chegaram juntos",
+          "default": "Agora você viu um jeito. Desta vez, sem pontos."
+        },
+        {
+          "label": "Número certo (@target)",
+          "default": "Sim, @target! 2 pontos."
+        },
+        {
+          "label": "Número errado (@target)",
+          "default": "Você caiu no @target. Os saltos estavam certos: 1 ponto."
+        },
+        {
+          "label": "Conta feita juntos (@target)",
+          "default": "Você caiu no @target. Desta vez, sem pontos."
+        },
+        {
+          "label": "Certo de primeira (@times, @size, @target)",
+          "default": "Certo! @times × @size = @target. 1 ponto."
+        },
+        {
+          "label": "Certo depois (@times, @size, @target)",
+          "default": "Aí está! @times × @size = @target."
+        },
+        {
+          "label": "Tentativa errada (@count, @landed, @target)",
+          "default": "Saltos: @count. Você caiu no @landed, e a bandeira está no @target."
+        },
+        {
+          "label": "Mostrar (@times, @size, @target)",
+          "default": "Olhe: @times × @size = @target."
+        },
+        {
+          "label": "Nome da reta (@max, @number)",
+          "default": "Reta numérica de 0 a @max. Coloque o @number com as setas."
+        },
+        {
+          "label": "A reta, antes de colocar",
+          "default": "Ainda sem colocar"
+        },
+        {
+          "label": "Botão de colocar",
+          "default": "Aqui"
+        },
+        {
+          "label": "Muito perto",
+          "default": "Muito perto! 2 pontos."
+        },
+        {
+          "label": "Perto",
+          "default": "Perto. 1 ponto."
+        },
+        {
+          "label": "Longe",
+          "default": "Olhe onde estava."
+        },
+        {
+          "label": "Botão de próxima",
+          "default": "Próxima"
+        },
+        {
+          "label": "Botão depois da última rodada",
+          "default": "Ver o resultado"
+        },
+        {
+          "label": "Mensagem com todos os pontos",
+          "default": "Todos!"
+        },
+        {
+          "label": "Mensagem com quase todos os pontos",
+          "default": "Muito bem!"
+        },
+        {
+          "label": "Mensagem com metade dos pontos",
+          "default": "Bom trabalho!"
+        },
+        {
+          "label": "Mensagem com menos pontos",
+          "default": "Continue praticando!"
+        },
+        {
+          "label": "Resultado (@score, @total)",
+          "default": "@score de @total pontos"
+        },
+        {
+          "label": "Botão de jogar de novo",
+          "default": "Jogar de novo"
+        },
+        {
+          "label": "Botão de escolher outra coisa",
+          "default": "Praticar outra coisa"
+        },
+        {
+          "label": "Revisão: chegar à bandeira (@start, @target)",
+          "default": "Do @start ao @target"
+        },
+        {
+          "label": "Revisão: os saltos (@path, @used, @best)",
+          "default": "@path (saltos: @used; dava em @best)"
+        },
+        {
+          "label": "Revisão: quantos saltos (@size, @target)",
+          "default": "Saltos de @size até o @target"
+        },
+        {
+          "label": "Revisão: colocar um número (@number)",
+          "default": "Colocar o @number"
+        },
+        {
+          "label": "Revisão: onde foi colocado (@value)",
+          "default": "Colocado no @value"
+        },
+        {
+          "label": "Revisão: uma conta (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Revisão: os saltos e o número (@path, @value)",
+          "default": "@path; disse @value"
+        },
+        {
+          "label": "Revisão: pontos (@got, @of)",
+          "default": "@got de @of"
+        },
+        {
+          "label": "Reta livre: o fim (@max)",
+          "default": "Até @max"
+        },
+        {
+          "label": "Reta livre: como funciona",
+          "default": "Toque um número para ir até ele. Salte com os botões, ou desenhe o salto com o dedo."
+        },
+        {
+          "label": "Reta livre: onde está a peça (@position)",
+          "default": "Você está no @position."
+        }
+      ]
+    }
+  ]
+}

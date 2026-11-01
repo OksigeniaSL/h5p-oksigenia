@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "What to practise",
+      "description": "With «Choose when starting», whoever plays picks it on the first screen: handy in the middle of a class.",
+      "options": [
+        {
+          "label": "Choose when starting"
+        },
+        {
+          "label": "Addition and subtraction up to 20"
+        },
+        {
+          "label": "Addition and subtraction up to 100"
+        },
+        {
+          "label": "Times tables"
+        },
+        {
+          "label": "Whole numbers up to 1000"
+        },
+        {
+          "label": "Fractions"
+        },
+        {
+          "label": "Free line, with no points"
+        }
+      ]
+    },
+    {
+      "label": "Rounds in a game"
+    },
+    {
+      "label": "Fine tuning",
+      "description": "Optional. What you fill in here makes a single level with those numbers. The rest can stay empty.",
+      "fields": [
+        {
+          "label": "End of the line",
+          "description": "For sums and for placing numbers: 30, 200, 1000…"
+        },
+        {
+          "label": "Jumps for sums and subtractions",
+          "description": "For example: +1 +5 +10 -1"
+        },
+        {
+          "label": "Times tables",
+          "description": "For example: 7, 8, 9"
+        },
+        {
+          "label": "Denominators of the fractions",
+          "description": "For example: 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Behaviour settings",
+      "fields": [
+        {
+          "label": "Play sounds",
+          "description": "Players can turn them down or off."
+        },
+        {
+          "label": "Offer to play again"
+        }
+      ]
+    },
+    {
+      "label": "Texts and translations",
+      "fields": [
+        {
+          "label": "Start button",
+          "default": "Start"
+        },
+        {
+          "label": "Heading of the choices",
+          "default": "What do you want to practise?"
+        },
+        {
+          "label": "Choice: sums up to 20",
+          "default": "Addition and subtraction up to 20"
+        },
+        {
+          "label": "Choice: sums up to 100",
+          "default": "Addition and subtraction up to 100"
+        },
+        {
+          "label": "Choice: times tables",
+          "default": "Times tables"
+        },
+        {
+          "label": "Choice: whole numbers",
+          "default": "Whole numbers up to 1000"
+        },
+        {
+          "label": "Choice: fractions",
+          "default": "Fractions"
+        },
+        {
+          "label": "Choice: free line",
+          "default": "Free line, with no points"
+        },
+        {
+          "label": "Summary (@count)",
+          "default": "Rounds: @count. No clock."
+        },
+        {
+          "label": "How to play sums",
+          "default": "Jump along the line with the buttons, or draw the jump with your finger."
+        },
+        {
+          "label": "How to play times tables",
+          "default": "Choose how many jumps it takes to land on the flag."
+        },
+        {
+          "label": "How to place numbers",
+          "default": "Tap the line where you think the number is."
+        },
+        {
+          "label": "Round (@round, @total)",
+          "default": "Round @round of @total"
+        },
+        {
+          "label": "Points (@count)",
+          "default": "Points: @count"
+        },
+        {
+          "label": "First level",
+          "default": "River Path"
+        },
+        {
+          "label": "Second level",
+          "default": "Stone Bridge"
+        },
+        {
+          "label": "Third level",
+          "default": "Mountain Peak"
+        },
+        {
+          "label": "Moving on (@place)",
+          "default": "Three in a row: on to @place."
+        },
+        {
+          "label": "Mute button",
+          "default": "Mute"
+        },
+        {
+          "label": "Sound on button",
+          "default": "Sound on"
+        },
+        {
+          "label": "Announced when muted",
+          "default": "Sound off"
+        },
+        {
+          "label": "Announced when unmuted",
+          "default": "Sound on"
+        },
+        {
+          "label": "Volume control",
+          "default": "Volume"
+        },
+        {
+          "label": "Hint: get to the flag",
+          "default": "Get to the flag in as few jumps as you can."
+        },
+        {
+          "label": "Hint: make the sum",
+          "default": "Make the jumps, on the buttons or with your finger."
+        },
+        {
+          "label": "Asking where they landed",
+          "default": "Where did you land?"
+        },
+        {
+          "label": "Hint: how many jumps (@size)",
+          "default": "How many jumps of @size to land on the flag?"
+        },
+        {
+          "label": "Hint: place the number",
+          "default": "Where is it? Tap the line and press «Here»."
+        },
+        {
+          "label": "Name of a button: forward (@count)",
+          "default": "Jump forward @count"
+        },
+        {
+          "label": "Name of a button: back (@count)",
+          "default": "Jump back @count"
+        },
+        {
+          "label": "Name of a button: how many (@count)",
+          "default": "Jumps: @count"
+        },
+        {
+          "label": "Start again button",
+          "default": "Start again"
+        },
+        {
+          "label": "Do it together button",
+          "default": "Let's do it together"
+        },
+        {
+          "label": "Undo button",
+          "default": "Undo"
+        },
+        {
+          "label": "Where the player is (@position, @target)",
+          "default": "You are on @position. The flag is on @target."
+        },
+        {
+          "label": "Where the player is, in a sum (@position, @done, @amount)",
+          "default": "You are on @position. You have jumped @done of @amount."
+        },
+        {
+          "label": "Went past the sum (@position, @amount)",
+          "default": "You are on @position: that is more than @amount. Start again."
+        },
+        {
+          "label": "A jump the wrong way",
+          "default": "That jump goes the other way."
+        },
+        {
+          "label": "Got there in the fewest jumps",
+          "default": "In the fewest jumps! 2 points."
+        },
+        {
+          "label": "Got there (@used, @best)",
+          "default": "You made it in @used jumps. It could be done in @best. 1 point."
+        },
+        {
+          "label": "Got there together",
+          "default": "Now you have seen one way. No points this time."
+        },
+        {
+          "label": "Right number (@target)",
+          "default": "Yes, @target! 2 points."
+        },
+        {
+          "label": "Wrong number (@target)",
+          "default": "You landed on @target. Your jumps were right: 1 point."
+        },
+        {
+          "label": "Sum done together (@target)",
+          "default": "You landed on @target. No points this time."
+        },
+        {
+          "label": "Right at the first try (@times, @size, @target)",
+          "default": "Right! @times × @size = @target. 1 point."
+        },
+        {
+          "label": "Right at a later try (@times, @size, @target)",
+          "default": "There it is! @times × @size = @target."
+        },
+        {
+          "label": "Wrong try (@count, @landed, @target)",
+          "default": "Jumps: @count. You landed on @landed, and the flag is on @target."
+        },
+        {
+          "label": "Showing it (@times, @size, @target)",
+          "default": "Look: @times × @size = @target."
+        },
+        {
+          "label": "Name of the line (@max, @number)",
+          "default": "Number line from 0 to @max. Place @number with the arrow keys."
+        },
+        {
+          "label": "The line, before placing",
+          "default": "Not placed yet"
+        },
+        {
+          "label": "Place it button",
+          "default": "Here"
+        },
+        {
+          "label": "Very close",
+          "default": "Very close! 2 points."
+        },
+        {
+          "label": "Close",
+          "default": "Close. 1 point."
+        },
+        {
+          "label": "Far",
+          "default": "Look where it was."
+        },
+        {
+          "label": "Next button",
+          "default": "Next"
+        },
+        {
+          "label": "Button after the last round",
+          "default": "See the result"
+        },
+        {
+          "label": "Message for all the points",
+          "default": "All of them!"
+        },
+        {
+          "label": "Message for most of the points",
+          "default": "Great job!"
+        },
+        {
+          "label": "Message for half of the points",
+          "default": "Well done!"
+        },
+        {
+          "label": "Message for fewer points",
+          "default": "Keep practising!"
+        },
+        {
+          "label": "Result (@score, @total)",
+          "default": "@score of @total points"
+        },
+        {
+          "label": "Play again button",
+          "default": "Play again"
+        },
+        {
+          "label": "Button to choose again",
+          "default": "Practise something else"
+        },
+        {
+          "label": "Review: get to the flag (@start, @target)",
+          "default": "From @start to @target"
+        },
+        {
+          "label": "Review: the jumps (@path, @used, @best)",
+          "default": "@path (jumps: @used; it could be done in @best)"
+        },
+        {
+          "label": "Review: how many jumps (@size, @target)",
+          "default": "Jumps of @size up to @target"
+        },
+        {
+          "label": "Review: place a number (@number)",
+          "default": "Place @number"
+        },
+        {
+          "label": "Review: where it was placed (@value)",
+          "default": "Placed at @value"
+        },
+        {
+          "label": "Review: a sum (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Review: the jumps and the number (@path, @value)",
+          "default": "@path; said @value"
+        },
+        {
+          "label": "Review: points (@got, @of)",
+          "default": "@got of @of"
+        },
+        {
+          "label": "Free line: the end of the line (@max)",
+          "default": "Up to @max"
+        },
+        {
+          "label": "Free line: how it works",
+          "default": "Tap a number to go there. Jump with the buttons, or draw the jump with your finger."
+        },
+        {
+          "label": "Free line: where the piece is (@position)",
+          "default": "You are on @position."
+        }
+      ]
+    }
+  ]
+}

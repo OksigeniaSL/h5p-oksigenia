@@ -1,0 +1,8 @@
+{
+  "topic": "choose",
+  "rounds": 6,
+  "behaviour": {
+    "enableSound": true,
+    "enableRetry": true
+  }
+}

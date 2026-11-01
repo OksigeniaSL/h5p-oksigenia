@@ -1,6 +1,6 @@
 <?php
 // Throwaway test data: a course, an example student and an H5P activity with the given package.
-// Run inside the container as www-data: php setup.php <package.h5p> <grademethod>
+// Run inside the container as www-data: php setup.php <package.h5p> <grademethod> [<name of the activity>]
 //
 // @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
@@ -11,7 +11,7 @@ require_once($CFG->dirroot . '/course/modlib.php');
 require_once($CFG->dirroot . '/user/lib.php');
 require_once($CFG->libdir . '/enrollib.php');
 
-[, $package, $grademethod] = $argv + [null, null, 3];
+[, $package, $grademethod, $name] = $argv + [null, null, 3, 'Rueda de letras'];
 $admin = get_admin();
 \core\session\manager::set_user($admin);
 
@@ -35,7 +35,7 @@ get_file_storage()->create_file_from_pathname(['contextid' => context_user::inst
     'filearea' => 'draft', 'itemid' => $draftid, 'filepath' => '/', 'filename' => basename($package)], $package);
 $cm = create_module((object) [
     'modulename' => 'h5pactivity', 'module' => $DB->get_field('modules', 'id', ['name' => 'h5pactivity']),
-    'course' => $course->id, 'section' => 1, 'visible' => 1, 'name' => 'Rueda de letras',
+    'course' => $course->id, 'section' => 1, 'visible' => 1, 'name' => $name,
     'introeditor' => ['text' => '', 'format' => FORMAT_HTML, 'itemid' => 0],
     'packagefile' => $draftid, 'grade' => 10, 'grademethod' => (int) $grademethod,
     'enabletracking' => 1, 'displayoptions' => 0, 'reviewmode' => 1,

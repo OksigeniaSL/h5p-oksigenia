@@ -5,6 +5,9 @@
 // @license   MIT
 
 const STORAGE_KEY = 'h5p-oksigenia-muted';
+const VOLUME_KEY = 'h5p-oksigenia-volume';
+/** Low from the start: a classroom can have thirty of these sounding at once. */
+const DEFAULT_VOLUME = 0.25;
 
 /** A soft bell: the fundamental and three partials that die out sooner. */
 function bell(a, out, f, when, vol, dur) {
@@ -78,10 +81,16 @@ export class Sounds {
   constructor({ enabled = true } = {}) {
     this.enabled = enabled;
     this.muted = false;
+    /** @type {number} From 0 to 1; the same for every game of this device, because it is set once. */
+    this.volume = DEFAULT_VOLUME;
     try {
       this.muted = window.localStorage.getItem(STORAGE_KEY) === '1';
+      const saved = Number.parseFloat(window.localStorage.getItem(VOLUME_KEY));
+      if (saved >= 0 && saved <= 1) {
+        this.volume = saved;
+      }
     } catch (e) {
-      // No storage (private mode, blocked): the sound starts on.
+      // No storage (private mode, blocked): the sound starts on, and low.
     }
     /** @type {AudioContext|null} */
     this.context = null;
@@ -103,6 +112,19 @@ export class Sounds {
     }
   }
 
+  /** @param {number} volume From 0 to 1. */
+  setVolume(volume) {
+    this.volume = Math.max(0, Math.min(1, volume));
+    if (this.master) {
+      this.master.gain.value = this.volume;
+    }
+    try {
+      window.localStorage.setItem(VOLUME_KEY, String(this.volume));
+    } catch (e) {
+      // Not remembered, but it still applies to this game.
+    }
+  }
+
   /** Browsers only let a page sound after a gesture: call this from a click or a key. */
   wake() {
     if (!this.on) {
@@ -115,8 +137,8 @@ export class Sounds {
     if (!this.context) {
       this.context = new AC();
       const master = this.context.createGain();
-      // Low from the start: a classroom can have thirty of these sounding at once.
-      master.gain.value = 0.25;
+      master.gain.value = this.volume;
+      this.master = master;
       const compressor = this.context.createDynamicsCompressor();
       master.connect(compressor);
       compressor.connect(this.context.destination);
@@ -140,4 +162,33 @@ export class Sounds {
       // A device without audio output: the game goes on in silence.
     }
   }
+}
+
+/**
+ * The volume control that goes next to the speaker button. Moving it brings the sound back if it was muted.
+ * @param {Sounds} sounds
+ * @param {string} label The name screen readers give it.
+ * @param {string} className
+ * @param {() => void} onChange Called when it changes, to repaint the speaker.
+ * @returns {HTMLInputElement}
+ */
+export function volumeSlider(sounds, label, className, onChange) {
+  const input = document.createElement('input');
+  input.type = 'range';
+  input.className = className;
+  input.min = '0';
+  input.max = '1';
+  input.step = '0.05';
+  input.value = String(sounds.volume);
+  input.setAttribute('aria-label', label);
+  input.addEventListener('input', () => {
+    sounds.setVolume(Number(input.value));
+    if (sounds.muted) {
+      sounds.setMuted(false);
+    }
+    onChange();
+  });
+  // One sound to hear how loud it is, when the player lets go.
+  input.addEventListener('change', () => sounds.play('tick'));
+  return input;
 }

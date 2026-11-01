@@ -179,6 +179,10 @@
           "default": "Som desativado."
         },
         {
+          "label": "Controle de volume",
+          "default": "Volume"
+        },
+        {
           "label": "Som ativado de novo (para leitores de tela)",
           "default": "Som ativado."
         },

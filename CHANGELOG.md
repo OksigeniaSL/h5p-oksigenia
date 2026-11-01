@@ -2,6 +2,11 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Number Line 1.0.0 (not released yet)
+
+First release of `H5P.NumberLine`: addition, subtraction, times tables, whole numbers and fractions as jumps on a number
+line. The jumps are the answer, not a question before them. Each game makes up its own numbers.
+
 ## Alphabet Wheel 1.0.2 (1 November 2026)
 
 - The next step stays in view. After «Start», the clue and the answer field could stay below the edge of the window, in
@@ -9,7 +14,8 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
   a phone, and the game brings the field into view.
 - The end screen has its buttons before the list of letters, not after it.
 - It follows the dark mode of the page around it, as Moodle 5.3 can have it, and changes along with it.
-- The sounds start lower, for classrooms with many devices at once.
+- The sounds start lower, for classrooms with many devices at once, and there is a volume control next to the speaker,
+  the same for every game of the device.
 - Double taps on the buttons do not zoom on touch screens.
 - The text kept for screen readers is hidden with `clip-path`, instead of the deprecated `clip`.
 

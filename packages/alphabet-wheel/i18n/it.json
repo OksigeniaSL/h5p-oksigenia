@@ -3,6 +3,8 @@
     "language": "it"
   },
   "strings": {
+    "Volume control": "Controllo del volume",
+    "Volume": "Volume",
     "Letters": "Lettere",
     "One item per letter, in the order the wheel goes round.": "Un elemento per lettera, nell'ordine in cui gira la ruota.",
     "letter": "lettera",

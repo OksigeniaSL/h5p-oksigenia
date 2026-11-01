@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "Was wird geübt",
+      "description": "Mit „Beim Start wählen“ entscheidet die spielende Person auf dem ersten Bildschirm: praktisch mitten im Unterricht.",
+      "options": [
+        {
+          "label": "Beim Start wählen"
+        },
+        {
+          "label": "Addition und Subtraktion bis 20"
+        },
+        {
+          "label": "Addition und Subtraktion bis 100"
+        },
+        {
+          "label": "Einmaleins"
+        },
+        {
+          "label": "Zahlen bis 1000"
+        },
+        {
+          "label": "Brüche"
+        },
+        {
+          "label": "Freier Zahlenstrahl, ohne Punkte"
+        }
+      ]
+    },
+    {
+      "label": "Runden pro Spiel"
+    },
+    {
+      "label": "Feineinstellung",
+      "description": "Optional. Was du hier einträgst, ergibt eine einzige Stufe mit diesen Zahlen. Der Rest kann leer bleiben.",
+      "fields": [
+        {
+          "label": "Ende des Zahlenstrahls",
+          "description": "Für Rechnungen und zum Platzieren von Zahlen: 30, 200, 1000 …"
+        },
+        {
+          "label": "Sprünge für Addition und Subtraktion",
+          "description": "Zum Beispiel: +1 +5 +10 -1"
+        },
+        {
+          "label": "Einmaleins",
+          "description": "Zum Beispiel: 7, 8, 9"
+        },
+        {
+          "label": "Nenner der Brüche",
+          "description": "Zum Beispiel: 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Verhalten",
+      "fields": [
+        {
+          "label": "Mit Tönen",
+          "description": "Die Spielenden können sie leiser stellen oder ausschalten."
+        },
+        {
+          "label": "Erneutes Spielen anbieten"
+        }
+      ]
+    },
+    {
+      "label": "Texte und Übersetzungen",
+      "fields": [
+        {
+          "label": "Schaltfläche Start",
+          "default": "Start"
+        },
+        {
+          "label": "Überschrift der Auswahl",
+          "default": "Was möchtest du üben?"
+        },
+        {
+          "label": "Auswahl: Rechnen bis 20",
+          "default": "Addition und Subtraktion bis 20"
+        },
+        {
+          "label": "Auswahl: Rechnen bis 100",
+          "default": "Addition und Subtraktion bis 100"
+        },
+        {
+          "label": "Auswahl: Einmaleins",
+          "default": "Einmaleins"
+        },
+        {
+          "label": "Auswahl: Zahlen",
+          "default": "Zahlen bis 1000"
+        },
+        {
+          "label": "Auswahl: Brüche",
+          "default": "Brüche"
+        },
+        {
+          "label": "Auswahl: freier Zahlenstrahl",
+          "default": "Freier Zahlenstrahl, ohne Punkte"
+        },
+        {
+          "label": "Zusammenfassung (@count)",
+          "default": "Runden: @count. Ohne Uhr."
+        },
+        {
+          "label": "So spielst du das Rechnen",
+          "default": "Springe mit den Schaltflächen über den Zahlenstrahl oder zeichne den Sprung mit dem Finger."
+        },
+        {
+          "label": "So spielst du das Einmaleins",
+          "default": "Wähle, wie viele Sprünge du brauchst, um auf der Fahne zu landen."
+        },
+        {
+          "label": "So platzierst du Zahlen",
+          "default": "Tippe dort auf den Zahlenstrahl, wo du die Zahl vermutest."
+        },
+        {
+          "label": "Runde (@round, @total)",
+          "default": "Runde @round von @total"
+        },
+        {
+          "label": "Punkte (@count)",
+          "default": "Punkte: @count"
+        },
+        {
+          "label": "Erste Stufe",
+          "default": "Flussweg"
+        },
+        {
+          "label": "Zweite Stufe",
+          "default": "Steinbrücke"
+        },
+        {
+          "label": "Dritte Stufe",
+          "default": "Berggipfel"
+        },
+        {
+          "label": "Nächste Stufe (@place)",
+          "default": "Drei hintereinander: weiter zu @place."
+        },
+        {
+          "label": "Schaltfläche zum Stummschalten",
+          "default": "Ton aus"
+        },
+        {
+          "label": "Schaltfläche zum Einschalten des Tons",
+          "default": "Ton an"
+        },
+        {
+          "label": "Ansage beim Stummschalten",
+          "default": "Ton aus"
+        },
+        {
+          "label": "Ansage beim Einschalten",
+          "default": "Ton an"
+        },
+        {
+          "label": "Lautstärkeregler",
+          "default": "Lautstärke"
+        },
+        {
+          "label": "Hinweis: zur Fahne",
+          "default": "Erreiche die Fahne mit möglichst wenigen Sprüngen."
+        },
+        {
+          "label": "Hinweis: die Rechnung",
+          "default": "Mache die Sprünge, mit den Schaltflächen oder mit dem Finger."
+        },
+        {
+          "label": "Frage, wo man gelandet ist",
+          "default": "Wo bist du gelandet?"
+        },
+        {
+          "label": "Hinweis: wie viele Sprünge (@size)",
+          "default": "Wie viele Sprünge von @size, um auf der Fahne zu landen?"
+        },
+        {
+          "label": "Hinweis: die Zahl platzieren",
+          "default": "Wo ist sie? Tippe auf den Zahlenstrahl und drücke „Hier“."
+        },
+        {
+          "label": "Name einer Schaltfläche: vorwärts (@count)",
+          "default": "@count vorwärts springen"
+        },
+        {
+          "label": "Name einer Schaltfläche: zurück (@count)",
+          "default": "@count zurück springen"
+        },
+        {
+          "label": "Name einer Schaltfläche: wie viele (@count)",
+          "default": "Sprünge: @count"
+        },
+        {
+          "label": "Schaltfläche Neu beginnen",
+          "default": "Neu beginnen"
+        },
+        {
+          "label": "Schaltfläche Gemeinsam machen",
+          "default": "Machen wir es gemeinsam"
+        },
+        {
+          "label": "Schaltfläche Rückgängig",
+          "default": "Rückgängig"
+        },
+        {
+          "label": "Wo man steht (@position, @target)",
+          "default": "Du bist auf @position. Die Fahne steht auf @target."
+        },
+        {
+          "label": "Wo man steht, bei einer Rechnung (@position, @done, @amount)",
+          "default": "Du bist auf @position. Du hast @done von @amount geschafft."
+        },
+        {
+          "label": "Zu weit gesprungen (@position, @amount)",
+          "default": "Du bist auf @position: Das ist mehr als @amount. Beginne neu."
+        },
+        {
+          "label": "Ein Sprung in die falsche Richtung",
+          "default": "Dieser Sprung geht in die andere Richtung."
+        },
+        {
+          "label": "Mit den wenigsten Sprüngen angekommen",
+          "default": "Mit den wenigsten Sprüngen! 2 Punkte."
+        },
+        {
+          "label": "Angekommen (@used, @best)",
+          "default": "Du hast es in @used Sprüngen geschafft. Es geht auch in @best. 1 Punkt."
+        },
+        {
+          "label": "Gemeinsam angekommen",
+          "default": "Jetzt hast du einen Weg gesehen. Diesmal keine Punkte."
+        },
+        {
+          "label": "Richtige Zahl (@target)",
+          "default": "Ja, @target! 2 Punkte."
+        },
+        {
+          "label": "Falsche Zahl (@target)",
+          "default": "Du bist auf @target gelandet. Deine Sprünge waren richtig: 1 Punkt."
+        },
+        {
+          "label": "Gemeinsam gerechnet (@target)",
+          "default": "Du bist auf @target gelandet. Diesmal keine Punkte."
+        },
+        {
+          "label": "Beim ersten Versuch richtig (@times, @size, @target)",
+          "default": "Richtig! @times × @size = @target. 1 Punkt."
+        },
+        {
+          "label": "Später richtig (@times, @size, @target)",
+          "default": "Da ist es! @times × @size = @target."
+        },
+        {
+          "label": "Falscher Versuch (@count, @landed, @target)",
+          "default": "Sprünge: @count. Du bist auf @landed gelandet, und die Fahne steht auf @target."
+        },
+        {
+          "label": "Wird gezeigt (@times, @size, @target)",
+          "default": "Schau: @times × @size = @target."
+        },
+        {
+          "label": "Name des Zahlenstrahls (@max, @number)",
+          "default": "Zahlenstrahl von 0 bis @max. Platziere @number mit den Pfeiltasten."
+        },
+        {
+          "label": "Der Zahlenstrahl vor dem Platzieren",
+          "default": "Noch nicht platziert"
+        },
+        {
+          "label": "Schaltfläche zum Platzieren",
+          "default": "Hier"
+        },
+        {
+          "label": "Sehr nah",
+          "default": "Sehr nah! 2 Punkte."
+        },
+        {
+          "label": "Nah",
+          "default": "Nah dran. 1 Punkt."
+        },
+        {
+          "label": "Weit weg",
+          "default": "Schau, wo es war."
+        },
+        {
+          "label": "Schaltfläche Weiter",
+          "default": "Weiter"
+        },
+        {
+          "label": "Schaltfläche nach der letzten Runde",
+          "default": "Ergebnis ansehen"
+        },
+        {
+          "label": "Meldung bei allen Punkten",
+          "default": "Alle!"
+        },
+        {
+          "label": "Meldung bei den meisten Punkten",
+          "default": "Sehr gut!"
+        },
+        {
+          "label": "Meldung bei der Hälfte der Punkte",
+          "default": "Gut gemacht!"
+        },
+        {
+          "label": "Meldung bei weniger Punkten",
+          "default": "Übe weiter!"
+        },
+        {
+          "label": "Ergebnis (@score, @total)",
+          "default": "@score von @total Punkten"
+        },
+        {
+          "label": "Schaltfläche Nochmal spielen",
+          "default": "Nochmal spielen"
+        },
+        {
+          "label": "Schaltfläche für eine neue Auswahl",
+          "default": "Etwas anderes üben"
+        },
+        {
+          "label": "Rückblick: zur Fahne (@start, @target)",
+          "default": "Von @start bis @target"
+        },
+        {
+          "label": "Rückblick: die Sprünge (@path, @used, @best)",
+          "default": "@path (Sprünge: @used; es geht auch in @best)"
+        },
+        {
+          "label": "Rückblick: wie viele Sprünge (@size, @target)",
+          "default": "Sprünge von @size bis @target"
+        },
+        {
+          "label": "Rückblick: eine Zahl platzieren (@number)",
+          "default": "@number platzieren"
+        },
+        {
+          "label": "Rückblick: wo es platziert wurde (@value)",
+          "default": "Platziert bei @value"
+        },
+        {
+          "label": "Rückblick: eine Rechnung (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Rückblick: Sprünge und Zahl (@path, @value)",
+          "default": "@path; Antwort @value"
+        },
+        {
+          "label": "Rückblick: Punkte (@got, @of)",
+          "default": "@got von @of"
+        },
+        {
+          "label": "Freier Zahlenstrahl: das Ende (@max)",
+          "default": "Bis @max"
+        },
+        {
+          "label": "Freier Zahlenstrahl: so geht's",
+          "default": "Tippe auf eine Zahl, um dorthin zu gehen. Springe mit den Schaltflächen oder zeichne den Sprung mit dem Finger."
+        },
+        {
+          "label": "Freier Zahlenstrahl: wo die Figur steht (@position)",
+          "default": "Du bist auf @position."
+        }
+      ]
+    }
+  ]
+}

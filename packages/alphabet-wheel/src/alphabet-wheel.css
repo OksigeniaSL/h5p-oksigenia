@@ -354,6 +354,19 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   font-weight: 700;
 }
 
+.h5p-alphabet-wheel .aw-sound-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.h5p-alphabet-wheel .aw-volume {
+  width: 5em;
+  min-height: 2.75rem;
+  margin: 0;
+  accent-color: var(--aw-main);
+}
+
 .h5p-alphabet-wheel .aw-sound {
   min-width: 2.75rem;
   padding-inline: 0.5em;

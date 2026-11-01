@@ -1,0 +1,24 @@
+{
+  "title": "Example number line",
+  "language": "en",
+  "defaultLanguage": "en",
+  "mainLibrary": "H5P.NumberLine",
+  "embedTypes": [
+    "iframe"
+  ],
+  "license": "CC BY",
+  "licenseVersion": "4.0",
+  "authors": [
+    {
+      "name": "Oksigenia",
+      "role": "Author"
+    }
+  ],
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.NumberLine",
+      "majorVersion": "1",
+      "minorVersion": "0"
+    }
+  ]
+}

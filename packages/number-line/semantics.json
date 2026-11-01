@@ -1,0 +1,642 @@
+[
+  {
+    "name": "topic",
+    "type": "select",
+    "label": "What to practise",
+    "importance": "high",
+    "description": "With «Choose when starting», whoever plays picks it on the first screen: handy in the middle of a class.",
+    "options": [
+      {
+        "value": "choose",
+        "label": "Choose when starting"
+      },
+      {
+        "value": "add20",
+        "label": "Addition and subtraction up to 20"
+      },
+      {
+        "value": "add100",
+        "label": "Addition and subtraction up to 100"
+      },
+      {
+        "value": "tables",
+        "label": "Times tables"
+      },
+      {
+        "value": "place1000",
+        "label": "Whole numbers up to 1000"
+      },
+      {
+        "value": "fractions",
+        "label": "Fractions"
+      },
+      {
+        "value": "free",
+        "label": "Free line, with no points"
+      }
+    ],
+    "default": "choose"
+  },
+  {
+    "name": "rounds",
+    "type": "number",
+    "label": "Rounds in a game",
+    "importance": "medium",
+    "min": 1,
+    "max": 30,
+    "default": 6
+  },
+  {
+    "name": "tuning",
+    "type": "group",
+    "label": "Fine tuning",
+    "importance": "low",
+    "optional": true,
+    "description": "Optional. What you fill in here makes a single level with those numbers. The rest can stay empty.",
+    "fields": [
+      {
+        "name": "maxNumber",
+        "type": "number",
+        "label": "End of the line",
+        "importance": "low",
+        "optional": true,
+        "min": 1,
+        "description": "For sums and for placing numbers: 30, 200, 1000…"
+      },
+      {
+        "name": "jumps",
+        "type": "text",
+        "label": "Jumps for sums and subtractions",
+        "importance": "low",
+        "optional": true,
+        "description": "For example: +1 +5 +10 -1"
+      },
+      {
+        "name": "tables",
+        "type": "text",
+        "label": "Times tables",
+        "importance": "low",
+        "optional": true,
+        "description": "For example: 7, 8, 9"
+      },
+      {
+        "name": "denominators",
+        "type": "text",
+        "label": "Denominators of the fractions",
+        "importance": "low",
+        "optional": true,
+        "description": "For example: 2, 4, 8"
+      }
+    ]
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Behaviour settings",
+    "importance": "low",
+    "fields": [
+      {
+        "name": "enableSound",
+        "type": "boolean",
+        "label": "Play sounds",
+        "importance": "low",
+        "default": true,
+        "description": "Players can turn them down or off."
+      },
+      {
+        "name": "enableRetry",
+        "type": "boolean",
+        "label": "Offer to play again",
+        "importance": "low",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "label": "Texts and translations",
+    "importance": "low",
+    "common": true,
+    "fields": [
+      {
+        "name": "start",
+        "type": "text",
+        "label": "Start button",
+        "importance": "low",
+        "default": "Start"
+      },
+      {
+        "name": "chooseTitle",
+        "type": "text",
+        "label": "Heading of the choices",
+        "importance": "low",
+        "default": "What do you want to practise?"
+      },
+      {
+        "name": "topicAdd20",
+        "type": "text",
+        "label": "Choice: sums up to 20",
+        "importance": "low",
+        "default": "Addition and subtraction up to 20"
+      },
+      {
+        "name": "topicAdd100",
+        "type": "text",
+        "label": "Choice: sums up to 100",
+        "importance": "low",
+        "default": "Addition and subtraction up to 100"
+      },
+      {
+        "name": "topicTables",
+        "type": "text",
+        "label": "Choice: times tables",
+        "importance": "low",
+        "default": "Times tables"
+      },
+      {
+        "name": "topicPlace",
+        "type": "text",
+        "label": "Choice: whole numbers",
+        "importance": "low",
+        "default": "Whole numbers up to 1000"
+      },
+      {
+        "name": "topicFractions",
+        "type": "text",
+        "label": "Choice: fractions",
+        "importance": "low",
+        "default": "Fractions"
+      },
+      {
+        "name": "topicFree",
+        "type": "text",
+        "label": "Choice: free line",
+        "importance": "low",
+        "default": "Free line, with no points"
+      },
+      {
+        "name": "introSummary",
+        "type": "text",
+        "label": "Summary (@count)",
+        "importance": "low",
+        "default": "Rounds: @count. No clock."
+      },
+      {
+        "name": "introSums",
+        "type": "text",
+        "label": "How to play sums",
+        "importance": "low",
+        "default": "Jump along the line with the buttons, or draw the jump with your finger."
+      },
+      {
+        "name": "introTables",
+        "type": "text",
+        "label": "How to play times tables",
+        "importance": "low",
+        "default": "Choose how many jumps it takes to land on the flag."
+      },
+      {
+        "name": "introPlace",
+        "type": "text",
+        "label": "How to place numbers",
+        "importance": "low",
+        "default": "Tap the line where you think the number is."
+      },
+      {
+        "name": "round",
+        "type": "text",
+        "label": "Round (@round, @total)",
+        "importance": "low",
+        "default": "Round @round of @total"
+      },
+      {
+        "name": "points",
+        "type": "text",
+        "label": "Points (@count)",
+        "importance": "low",
+        "default": "Points: @count"
+      },
+      {
+        "name": "levelOne",
+        "type": "text",
+        "label": "First level",
+        "importance": "low",
+        "default": "River Path"
+      },
+      {
+        "name": "levelTwo",
+        "type": "text",
+        "label": "Second level",
+        "importance": "low",
+        "default": "Stone Bridge"
+      },
+      {
+        "name": "levelThree",
+        "type": "text",
+        "label": "Third level",
+        "importance": "low",
+        "default": "Mountain Peak"
+      },
+      {
+        "name": "levelUp",
+        "type": "text",
+        "label": "Moving on (@place)",
+        "importance": "low",
+        "default": "Three in a row: on to @place."
+      },
+      {
+        "name": "soundOff",
+        "type": "text",
+        "label": "Mute button",
+        "importance": "low",
+        "default": "Mute"
+      },
+      {
+        "name": "soundOn",
+        "type": "text",
+        "label": "Sound on button",
+        "importance": "low",
+        "default": "Sound on"
+      },
+      {
+        "name": "soundMuted",
+        "type": "text",
+        "label": "Announced when muted",
+        "importance": "low",
+        "default": "Sound off"
+      },
+      {
+        "name": "soundUnmuted",
+        "type": "text",
+        "label": "Announced when unmuted",
+        "importance": "low",
+        "default": "Sound on"
+      },
+      {
+        "name": "volume",
+        "type": "text",
+        "label": "Volume control",
+        "importance": "low",
+        "default": "Volume"
+      },
+      {
+        "name": "goalHint",
+        "type": "text",
+        "label": "Hint: get to the flag",
+        "importance": "low",
+        "default": "Get to the flag in as few jumps as you can."
+      },
+      {
+        "name": "landHint",
+        "type": "text",
+        "label": "Hint: make the sum",
+        "importance": "low",
+        "default": "Make the jumps, on the buttons or with your finger."
+      },
+      {
+        "name": "landAsk",
+        "type": "text",
+        "label": "Asking where they landed",
+        "importance": "low",
+        "default": "Where did you land?"
+      },
+      {
+        "name": "exactHint",
+        "type": "text",
+        "label": "Hint: how many jumps (@size)",
+        "importance": "low",
+        "default": "How many jumps of @size to land on the flag?"
+      },
+      {
+        "name": "placeHint",
+        "type": "text",
+        "label": "Hint: place the number",
+        "importance": "low",
+        "default": "Where is it? Tap the line and press «Here»."
+      },
+      {
+        "name": "jumpForward",
+        "type": "text",
+        "label": "Name of a button: forward (@count)",
+        "importance": "low",
+        "default": "Jump forward @count"
+      },
+      {
+        "name": "jumpBack",
+        "type": "text",
+        "label": "Name of a button: back (@count)",
+        "importance": "low",
+        "default": "Jump back @count"
+      },
+      {
+        "name": "countJumps",
+        "type": "text",
+        "label": "Name of a button: how many (@count)",
+        "importance": "low",
+        "default": "Jumps: @count"
+      },
+      {
+        "name": "startAgain",
+        "type": "text",
+        "label": "Start again button",
+        "importance": "low",
+        "default": "Start again"
+      },
+      {
+        "name": "together",
+        "type": "text",
+        "label": "Do it together button",
+        "importance": "low",
+        "default": "Let's do it together"
+      },
+      {
+        "name": "undo",
+        "type": "text",
+        "label": "Undo button",
+        "importance": "low",
+        "default": "Undo"
+      },
+      {
+        "name": "youAreAt",
+        "type": "text",
+        "label": "Where the player is (@position, @target)",
+        "importance": "low",
+        "default": "You are on @position. The flag is on @target."
+      },
+      {
+        "name": "landNow",
+        "type": "text",
+        "label": "Where the player is, in a sum (@position, @done, @amount)",
+        "importance": "low",
+        "default": "You are on @position. You have jumped @done of @amount."
+      },
+      {
+        "name": "landOver",
+        "type": "text",
+        "label": "Went past the sum (@position, @amount)",
+        "importance": "low",
+        "default": "You are on @position: that is more than @amount. Start again."
+      },
+      {
+        "name": "landWrongWay",
+        "type": "text",
+        "label": "A jump the wrong way",
+        "importance": "low",
+        "default": "That jump goes the other way."
+      },
+      {
+        "name": "goalBest",
+        "type": "text",
+        "label": "Got there in the fewest jumps",
+        "importance": "low",
+        "default": "In the fewest jumps! 2 points."
+      },
+      {
+        "name": "goalReached",
+        "type": "text",
+        "label": "Got there (@used, @best)",
+        "importance": "low",
+        "default": "You made it in @used jumps. It could be done in @best. 1 point."
+      },
+      {
+        "name": "goalTogether",
+        "type": "text",
+        "label": "Got there together",
+        "importance": "low",
+        "default": "Now you have seen one way. No points this time."
+      },
+      {
+        "name": "landRight",
+        "type": "text",
+        "label": "Right number (@target)",
+        "importance": "low",
+        "default": "Yes, @target! 2 points."
+      },
+      {
+        "name": "landWrong",
+        "type": "text",
+        "label": "Wrong number (@target)",
+        "importance": "low",
+        "default": "You landed on @target. Your jumps were right: 1 point."
+      },
+      {
+        "name": "landTogether",
+        "type": "text",
+        "label": "Sum done together (@target)",
+        "importance": "low",
+        "default": "You landed on @target. No points this time."
+      },
+      {
+        "name": "exactRight",
+        "type": "text",
+        "label": "Right at the first try (@times, @size, @target)",
+        "importance": "low",
+        "default": "Right! @times × @size = @target. 1 point."
+      },
+      {
+        "name": "exactLater",
+        "type": "text",
+        "label": "Right at a later try (@times, @size, @target)",
+        "importance": "low",
+        "default": "There it is! @times × @size = @target."
+      },
+      {
+        "name": "exactWrong",
+        "type": "text",
+        "label": "Wrong try (@count, @landed, @target)",
+        "importance": "low",
+        "default": "Jumps: @count. You landed on @landed, and the flag is on @target."
+      },
+      {
+        "name": "exactShown",
+        "type": "text",
+        "label": "Showing it (@times, @size, @target)",
+        "importance": "low",
+        "default": "Look: @times × @size = @target."
+      },
+      {
+        "name": "lineLabel",
+        "type": "text",
+        "label": "Name of the line (@max, @number)",
+        "importance": "low",
+        "default": "Number line from 0 to @max. Place @number with the arrow keys."
+      },
+      {
+        "name": "notPlaced",
+        "type": "text",
+        "label": "The line, before placing",
+        "importance": "low",
+        "default": "Not placed yet"
+      },
+      {
+        "name": "here",
+        "type": "text",
+        "label": "Place it button",
+        "importance": "low",
+        "default": "Here"
+      },
+      {
+        "name": "placeClose",
+        "type": "text",
+        "label": "Very close",
+        "importance": "low",
+        "default": "Very close! 2 points."
+      },
+      {
+        "name": "placeNear",
+        "type": "text",
+        "label": "Close",
+        "importance": "low",
+        "default": "Close. 1 point."
+      },
+      {
+        "name": "placeFar",
+        "type": "text",
+        "label": "Far",
+        "importance": "low",
+        "default": "Look where it was."
+      },
+      {
+        "name": "next",
+        "type": "text",
+        "label": "Next button",
+        "importance": "low",
+        "default": "Next"
+      },
+      {
+        "name": "seeResult",
+        "type": "text",
+        "label": "Button after the last round",
+        "importance": "low",
+        "default": "See the result"
+      },
+      {
+        "name": "cheerPerfect",
+        "type": "text",
+        "label": "Message for all the points",
+        "importance": "low",
+        "default": "All of them!"
+      },
+      {
+        "name": "cheerGreat",
+        "type": "text",
+        "label": "Message for most of the points",
+        "importance": "low",
+        "default": "Great job!"
+      },
+      {
+        "name": "cheerGood",
+        "type": "text",
+        "label": "Message for half of the points",
+        "importance": "low",
+        "default": "Well done!"
+      },
+      {
+        "name": "cheerKeep",
+        "type": "text",
+        "label": "Message for fewer points",
+        "importance": "low",
+        "default": "Keep practising!"
+      },
+      {
+        "name": "resultTitle",
+        "type": "text",
+        "label": "Result (@score, @total)",
+        "importance": "low",
+        "default": "@score of @total points"
+      },
+      {
+        "name": "retry",
+        "type": "text",
+        "label": "Play again button",
+        "importance": "low",
+        "default": "Play again"
+      },
+      {
+        "name": "otherTopic",
+        "type": "text",
+        "label": "Button to choose again",
+        "importance": "low",
+        "default": "Practise something else"
+      },
+      {
+        "name": "reviewGoal",
+        "type": "text",
+        "label": "Review: get to the flag (@start, @target)",
+        "importance": "low",
+        "default": "From @start to @target"
+      },
+      {
+        "name": "reviewDidGoal",
+        "type": "text",
+        "label": "Review: the jumps (@path, @used, @best)",
+        "importance": "low",
+        "default": "@path (jumps: @used; it could be done in @best)"
+      },
+      {
+        "name": "reviewExact",
+        "type": "text",
+        "label": "Review: how many jumps (@size, @target)",
+        "importance": "low",
+        "default": "Jumps of @size up to @target"
+      },
+      {
+        "name": "reviewPlace",
+        "type": "text",
+        "label": "Review: place a number (@number)",
+        "importance": "low",
+        "default": "Place @number"
+      },
+      {
+        "name": "reviewDidPlace",
+        "type": "text",
+        "label": "Review: where it was placed (@value)",
+        "importance": "low",
+        "default": "Placed at @value"
+      },
+      {
+        "name": "reviewLand",
+        "type": "text",
+        "label": "Review: a sum (@sum)",
+        "importance": "low",
+        "default": "@sum"
+      },
+      {
+        "name": "reviewDidLand",
+        "type": "text",
+        "label": "Review: the jumps and the number (@path, @value)",
+        "importance": "low",
+        "default": "@path; said @value"
+      },
+      {
+        "name": "reviewPoints",
+        "type": "text",
+        "label": "Review: points (@got, @of)",
+        "importance": "low",
+        "default": "@got of @of"
+      },
+      {
+        "name": "freeRange",
+        "type": "text",
+        "label": "Free line: the end of the line (@max)",
+        "importance": "low",
+        "default": "Up to @max"
+      },
+      {
+        "name": "freeHelp",
+        "type": "text",
+        "label": "Free line: how it works",
+        "importance": "low",
+        "default": "Tap a number to go there. Jump with the buttons, or draw the jump with your finger."
+      },
+      {
+        "name": "freeAt",
+        "type": "text",
+        "label": "Free line: where the piece is (@position)",
+        "importance": "low",
+        "default": "You are on @position."
+      }
+    ]
+  }
+]

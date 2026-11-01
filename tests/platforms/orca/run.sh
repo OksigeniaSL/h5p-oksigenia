@@ -3,7 +3,7 @@
 # virtual screen and no access to the host's screen, sound or input, reads the Spanish example in Firefox ESR; the
 # speech it would give is cut out step by step from its debug log.
 #
-#   tests/platforms/orca/run.sh
+#   tests/platforms/orca/run.sh [alphabet-wheel|number-line]
 #
 # Needs Docker, the built example packages (npm run pack) and the dev server's H5P core (.h5p-dev, npm run dev once).
 # Output: $H5P_PLATFORM_DIR/orca (default ~/.cache/h5p-oksigenia/orca): orca.log, steps.log and speech.txt.
@@ -13,20 +13,21 @@
 set -eu
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/../../.." && pwd)
-out=${H5P_PLATFORM_DIR:-$HOME/.cache/h5p-oksigenia}/orca
+game=${1:-alphabet-wheel}
+out=${H5P_PLATFORM_DIR:-$HOME/.cache/h5p-oksigenia}/orca-$game
 port=8093
 rm -rf "$out" && mkdir -p "$out" && chmod 777 "$out"
 
 docker image inspect h5p-oksigenia-orca >/dev/null 2>&1 || docker build -q -t h5p-oksigenia-orca "$here" >/dev/null
 
-node "$here/serve.mjs" --port $port > "$out/server.log" 2>&1 &
+node "$here/serve.mjs" --port $port --game "$game" > "$out/server.log" 2>&1 &
 server=$!
 trap 'kill $server 2>/dev/null || true' EXIT INT TERM
 i=0
 until grep -q '/play' "$out/server.log"; do i=$((i + 1)); [ $i -lt 60 ] || { cat "$out/server.log" >&2; exit 1; }; sleep 1; done
 
 docker run --rm --network host --memory 2g --cpus 2 -e URL="http://127.0.0.1:$port/play" \
-  -v "$out:/out" -v "$here/session.sh:/session.sh:ro" h5p-oksigenia-orca sh /session.sh
+  -v "$out:/out" -v "$here/session.sh:/session.sh:ro" -v "$here/steps-$game.sh:/steps.sh:ro" h5p-oksigenia-orca sh /session.sh
 
 node -e '
 const fs = require("fs");

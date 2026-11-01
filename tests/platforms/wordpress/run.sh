@@ -72,3 +72,9 @@ docker cp "$package" $c:/tmp/alphabet-wheel-es.h5p
 node "$here/check.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
   --admin-password "$admin_password" --student-password "$student_password" --package "$package" \
   --shots "$base/report-wordpress"
+
+# The number line, on the same site: the second game of the repository.
+line_package="$root/dist/number-line-$(node -p "const l=require('$root/packages/number-line/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
+node "$here/number-line.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
+  --admin-password "$admin_password" --student-password "$student_password" --package "$line_package" \
+  --shots "$base/report-wordpress"

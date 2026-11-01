@@ -3,6 +3,8 @@
     "language": "de"
   },
   "strings": {
+    "Volume control": "Lautstärkeregler",
+    "Volume": "Lautstärke",
     "Letters": "Buchstaben",
     "One item per letter, in the order the wheel goes round.": "Ein Eintrag pro Buchstabe, in der Reihenfolge, in der sich das Rad dreht.",
     "letter": "Buchstabe",

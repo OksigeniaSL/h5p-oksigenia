@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "Wat wordt geoefend",
+      "description": "Met ‘Kiezen bij het starten’ kiest wie speelt op het eerste scherm: handig midden in de les.",
+      "options": [
+        {
+          "label": "Kiezen bij het starten"
+        },
+        {
+          "label": "Optellen en aftrekken tot 20"
+        },
+        {
+          "label": "Optellen en aftrekken tot 100"
+        },
+        {
+          "label": "Tafels van vermenigvuldiging"
+        },
+        {
+          "label": "Getallen tot 1000"
+        },
+        {
+          "label": "Breuken"
+        },
+        {
+          "label": "Vrije getallenlijn, zonder punten"
+        }
+      ]
+    },
+    {
+      "label": "Rondes per spel"
+    },
+    {
+      "label": "Fijnafstelling",
+      "description": "Optioneel. Wat je hier invult, maakt één niveau met die getallen. De rest mag leeg blijven.",
+      "fields": [
+        {
+          "label": "Einde van de lijn",
+          "description": "Voor sommen en om getallen te plaatsen: 30, 200, 1000…"
+        },
+        {
+          "label": "Sprongen voor optellen en aftrekken",
+          "description": "Bijvoorbeeld: +1 +5 +10 -1"
+        },
+        {
+          "label": "Tafels van vermenigvuldiging",
+          "description": "Bijvoorbeeld: 7, 8, 9"
+        },
+        {
+          "label": "Noemers van de breuken",
+          "description": "Bijvoorbeeld: 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Gedrag",
+      "fields": [
+        {
+          "label": "Met geluid",
+          "description": "Spelers kunnen ze zachter of uit zetten."
+        },
+        {
+          "label": "Opnieuw spelen aanbieden"
+        }
+      ]
+    },
+    {
+      "label": "Teksten en vertalingen",
+      "fields": [
+        {
+          "label": "Startknop",
+          "default": "Starten"
+        },
+        {
+          "label": "Kop van de keuzes",
+          "default": "Wat wil je oefenen?"
+        },
+        {
+          "label": "Keuze: sommen tot 20",
+          "default": "Optellen en aftrekken tot 20"
+        },
+        {
+          "label": "Keuze: sommen tot 100",
+          "default": "Optellen en aftrekken tot 100"
+        },
+        {
+          "label": "Keuze: tafels",
+          "default": "Tafels van vermenigvuldiging"
+        },
+        {
+          "label": "Keuze: getallen",
+          "default": "Getallen tot 1000"
+        },
+        {
+          "label": "Keuze: breuken",
+          "default": "Breuken"
+        },
+        {
+          "label": "Keuze: vrije lijn",
+          "default": "Vrije getallenlijn, zonder punten"
+        },
+        {
+          "label": "Samenvatting (@count)",
+          "default": "Rondes: @count. Zonder klok."
+        },
+        {
+          "label": "Hoe je de sommen speelt",
+          "default": "Spring over de lijn met de knoppen, of teken de sprong met je vinger."
+        },
+        {
+          "label": "Hoe je de tafels speelt",
+          "default": "Kies hoeveel sprongen je nodig hebt om op de vlag te landen."
+        },
+        {
+          "label": "Hoe je getallen plaatst",
+          "default": "Tik op de lijn waar je denkt dat het getal staat."
+        },
+        {
+          "label": "Ronde (@round, @total)",
+          "default": "Ronde @round van @total"
+        },
+        {
+          "label": "Punten (@count)",
+          "default": "Punten: @count"
+        },
+        {
+          "label": "Eerste niveau",
+          "default": "Rivierpad"
+        },
+        {
+          "label": "Tweede niveau",
+          "default": "Stenen Brug"
+        },
+        {
+          "label": "Derde niveau",
+          "default": "Bergtop"
+        },
+        {
+          "label": "Volgend niveau (@place)",
+          "default": "Drie op rij: door naar @place."
+        },
+        {
+          "label": "Knop om geluid uit te zetten",
+          "default": "Geluid uit"
+        },
+        {
+          "label": "Knop om geluid aan te zetten",
+          "default": "Geluid aan"
+        },
+        {
+          "label": "Gemeld als het geluid uitgaat",
+          "default": "Geluid uit"
+        },
+        {
+          "label": "Gemeld als het geluid aangaat",
+          "default": "Geluid aan"
+        },
+        {
+          "label": "Volumeregeling",
+          "default": "Volume"
+        },
+        {
+          "label": "Hint: naar de vlag",
+          "default": "Kom bij de vlag met zo weinig mogelijk sprongen."
+        },
+        {
+          "label": "Hint: de som maken",
+          "default": "Maak de sprongen, met de knoppen of met je vinger."
+        },
+        {
+          "label": "Vraag waar je bent geland",
+          "default": "Waar ben je geland?"
+        },
+        {
+          "label": "Hint: hoeveel sprongen (@size)",
+          "default": "Hoeveel sprongen van @size om op de vlag te landen?"
+        },
+        {
+          "label": "Hint: het getal plaatsen",
+          "default": "Waar staat het? Tik op de lijn en druk op ‘Hier’."
+        },
+        {
+          "label": "Naam van een knop: vooruit (@count)",
+          "default": "@count vooruit springen"
+        },
+        {
+          "label": "Naam van een knop: terug (@count)",
+          "default": "@count terug springen"
+        },
+        {
+          "label": "Naam van een knop: hoeveel (@count)",
+          "default": "Sprongen: @count"
+        },
+        {
+          "label": "Knop om opnieuw te beginnen",
+          "default": "Opnieuw beginnen"
+        },
+        {
+          "label": "Knop om het samen te doen",
+          "default": "Laten we het samen doen"
+        },
+        {
+          "label": "Knop om ongedaan te maken",
+          "default": "Ongedaan maken"
+        },
+        {
+          "label": "Waar de speler staat (@position, @target)",
+          "default": "Je staat op @position. De vlag staat op @target."
+        },
+        {
+          "label": "Waar de speler staat, bij een som (@position, @done, @amount)",
+          "default": "Je staat op @position. Je bent @done van de @amount gesprongen."
+        },
+        {
+          "label": "Te ver gesprongen (@position, @amount)",
+          "default": "Je staat op @position: dat is meer dan @amount. Begin opnieuw."
+        },
+        {
+          "label": "Een sprong de verkeerde kant op",
+          "default": "Die sprong gaat de andere kant op."
+        },
+        {
+          "label": "Met de minste sprongen aangekomen",
+          "default": "Met de minste sprongen! 2 punten."
+        },
+        {
+          "label": "Aangekomen (@used, @best)",
+          "default": "Je bent er in @used sprongen. Het kon in @best. 1 punt."
+        },
+        {
+          "label": "Samen aangekomen",
+          "default": "Nu heb je een manier gezien. Deze keer geen punten."
+        },
+        {
+          "label": "Goed getal (@target)",
+          "default": "Ja, @target! 2 punten."
+        },
+        {
+          "label": "Verkeerd getal (@target)",
+          "default": "Je bent op @target geland. Je sprongen waren goed: 1 punt."
+        },
+        {
+          "label": "Samen gemaakt (@target)",
+          "default": "Je bent op @target geland. Deze keer geen punten."
+        },
+        {
+          "label": "Goed bij de eerste poging (@times, @size, @target)",
+          "default": "Goed! @times × @size = @target. 1 punt."
+        },
+        {
+          "label": "Later goed (@times, @size, @target)",
+          "default": "Daar is het! @times × @size = @target."
+        },
+        {
+          "label": "Verkeerde poging (@count, @landed, @target)",
+          "default": "Sprongen: @count. Je bent op @landed geland, en de vlag staat op @target."
+        },
+        {
+          "label": "Het wordt getoond (@times, @size, @target)",
+          "default": "Kijk: @times × @size = @target."
+        },
+        {
+          "label": "Naam van de lijn (@max, @number)",
+          "default": "Getallenlijn van 0 tot @max. Plaats @number met de pijltjestoetsen."
+        },
+        {
+          "label": "De lijn, voor het plaatsen",
+          "default": "Nog niet geplaatst"
+        },
+        {
+          "label": "Knop om te plaatsen",
+          "default": "Hier"
+        },
+        {
+          "label": "Heel dichtbij",
+          "default": "Heel dichtbij! 2 punten."
+        },
+        {
+          "label": "Dichtbij",
+          "default": "Dichtbij. 1 punt."
+        },
+        {
+          "label": "Ver",
+          "default": "Kijk waar het stond."
+        },
+        {
+          "label": "Knop volgende",
+          "default": "Volgende"
+        },
+        {
+          "label": "Knop na de laatste ronde",
+          "default": "Resultaat bekijken"
+        },
+        {
+          "label": "Bericht bij alle punten",
+          "default": "Allemaal!"
+        },
+        {
+          "label": "Bericht bij de meeste punten",
+          "default": "Heel goed!"
+        },
+        {
+          "label": "Bericht bij de helft van de punten",
+          "default": "Goed gedaan!"
+        },
+        {
+          "label": "Bericht bij minder punten",
+          "default": "Blijf oefenen!"
+        },
+        {
+          "label": "Resultaat (@score, @total)",
+          "default": "@score van de @total punten"
+        },
+        {
+          "label": "Knop om opnieuw te spelen",
+          "default": "Opnieuw spelen"
+        },
+        {
+          "label": "Knop om iets anders te kiezen",
+          "default": "Iets anders oefenen"
+        },
+        {
+          "label": "Terugblik: naar de vlag (@start, @target)",
+          "default": "Van @start naar @target"
+        },
+        {
+          "label": "Terugblik: de sprongen (@path, @used, @best)",
+          "default": "@path (sprongen: @used; het kon in @best)"
+        },
+        {
+          "label": "Terugblik: hoeveel sprongen (@size, @target)",
+          "default": "Sprongen van @size tot @target"
+        },
+        {
+          "label": "Terugblik: een getal plaatsen (@number)",
+          "default": "@number plaatsen"
+        },
+        {
+          "label": "Terugblik: waar het geplaatst is (@value)",
+          "default": "Geplaatst op @value"
+        },
+        {
+          "label": "Terugblik: een som (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Terugblik: de sprongen en het getal (@path, @value)",
+          "default": "@path; zei @value"
+        },
+        {
+          "label": "Terugblik: punten (@got, @of)",
+          "default": "@got van @of"
+        },
+        {
+          "label": "Vrije lijn: het einde (@max)",
+          "default": "Tot @max"
+        },
+        {
+          "label": "Vrije lijn: hoe het werkt",
+          "default": "Tik op een getal om erheen te gaan. Spring met de knoppen, of teken de sprong met je vinger."
+        },
+        {
+          "label": "Vrije lijn: waar het figuurtje staat (@position)",
+          "default": "Je staat op @position."
+        }
+      ]
+    }
+  ]
+}

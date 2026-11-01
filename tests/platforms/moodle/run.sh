@@ -91,3 +91,11 @@ docker exec -u www-data $c php /tmp/install-library.php --package=/tmp/newer.h5p
   || { echo "FAIL the newer copy did not install" >&2; exit 1; }
 install --sums=/tmp/SHA256SUMS | grep -q 'already has 1.0.99' || { echo "FAIL the released package touched a newer version" >&2; exit 1; }
 echo "ok   with a newer version on the site, the installer leaves it alone"
+
+# The number line, on the same site: the second game of the repository.
+line_package="$root/dist/number-line-$(node -p "const l=require('$root/packages/number-line/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
+docker cp "$line_package" $c:/tmp/number-line-es.h5p
+docker exec $c chown www-data /tmp/number-line-es.h5p
+line_cmid=$(docker exec -u www-data $c php /tmp/setup.php /tmp/number-line-es.h5p 3 'Recta numérica' | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s.trim().split("\n").pop()).cmid))')
+node "$here/number-line.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$line_cmid" --db h5p-moodle-db-1 \
+  --db-password "$db_password" --shots "$work/../report-moodle-$branch"

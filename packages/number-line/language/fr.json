@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "Ce qu'on travaille",
+      "description": "Avec « Choisir au début », on choisit sur le premier écran : pratique en plein cours.",
+      "options": [
+        {
+          "label": "Choisir au début"
+        },
+        {
+          "label": "Additions et soustractions jusqu'à 20"
+        },
+        {
+          "label": "Additions et soustractions jusqu'à 100"
+        },
+        {
+          "label": "Tables de multiplication"
+        },
+        {
+          "label": "Nombres jusqu'à 1000"
+        },
+        {
+          "label": "Fractions"
+        },
+        {
+          "label": "Droite libre, sans points"
+        }
+      ]
+    },
+    {
+      "label": "Manches par partie"
+    },
+    {
+      "label": "Réglages fins",
+      "description": "Facultatif. Ce que vous remplissez ici crée un seul niveau avec ces nombres. Le reste peut rester vide.",
+      "fields": [
+        {
+          "label": "Fin de la droite",
+          "description": "Pour les calculs et pour placer des nombres : 30, 200, 1000…"
+        },
+        {
+          "label": "Sauts pour additions et soustractions",
+          "description": "Par exemple : +1 +5 +10 -1"
+        },
+        {
+          "label": "Tables de multiplication",
+          "description": "Par exemple : 7, 8, 9"
+        },
+        {
+          "label": "Dénominateurs des fractions",
+          "description": "Par exemple : 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Comportement",
+      "fields": [
+        {
+          "label": "Avec des sons",
+          "description": "Les joueurs peuvent les baisser ou les couper."
+        },
+        {
+          "label": "Proposer de rejouer"
+        }
+      ]
+    },
+    {
+      "label": "Textes et traductions",
+      "fields": [
+        {
+          "label": "Bouton de démarrage",
+          "default": "Commencer"
+        },
+        {
+          "label": "Titre des choix",
+          "default": "Que veux-tu travailler ?"
+        },
+        {
+          "label": "Choix : calculs jusqu'à 20",
+          "default": "Additions et soustractions jusqu'à 20"
+        },
+        {
+          "label": "Choix : calculs jusqu'à 100",
+          "default": "Additions et soustractions jusqu'à 100"
+        },
+        {
+          "label": "Choix : tables",
+          "default": "Tables de multiplication"
+        },
+        {
+          "label": "Choix : nombres",
+          "default": "Nombres jusqu'à 1000"
+        },
+        {
+          "label": "Choix : fractions",
+          "default": "Fractions"
+        },
+        {
+          "label": "Choix : droite libre",
+          "default": "Droite libre, sans points"
+        },
+        {
+          "label": "Résumé (@count)",
+          "default": "Manches : @count. Sans chrono."
+        },
+        {
+          "label": "Comment jouer aux calculs",
+          "default": "Saute sur la droite avec les boutons, ou dessine le saut avec le doigt."
+        },
+        {
+          "label": "Comment jouer aux tables",
+          "default": "Choisis combien de sauts il faut pour tomber sur le drapeau."
+        },
+        {
+          "label": "Comment placer les nombres",
+          "default": "Touche la droite là où tu penses que se trouve le nombre."
+        },
+        {
+          "label": "Manche (@round, @total)",
+          "default": "Manche @round sur @total"
+        },
+        {
+          "label": "Points (@count)",
+          "default": "Points : @count"
+        },
+        {
+          "label": "Premier niveau",
+          "default": "Sentier de la Rivière"
+        },
+        {
+          "label": "Deuxième niveau",
+          "default": "Pont de Pierre"
+        },
+        {
+          "label": "Troisième niveau",
+          "default": "Sommet de la Montagne"
+        },
+        {
+          "label": "Niveau suivant (@place)",
+          "default": "Trois d'affilée : direction @place."
+        },
+        {
+          "label": "Bouton pour couper le son",
+          "default": "Couper le son"
+        },
+        {
+          "label": "Bouton pour remettre le son",
+          "default": "Remettre le son"
+        },
+        {
+          "label": "Annoncé quand le son est coupé",
+          "default": "Son coupé"
+        },
+        {
+          "label": "Annoncé quand le son revient",
+          "default": "Remettre le son"
+        },
+        {
+          "label": "Réglage du volume",
+          "default": "Volume"
+        },
+        {
+          "label": "Indice : aller au drapeau",
+          "default": "Atteins le drapeau en le moins de sauts possible."
+        },
+        {
+          "label": "Indice : faire le calcul",
+          "default": "Fais les sauts, avec les boutons ou avec le doigt."
+        },
+        {
+          "label": "Demande où on est tombé",
+          "default": "Où es-tu tombé ?"
+        },
+        {
+          "label": "Indice : combien de sauts (@size)",
+          "default": "Combien de sauts de @size pour tomber sur le drapeau ?"
+        },
+        {
+          "label": "Indice : placer le nombre",
+          "default": "Où est-il ? Touche la droite et appuie sur « Ici »."
+        },
+        {
+          "label": "Nom d'un bouton : en avant (@count)",
+          "default": "Sauter de @count en avant"
+        },
+        {
+          "label": "Nom d'un bouton : en arrière (@count)",
+          "default": "Sauter de @count en arrière"
+        },
+        {
+          "label": "Nom d'un bouton : combien (@count)",
+          "default": "Sauts : @count"
+        },
+        {
+          "label": "Bouton pour recommencer",
+          "default": "Recommencer"
+        },
+        {
+          "label": "Bouton pour le faire ensemble",
+          "default": "Faisons-le ensemble"
+        },
+        {
+          "label": "Bouton pour annuler",
+          "default": "Annuler"
+        },
+        {
+          "label": "Où se trouve le joueur (@position, @target)",
+          "default": "Tu es sur @position. Le drapeau est sur @target."
+        },
+        {
+          "label": "Où se trouve le joueur, dans un calcul (@position, @done, @amount)",
+          "default": "Tu es sur @position. Tu as sauté @done sur @amount."
+        },
+        {
+          "label": "Trop loin (@position, @amount)",
+          "default": "Tu es sur @position : c'est plus que @amount. Recommence."
+        },
+        {
+          "label": "Un saut dans le mauvais sens",
+          "default": "Ce saut va dans l'autre sens."
+        },
+        {
+          "label": "Arrivé en le moins de sauts",
+          "default": "En le moins de sauts ! 2 points."
+        },
+        {
+          "label": "Arrivé (@used, @best)",
+          "default": "Tu y es arrivé en @used sauts. C'était possible en @best. 1 point."
+        },
+        {
+          "label": "Arrivé ensemble",
+          "default": "Tu as vu une façon de faire. Pas de points cette fois."
+        },
+        {
+          "label": "Bon nombre (@target)",
+          "default": "Oui, @target ! 2 points."
+        },
+        {
+          "label": "Mauvais nombre (@target)",
+          "default": "Tu es tombé sur @target. Tes sauts étaient bons : 1 point."
+        },
+        {
+          "label": "Calcul fait ensemble (@target)",
+          "default": "Tu es tombé sur @target. Pas de points cette fois."
+        },
+        {
+          "label": "Juste du premier coup (@times, @size, @target)",
+          "default": "Juste ! @times × @size = @target. 1 point."
+        },
+        {
+          "label": "Juste ensuite (@times, @size, @target)",
+          "default": "Le voilà ! @times × @size = @target."
+        },
+        {
+          "label": "Essai raté (@count, @landed, @target)",
+          "default": "Sauts : @count. Tu es tombé sur @landed, et le drapeau est sur @target."
+        },
+        {
+          "label": "On le montre (@times, @size, @target)",
+          "default": "Regarde : @times × @size = @target."
+        },
+        {
+          "label": "Nom de la droite (@max, @number)",
+          "default": "Droite numérique de 0 à @max. Place @number avec les flèches."
+        },
+        {
+          "label": "La droite, avant de placer",
+          "default": "Pas encore placé"
+        },
+        {
+          "label": "Bouton pour placer",
+          "default": "Ici"
+        },
+        {
+          "label": "Très près",
+          "default": "Très près ! 2 points."
+        },
+        {
+          "label": "Près",
+          "default": "Près. 1 point."
+        },
+        {
+          "label": "Loin",
+          "default": "Regarde où il était."
+        },
+        {
+          "label": "Bouton suivant",
+          "default": "Suivant"
+        },
+        {
+          "label": "Bouton après la dernière manche",
+          "default": "Voir le résultat"
+        },
+        {
+          "label": "Message avec tous les points",
+          "default": "Tous !"
+        },
+        {
+          "label": "Message avec la plupart des points",
+          "default": "Très bien !"
+        },
+        {
+          "label": "Message avec la moitié des points",
+          "default": "Bien joué !"
+        },
+        {
+          "label": "Message avec moins de points",
+          "default": "Continue à t'entraîner !"
+        },
+        {
+          "label": "Résultat (@score, @total)",
+          "default": "@score sur @total points"
+        },
+        {
+          "label": "Bouton pour rejouer",
+          "default": "Rejouer"
+        },
+        {
+          "label": "Bouton pour choisir autre chose",
+          "default": "Travailler autre chose"
+        },
+        {
+          "label": "Revue : aller au drapeau (@start, @target)",
+          "default": "De @start à @target"
+        },
+        {
+          "label": "Revue : les sauts (@path, @used, @best)",
+          "default": "@path (sauts : @used ; possible en @best)"
+        },
+        {
+          "label": "Revue : combien de sauts (@size, @target)",
+          "default": "Sauts de @size jusqu'à @target"
+        },
+        {
+          "label": "Revue : placer un nombre (@number)",
+          "default": "Placer @number"
+        },
+        {
+          "label": "Revue : où il a été placé (@value)",
+          "default": "Placé à @value"
+        },
+        {
+          "label": "Revue : un calcul (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Revue : les sauts et le nombre (@path, @value)",
+          "default": "@path ; a dit @value"
+        },
+        {
+          "label": "Revue : points (@got, @of)",
+          "default": "@got sur @of"
+        },
+        {
+          "label": "Droite libre : la fin (@max)",
+          "default": "Jusqu'à @max"
+        },
+        {
+          "label": "Droite libre : comment ça marche",
+          "default": "Touche un nombre pour y aller. Saute avec les boutons, ou dessine le saut avec le doigt."
+        },
+        {
+          "label": "Droite libre : où est le pion (@position)",
+          "default": "Tu es sur @position."
+        }
+      ]
+    }
+  ]
+}

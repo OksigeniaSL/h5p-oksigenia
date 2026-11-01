@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "Vad ska övas",
+      "description": "Med ”Välj vid start” väljer den som spelar på första skärmen: praktiskt mitt i en lektion.",
+      "options": [
+        {
+          "label": "Välj vid start"
+        },
+        {
+          "label": "Addition och subtraktion upp till 20"
+        },
+        {
+          "label": "Addition och subtraktion upp till 100"
+        },
+        {
+          "label": "Multiplikationstabeller"
+        },
+        {
+          "label": "Tal upp till 1000"
+        },
+        {
+          "label": "Bråk"
+        },
+        {
+          "label": "Fri tallinje, utan poäng"
+        }
+      ]
+    },
+    {
+      "label": "Omgångar per spel"
+    },
+    {
+      "label": "Finjustering",
+      "description": "Valfritt. Det du fyller i här blir en enda nivå med de talen. Resten kan lämnas tomt.",
+      "fields": [
+        {
+          "label": "Tallinjens slut",
+          "description": "För räkning och för att placera tal: 30, 200, 1000 …"
+        },
+        {
+          "label": "Hopp för addition och subtraktion",
+          "description": "Till exempel: +1 +5 +10 -1"
+        },
+        {
+          "label": "Multiplikationstabeller",
+          "description": "Till exempel: 7, 8, 9"
+        },
+        {
+          "label": "Bråkens nämnare",
+          "description": "Till exempel: 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Beteende",
+      "fields": [
+        {
+          "label": "Med ljud",
+          "description": "Den som spelar kan sänka eller stänga av dem."
+        },
+        {
+          "label": "Erbjud att spela igen"
+        }
+      ]
+    },
+    {
+      "label": "Texter och översättningar",
+      "fields": [
+        {
+          "label": "Startknapp",
+          "default": "Starta"
+        },
+        {
+          "label": "Rubrik för valen",
+          "default": "Vad vill du öva på?"
+        },
+        {
+          "label": "Val: räkning upp till 20",
+          "default": "Addition och subtraktion upp till 20"
+        },
+        {
+          "label": "Val: räkning upp till 100",
+          "default": "Addition och subtraktion upp till 100"
+        },
+        {
+          "label": "Val: multiplikationstabeller",
+          "default": "Multiplikationstabeller"
+        },
+        {
+          "label": "Val: tal",
+          "default": "Tal upp till 1000"
+        },
+        {
+          "label": "Val: bråk",
+          "default": "Bråk"
+        },
+        {
+          "label": "Val: fri tallinje",
+          "default": "Fri tallinje, utan poäng"
+        },
+        {
+          "label": "Sammanfattning (@count)",
+          "default": "Omgångar: @count. Utan klocka."
+        },
+        {
+          "label": "Så spelar du räkningen",
+          "default": "Hoppa längs linjen med knapparna, eller rita hoppet med fingret."
+        },
+        {
+          "label": "Så spelar du multiplikationen",
+          "default": "Välj hur många hopp som behövs för att landa på flaggan."
+        },
+        {
+          "label": "Så placerar du tal",
+          "default": "Tryck på linjen där du tror att talet finns."
+        },
+        {
+          "label": "Omgång (@round, @total)",
+          "default": "Omgång @round av @total"
+        },
+        {
+          "label": "Poäng (@count)",
+          "default": "Poäng: @count"
+        },
+        {
+          "label": "Första nivån",
+          "default": "Flodstigen"
+        },
+        {
+          "label": "Andra nivån",
+          "default": "Stenbron"
+        },
+        {
+          "label": "Tredje nivån",
+          "default": "Bergstoppen"
+        },
+        {
+          "label": "Nästa nivå (@place)",
+          "default": "Tre i rad: vidare till @place."
+        },
+        {
+          "label": "Knapp för att stänga av ljudet",
+          "default": "Stäng av ljudet"
+        },
+        {
+          "label": "Knapp för att sätta på ljudet",
+          "default": "Sätt på ljudet"
+        },
+        {
+          "label": "Meddelas när ljudet stängs av",
+          "default": "Ljudet är av"
+        },
+        {
+          "label": "Meddelas när ljudet sätts på",
+          "default": "Sätt på ljudet"
+        },
+        {
+          "label": "Volymreglage",
+          "default": "Volym"
+        },
+        {
+          "label": "Tips: till flaggan",
+          "default": "Nå flaggan med så få hopp du kan."
+        },
+        {
+          "label": "Tips: räkningen",
+          "default": "Gör hoppen, med knapparna eller med fingret."
+        },
+        {
+          "label": "Frågan om var man landade",
+          "default": "Var landade du?"
+        },
+        {
+          "label": "Tips: hur många hopp (@size)",
+          "default": "Hur många hopp på @size för att landa på flaggan?"
+        },
+        {
+          "label": "Tips: placera talet",
+          "default": "Var är det? Tryck på linjen och sedan på ”Här”."
+        },
+        {
+          "label": "Namn på en knapp: framåt (@count)",
+          "default": "Hoppa @count framåt"
+        },
+        {
+          "label": "Namn på en knapp: bakåt (@count)",
+          "default": "Hoppa @count bakåt"
+        },
+        {
+          "label": "Namn på en knapp: hur många (@count)",
+          "default": "Hopp: @count"
+        },
+        {
+          "label": "Knapp för att börja om",
+          "default": "Börja om"
+        },
+        {
+          "label": "Knapp för att göra det tillsammans",
+          "default": "Vi gör det tillsammans"
+        },
+        {
+          "label": "Knapp för att ångra",
+          "default": "Ångra"
+        },
+        {
+          "label": "Var spelaren står (@position, @target)",
+          "default": "Du står på @position. Flaggan står på @target."
+        },
+        {
+          "label": "Var spelaren står, i en räkning (@position, @done, @amount)",
+          "default": "Du står på @position. Du har hoppat @done av @amount."
+        },
+        {
+          "label": "För långt (@position, @amount)",
+          "default": "Du står på @position: det är mer än @amount. Börja om."
+        },
+        {
+          "label": "Ett hopp åt fel håll",
+          "default": "Det hoppet går åt andra hållet."
+        },
+        {
+          "label": "Framme med minst antal hopp",
+          "default": "Med minst antal hopp! 2 poäng."
+        },
+        {
+          "label": "Framme (@used, @best)",
+          "default": "Du klarade det på @used hopp. Det gick på @best. 1 poäng."
+        },
+        {
+          "label": "Framme tillsammans",
+          "default": "Nu har du sett ett sätt. Inga poäng den här gången."
+        },
+        {
+          "label": "Rätt tal (@target)",
+          "default": "Ja, @target! 2 poäng."
+        },
+        {
+          "label": "Fel tal (@target)",
+          "default": "Du landade på @target. Hoppen var rätt: 1 poäng."
+        },
+        {
+          "label": "Räknat tillsammans (@target)",
+          "default": "Du landade på @target. Inga poäng den här gången."
+        },
+        {
+          "label": "Rätt på första försöket (@times, @size, @target)",
+          "default": "Rätt! @times × @size = @target. 1 poäng."
+        },
+        {
+          "label": "Rätt senare (@times, @size, @target)",
+          "default": "Där är det! @times × @size = @target."
+        },
+        {
+          "label": "Fel försök (@count, @landed, @target)",
+          "default": "Hopp: @count. Du landade på @landed, och flaggan står på @target."
+        },
+        {
+          "label": "Visas (@times, @size, @target)",
+          "default": "Titta: @times × @size = @target."
+        },
+        {
+          "label": "Linjens namn (@max, @number)",
+          "default": "Tallinje från 0 till @max. Placera @number med piltangenterna."
+        },
+        {
+          "label": "Linjen, före placeringen",
+          "default": "Inte placerat än"
+        },
+        {
+          "label": "Knapp för att placera",
+          "default": "Här"
+        },
+        {
+          "label": "Mycket nära",
+          "default": "Mycket nära! 2 poäng."
+        },
+        {
+          "label": "Nära",
+          "default": "Nära. 1 poäng."
+        },
+        {
+          "label": "Långt ifrån",
+          "default": "Titta var det var."
+        },
+        {
+          "label": "Knapp för nästa",
+          "default": "Nästa"
+        },
+        {
+          "label": "Knapp efter sista omgången",
+          "default": "Se resultatet"
+        },
+        {
+          "label": "Meddelande vid alla poäng",
+          "default": "Alla!"
+        },
+        {
+          "label": "Meddelande vid de flesta poäng",
+          "default": "Mycket bra!"
+        },
+        {
+          "label": "Meddelande vid hälften av poängen",
+          "default": "Bra gjort!"
+        },
+        {
+          "label": "Meddelande vid färre poäng",
+          "default": "Fortsätt öva!"
+        },
+        {
+          "label": "Resultat (@score, @total)",
+          "default": "@score av @total poäng"
+        },
+        {
+          "label": "Knapp för att spela igen",
+          "default": "Spela igen"
+        },
+        {
+          "label": "Knapp för att välja något annat",
+          "default": "Öva på något annat"
+        },
+        {
+          "label": "Genomgång: till flaggan (@start, @target)",
+          "default": "Från @start till @target"
+        },
+        {
+          "label": "Genomgång: hoppen (@path, @used, @best)",
+          "default": "@path (hopp: @used; det gick på @best)"
+        },
+        {
+          "label": "Genomgång: hur många hopp (@size, @target)",
+          "default": "Hopp på @size upp till @target"
+        },
+        {
+          "label": "Genomgång: placera ett tal (@number)",
+          "default": "Placera @number"
+        },
+        {
+          "label": "Genomgång: var det placerades (@value)",
+          "default": "Placerat vid @value"
+        },
+        {
+          "label": "Genomgång: en räkning (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Genomgång: hoppen och talet (@path, @value)",
+          "default": "@path; svarade @value"
+        },
+        {
+          "label": "Genomgång: poäng (@got, @of)",
+          "default": "@got av @of"
+        },
+        {
+          "label": "Fri tallinje: slutet (@max)",
+          "default": "Upp till @max"
+        },
+        {
+          "label": "Fri tallinje: så fungerar det",
+          "default": "Tryck på ett tal för att gå dit. Hoppa med knapparna, eller rita hoppet med fingret."
+        },
+        {
+          "label": "Fri tallinje: var pjäsen står (@position)",
+          "default": "Du står på @position."
+        }
+      ]
+    }
+  ]
+}

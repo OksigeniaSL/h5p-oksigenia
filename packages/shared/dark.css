@@ -1,0 +1,47 @@
+/*
+ * Dark mode of the page around the H5P frames (see watchPageColourMode in dom.js): the variables of the H5P theme take
+ * dark values for the whole frame, so a game and its shared end screen follow without colours of their own. The main
+ * colour stays the site's.
+ *
+ * @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
+ * @license   MIT
+ */
+
+html.h5p-oksigenia-dark {
+  --h5p-theme-contrast-cta-white: #8cc4f0;
+  --h5p-theme-text-primary: #eef1f4;
+  --h5p-theme-text-secondary: #c3cad1;
+  --h5p-theme-text-third: #8d97a1;
+  --h5p-theme-background: #1d2125;
+  --h5p-theme-ui-base: #2a2f35;
+  --h5p-theme-alternative-base: #2a2f35;
+  --h5p-theme-stroke-1: #454c54;
+  --h5p-theme-feedback-correct-main: #86d67f;
+  --h5p-theme-feedback-correct-secondary: #10260d;
+  --h5p-theme-feedback-incorrect-main: #ff9da2;
+  --h5p-theme-feedback-incorrect-secondary: #3a0f12;
+
+  color-scheme: dark;
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  html.h5p-oksigenia-dark {
+    --h5p-theme-contrast-cta-white: color-mix(in srgb, var(--h5p-theme-main-cta-base, #006fbf) 40%, white);
+  }
+}
+
+html.h5p-oksigenia-dark,
+html.h5p-oksigenia-dark body,
+html.h5p-oksigenia-dark .h5p-content {
+  background: #1d2125;
+}
+
+html.h5p-oksigenia-dark .h5p-actions {
+  border-color: #454c54;
+  background: #1d2125;
+}
+
+html.h5p-oksigenia-dark .h5p-actions > .h5p-button,
+html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
+  color: #c3cad1;
+}

@@ -3,6 +3,8 @@
     "language": "nl"
   },
   "strings": {
+    "Volume control": "Volumeregeling",
+    "Volume": "Volume",
     "Letters": "Letters",
     "One item per letter, in the order the wheel goes round.": "Eén item per letter, in de volgorde waarin het wiel draait.",
     "letter": "letter",

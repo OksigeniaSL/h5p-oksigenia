@@ -179,6 +179,10 @@
           "default": "Geluid uit."
         },
         {
+          "label": "Volumeregeling",
+          "default": "Volume"
+        },
+        {
           "label": "Geluid weer aan (voor schermlezers)",
           "default": "Geluid aan."
         },

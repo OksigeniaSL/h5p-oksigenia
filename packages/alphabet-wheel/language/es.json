@@ -179,6 +179,10 @@
           "default": "Sonido silenciado."
         },
         {
+          "label": "Control de volumen",
+          "default": "Volumen"
+        },
+        {
           "label": "Sonido activado (para lectores de pantalla)",
           "default": "Sonido activado."
         },

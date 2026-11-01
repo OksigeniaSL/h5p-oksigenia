@@ -183,6 +183,7 @@
       { "name": "soundOff", "type": "text", "label": "Mute button", "importance": "low", "default": "Mute" },
       { "name": "soundOn", "type": "text", "label": "Sound on button", "importance": "low", "default": "Sound on" },
       { "name": "soundMuted", "type": "text", "label": "Sound muted (for screen readers)", "importance": "low", "default": "Sound off." },
+      { "name": "volume", "type": "text", "label": "Volume control", "importance": "low", "default": "Volume" },
       { "name": "soundUnmuted", "type": "text", "label": "Sound on again (for screen readers)", "importance": "low", "default": "Sound on." },
       { "name": "finish", "type": "text", "label": "Finish button", "importance": "low", "default": "Finish" },
       { "name": "finishConfirm", "type": "text", "label": "Finish, to confirm", "importance": "low", "default": "Finish now? Press again" },

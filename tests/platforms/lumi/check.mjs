@@ -151,6 +151,32 @@ try {
   check('with one point per letter', score.raw === parameters.items.length - 2 && score.max === parameters.items.length,
     `${score.raw}/${score.max}`);
   check('no script errors', errors.length === 0, errors.join(' | '));
+
+  // The second game of the repository, on the same engine.
+  const line = packages().find((p) => p.name === 'number-line');
+  const lineUpload = await editor.uploadPackage(readFileSync(join(ROOT, 'dist', `number-line-${line.version}-es.h5p`)), user);
+  check('the number line is accepted and installs on core 1.27', lineUpload.metadata.mainLibrary === 'H5P.NumberLine', lineUpload.metadata.title);
+  const lineId = await editor.saveOrUpdateContent(undefined, lineUpload.parameters, lineUpload.metadata,
+    `H5P.NumberLine ${line.library.majorVersion}.${line.library.minorVersion}`, user);
+  const linePage = await browser.newPage({ viewport: { width: 1100, height: 900 } });
+  const lineErrors = [];
+  linePage.on('pageerror', (e) => lineErrors.push(e.message));
+  app.get('/play-line', async (req, res) => res.send(await player.render(lineId, user, 'es')));
+  await linePage.goto(`http://127.0.0.1:${server.address().port}/play-line`, { waitUntil: 'networkidle' });
+  const lineFramed = await linePage.locator('iframe.h5p-iframe').count() > 0;
+  const lineFrame = lineFramed ? linePage.frameLocator('iframe.h5p-iframe') : linePage.locator('body');
+  await lineFrame.locator('.nl').waitFor({ timeout: 30_000 });
+  await lineFrame.locator('.nl-choice-tables').click();
+  for (let i = 0; i < 6; i++) {
+    const r = await lineFrame.locator('.nl').evaluate(() => H5P.instances[H5P.instances.length - 1].game.current);
+    await lineFrame.locator('.nl-count', { hasText: new RegExp(`^${r.times}$`) }).click();
+    await lineFrame.locator('.nl-next').click();
+  }
+  await lineFrame.locator('.nl-cheer-title').waitFor();
+  await linePage.screenshot({ path: join(shots, 'lumi-number-line.png') });
+  const lineScore = await lineFrame.locator('.nl').evaluate(() => H5P.instances[H5P.instances.length - 1].getScore());
+  check('the number line plays to the end, with its score', lineScore === 6, String(lineScore));
+  check('the number line has no script errors', lineErrors.length === 0, lineErrors.join(' | '));
 } finally {
   await browser.close();
   if (server) {

@@ -179,6 +179,10 @@
           "default": "Son coupé."
         },
         {
+          "label": "Réglage du volume",
+          "default": "Volume"
+        },
+        {
           "label": "Son réactivé (pour les lecteurs d'écran)",
           "default": "Son activé."
         },

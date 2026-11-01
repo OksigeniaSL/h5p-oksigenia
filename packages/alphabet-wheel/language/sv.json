@@ -179,6 +179,10 @@
           "default": "Ljudet är av."
         },
         {
+          "label": "Volymreglage",
+          "default": "Volym"
+        },
+        {
           "label": "Ljudet påslaget igen (för skärmläsare)",
           "default": "Ljudet är på."
         },

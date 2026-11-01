@@ -9,7 +9,7 @@ import { Countdown, formatTime } from '../../shared/timer.js';
 import { Announcer, bringIntoView, el, fill, paintOuterFrames, plain, watchPageColourMode } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
-import { Sounds } from '../../shared/sound.js';
+import { Sounds, volumeSlider } from '../../shared/sound.js';
 import { WheelGame } from './game.js';
 import './alphabet-wheel.css';
 
@@ -251,7 +251,10 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.finishButton = el('button', { type: 'button', class: 'aw-button aw-tertiary aw-finish', onclick: () => this.askFinish() });
     this.panel = el('div', { class: 'aw-panel' }, [
       el('div', { class: 'aw-bar' }, [
-        this.round, this.timer ? this.clock : '', this.timer ? this.pauseButton : '', this.sounds.enabled ? this.soundButton : '',
+        this.round, this.timer ? this.clock : '', this.timer ? this.pauseButton : '',
+        this.sounds.enabled ? el('span', { class: 'aw-sound-group' }, [
+          this.soundButton, volumeSlider(this.sounds, t.volume, 'aw-volume', () => this.render()),
+        ]) : '',
       ]),
       this.question, this.pausedNote, this.feedbackLine, this.counts, this.finishButton,
     ]);

@@ -179,6 +179,10 @@
           "default": "Audio disattivato."
         },
         {
+          "label": "Controllo del volume",
+          "default": "Volume"
+        },
+        {
           "label": "Audio riattivato (per i lettori di schermo)",
           "default": "Audio attivato."
         },

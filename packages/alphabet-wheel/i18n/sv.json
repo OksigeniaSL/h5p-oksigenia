@@ -3,6 +3,8 @@
     "language": "sv"
   },
   "strings": {
+    "Volume control": "Volymreglage",
+    "Volume": "Volym",
     "Letters": "Bokstäver",
     "One item per letter, in the order the wheel goes round.": "En post per bokstav, i den ordning hjulet snurrar.",
     "letter": "bokstav",

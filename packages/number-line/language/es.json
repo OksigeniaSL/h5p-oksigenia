@@ -1,0 +1,369 @@
+{
+  "semantics": [
+    {
+      "label": "Qué se practica",
+      "description": "Con «Elegir al empezar», quien juega lo escoge en la primera pantalla: es lo más cómodo en mitad de una clase.",
+      "options": [
+        {
+          "label": "Elegir al empezar"
+        },
+        {
+          "label": "Sumas y restas hasta 20"
+        },
+        {
+          "label": "Sumas y restas hasta 100"
+        },
+        {
+          "label": "Tablas de multiplicar"
+        },
+        {
+          "label": "Números hasta el 1000"
+        },
+        {
+          "label": "Fracciones"
+        },
+        {
+          "label": "Recta libre, sin puntos"
+        }
+      ]
+    },
+    {
+      "label": "Rondas de cada partida"
+    },
+    {
+      "label": "Ajuste fino",
+      "description": "Opcional. Lo que rellenes aquí hace un único nivel con esos números. Lo demás puede quedar vacío.",
+      "fields": [
+        {
+          "label": "Final de la recta",
+          "description": "Para sumas y para colocar números: 30, 200, 1000…"
+        },
+        {
+          "label": "Saltos para sumas y restas",
+          "description": "Por ejemplo: +1 +5 +10 -1"
+        },
+        {
+          "label": "Tablas de multiplicar",
+          "description": "Por ejemplo: 7, 8, 9"
+        },
+        {
+          "label": "Denominadores de las fracciones",
+          "description": "Por ejemplo: 2, 4, 8"
+        }
+      ]
+    },
+    {
+      "label": "Comportamiento",
+      "fields": [
+        {
+          "label": "Con sonidos",
+          "description": "Quien juega puede bajarlos o quitarlos."
+        },
+        {
+          "label": "Ofrecer volver a jugar"
+        }
+      ]
+    },
+    {
+      "label": "Textos y traducciones",
+      "fields": [
+        {
+          "label": "Botón de empezar",
+          "default": "Empezar"
+        },
+        {
+          "label": "Título de las opciones",
+          "default": "¿Qué quieres practicar?"
+        },
+        {
+          "label": "Opción: sumas hasta 20",
+          "default": "Sumas y restas hasta 20"
+        },
+        {
+          "label": "Opción: sumas hasta 100",
+          "default": "Sumas y restas hasta 100"
+        },
+        {
+          "label": "Opción: tablas",
+          "default": "Tablas de multiplicar"
+        },
+        {
+          "label": "Opción: números",
+          "default": "Números hasta el 1000"
+        },
+        {
+          "label": "Opción: fracciones",
+          "default": "Fracciones"
+        },
+        {
+          "label": "Opción: recta libre",
+          "default": "Recta libre, sin puntos"
+        },
+        {
+          "label": "Resumen (@count)",
+          "default": "Rondas: @count. Sin reloj."
+        },
+        {
+          "label": "Cómo se juegan las sumas",
+          "default": "Salta por la recta con los botones, o dibuja el salto con el dedo."
+        },
+        {
+          "label": "Cómo se juegan las tablas",
+          "default": "Elige cuántos saltos hacen falta para caer en la bandera."
+        },
+        {
+          "label": "Cómo se colocan los números",
+          "default": "Toca la recta donde creas que está el número."
+        },
+        {
+          "label": "Ronda (@round, @total)",
+          "default": "Ronda @round de @total"
+        },
+        {
+          "label": "Puntos (@count)",
+          "default": "Puntos: @count"
+        },
+        {
+          "label": "Primer nivel",
+          "default": "Sendero del Río"
+        },
+        {
+          "label": "Segundo nivel",
+          "default": "Puente de Piedra"
+        },
+        {
+          "label": "Tercer nivel",
+          "default": "Cima de la Montaña"
+        },
+        {
+          "label": "Paso de nivel (@place)",
+          "default": "Tres seguidas: pasas a @place."
+        },
+        {
+          "label": "Botón de silenciar",
+          "default": "Silenciar"
+        },
+        {
+          "label": "Botón de activar el sonido",
+          "default": "Activar el sonido"
+        },
+        {
+          "label": "Se anuncia al silenciar",
+          "default": "Sonido desactivado"
+        },
+        {
+          "label": "Se anuncia al activar el sonido",
+          "default": "Activar el sonido"
+        },
+        {
+          "label": "Control de volumen",
+          "default": "Volumen"
+        },
+        {
+          "label": "Pista: llegar a la bandera",
+          "default": "Llega a la bandera con los menos saltos que puedas."
+        },
+        {
+          "label": "Pista: hacer la cuenta",
+          "default": "Da los saltos, con los botones o con el dedo."
+        },
+        {
+          "label": "Pregunta de dónde se ha caído",
+          "default": "¿Dónde has caído?"
+        },
+        {
+          "label": "Pista: cuántos saltos (@size)",
+          "default": "¿Cuántos saltos de @size para caer en la bandera?"
+        },
+        {
+          "label": "Pista: colocar el número",
+          "default": "¿Dónde está? Toca la recta y pulsa «Aquí»."
+        },
+        {
+          "label": "Nombre de un botón: adelante (@count)",
+          "default": "Saltar @count hacia delante"
+        },
+        {
+          "label": "Nombre de un botón: atrás (@count)",
+          "default": "Saltar @count hacia atrás"
+        },
+        {
+          "label": "Nombre de un botón: cuántos (@count)",
+          "default": "Saltos: @count"
+        },
+        {
+          "label": "Botón de volver a empezar",
+          "default": "Volver a empezar"
+        },
+        {
+          "label": "Botón de hacerlo juntos",
+          "default": "Lo hacemos juntos"
+        },
+        {
+          "label": "Botón de deshacer",
+          "default": "Deshacer"
+        },
+        {
+          "label": "Dónde está el jugador (@position, @target)",
+          "default": "Estás en el @position. La bandera, en el @target."
+        },
+        {
+          "label": "Dónde está el jugador, en una cuenta (@position, @done, @amount)",
+          "default": "Estás en el @position. Llevas @done de @amount."
+        },
+        {
+          "label": "Se ha pasado (@position, @amount)",
+          "default": "Estás en el @position: te has pasado de @amount. Vuelve a empezar."
+        },
+        {
+          "label": "Un salto hacia el otro lado",
+          "default": "Ese salto va hacia el otro lado."
+        },
+        {
+          "label": "Ha llegado con los saltos justos",
+          "default": "¡Con los saltos justos! 2 puntos."
+        },
+        {
+          "label": "Ha llegado (@used, @best)",
+          "default": "Has llegado en @used saltos. Se podía en @best. 1 punto."
+        },
+        {
+          "label": "Ha llegado juntos",
+          "default": "Ya has visto una forma de hacerlo. Esta vez, sin puntos."
+        },
+        {
+          "label": "Número correcto (@target)",
+          "default": "¡Sí, el @target! 2 puntos."
+        },
+        {
+          "label": "Número equivocado (@target)",
+          "default": "Has caído en el @target. Los saltos estaban bien: 1 punto."
+        },
+        {
+          "label": "Cuenta hecha juntos (@target)",
+          "default": "Has caído en el @target. Esta vez, sin puntos."
+        },
+        {
+          "label": "Bien a la primera (@times, @size, @target)",
+          "default": "¡Justo! @times × @size = @target. 1 punto."
+        },
+        {
+          "label": "Bien más tarde (@times, @size, @target)",
+          "default": "¡Ahí está! @times × @size = @target."
+        },
+        {
+          "label": "Intento fallido (@count, @landed, @target)",
+          "default": "Saltos: @count. Has caído en el @landed, y la bandera está en el @target."
+        },
+        {
+          "label": "Se enseña (@times, @size, @target)",
+          "default": "Mira: @times × @size = @target."
+        },
+        {
+          "label": "Nombre de la recta (@max, @number)",
+          "default": "Recta numérica del 0 al @max. Coloca el @number con las flechas."
+        },
+        {
+          "label": "La recta, antes de colocar",
+          "default": "Sin colocar"
+        },
+        {
+          "label": "Botón de colocar",
+          "default": "Aquí"
+        },
+        {
+          "label": "Muy cerca",
+          "default": "¡Muy cerca! 2 puntos."
+        },
+        {
+          "label": "Cerca",
+          "default": "Cerca. 1 punto."
+        },
+        {
+          "label": "Lejos",
+          "default": "Mira dónde estaba."
+        },
+        {
+          "label": "Botón de siguiente",
+          "default": "Siguiente"
+        },
+        {
+          "label": "Botón tras la última ronda",
+          "default": "Ver el resultado"
+        },
+        {
+          "label": "Mensaje con todos los puntos",
+          "default": "¡Todos!"
+        },
+        {
+          "label": "Mensaje con casi todos los puntos",
+          "default": "¡Muy bien!"
+        },
+        {
+          "label": "Mensaje con la mitad de los puntos",
+          "default": "¡Bien hecho!"
+        },
+        {
+          "label": "Mensaje con menos puntos",
+          "default": "¡Sigue practicando!"
+        },
+        {
+          "label": "Resultado (@score, @total)",
+          "default": "@score de @total puntos"
+        },
+        {
+          "label": "Botón de volver a jugar",
+          "default": "Volver a jugar"
+        },
+        {
+          "label": "Botón de elegir otra cosa",
+          "default": "Practicar otra cosa"
+        },
+        {
+          "label": "Repaso: llegar a la bandera (@start, @target)",
+          "default": "Del @start al @target"
+        },
+        {
+          "label": "Repaso: los saltos (@path, @used, @best)",
+          "default": "@path (saltos: @used; se podía en @best)"
+        },
+        {
+          "label": "Repaso: cuántos saltos (@size, @target)",
+          "default": "Saltos de @size hasta el @target"
+        },
+        {
+          "label": "Repaso: colocar un número (@number)",
+          "default": "Colocar el @number"
+        },
+        {
+          "label": "Repaso: dónde se colocó (@value)",
+          "default": "Colocado en el @value"
+        },
+        {
+          "label": "Repaso: una cuenta (@sum)",
+          "default": "@sum"
+        },
+        {
+          "label": "Repaso: los saltos y el número (@path, @value)",
+          "default": "@path; dijo @value"
+        },
+        {
+          "label": "Repaso: puntos (@got, @of)",
+          "default": "@got de @of"
+        },
+        {
+          "label": "Recta libre: el final (@max)",
+          "default": "Hasta @max"
+        },
+        {
+          "label": "Recta libre: cómo funciona",
+          "default": "Toca un número para ir allí. Salta con los botones, o dibuja el salto con el dedo."
+        },
+        {
+          "label": "Recta libre: dónde está la ficha (@position)",
+          "default": "Estás en el @position."
+        }
+      ]
+    }
+  ]
+}

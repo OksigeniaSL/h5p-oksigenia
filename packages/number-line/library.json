@@ -1,0 +1,33 @@
+{
+  "title": "Number Line",
+  "description": "Addition, subtraction, times tables and fractions as jumps on a number line: the jumps are the answer. Each game makes up its own numbers.",
+  "machineName": "H5P.NumberLine",
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
+  "runnable": 1,
+  "author": "Oksigenia",
+  "license": "MIT",
+  "embedTypes": [
+    "iframe"
+  ],
+  "fullscreen": 1,
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 24
+  },
+  "preloadedJs": [
+    {
+      "path": "dist/number-line.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/number-line.css"
+    }
+  ],
+  "metadataSettings": {
+    "disable": 0,
+    "disableExtraTitleField": 1
+  }
+}

@@ -178,6 +178,10 @@
           "default": "Sound off."
         },
         {
+          "label": "Volume control",
+          "default": "Volume"
+        },
+        {
           "label": "Sound on again (for screen readers)",
           "default": "Sound on."
         },

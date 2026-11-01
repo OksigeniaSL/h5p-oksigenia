@@ -179,6 +179,10 @@
           "default": "Ton aus."
         },
         {
+          "label": "Lautstärkeregler",
+          "default": "Lautstärke"
+        },
+        {
           "label": "Ton wieder an (für Screenreader)",
           "default": "Ton an."
         },

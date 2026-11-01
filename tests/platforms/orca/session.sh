@@ -1,6 +1,6 @@
 #!/bin/sh
 # Inside the container: a virtual screen, the accessibility bus, Orca writing what it says to /out/orca.log, and
-# Firefox playing the wheel at $URL with the keyboard only (xdotool). The steps are printed as they go.
+# Firefox playing the game at $URL with the keyboard only (xdotool), by the steps of /steps.sh. They are printed as they go.
 #
 # @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
@@ -23,15 +23,4 @@ step() { echo "$(wc -c < /out/orca.log)	$*" >> /out/steps.log; echo "STEP $*"; }
 win=$(xdotool search --sync --onlyvisible --class firefox | head -1)
 xdotool windowfocus --sync "$win" || true
 xdotool mousemove 5 450 click 1
-step "Tab to the first control"; xdotool key Tab; sleep 2
-step "Enter: start"; xdotool key Return; sleep 3
-step "type abeja, Enter (right)"; xdotool type --delay 60 abeja; xdotool key Return; sleep 3
-step "type bote, Enter (wrong)"; xdotool type --delay 60 bote; xdotool key Return; sleep 4
-step "Tab, Tab to Pass, Enter"; xdotool key Tab; sleep 1; xdotool key Tab; sleep 1; xdotool key Return; sleep 4
-step "Shift+Tab to the speaker button"; xdotool key shift+Tab; sleep 2
-step "Shift+Tab to Pause, Enter"; xdotool key shift+Tab; sleep 1; xdotool key Return; sleep 3
-step "Enter again: resume"; xdotool key Return; sleep 3
-step "Tab to Check, Pass, Finish"; xdotool key Tab; sleep 1; xdotool key Tab; sleep 1; xdotool key Tab; sleep 2
-step "Enter: finish asks"; xdotool key Return; sleep 3
-step "Enter again: finish"; xdotool key Return; sleep 5
-step "done"
+. /steps.sh
