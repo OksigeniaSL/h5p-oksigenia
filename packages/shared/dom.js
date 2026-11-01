@@ -110,17 +110,38 @@ function inView(node) {
 }
 
 /**
- * Brings the next step of a game into view when it is out of it. The frames around H5P content grow a moment after the
- * content does, and only then is its place known, so it looks more than once. It does nothing if the element is
- * already in view, and it jumps instead of gliding, so it also suits those who ask for less motion.
+ * Brings the next step of a game into view when it is out of it, at the top of the window; `scroll-margin-top` in the
+ * styles of each element keeps room above it. The frames around H5P content grow a moment after the content does, and
+ * only then is its place known, so it looks more than once. It jumps instead of gliding, so it also suits those who ask
+ * for less motion.
+ *
+ * On a touch screen, a field goes to the top even if it shows now: the keyboard is about to cover the lower half, and
+ * the page is not always told (the Moodle app does not resize its page for the keyboard).
  * @param {Element} node
+ * @param {{keyboard?: boolean}} [options] `keyboard`: a text field that has just taken the focus.
  */
-export function bringIntoView(node) {
+export function bringIntoView(node, { keyboard = false } = {}) {
+  const touch = keyboard && matchMedia('(pointer: coarse)').matches;
   [50, 250, 600].forEach((ms) => setTimeout(() => {
-    if (!inView(node)) {
-      node.scrollIntoView({ block: 'center' });
+    if (touch || !inView(node)) {
+      node.scrollIntoView({ block: 'start' });
     }
   }, ms));
+}
+
+/**
+ * Paints the frames between the game and the page, so their edges do not show around a game in dark mode: their
+ * documents have no colours of their own (the Moodle app leaves the default margin of a white page). The outermost page
+ * is not touched.
+ * @param {string} colour A CSS colour, or empty to give them back their own.
+ */
+export function paintOuterFrames(colour) {
+  readableWindows().slice(1, -1).forEach((win) => {
+    win.document.documentElement.style.backgroundColor = colour;
+    if (win.document.body) {
+      win.document.body.style.backgroundColor = colour;
+    }
+  });
 }
 
 /**

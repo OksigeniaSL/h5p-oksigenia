@@ -222,6 +222,48 @@ try {
     await page.screenshot({ path: `${opt.shots}/moodle-end-${width}x${height}.png` });
     await page.waitForTimeout(4000);
   }
+  await page.setViewportSize({ width: 1200, height: 1000 });
+
+  // On a touch screen the keyboard covers the lower part, and the page is not always told: the clue and the field go up
+  // before it opens. Here the keyboard does not open, so it looks at where they end up.
+  const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true,
+    storageState: { cookies: await page.context().cookies(), origins: [] } });
+  await phone.addInitScript(() => localStorage.setItem('h5p-oksigenia-muted', '1'));
+  const touch = await phone.newPage();
+  const touchGame = touch.frameLocator('iframe.h5p-player').frameLocator('iframe.h5p-iframe');
+  await touch.goto(`${opt.url}/mod/h5pactivity/view.php?id=${opt.cmid}`);
+  await touchGame.locator('.aw-intro button').tap();
+  let clue = null, field = null;
+  for (let i = 0; i < 25; i++) {
+    clue = await touchGame.locator('.aw-clue').boundingBox();
+    field = await touchGame.locator('.aw-input').boundingBox();
+    if (clue && field && clue.y >= 60 && field.y + field.height <= 844 * 0.6) {
+      break;
+    }
+    await touch.waitForTimeout(100);
+  }
+  check('on a touch screen, the clue and the field stay above where the keyboard opens',
+    clue && field && clue.y >= 60 && field.y + field.height <= 844 * 0.6,
+    `clue from y ${Math.round(clue.y)}, field down to y ${Math.round(field.y + field.height)}, of 844`);
+  await touch.screenshot({ path: `${opt.shots}/moodle-touch.png` });
+  await phone.close();
+
+  // The dark mode of the page, only in the Moodle versions that have it. The frame around the game goes dark as well.
+  if (opt.container && report.moodle.startsWith('5.')) {
+    execFileSync('docker', ['exec', '-u', 'www-data', opt.container, 'php', '-r', 'define("CLI_SCRIPT", 1); '
+      + 'require "/var/www/moodle/config.php"; set_config("enablecolourmodes", 1, "theme_boost"); '
+      + 'set_config("defaultcolourmode", "dark", "theme_boost"); purge_all_caches();']);
+    await page.waitForTimeout(4000);
+    await openActivity();
+    const dark = 'rgb(29, 33, 37)';
+    const background = (locator) => locator.evaluate((node) => getComputedStyle(node).backgroundColor);
+    await page.waitForTimeout(1000);
+    const inner = await background(game().locator('.aw'));
+    const outer = await background(page.frameLocator('iframe.h5p-player').locator('body'));
+    check('with Moodle in dark mode, the game and the frame around it are dark', inner === dark && outer === dark,
+      `game ${inner}, frame ${outer}`);
+    await page.screenshot({ path: `${opt.shots}/moodle-dark.png` });
+  }
 } finally {
   await browser.close();
 }

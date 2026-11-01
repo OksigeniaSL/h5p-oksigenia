@@ -6,7 +6,7 @@
 import semantics from '../semantics.json';
 import { createMatcher, splitAlternatives } from '../../shared/answer.js';
 import { Countdown, formatTime } from '../../shared/timer.js';
-import { Announcer, bringIntoView, el, fill, plain, watchPageColourMode } from '../../shared/dom.js';
+import { Announcer, bringIntoView, el, fill, paintOuterFrames, plain, watchPageColourMode } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds } from '../../shared/sound.js';
@@ -160,6 +160,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       watchPageColourMode((dark) => {
         this.root.classList.toggle('aw-dark', dark);
         document.documentElement.classList.toggle('h5p-oksigenia-dark', dark);
+        paintOuterFrames(dark ? getComputedStyle(this.root).backgroundColor : '');
       });
     }
     if (this.timer && !this.visibilityWatched) {
@@ -428,7 +429,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     this.render();
     this.input.focus();
-    bringIntoView(this.input);
+    bringIntoView(this.input, { keyboard: true });
     this.announceCurrent('');
   }
 
@@ -522,7 +523,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     } else {
       if (moveFocus) {
         this.input.focus();
-        bringIntoView(this.input);
+        bringIntoView(this.input, { keyboard: true });
       }
       this.announceCurrent('');
     }

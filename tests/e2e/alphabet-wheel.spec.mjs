@@ -353,6 +353,33 @@ for (const [width, height] of [[1100, 540], [360, 640]]) {
   });
 }
 
+test.describe('on a touch screen', () => {
+  // The Moodle app does not resize its page for the keyboard, which covers the lower part of the screen.
+  const height = 844;
+  test.use({ viewport: { width: 390, height }, hasTouch: true, isMobile: true });
+  test.skip(({ browserName }) => browserName === 'firefox', 'Firefox has no mobile emulation');
+
+  test('the clue and the field go to the upper part, before the keyboard covers them', async ({ page }) => {
+    const frame = await open(page, 'es');
+    // A page with more above and below the game, as a Moodle page has, so there is room to scroll.
+    await page.evaluate(() => {
+      const spacer = () => Object.assign(document.createElement('div'), { style: 'height: 500px' });
+      document.body.prepend(spacer());
+      document.body.append(spacer());
+    });
+    const clear = () => expect.poll(async () => {
+      const clue = await frame.locator('.aw-clue').boundingBox();
+      const field = await frame.locator('.aw-input').boundingBox();
+      return !!clue && !!field && clue.y >= 0 && field.y + field.height <= height * 0.6;
+    }, { message: 'clue and field above the keyboard' }).toBe(true);
+    await frame.locator('.aw-intro button').tap();
+    await clear();
+    await frame.locator('.aw-pause').tap();
+    await frame.locator('.aw-pause').tap();
+    await clear();
+  });
+});
+
 test('the game changes along with the dark mode of the page, and stays light without it', async ({ page }) => {
   const frame = await open(page, 'es');
   const background = () => frame.evaluate(() => getComputedStyle(document.querySelector('.aw')).backgroundColor);
