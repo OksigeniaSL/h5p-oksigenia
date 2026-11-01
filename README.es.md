@@ -29,7 +29,7 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
   son la respuesta, no una pregunta antes de saltar: no hay reloj, y un intento fallido enseña dónde ha caído. Cada
   partida genera sus números, así que el docente solo elige qué se practica, o deja la elección para la primera pantalla.
   Cada ronda queda en el informe de la actividad. Hay tres piezas a elegir, para que no resulte infantil a ninguna edad, y
-  una recta libre, sin puntos, para la pizarra.
+  una recta libre, sin puntos, para la pizarra. **[Juega ahora](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D78)**.
 
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/img/number-line-game-es-dark.webp">

@@ -102,7 +102,7 @@ try {
     }
     return { ok: false, where: box ? `y ${Math.round(box.y)}-${Math.round(box.y + box.height)}` : 'not shown' };
   };
-  for (const [width, height] of [[1100, 540], [1024, 768], [800, 600], [360, 640]]) {
+  for (const [width, height] of [[1366, 768], [1100, 540], [1024, 768], [800, 600], [360, 640]]) {
     await page.setViewportSize({ width, height });
     await open();
     const start = game.locator('.nl-choice-tables');
@@ -111,6 +111,8 @@ try {
     }
     const challenge = await inView(game.locator('.nl-challenge'), height);
     check(`at ${width}×${height}, the round comes into view`, challenge.ok, challenge.where);
+    const buttons = await inView(game.locator('.nl-controls').first(), height);
+    check(`at ${width}×${height}, with its buttons`, buttons.ok, buttons.where);
     // Reloaded after a round that was over, only «Next» is left.
     if (await game.locator('.nl-next').isVisible()) {
       await game.locator('.nl-next').click();

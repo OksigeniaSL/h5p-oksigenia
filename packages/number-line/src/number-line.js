@@ -236,7 +236,11 @@ export default class NumberLine extends H5P.EventDispatcher {
       if (first) {
         /** @type {HTMLElement} */ (first).focus({ preventScroll: true });
       }
-      bringIntoView(this.game.roundOver ? this.nextButton : this.challenge);
+      if (this.game.roundOver) {
+        bringIntoView(this.nextButton);
+      } else {
+        bringIntoView(this.challenge, { through: this.controls });
+      }
     }
     // Inside another content type, the game keeps the colours of what is around it.
     if (this.isRoot() && !this.colourWatched) {
@@ -376,7 +380,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     if (topic === 'free') {
       this.openFree(FREE_RANGES[1][0]);
       this.render();
-      bringIntoView(this.lineBox);
+      bringIntoView(this.lineBox, { through: this.controls });
       this.controls.querySelector('button').focus({ preventScroll: true });
       return;
     }
@@ -915,7 +919,8 @@ export default class NumberLine extends H5P.EventDispatcher {
     if (first) {
       /** @type {HTMLElement} */ (first).focus({ preventScroll: true });
     }
-    bringIntoView(this.challenge);
+    // The whole round in view, down to its buttons: the sum alone is not enough to play.
+    bringIntoView(this.challenge, { through: this.controls });
     this.announcer.say(`${this.challenge.textContent}. ${this.hint.textContent}`);
   }
 

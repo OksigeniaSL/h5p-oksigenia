@@ -275,6 +275,8 @@ for (const [width, height] of [[1100, 540], [360, 640]]) {
     }, { message: `${selector} in view` }).toBe(true);
     await frame.locator('.nl-choice-tables').click();
     await shows('.nl-challenge');
+    await shows('.nl-line');
+    await shows('.nl-count >> nth=11');
     const r = await round(frame);
     await frame.locator('.nl-count', { hasText: new RegExp(`^${r.times}$`) }).click();
     await shows('.nl-next');

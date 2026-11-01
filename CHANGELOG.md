@@ -2,10 +2,17 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Not released yet
+## Alphabet Wheel, not released yet
 
-- Both games: a game taken up again comes into view with the focus where it goes on: the answer field, the button that resumes
-  it or, in the Number Line, the first thing to press. Before, what was typed went nowhere until the field was tapped.
+- A game taken up again comes into view with the focus where it goes on: the answer field or the button that resumes it.
+  Before, what was typed went nowhere until the field was tapped.
+
+## Number Line 1.0.1 (1 November 2026)
+
+- The whole round comes into view at the start, down to its buttons. Before, on a common laptop screen below the header of a
+  page, only the sum showed and the line and the buttons were out of view.
+- «Next» comes into view with the line above it, clear of the fixed bars of a page.
+- A game taken up again comes into view with the focus on the first thing to press.
 
 ## Number Line 1.0.0 (1 November 2026)
 

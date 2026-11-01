@@ -220,8 +220,8 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
 }
 
 .h5p-number-line .nl-challenge {
-  /* Room above it when it is brought into view: the bar goes with it. */
-  scroll-margin-top: 6em;
+  /* Room above it when it is brought into view, clear of the fixed bars of a page. */
+  scroll-margin-top: 5em;
   /* Symbols before words: who is starting to read follows «3 → 27» without the sentence. */
   font-size: 1.9em;
   font-weight: 800;
@@ -250,6 +250,8 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
 }
 
 .h5p-number-line .nl-next {
+  /* Room above it when it is brought into view: the line and what happened on it stay on screen. */
+  scroll-margin-top: 16em;
   align-self: flex-start;
 }
 
