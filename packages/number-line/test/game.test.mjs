@@ -318,10 +318,76 @@ test('the state takes the game up again, with the same numbers', () => {
   assert.equal(back.number, 2);
   assert.equal(back.score, 2);
   assert.deepEqual(back.current, g.current);
-  // The open round starts again from its first number.
-  assert.equal(back.position, g.current.start);
-  assert.equal(back.moves.length, 0);
+  // The open round goes on from where it was, with its jumps.
+  assert.equal(back.position, g.position);
+  assert.deepEqual(back.moves, g.moves);
   assert.equal(back.roundOver, false);
+});
+
+test('coming back does not give another try: a wrong try stays counted, and a sum stays where it was', () => {
+  const g = game('tables');
+  g.start();
+  g.tryJumps(g.current.times + 1);
+  const back = game('tables');
+  back.restore(JSON.parse(JSON.stringify(g.toState())));
+  assert.equal(back.moves.length, 1);
+  assert.equal(back.tryJumps(back.current.times).got, 0);
+
+  const sum = game('add100', 4);
+  sum.start();
+  sum.jump(sum.current.amount);
+  const again = game('add100', 4);
+  again.restore(JSON.parse(JSON.stringify(sum.toState())));
+  assert.equal(again.answering, true);
+  assert.equal(again.answer(again.current.target).got, 2);
+});
+
+test('moves that do not fit the round are left out', () => {
+  const g = game('add100');
+  g.start();
+  const state = JSON.parse(JSON.stringify(g.toState()));
+  const back = game('add100');
+  assert.equal(back.restore({ ...state, moves: [100000] }), true);
+  assert.equal(back.position, back.current.start);
+  assert.equal(back.moves.length, 0);
+  const other = game('add100');
+  assert.equal(other.restore({ ...state, moves: ['x'] }), true);
+  assert.equal(other.moves.length, 0);
+});
+
+test('a game does not ask the same thing twice, and 2/4 counts as 1/2', () => {
+  for (let seed = 1; seed <= 30; seed++) {
+    const g = game('fractions', 5, {}, seed);
+    g.start();
+    const values = [];
+    while (g.phase === 'playing') {
+      values.push(g.current.value);
+      g.place(0);
+      g.next();
+    }
+    assert.equal(new Set(values).size, values.length, `seed ${seed}: ${values}`);
+  }
+  for (const topic of ['add20', 'add100', 'tables', 'place1000']) {
+    const g = game(topic, 6);
+    g.start();
+    const seen = [];
+    while (g.phase === 'playing') {
+      const { current: r } = g;
+      seen.push(JSON.stringify(r));
+      if (r.mode === 'goal') {
+        r.best.forEach((j) => g.jump(j));
+      } else if (r.mode === 'land') {
+        g.jump(r.amount);
+        g.answer(r.target);
+      } else if (r.mode === 'exact') {
+        g.tryJumps(r.times);
+      } else {
+        g.place(r.value);
+      }
+      g.next();
+    }
+    assert.equal(new Set(seen).size, seen.length, topic);
+  }
 });
 
 test('a state that does not fit is left out', () => {

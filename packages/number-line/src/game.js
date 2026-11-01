@@ -27,7 +27,7 @@ export const TOPICS = {
     { max: 100, ticks: 10 }, { max: 500, ticks: 5 }, { max: 1000, ticks: 0 },
   ] },
   fractions: { modes: ['place'], points: 2, levels: [
-    { max: 1, denominators: [2, 4], ticks: 'denominator' },
+    { max: 1, denominators: [2, 3, 4], ticks: 'denominator' },
     { max: 1, denominators: [3, 4, 5, 8], ticks: 0 },
     { max: 2, denominators: [2, 3, 4], ticks: 0 },
   ] },
@@ -233,17 +233,32 @@ export class NumberLineGame {
     return list[this.between(0, list.length - 1)];
   }
 
-  /** @returns {Round} A new round of the current level, different from the one before. */
+  /**
+   * @param {Round} round
+   * @returns {string} What makes it the same round for the player: a fraction is its value, so 2/4 repeats 1/2.
+   */
+  static sameness(round) {
+    if (round.mode === 'goal') {
+      return `goal ${round.start} ${round.target}`;
+    }
+    if (round.mode === 'land') {
+      return `land ${round.start} ${round.amount}`;
+    }
+    return round.mode === 'exact' ? `exact ${round.size} ${round.times}` : `place ${round.value}`;
+  }
+
+  /** @returns {Round} A new round of the current level, not one already asked in this game if it can be helped. */
   newRound() {
     const mode = this.plan.modes[(this.number - 1) % this.plan.modes.length];
     const make = { goal: () => this.goalRound(), land: () => this.landRound(), exact: () => this.exactRound(), place: () => this.placeRound() }[mode];
-    const last = this.log.length ? this.log[this.log.length - 1].round : null;
-    let round;
-    for (let tries = 0; tries < 20; tries++) {
+    const asked = this.log.map((entry) => NumberLineGame.sameness(entry.round));
+    let round = make();
+    for (let tries = 0; tries < 40 && asked.includes(NumberLineGame.sameness(round)); tries++) {
       round = make();
-      if (!last || JSON.stringify(round) !== JSON.stringify(last)) {
-        break;
-      }
+    }
+    // With few numbers to ask about (one times table), they run out: at least, not twice in a row.
+    for (let tries = 0; tries < 40 && asked[asked.length - 1] === NumberLineGame.sameness(round); tries++) {
+      round = make();
     }
     return round;
   }
@@ -492,12 +507,38 @@ export class NumberLineGame {
     return this.log.length > 0 || this.moves.length > 0;
   }
 
-  /** @returns {Object} What is saved to take the game up again. An open round starts again, with the same numbers. */
+  /** @returns {Object} What is saved to take the game up again where it was, with the jumps already made. */
   toState() {
     return {
       topic: this.topic, phase: this.phase, number: this.number, level: this.level, streak: this.streak,
-      current: this.current, log: this.log,
+      current: this.current, log: this.log, moves: this.moves, restarted: this.restarted, helped: this.helped,
     };
+  }
+
+  /**
+   * The moves already made in the open round, so it goes on from there. Moves that do not fit the round are left out.
+   * @param {{moves: number[], restarted?: boolean, helped?: boolean}} state
+   */
+  takeUpRound({ moves, restarted, helped }) {
+    const round = this.current;
+    if (!moves.every(Number.isInteger)) {
+      return;
+    }
+    this.restarted = !!restarted;
+    this.helped = !!helped;
+    if (round.mode === 'exact') {
+      this.moves = moves.slice();
+    } else if (round.mode === 'goal' || round.mode === 'land') {
+      const position = moves.reduce((at, jump) => at + jump, round.start);
+      if (position >= 0 && position <= round.max) {
+        this.moves = moves.slice();
+        this.position = position;
+        if (round.mode === 'land') {
+          this.answering = position === round.target;
+          this.over = Math.sign(round.target - position) === -Math.sign(round.amount);
+        }
+      }
+    }
   }
 
   /**
@@ -519,6 +560,9 @@ export class NumberLineGame {
     this.clearRound();
     // A round that was over when it was saved: on to the next one.
     this.roundOver = this.log.length >= this.number;
+    if (!this.roundOver && Array.isArray(state.moves)) {
+      this.takeUpRound(state);
+    }
     return true;
   }
 }

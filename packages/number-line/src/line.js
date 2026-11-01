@@ -14,6 +14,8 @@ const BASELINE = 130;
 /** The steps labels can go by: the first one that leaves them room. */
 const LABEL_STEPS = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
 const LABEL_ROOM = 26;
+/** A label this close to the number of the flag, in pixels of the line, would be written over by it. */
+const LABEL_CLEAR = 26;
 /** On a big screen the whole line grows with its width, up to this, so it can be seen from the back of a classroom. */
 const MAX_SCALE = 2;
 const SCALE_FROM_WIDTH = 800;
@@ -213,8 +215,8 @@ export class Line {
       this.node.append(svg('line', {
         class: 'nl-tick-major', x1: this.x(value), x2: this.x(value), y1: BASELINE - 10, y2: BASELINE + 10,
       }));
-      // A label under the flag would be written over by the flag's own.
-      if (value !== this.flag && value !== this.solution) {
+      const clear = [this.flag, this.solution].every((other) => other === null || Math.abs(this.x(value) - this.x(other)) >= LABEL_CLEAR);
+      if (clear) {
         this.node.append(svg('text', {
           class: 'nl-label', x: this.x(value), y: BASELINE + 30, 'text-anchor': 'middle',
         }, this.format(value)));

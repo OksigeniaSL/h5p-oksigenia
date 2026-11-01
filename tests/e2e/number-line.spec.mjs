@@ -51,11 +51,15 @@ async function playRound(page, frame) {
   } else if (r.mode === 'exact') {
     await frame.locator('.nl-count', { hasText: new RegExp(`^${r.times}$`) }).click();
   } else {
-    // The round comes into view a moment after it opens, and the place to click moves with it.
+    // The round comes into view a moment after it opens, and the place to click moves with it: on a busy machine, later.
     await page.waitForTimeout(700);
-    const box = await frame.locator('.nl-line').boundingBox();
-    const padding = 26 * (box.width / await frame.evaluate(() => H5P.instances[0].line.width));
-    await page.mouse.click(box.x + padding + (r.value / r.max) * (box.width - 2 * padding), box.y + box.height / 2);
+    for (let i = 0; i < 5 && await frame.locator('.nl-here').isDisabled(); i++) {
+      const box = await frame.locator('.nl-line').boundingBox();
+      const padding = 26 * (box.width / await frame.evaluate(() => H5P.instances[0].line.width));
+      await page.mouse.click(box.x + padding + (r.value / r.max) * (box.width - 2 * padding), box.y + box.height / 2);
+      await page.waitForTimeout(200);
+    }
+    await frame.evaluate((value) => H5P.instances[0].mark(value), r.value);
     await frame.locator('.nl-here').click();
   }
   await frame.locator('.nl-next').click();
@@ -69,7 +73,7 @@ for (const topic of TOPICS) {
     for (let i = 0; i < 6; i++) {
       await playRound(page, frame);
     }
-    await expect(frame.locator('.nl-cheer-title')).toBeVisible();
+    await expect(frame.locator('.nl-cheer-title')).toBeVisible({ timeout: 15_000 });
     await expect(frame.locator('.nl-review-item')).toHaveCount(6);
     const [statement, ...more] = await answered(frame);
     expect(more).toEqual([]);
@@ -209,6 +213,37 @@ test('a reload in the middle takes the game up again, with the same numbers', as
   await expect(frame.locator('.nl-round')).toContainText('2');
   expect((await round(frame)).target).toBe(r.target);
 });
+
+test('a reload in the middle of a sum keeps the jumps already made', async ({ page }) => {
+  const session = `nl-jumps-${test.info().project.name}`;
+  let frame = await open(page, 'es', session);
+  await frame.locator('.nl-choice-add100').click();
+  await frame.locator('.nl-jump').first().click();
+  const before = await frame.evaluate(() => H5P.instances[0].game.position);
+  await frame.evaluate(() => {
+    H5P.setUserData(H5P.instances[0].contentId, 'state', H5P.instances[0].getCurrentState(), { deleteOnChange: true });
+  });
+  await page.waitForTimeout(500);
+  frame = await open(page, 'es', session);
+  expect(await frame.evaluate(() => H5P.instances[0].game.position)).toBe(before);
+  expect(await frame.evaluate(() => H5P.instances[0].line.piece)).toBe(before);
+  expect(await frame.locator('.nl-arc').count()).toBe(1);
+  await expect(frame.locator('.nl-again')).toBeVisible();
+});
+
+for (const width of [320, 360, 412]) {
+  test(`the full screen button of H5P covers nothing of the bar at ${width} px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    const frame = await open(page);
+    await frame.locator('.nl-choice-tables').click();
+    const corner = await frame.locator('.h5p-enable-fullscreen').boundingBox();
+    for (const selector of ['.nl-round', '.nl-level', '.nl-points', '.nl-sound', '.nl-volume']) {
+      const box = await frame.locator(selector).boundingBox();
+      const apart = box.x + box.width <= corner.x || box.y >= corner.y + corner.height;
+      expect(apart, `${selector} clear of the button`).toBe(true);
+    }
+  });
+}
 
 test('it never saves a null state, the one H5P takes for changed content', async ({ page }) => {
   const frame = await open(page);

@@ -450,6 +450,9 @@ export default class NumberLine extends H5P.EventDispatcher {
       this.openPlace(round);
     }
     this.line.show();
+    if ((round.mode === 'goal' || round.mode === 'land') && this.game.moves.length) {
+      this.takeUpJumps(round);
+    }
     if (this.game.roundOver) {
       // The game was taken up again after this round was over: only «Next» is left.
       [...this.controls.children, ...this.extraControls.children].forEach((b) => {
@@ -505,6 +508,30 @@ export default class NumberLine extends H5P.EventDispatcher {
     line.piece = round.start;
     line.enableDrawing({ onDraw: (to) => this.jump(to - this.game.position) });
     this.jumpControls(round.sizes);
+  }
+
+  /**
+   * The game was taken up again in the middle of this round: the jumps already made go back on the line.
+   * @param {import('./game.js').GoalRound|import('./game.js').LandRound} round
+   */
+  takeUpJumps(round) {
+    const g = this.game, t = this.l10n;
+    let at = round.start;
+    this.line.arcs = g.moves.map((jump) => {
+      const arc = { from: at, to: at + jump, text: signed(jump), off: false };
+      at += jump;
+      return arc;
+    });
+    this.line.piece = at;
+    this.line.draw();
+    this.paintJumps();
+    if (g.answering && round.mode === 'land') {
+      this.askWhere(round, false);
+    } else if (g.over && round.mode === 'land') {
+      this.line.arcs[this.line.arcs.length - 1].off = true;
+      this.line.draw();
+      this.message = { text: fill(t.landOver, { position: this.format(at), amount: this.format(Math.abs(round.amount)) }), kind: 'bad' };
+    }
   }
 
   /** The jumps that cannot be made are off, and the help shows when it is due. Focus does not stay on a button that went off. */
@@ -629,8 +656,9 @@ export default class NumberLine extends H5P.EventDispatcher {
   /**
    * The jumps are done: now to say where they landed.
    * @param {import('./game.js').LandRound} round
+   * @param {boolean} [moveFocus] Not when the game is taken up again and the page has only just opened.
    */
-  askWhere(round) {
+  askWhere(round, moveFocus = true) {
     const t = this.l10n;
     this.hint.textContent = t.landAsk;
     this.extraControls.replaceChildren();
@@ -639,8 +667,10 @@ export default class NumberLine extends H5P.EventDispatcher {
     })));
     this.message = null;
     this.render();
-    this.controls.querySelector('button').focus();
-    this.announcer.say(t.landAsk);
+    if (moveFocus) {
+      this.controls.querySelector('button').focus();
+      this.announcer.say(t.landAsk);
+    }
   }
 
   /** @param {number} value The number the player says. */
