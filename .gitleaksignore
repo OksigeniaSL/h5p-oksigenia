@@ -1,0 +1,3 @@
+# The key under which the games remember the mute button in localStorage: a plain name, not a secret. The generic rule
+# of Gitleaks takes it for an API key.
+7f9ace13825c450d9bf5da333c85aaaf341baa2d:packages/shared/sound.js:generic-api-key:7
