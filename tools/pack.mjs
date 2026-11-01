@@ -1,7 +1,7 @@
 // Packs the example content of each game, one .h5p per language, into dist/: h5p.json, content/ and the library
 // folder from build/. Uploading one of them to a site installs the game. Run tools/build.mjs first.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';

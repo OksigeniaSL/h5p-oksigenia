@@ -1,6 +1,6 @@
 // H5P.AlphabetWheel: the screen of the alphabet wheel and its contract with H5P (score, xAPI, resume).
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import semantics from '../semantics.json';

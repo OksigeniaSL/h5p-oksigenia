@@ -1,4 +1,4 @@
-// Plays the Alphabet Wheel in a real Moodle as a fictitious student and checks what Moodle keeps: one attempt per
+// Plays the Alphabet Wheel in a real Moodle as an example student and checks what Moodle keeps: one attempt per
 // game, with score = letters right, and the grade from the last one; a reload in the middle takes the game up again;
 // a reload after the end starts a new game. Leaves screenshots for the test report.
 //
@@ -8,7 +8,7 @@
 //   node tests/platforms/moodle/check.mjs --url http://localhost:8096 --cmid 2 --container h5p-moodle-moodle-1 \
 //     --db h5p-moodle-db-1 --db-password … --admin-password … --shots <folder> [--games 10]
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { chromium } from '@playwright/test';

@@ -1,7 +1,7 @@
 // The end of a game: a ring that fills up to the score, a message by how well it went and, when it went well,
 // confetti. No animation when the system asks for reduced motion.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { el } from './dom.js';

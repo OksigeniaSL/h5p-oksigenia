@@ -7,7 +7,7 @@
 //
 // The core files are taken once from Lumi's repository (tag v1.0.3) into $H5P_PLATFORM_DIR/lumi-1.0.3.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import * as LumiH5P from '@lumieducation/h5p-server';

@@ -52,7 +52,7 @@ npm run lang         # language/*.json a partir de semantics.json y de los dicci
 
 Las mismas fuentes dan siempre el mismo `.h5p`, byte a byte.
 
-En plataformas reales, con datos ficticios y sitios de usar y tirar que se borran al acabar (Docker, con tope de
+En plataformas reales, con datos de ejemplo y sitios de usar y tirar que se borran al acabar (Docker, con tope de
 memoria y de CPU):
 
 ```

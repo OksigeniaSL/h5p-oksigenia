@@ -6,7 +6,7 @@ a real classroom. A few things to keep in mind before opening a pull request.
 ## Code
 
 - One folder per H5P library. What the games share is built into each game, not shipped as a library of its own.
-- License header in each source file: MIT, copyright `Oksigenia <dev@oksigenia.cc>`.
+- License header in each source file: MIT, copyright `Oksigenia SL <dev@oksigenia.cc>`.
 - Code, comments and commit messages in **English**. The texts players and authors see live in the translation
   files of each library (`language/*.json`).
 - No external services, no CDN, no tracking, no WebP images (H5P does not accept them).

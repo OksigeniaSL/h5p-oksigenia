@@ -8,7 +8,7 @@
 # published SHA-512. The site gets random passwords, runs with capped memory and CPU (compose.yaml) and is removed with
 # its volumes at the end, also when something fails. Screenshots go to $H5P_PLATFORM_DIR/report-wordpress.
 #
-# @copyright 2026 Oksigenia <dev@oksigenia.cc>
+# @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
 set -eu
 
@@ -58,7 +58,7 @@ c=h5p-wordpress-wordpress-1
 docker cp "$base/wp-cli/wp-cli-$WPCLI_VERSION.phar" $c:/usr/local/bin/wp
 docker exec $c chmod 755 /usr/local/bin/wp
 wp() { docker exec -u www-data $c wp "$@"; }
-wp core install --url=http://localhost:8098 --title='Pruebas H5P (datos ficticios)' --admin_user=admin \
+wp core install --url=http://localhost:8098 --title='Pruebas H5P (datos de ejemplo)' --admin_user=admin \
   --admin_password="$admin_password" --admin_email=admin@example.org --skip-email
 wp plugin install h5p --activate
 wp option update h5p_save_content_state 1

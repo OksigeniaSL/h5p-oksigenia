@@ -3,7 +3,7 @@
 //
 //   node tests/platforms/orca/serve.mjs [--port 8093]
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import * as LumiH5P from '@lumieducation/h5p-server';

@@ -1,7 +1,7 @@
 // The rules of the alphabet wheel, without the screen: one player goes round the letters, answers or passes, and the
 // passed letters come back in the next round until every letter is answered, the time is up or the player stops.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 export const STATE_VERSION = 1;

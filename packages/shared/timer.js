@@ -1,6 +1,6 @@
 // A countdown that can be paused (WCAG 2.2.1), measured with the monotonic clock so a slow tab does not gain time.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 export class Countdown {

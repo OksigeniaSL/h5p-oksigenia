@@ -1,7 +1,7 @@
 // Letters that never count as another one when answers are compared, per language of the answers, and the few
 // equivalences that removing accents does not give by itself. Taken from the content packs of Oksigenia Classtools.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 const LATIN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

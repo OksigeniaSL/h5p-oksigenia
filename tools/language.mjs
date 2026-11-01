@@ -2,7 +2,7 @@
 // (i18n/<lang>.json: English text → translation, plus defaults that are not texts). With --check it only says
 // whether the files are up to date, for the CI.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'node:fs';

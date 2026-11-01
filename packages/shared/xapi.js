@@ -2,7 +2,7 @@
 // the Moodle report shows each gap with the player's answer and the accepted ones. The description is only the
 // title: Moodle strips its markup and would run every clue into one paragraph above the table of gaps.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 export const XAPI_ALTERNATIVES = 'https://h5p.org/x-api/alternatives';

@@ -1,7 +1,7 @@
 // Checks a typed answer against the accepted ones, with the tolerance the author chose: capitals, accents and
 // spacing can be ignored, but the letters of the language (the Ñ in Spanish, the Ä in German) always count.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { alphabetFor } from './alphabets.js';

@@ -2,7 +2,7 @@
 // Firefox and WebKit (the engine of Safari). Locally Chromium is the Chrome of the system; E2E_BROWSERS picks some of
 // them (E2E_BROWSERS=chromium for a quick run).
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { defineConfig, devices } from '@playwright/test';

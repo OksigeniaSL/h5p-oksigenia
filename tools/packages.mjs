@@ -1,6 +1,6 @@
 // The H5P libraries of the repository: every folder of packages/ with a library.json.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';

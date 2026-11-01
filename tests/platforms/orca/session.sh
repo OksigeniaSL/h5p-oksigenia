@@ -2,7 +2,7 @@
 # Inside the container: a virtual screen, the accessibility bus, Orca writing what it says to /out/orca.log, and
 # Firefox playing the wheel at $URL with the keyboard only (xdotool). The steps are printed as they go.
 #
-# @copyright 2026 Oksigenia <dev@oksigenia.cc>
+# @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
 set -eu
 Xvfb :99 -screen 0 1280x900x24 >/dev/null 2>&1 &

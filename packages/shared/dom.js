@@ -1,6 +1,6 @@
 // Small DOM helpers shared by the games.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 /**

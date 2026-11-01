@@ -4,7 +4,7 @@
 // With --watch it keeps rebuilding on every change and copies each build into the dev server (.h5p-dev), whose live
 // reload shows it.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { context } from 'esbuild';

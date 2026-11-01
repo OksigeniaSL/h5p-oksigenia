@@ -8,7 +8,7 @@
 # Needs Docker, the built example packages (npm run pack) and the dev server's H5P core (.h5p-dev, npm run dev once).
 # Output: $H5P_PLATFORM_DIR/orca (default ~/.cache/h5p-oksigenia/orca): orca.log, steps.log and speech.txt.
 #
-# @copyright 2026 Oksigenia <dev@oksigenia.cc>
+# @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
 set -eu
 here=$(cd "$(dirname "$0")" && pwd)

@@ -1,4 +1,4 @@
-// Plays the Alphabet Wheel in a real WordPress with the official H5P plugin as a fictitious student: the admin uploads
+// Plays the Alphabet Wheel in a real WordPress with the official H5P plugin as an example student: the admin uploads
 // the example package (which installs the game), then each game leaves its score in the plugin's results; a reload
 // in the middle takes the game up again, and a reload after the end starts a new one. Leaves screenshots.
 //
@@ -7,7 +7,7 @@
 //   node tests/platforms/wordpress/check.mjs --url http://localhost:8098 --container … --db … --db-password … \
 //     --admin-password … --student-password … --package <file.h5p> --shots <folder>
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { chromium } from '@playwright/test';

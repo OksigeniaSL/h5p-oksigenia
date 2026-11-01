@@ -12,7 +12,7 @@
 // Exit codes: 0 installed, or already up to date; 1 the installation failed; 2 the checksum does not match;
 // 3 wrong options or unreadable package.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 define('CLI_SCRIPT', true);

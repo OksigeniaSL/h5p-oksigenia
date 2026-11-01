@@ -1,7 +1,7 @@
 // A minimal zip writer, deterministic: files in name order, fixed dates and DEFLATE, so the same sources always give
 // the same .h5p, byte for byte.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { crc32, deflateRawSync } from 'node:zlib';

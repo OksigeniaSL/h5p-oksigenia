@@ -1,6 +1,6 @@
 // Linting: the recommended rules of ESLint and a style close to H5P's own (2 spaces, single quotes, semicolons).
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import js from '@eslint/js';

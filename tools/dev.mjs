@@ -7,7 +7,7 @@
 // --no-watch turns off live reload, which always takes port 35729: the end-to-end tests use it so they can run
 // next to a dev server that is already open.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { spawn, spawnSync } from 'node:child_process';

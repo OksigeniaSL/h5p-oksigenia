@@ -1,6 +1,6 @@
-// End-to-end tests of H5P.AlphabetWheel in the h5p-cli dev server, with the example wheels (fictitious content).
+// End-to-end tests of H5P.AlphabetWheel in the h5p-cli dev server, with the example wheels (example content).
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { test, expect } from '@playwright/test';

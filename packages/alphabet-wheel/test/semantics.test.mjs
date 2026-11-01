@@ -1,6 +1,6 @@
 // Every text and setting of the editor is used by the game, and the game uses no text the editor does not offer.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 import { test } from 'node:test';

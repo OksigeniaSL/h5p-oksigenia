@@ -7,7 +7,7 @@
 # random passwords, runs with capped memory and CPU (compose.yaml) and is removed with its volumes at the end, also
 # when something fails. Screenshots go to $H5P_PLATFORM_DIR/report-moodle-<branch> (default ~/.cache/h5p-oksigenia).
 #
-# @copyright 2026 Oksigenia <dev@oksigenia.cc>
+# @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
 set -eu
 

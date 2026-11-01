@@ -1,5 +1,5 @@
 // Globals the games find on the page: H5P core, and what the tests leave on the window.
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 declare var H5P: any;

@@ -1,7 +1,7 @@
 # Orca, Firefox ESR and a virtual screen, to read what a screen reader says while a game is played with the keyboard
 # (tests/platforms/orca/run.sh). Nothing of the host's screen, sound or input is used.
 #
-# @copyright 2026 Oksigenia <dev@oksigenia.cc>
+# @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
 FROM debian:trixie-slim
 RUN apt-get update \

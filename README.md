@@ -51,7 +51,7 @@ npm run lang         # language/*.json from semantics.json and the dictionaries 
 
 The same sources always give the same `.h5p`, byte for byte.
 
-On real platforms, with fictitious data and throwaway sites that are removed at the end (Docker; memory and CPU
+On real platforms, with example data and throwaway sites that are removed at the end (Docker; memory and CPU
 capped):
 
 ```

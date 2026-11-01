@@ -1,8 +1,8 @@
 <?php
-// Throwaway test data: a course, a fictitious student and an H5P activity with the given package.
+// Throwaway test data: a course, an example student and an H5P activity with the given package.
 // Run inside the container as www-data: php setup.php <package.h5p> <grademethod>
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 define('CLI_SCRIPT', true);
 require('/var/www/moodle/config.php');
@@ -17,7 +17,7 @@ $admin = get_admin();
 
 $course = $DB->get_record('course', ['shortname' => 'AW-TEST']);
 if (!$course) {
-    $course = create_course((object) ['fullname' => 'Rueda de letras: pruebas (datos ficticios)', 'shortname' => 'AW-TEST',
+    $course = create_course((object) ['fullname' => 'Rueda de letras: pruebas (datos de ejemplo)', 'shortname' => 'AW-TEST',
         'category' => 1, 'format' => 'topics', 'numsections' => 1]);
 }
 $student = $DB->get_record('user', ['username' => 'alumno1']);

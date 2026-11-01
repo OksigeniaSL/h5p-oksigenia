@@ -1,7 +1,7 @@
 // Sounds made in the browser with Web Audio, without audio files: the same bells and clicks as the classroom board of
 // Oksigenia Classtools. Players can mute them (remembered in this browser) and authors can leave them out.
 //
-// @copyright 2026 Oksigenia <dev@oksigenia.cc>
+// @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 // @license   MIT
 
 const STORAGE_KEY = 'h5p-oksigenia-muted';

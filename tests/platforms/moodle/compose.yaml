@@ -1,4 +1,4 @@
-# Throwaway Moodle to test the H5P games of Oksigenia, used by run.sh. Fictitious data only; removed after each run.
+# Throwaway Moodle to test the H5P games of Oksigenia, used by run.sh. Example data only; removed after each run.
 # MOODLE_IMAGE picks the branch (oksigenia/moodle:4.5 or :5.3). Memory and CPU capped: the laptop runs other agents.
 name: h5p-moodle
 services:
@@ -34,7 +34,7 @@ services:
       MOODLE_DB_PASSWORD: ${DB_PASSWORD}
       MOODLE_ADMIN_USER: admin
       MOODLE_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-      MOODLE_SITE_NAME: "Pruebas H5P (datos ficticios)"
+      MOODLE_SITE_NAME: "Pruebas H5P (datos de ejemplo)"
       MOODLE_LANG: es
       MOODLE_TIMEZONE: Europe/Madrid
       APACHE_MAX_REQUEST_WORKERS: "6"
