@@ -28,9 +28,9 @@ services:
       db:
         condition: service_healthy
     ports:
-      - "127.0.0.1:8096:8080"
+      - "127.0.0.1:${H5P_MOODLE_PORT:-8096}:8080"
     environment:
-      MOODLE_URL: http://localhost:8096
+      MOODLE_URL: http://localhost:${H5P_MOODLE_PORT:-8096}
       MOODLE_DB_PASSWORD: ${DB_PASSWORD}
       MOODLE_ADMIN_USER: admin
       MOODLE_ADMIN_PASSWORD: ${ADMIN_PASSWORD}

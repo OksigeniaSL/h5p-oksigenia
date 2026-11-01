@@ -334,14 +334,50 @@ test('the size of the H5P theme changes the text and the wheel', async ({ page }
   expect((await measure()).text).toBeGreaterThan(small.text);
 });
 
+for (const [width, height] of [[1100, 540], [360, 640]]) {
+  test(`the next step comes into view at ${width}×${height}, below the header of a page`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    const frame = await open(page, 'es');
+    // As the header of a Moodle page does: the game starts low on the page.
+    await page.evaluate(() => document.body.prepend(Object.assign(document.createElement('div'), { style: 'height: 500px' })));
+    const shows = (selector) => expect.poll(async () => {
+      const box = await frame.locator(selector).boundingBox();
+      return !!box && box.y >= 0 && box.y + box.height <= height;
+    }, { message: `${selector} in view` }).toBe(true);
+    await frame.locator('.aw-intro button').click();
+    await shows('.aw-input');
+    await frame.locator('.aw-finish').click();
+    await frame.locator('.aw-finish').click();
+    await shows('.aw-cheer-title');
+    await shows('.aw-retry');
+  });
+}
+
+test('the game changes along with the dark mode of the page, and stays light without it', async ({ page }) => {
+  const frame = await open(page, 'es');
+  const background = () => frame.evaluate(() => getComputedStyle(document.querySelector('.aw')).backgroundColor);
+  const light = await background();
+  await page.evaluate(() => document.documentElement.setAttribute('data-bs-theme', 'dark'));
+  await expect.poll(background).toBe('rgb(29, 33, 37)');
+  await page.evaluate(() => document.documentElement.setAttribute('data-bs-theme', 'light'));
+  await expect.poll(background).toBe(light);
+});
+
 /** @type {Array<[number, string]>} */
-const SCREENS = [[320, 'core'], [1100, 'core'], [320, 'dark'], [1100, 'dark']];
+const SCREENS = [[320, 'core'], [1100, 'core'], [320, 'dark'], [1100, 'dark'], [320, 'page'], [1100, 'page']];
 for (const [width, theme] of SCREENS) {
   test(`no sideways scrolling and no axe violations at ${width} px, ${theme} theme`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     const frame = await open(page, 'es');
-    // The theme buttons of the dev server set the H5P core 1.28 theme variables inside the game.
-    await page.evaluate((name) => /** @type {HTMLElement} */ (document.querySelector(`.button-theme-color.${name}`)).click(), theme);
+    if (theme === 'page') {
+      // The dark mode of the page around the frames, the way Moodle 5.3 marks it.
+      await page.evaluate(() => document.documentElement.setAttribute('data-bs-theme', 'dark'));
+      await expect.poll(() => frame.evaluate(() => getComputedStyle(document.querySelector('.aw')).backgroundColor))
+        .toBe('rgb(29, 33, 37)');
+    } else {
+      // The theme buttons of the dev server set the H5P core 1.28 theme variables inside the game.
+      await page.evaluate((name) => /** @type {HTMLElement} */ (document.querySelector(`.button-theme-color.${name}`)).click(), theme);
+    }
     if (theme === 'dark') {
       await expect.poll(() => frame.evaluate(() => getComputedStyle(document.querySelector('.aw')).backgroundColor))
         .toBe('rgb(0, 0, 0)');

@@ -56,6 +56,49 @@
   margin: 0;
 }
 
+/*
+ * Dark mode of the page around the frames (see watchPageColourMode). The theme variables take dark values here, so the
+ * shared end screen follows too; the main colour stays the site's.
+ */
+.h5p-alphabet-wheel .aw.aw-dark {
+  --h5p-theme-contrast-cta-white: #8cc4f0;
+  --h5p-theme-text-primary: #eef1f4;
+  --h5p-theme-text-secondary: #c3cad1;
+  --h5p-theme-text-third: #8d97a1;
+  --h5p-theme-background: #1d2125;
+  --h5p-theme-ui-base: #2a2f35;
+  --h5p-theme-alternative-base: #2a2f35;
+  --h5p-theme-stroke-1: #454c54;
+  --h5p-theme-feedback-correct-main: #86d67f;
+  --h5p-theme-feedback-correct-secondary: #10260d;
+  --h5p-theme-feedback-incorrect-main: #ff9da2;
+  --h5p-theme-feedback-incorrect-secondary: #3a0f12;
+
+  color-scheme: dark;
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  .h5p-alphabet-wheel .aw.aw-dark {
+    --h5p-theme-contrast-cta-white: color-mix(in srgb, var(--h5p-theme-main-cta-base, #006fbf) 40%, white);
+  }
+}
+
+html.h5p-oksigenia-dark,
+html.h5p-oksigenia-dark body,
+html.h5p-oksigenia-dark .h5p-content {
+  background: #1d2125;
+}
+
+html.h5p-oksigenia-dark .h5p-actions {
+  border-color: #454c54;
+  background: #1d2125;
+}
+
+html.h5p-oksigenia-dark .h5p-actions > .h5p-button,
+html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
+  color: #c3cad1;
+}
+
 /* Buttons and field */
 
 .h5p-alphabet-wheel .aw-button {
@@ -70,6 +113,7 @@
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .h5p-alphabet-wheel .aw-primary {
@@ -161,26 +205,34 @@
   font-weight: 700;
 }
 
-/* The game: the wheel above the panel, side by side when there is room */
+/*
+ * The game: the wheel beside the panel as soon as both fit, with their tops aligned so the answer field stays in place.
+ * In a narrow frame the wheel goes above and stays small, so it does not push the clue and the field out of view: the
+ * big letter in its centre says the same.
+ */
 
 .h5p-alphabet-wheel .aw-game {
   display: grid;
   gap: 1em;
-  align-items: center;
-}
-
-@container (min-width: 40em) {
-  .h5p-alphabet-wheel .aw-game {
-    grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
-  }
+  align-items: start;
 }
 
 .h5p-alphabet-wheel .aw-wheel {
   position: relative;
-  width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
+  width: min(100%, 15em);
   aspect-ratio: 1;
   margin-inline: auto;
   container-type: inline-size;
+}
+
+@container (min-width: 34em) {
+  .h5p-alphabet-wheel .aw-game {
+    grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
+  }
+
+  .h5p-alphabet-wheel .aw-wheel {
+    width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
+  }
 }
 
 .h5p-alphabet-wheel .aw-letters {

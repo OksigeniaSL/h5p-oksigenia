@@ -6,7 +6,7 @@
 import semantics from '../semantics.json';
 import { createMatcher, splitAlternatives } from '../../shared/answer.js';
 import { Countdown, formatTime } from '../../shared/timer.js';
-import { Announcer, el, fill, plain } from '../../shared/dom.js';
+import { Announcer, bringIntoView, el, fill, plain, watchPageColourMode } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds } from '../../shared/sound.js';
@@ -154,6 +154,14 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     container.replaceChildren(this.root);
     this.render();
+    // Inside another content type, the game keeps the colours of what is around it.
+    if (this.isRoot() && !this.colourWatched) {
+      this.colourWatched = true;
+      watchPageColourMode((dark) => {
+        this.root.classList.toggle('aw-dark', dark);
+        document.documentElement.classList.toggle('h5p-oksigenia-dark', dark);
+      });
+    }
     if (this.timer && !this.visibilityWatched) {
       this.visibilityWatched = true;
       // The clock stops when the player leaves the page, so the time is not lost while away.
@@ -266,9 +274,11 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.review = el('ol', { class: 'aw-review' });
     this.solutionsButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-show-solutions', text: t.showSolutions, onclick: () => this.showSolutions() });
     this.retryButton = el('button', { type: 'button', class: 'aw-button aw-primary aw-retry', text: t.retry, onclick: () => this.retry() });
+    // The buttons before the review: with every letter listed, they would be far below.
     this.results = el('div', { class: 'aw-results' }, [
-      this.cheer, this.review,
+      this.cheer,
       el('div', { class: 'aw-actions' }, [this.solutionsButton, this.retryButton]),
+      this.review,
     ]);
 
     this.empty = el('p', { class: 'aw-empty', text: t.noItems });
@@ -418,6 +428,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     this.render();
     this.input.focus();
+    bringIntoView(this.input);
     this.announceCurrent('');
   }
 
@@ -511,6 +522,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     } else {
       if (moveFocus) {
         this.input.focus();
+        bringIntoView(this.input);
       }
       this.announceCurrent('');
     }
@@ -550,6 +562,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     this.lastMove.textContent = said;
     this.cheerBox.focus();
+    bringIntoView(this.cheer);
     const tier = cheerTier(this.game.score, this.game.maxScore);
     // Confetti only for a game that went well, and more of it for a full wheel. The bells come just after the sound of
     // the last answer; when the time ran out, its own sound already said so.

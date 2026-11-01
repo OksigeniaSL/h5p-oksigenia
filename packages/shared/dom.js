@@ -70,3 +70,87 @@ export class Announcer {
     }, 100);
   }
 }
+
+/** Room kept at the top and the bottom of the window: pages keep bars there (the header and footer of Moodle). */
+const VIEW_MARGIN = 80;
+
+/**
+ * The windows around this frame that can be read, from this one outwards. A frame of another site ends the list.
+ * @returns {Window[]}
+ */
+function readableWindows() {
+  /** @type {Window[]} */
+  const list = [window];
+  try {
+    /** @type {Window} */
+    let win = window;
+    while (win.parent !== win && win.parent.document) {
+      win = win.parent;
+      list.push(win);
+    }
+  } catch (e) {
+    // A frame of another site: nothing beyond it can be read.
+  }
+  return list;
+}
+
+/**
+ * @param {Element} node
+ * @returns {boolean} Whether the element shows in the outermost window that can be read, clear of its bars.
+ */
+function inView(node) {
+  const box = node.getBoundingClientRect();
+  const windows = readableWindows();
+  let top = box.top;
+  windows.slice(0, -1).forEach((win) => {
+    const frame = win.frameElement;
+    top += frame ? frame.getBoundingClientRect().top : 0;
+  });
+  return top >= VIEW_MARGIN && top + box.height <= windows[windows.length - 1].innerHeight - VIEW_MARGIN;
+}
+
+/**
+ * Brings the next step of a game into view when it is out of it. The frames around H5P content grow a moment after the
+ * content does, and only then is its place known, so it looks more than once. It does nothing if the element is
+ * already in view, and it jumps instead of gliding, so it also suits those who ask for less motion.
+ * @param {Element} node
+ */
+export function bringIntoView(node) {
+  [50, 250, 600].forEach((ms) => setTimeout(() => {
+    if (!inView(node)) {
+      node.scrollIntoView({ block: 'center' });
+    }
+  }, ms));
+}
+
+/**
+ * @param {Window[]} windows
+ * @returns {boolean} Whether the page is in dark mode: `data-bs-theme` in Moodle and other Bootstrap sites, the class
+ *   `dark` in the Moodle app. The outermost window decides, because it is the one the player can change.
+ */
+function pageIsDark(windows) {
+  for (const win of [...windows].reverse()) {
+    const html = win.document.documentElement;
+    const mode = html.getAttribute('data-bs-theme');
+    if (mode || html.classList.contains('dark')) {
+      return mode ? mode === 'dark' : true;
+    }
+  }
+  return false;
+}
+
+/**
+ * The frames of H5P do not inherit the colour mode of the page around them: this reads it from there, now and whenever
+ * it changes.
+ * @param {(dark: boolean) => void} onChange
+ */
+export function watchPageColourMode(onChange) {
+  const windows = readableWindows();
+  const update = () => onChange(pageIsDark(windows));
+  update();
+  windows.forEach((win) => {
+    new MutationObserver(update).observe(win.document.documentElement, {
+      attributes: true, attributeFilter: ['data-bs-theme', 'class'],
+    });
+  });
+}

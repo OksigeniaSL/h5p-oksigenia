@@ -191,6 +191,37 @@ try {
   const results = Number(sql(`SELECT COUNT(*) FROM mdl_h5pactivity_attempts_results WHERE attemptid = ${firstAttempt}
     AND interactiontype = 'fill-in'`));
   check('each attempt keeps one fill-in result with every letter', results === 1, `${results} result rows`);
+
+  // The next step in view without scrolling by hand, clear of Moodle's fixed bars: the answer field after «Start», the
+  // end message and its buttons after the game. The frames grow a moment later, so it waits a little for them.
+  await login(opt.student, opt['student-password']);
+  const inView = async (locator, height) => {
+    let box = null;
+    for (let i = 0; i < 25; i++) {
+      box = await locator.boundingBox();
+      if (box && box.y >= 60 && box.y + box.height <= height - 65) {
+        return { ok: true, where: `y ${Math.round(box.y)}-${Math.round(box.y + box.height)}` };
+      }
+      await page.waitForTimeout(100);
+    }
+    return { ok: false, where: box ? `y ${Math.round(box.y)}-${Math.round(box.y + box.height)}` : 'not shown' };
+  };
+  for (const [width, height] of [[1100, 540], [1024, 768], [800, 600], [360, 640]]) {
+    await page.setViewportSize({ width, height });
+    await openActivity();
+    await game().locator('.aw-intro button').click();
+    const field = await inView(game().locator('.aw-input'), height);
+    check(`at ${width}×${height}, after «Start» the answer field is in view`, field.ok, field.where);
+    await page.screenshot({ path: `${opt.shots}/moodle-view-${width}x${height}.png` });
+    await game().locator('.aw-finish').click();
+    await game().locator('.aw-finish').click();
+    const end = await inView(game().locator('.aw-cheer-title'), height);
+    check(`at ${width}×${height}, the end message is in view`, end.ok, end.where);
+    const retry = await inView(game().locator('.aw-retry'), height);
+    check(`at ${width}×${height}, «Retry» is in view at the end`, retry.ok, retry.where);
+    await page.screenshot({ path: `${opt.shots}/moodle-end-${width}x${height}.png` });
+    await page.waitForTimeout(4000);
+  }
 } finally {
   await browser.close();
 }

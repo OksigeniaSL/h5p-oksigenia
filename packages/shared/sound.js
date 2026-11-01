@@ -115,7 +115,8 @@ export class Sounds {
     if (!this.context) {
       this.context = new AC();
       const master = this.context.createGain();
-      master.gain.value = 0.5;
+      // Low from the start: a classroom can have thirty of these sounding at once.
+      master.gain.value = 0.25;
       const compressor = this.context.createDynamicsCompressor();
       master.connect(compressor);
       compressor.connect(this.context.destination);
