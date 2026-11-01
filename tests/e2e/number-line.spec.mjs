@@ -155,6 +155,8 @@ test('a sum: the jump can be drawn from the piece with the mouse, and it lands o
   const frame = await open(page);
   await frame.locator('.nl-choice-add100').click();
   const r = await round(frame);
+  // The round comes into view a moment after it opens: the line moves with it.
+  await page.waitForTimeout(700);
   const box = await frame.locator('.nl-line').boundingBox();
   const line = () => frame.evaluate(() => {
     const { line: l } = H5P.instances[0];
