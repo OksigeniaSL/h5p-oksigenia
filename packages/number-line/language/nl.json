@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "Het figuurtje dat springt",
+      "description": "De veer past het best bij jonge kinderen en de dobbelsteen bij oudere. Als spelers kiezen, zien ze alleen de tekening en de naam, zonder leeftijd.",
+      "options": [
+        {
+          "label": "Laat de speler kiezen"
+        },
+        {
+          "label": "Veer"
+        },
+        {
+          "label": "Raket"
+        },
+        {
+          "label": "Dobbelsteen"
+        }
+      ]
+    },
+    {
       "label": "Rondes per spel"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Startknop",
           "default": "Starten"
+        },
+        {
+          "label": "Kop van de figuurtjes",
+          "default": "Kies je figuurtje"
+        },
+        {
+          "label": "Figuurtje: veer",
+          "default": "Veer"
+        },
+        {
+          "label": "Figuurtje: raket",
+          "default": "Raket"
+        },
+        {
+          "label": "Figuurtje: dobbelsteen",
+          "default": "Dobbelsteen"
         },
         {
           "label": "Kop van de keuzes",

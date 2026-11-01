@@ -1,5 +1,6 @@
 {
   "topic": "choose",
+  "character": "choose",
   "rounds": 6,
   "behaviour": {
     "enableSound": true,

@@ -10,7 +10,8 @@ import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds, volumeSlider } from '../../shared/sound.js';
 import { NumberLineGame } from './game.js';
-import { Line } from './line.js';
+import { Line, svg } from './line.js';
+import { PIECES } from './pieces.js';
 import '../../shared/dark.css';
 import './number-line.css';
 
@@ -30,6 +31,10 @@ const FALLBACK_TITLE = 'Number Line';
 const QUICK_JUMP_MS = 170;
 /** How long a wrong try stays on the line before the game shows the right one. */
 const SHOW_WRONG_MS = 1200;
+/** Remembers the piece chosen on this device, like the volume. */
+const PIECE_KEY = 'h5p-oksigenia-piece';
+/** The pieces, with the name of their text. */
+const PIECE_NAMES = [['muelle', 'pieceSpring'], ['cohete', 'pieceRocket'], ['dado', 'pieceDice']];
 /** What can be chosen on the first screen, with the name of its text. */
 const CHOICES = [
   ['add20', 'topicAdd20'], ['add100', 'topicAdd100'], ['tables', 'topicTables'], ['place1000', 'topicPlace'],
@@ -98,6 +103,9 @@ export default class NumberLine extends H5P.EventDispatcher {
     this.id = `h5p-nl-${++uid}-${Math.random().toString(36).slice(2, 8)}`;
     this.locale = plain(extras.metadata && extras.metadata.defaultLanguage) || document.documentElement.lang || undefined;
     this.topic = params.topic || 'choose';
+    /** Whether the player chooses the piece, or the author fixed one. */
+    this.choosesPiece = !(params.character in PIECES);
+    this.character = this.choosesPiece ? this.savedPiece() : params.character;
     this.roundsWanted = params.rounds;
     this.tuning = { ...TUNING, ...(params.tuning || {}) };
     this.sounds = new Sounds({ enabled: this.behaviour.enableSound !== false });
@@ -131,6 +139,61 @@ export default class NumberLine extends H5P.EventDispatcher {
    */
   newGame(topic) {
     return new NumberLineGame({ topic, rounds: this.roundsWanted, tuning: this.tuning });
+  }
+
+  /** @returns {string} The piece last chosen on this device, or the first one. */
+  savedPiece() {
+    try {
+      const saved = window.localStorage.getItem(PIECE_KEY);
+      return saved in PIECES ? saved : 'muelle';
+    } catch (e) {
+      return 'muelle';
+    }
+  }
+
+  /**
+   * The row to choose the piece, by its drawing and its name, without any age: nobody wants to pick «the one for the
+   * older ones», or to be told which one is theirs.
+   * @returns {HTMLElement|string} Nothing if the author fixed one.
+   */
+  buildPicker() {
+    if (!this.choosesPiece) {
+      return '';
+    }
+    const t = this.l10n;
+    this.pickButtons = PIECE_NAMES.map(([name, text]) => {
+      const drawing = svg('svg', { class: 'nl-pick-icon', viewBox: '-15 -33 30 36', 'aria-hidden': 'true', focusable: 'false' });
+      const group = svg('g', { class: 'nl-piece' });
+      PIECES[name](group, svg, 0, 0, null);
+      drawing.append(group);
+      const button = btn({ type: 'button', class: `nl-button nl-secondary nl-pick nl-pick-${name}`, onclick: () => this.pick(name) });
+      button.append(drawing, t[text]);
+      return { name, button };
+    });
+    this.picker = el('div', { class: 'nl-picker', role: 'group', 'aria-label': t.pieceTitle }, [
+      el('span', { class: 'nl-picker-title', text: t.pieceTitle }), ...this.pickButtons.map(({ button }) => button),
+    ]);
+    this.paintPicker();
+    return this.picker;
+  }
+
+  paintPicker() {
+    this.pickButtons.forEach(({ name, button }) => button.setAttribute('aria-pressed', String(name === this.character)));
+  }
+
+  /** @param {string} name The piece that jumps from now on, remembered on this device. */
+  pick(name) {
+    this.character = name;
+    try {
+      window.localStorage.setItem(PIECE_KEY, name);
+    } catch (e) {
+      // Not remembered, but it still applies to this game.
+    }
+    this.paintPicker();
+    if (this.line) {
+      this.line.character = name;
+      this.line.draw();
+    }
   }
 
   /**
@@ -230,7 +293,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     // No heading tags: the game does not know at which level of the page it ends up.
     const title = this.title ? el('p', { class: 'nl-title', text: this.title }) : '';
     if (this.topic === 'choose') {
-      this.intro.replaceChildren(title, el('p', { class: 'nl-summary', text: t.chooseTitle }), el('div', { class: 'nl-choices' },
+      this.intro.replaceChildren(title, this.buildPicker(), el('p', { class: 'nl-summary', text: t.chooseTitle }), el('div', { class: 'nl-choices' },
         CHOICES.map(([name, text]) => btn({
           type: 'button', class: `nl-button nl-secondary nl-choice nl-choice-${name}`, text: t[text], onclick: () => this.choose(name),
         }))));
@@ -245,6 +308,7 @@ export default class NumberLine extends H5P.EventDispatcher {
       title,
       el('p', { class: 'nl-summary', text: fill(t.introSummary, { count: this.game.rounds }) }),
       el('p', { class: 'nl-help', text: help }),
+      this.buildPicker(),
       btn({ type: 'button', class: 'nl-button nl-primary nl-start', text: t.start, onclick: () => this.start() }),
     );
   }
@@ -364,7 +428,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     if (this.line) {
       this.line.remove();
     }
-    this.line = new Line({ ...options, format: (v) => this.format(v) });
+    this.line = new Line({ ...options, format: (v) => this.format(v), character: this.character });
     this.lineBox.replaceChildren(this.line.node);
     return this.line;
   }
@@ -861,6 +925,10 @@ export default class NumberLine extends H5P.EventDispatcher {
       ? [btn({ type: 'button', class: 'nl-button nl-tertiary nl-other', text: t.otherTopic, onclick: () => this.chooseAgain() })]
       : [];
     this.extraControls.replaceChildren(this.undoButton, this.freeAgainButton, ...ranges, ...back);
+    // With the free line as the only thing on the page, there is no first screen to choose the piece on.
+    if (this.topic === 'free') {
+      this.extraControls.append(this.picker || this.buildPicker());
+    }
     line.show();
     this.paintFree();
   }

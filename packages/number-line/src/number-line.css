@@ -361,7 +361,7 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   stroke-width: 2;
 }
 
-/* The piece: the body takes the main colour of the theme; the spring and the foot, the colour of the text. */
+/* The piece: the body takes the main colour of the theme; the spring, the foot, the fins and the flame, the colour of the text. */
 .h5p-number-line .nl-piece-body {
   fill: var(--nl-main);
   stroke: var(--nl-ink);
@@ -376,7 +376,9 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   stroke-linejoin: round;
 }
 
-.h5p-number-line .nl-piece-foot {
+.h5p-number-line .nl-piece-foot,
+.h5p-number-line .nl-piece-fin,
+.h5p-number-line .nl-piece-flame {
   fill: var(--nl-ink);
 }
 
@@ -402,6 +404,53 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   stroke: var(--nl-on-main);
   stroke-width: 1.4;
   stroke-linecap: round;
+}
+
+.h5p-number-line .nl-piece-pip {
+  fill: var(--nl-on-main);
+}
+
+.h5p-number-line .nl-piece-window {
+  fill: #fff;
+  stroke: var(--nl-ink);
+  stroke-width: 1.4;
+}
+
+/* Choosing the piece */
+
+.h5p-number-line .nl-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em 0.8em;
+  width: 100%;
+}
+
+.h5p-number-line .nl-picker-title {
+  color: var(--nl-soft-ink);
+  font-weight: 700;
+}
+
+.h5p-number-line .nl-pick {
+  gap: 0.5em;
+  padding: 0.25em 0.8em 0.25em 0.5em;
+}
+
+/* The chosen one: a thicker border and a tick, so it does not depend on the colour. */
+.h5p-number-line .nl-pick[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--nl-main-text);
+}
+
+.h5p-number-line .nl-pick[aria-pressed="true"]::after {
+  content: "✓";
+  font-weight: 800;
+}
+
+.h5p-number-line .nl-pick-icon {
+  display: block;
+  flex: none;
+  width: 2.2em;
+  height: 2.5em;
 }
 
 /* After the game */

@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "A peça que salta",
+      "description": "A mola combina mais com os menores e o dado, com os maiores. Se quem joga escolher, vê só o desenho e o nome, sem idades.",
+      "options": [
+        {
+          "label": "Deixar quem joga escolher"
+        },
+        {
+          "label": "Mola"
+        },
+        {
+          "label": "Foguete"
+        },
+        {
+          "label": "Dado"
+        }
+      ]
+    },
+    {
       "label": "Rodadas por partida"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Botão de começar",
           "default": "Começar"
+        },
+        {
+          "label": "Título das peças",
+          "default": "Escolha sua peça"
+        },
+        {
+          "label": "Peça: mola",
+          "default": "Mola"
+        },
+        {
+          "label": "Peça: foguete",
+          "default": "Foguete"
+        },
+        {
+          "label": "Peça: dado",
+          "default": "Dado"
         },
         {
           "label": "Título das opções",

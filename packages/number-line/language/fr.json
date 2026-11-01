@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "Le pion qui saute",
+      "description": "Le ressort convient mieux aux plus jeunes et le dé aux plus âgés. Si les joueurs choisissent, ils ne voient que le dessin et le nom, sans âge.",
+      "options": [
+        {
+          "label": "Laisser choisir le joueur"
+        },
+        {
+          "label": "Ressort"
+        },
+        {
+          "label": "Fusée"
+        },
+        {
+          "label": "Dé"
+        }
+      ]
+    },
+    {
       "label": "Manches par partie"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Bouton de démarrage",
           "default": "Commencer"
+        },
+        {
+          "label": "Titre des pions",
+          "default": "Choisis ton pion"
+        },
+        {
+          "label": "Pion : ressort",
+          "default": "Ressort"
+        },
+        {
+          "label": "Pion : fusée",
+          "default": "Fusée"
+        },
+        {
+          "label": "Pion : dé",
+          "default": "Dé"
         },
         {
           "label": "Titre des choix",

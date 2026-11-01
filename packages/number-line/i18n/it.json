@@ -164,6 +164,17 @@
     "@sum": "@sum",
     "Rounds: @count. No clock.": "Turni: @count. Senza orologio.",
     "Jumps: @count": "Salti: @count",
-    "@path (jumps: @used; it could be done in @best)": "@path (salti: @used; si poteva in @best)"
+    "@path (jumps: @used; it could be done in @best)": "@path (salti: @used; si poteva in @best)",
+    "The piece that jumps": "La pedina che salta",
+    "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.": "La molla è più adatta ai più piccoli e il dado ai più grandi. Se sceglie chi gioca, vede solo il disegno e il nome, senza età.",
+    "Let the player choose": "Lascia scegliere a chi gioca",
+    "Spring": "Molla",
+    "Rocket": "Razzo",
+    "Dice": "Dado",
+    "Heading of the pieces": "Titolo delle pedine",
+    "Choose your piece": "Scegli la tua pedina",
+    "Piece: spring": "Pedina: molla",
+    "Piece: rocket": "Pedina: razzo",
+    "Piece: dice": "Pedina: dado"
   }
 }

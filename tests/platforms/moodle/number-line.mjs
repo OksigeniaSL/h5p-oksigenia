@@ -110,7 +110,10 @@ try {
     }
     const challenge = await inView(game.locator('.nl-challenge'), height);
     check(`at ${width}×${height}, the round comes into view`, challenge.ok, challenge.where);
-    await playRight().catch(() => {});
+    // Reloaded after a round that was over, only «Next» is left.
+    if (await game.locator('.nl-next').isVisible()) {
+      await game.locator('.nl-next').click();
+    }
     const r = await current();
     await game.locator('.nl-count', { hasText: new RegExp(`^${r.times}$`) }).click();
     const next = await inView(game.locator('.nl-next'), height);

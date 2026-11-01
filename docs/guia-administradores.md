@@ -108,3 +108,15 @@ Los fallos y las propuestas se recogen en las incidencias del repositorio,
 <https://github.com/OksigeniaSL/h5p-oksigenia/issues>. Los problemas de seguridad, por la vía de `SECURITY.md`.
 
 Moodle™ es una marca registrada de Moodle Pty Ltd en muchos países. H5P es una marca registrada de H5P Group.
+
+## La Recta numérica
+
+La Recta numérica (`H5P.NumberLine`) se instala igual que la Rueda: con cualquiera de sus `.h5p` de ejemplo, o con
+`moodle-install-library.php`. No hace falta escribir preguntas: en «Qué se practica» se elige el tema, o «Elegir al
+empezar» para que se decida en la primera pantalla, y cada partida genera sus números. En «Ajuste fino», opcional, se
+pueden fijar el final de la recta, los saltos, las tablas o los denominadores.
+
+- **Nota.** En sumas, restas, números y fracciones, cada ronda vale 2 puntos; en las tablas, 1. La nota es la proporción de
+  puntos conseguidos, y cada ronda queda en el informe de intentos con lo que pedía y lo que hizo el alumno.
+- **Recta libre.** No da puntos ni crea intentos. Sirve para la pizarra: saltos con botones o dibujados con el dedo,
+  deshacer y volver a empezar. En pantalla completa se ve desde el fondo del aula.

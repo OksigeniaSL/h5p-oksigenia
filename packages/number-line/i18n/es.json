@@ -164,6 +164,17 @@
     "@sum": "@sum",
     "Rounds: @count. No clock.": "Rondas: @count. Sin reloj.",
     "Jumps: @count": "Saltos: @count",
-    "@path (jumps: @used; it could be done in @best)": "@path (saltos: @used; se podía en @best)"
+    "@path (jumps: @used; it could be done in @best)": "@path (saltos: @used; se podía en @best)",
+    "The piece that jumps": "La pieza que salta",
+    "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.": "El muelle va mejor con los más pequeños y el dado, con los mayores. Si elige quien juega, solo ve el dibujo y el nombre, sin edades.",
+    "Let the player choose": "Que elija quien juega",
+    "Spring": "Muelle",
+    "Rocket": "Cohete",
+    "Dice": "Dado",
+    "Heading of the pieces": "Título de las piezas",
+    "Choose your piece": "Elige tu pieza",
+    "Piece: spring": "Pieza: muelle",
+    "Piece: rocket": "Pieza: cohete",
+    "Piece: dice": "Pieza: dado"
   }
 }

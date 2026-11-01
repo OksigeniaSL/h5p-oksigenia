@@ -4,7 +4,7 @@
 [![Release](https://img.shields.io/github/v/release/OksigeniaSL/h5p-oksigenia?label=release)](https://github.com/OksigeniaSL/h5p-oksigenia/releases)
 [![Sponsor](https://img.shields.io/badge/sponsor-Oksigenia-00d4ff)](https://oksigenia.com/en/open-source#sponsor)
 
-Word games as H5P content types. Each student plays on their own, the game checks the answers and the score goes
+Games as H5P content types. Each student plays on their own, the game checks the answers and the score goes
 to the gradebook, so a game counts as a graded activity in Moodle™ like any other H5P activity.
 
 [Leer en español](README.es.md)
@@ -25,11 +25,22 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
 
   <img src="docs/img/alphabet-wheel-end.webp" width="676" alt="The end of a game: a score ring with 24 of 26, a message, the buttons to see the answers or play again, and the first letters with their answers.">
 
+- **Number Line** (`H5P.NumberLine`): addition, subtraction, times tables, whole numbers and fractions as jumps on a
+  number line. The jumps are the answer, not a question before them: there is no clock, and a wrong try shows where it
+  landed. Each game makes up its own numbers, so the teacher only chooses what to practise, or leaves the choice for the
+  first screen. Every round goes to the report of the activity. There are three pieces to choose from, so it does not feel
+  childish at any age, and a free line with no points, for a board.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/img/number-line-game-dark.webp">
+    <img src="docs/img/number-line-game.webp" width="676" alt="The Number Line in the middle of a sum: a line from 0 to 50 with the arcs of the jumps drawn on it, the buttons to jump and the piece that jumps.">
+  </picture>
+
 ## Languages
 
 English, Spanish, German, French, Italian, Dutch, Portuguese (Brazil) and Swedish, both for players and for authors
-in the H5P editor, each with an example wheel. Answers are checked by the rules of their own language: the Ñ, the Ä
-or the Å never count as another letter.
+in the H5P editor, each with an example. In the Alphabet Wheel, answers are checked by the rules of their own language:
+the Ñ, the Ä or the Å never count as another letter.
 
 ## Where they run
 

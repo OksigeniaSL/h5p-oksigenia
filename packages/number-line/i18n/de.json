@@ -164,6 +164,17 @@
     "@sum": "@sum",
     "Rounds: @count. No clock.": "Runden: @count. Ohne Uhr.",
     "Jumps: @count": "Sprünge: @count",
-    "@path (jumps: @used; it could be done in @best)": "@path (Sprünge: @used; es geht auch in @best)"
+    "@path (jumps: @used; it could be done in @best)": "@path (Sprünge: @used; es geht auch in @best)",
+    "The piece that jumps": "Die Figur, die springt",
+    "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.": "Die Feder passt am besten zu jüngeren Kindern, der Würfel zu älteren. Wenn die Spielenden wählen, sehen sie nur Bild und Namen, ohne Alter.",
+    "Let the player choose": "Die Spielenden wählen lassen",
+    "Spring": "Feder",
+    "Rocket": "Rakete",
+    "Dice": "Würfel",
+    "Heading of the pieces": "Überschrift der Figuren",
+    "Choose your piece": "Wähle deine Figur",
+    "Piece: spring": "Figur: Feder",
+    "Piece: rocket": "Figur: Rakete",
+    "Piece: dice": "Figur: Würfel"
   }
 }

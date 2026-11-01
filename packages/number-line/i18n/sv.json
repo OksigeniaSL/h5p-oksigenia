@@ -164,6 +164,17 @@
     "@sum": "@sum",
     "Rounds: @count. No clock.": "Omgångar: @count. Utan klocka.",
     "Jumps: @count": "Hopp: @count",
-    "@path (jumps: @used; it could be done in @best)": "@path (hopp: @used; det gick på @best)"
+    "@path (jumps: @used; it could be done in @best)": "@path (hopp: @used; det gick på @best)",
+    "The piece that jumps": "Pjäsen som hoppar",
+    "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.": "Fjädern passar bäst för yngre barn och tärningen för äldre. Om spelarna väljer ser de bara bilden och namnet, utan ålder.",
+    "Let the player choose": "Låt spelaren välja",
+    "Spring": "Fjäder",
+    "Rocket": "Raket",
+    "Dice": "Tärning",
+    "Heading of the pieces": "Rubrik för pjäserna",
+    "Choose your piece": "Välj din pjäs",
+    "Piece: spring": "Pjäs: fjäder",
+    "Piece: rocket": "Pjäs: raket",
+    "Piece: dice": "Pjäs: tärning"
   }
 }

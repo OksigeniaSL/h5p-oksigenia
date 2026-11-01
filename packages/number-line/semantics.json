@@ -38,6 +38,32 @@
     "default": "choose"
   },
   {
+    "name": "character",
+    "type": "select",
+    "label": "The piece that jumps",
+    "importance": "medium",
+    "description": "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.",
+    "options": [
+      {
+        "value": "choose",
+        "label": "Let the player choose"
+      },
+      {
+        "value": "muelle",
+        "label": "Spring"
+      },
+      {
+        "value": "cohete",
+        "label": "Rocket"
+      },
+      {
+        "value": "dado",
+        "label": "Dice"
+      }
+    ],
+    "default": "choose"
+  },
+  {
     "name": "rounds",
     "type": "number",
     "label": "Rounds in a game",
@@ -125,6 +151,34 @@
         "label": "Start button",
         "importance": "low",
         "default": "Start"
+      },
+      {
+        "name": "pieceTitle",
+        "type": "text",
+        "label": "Heading of the pieces",
+        "importance": "low",
+        "default": "Choose your piece"
+      },
+      {
+        "name": "pieceSpring",
+        "type": "text",
+        "label": "Piece: spring",
+        "importance": "low",
+        "default": "Spring"
+      },
+      {
+        "name": "pieceRocket",
+        "type": "text",
+        "label": "Piece: rocket",
+        "importance": "low",
+        "default": "Rocket"
+      },
+      {
+        "name": "pieceDice",
+        "type": "text",
+        "label": "Piece: dice",
+        "importance": "low",
+        "default": "Dice"
       },
       {
         "name": "chooseTitle",

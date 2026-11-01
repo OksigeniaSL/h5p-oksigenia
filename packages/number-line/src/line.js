@@ -5,6 +5,7 @@
 // @license   MIT
 
 import { reducedMotion } from '../../shared/cheer.js';
+import { PIECES } from './pieces.js';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const PADDING = 26;
@@ -28,7 +29,7 @@ const TICK_ROOM = 4;
  * @param {string} [text]
  * @returns {SVGElement}
  */
-function svg(tag, attributes, text) {
+export function svg(tag, attributes, text) {
   const node = document.createElementNS(SVG, tag);
   Object.entries(attributes).forEach(([name, value]) => node.setAttribute(name, String(value)));
   if (text !== undefined) {
@@ -46,8 +47,10 @@ export class Line {
    * @param {number[]|null} [options.labels] What is written under the line; null, by the width.
    * @param {number|null} [options.labelEvery] Writes only every so many, whatever the width, and leaves more to work out.
    * @param {boolean} [options.units] Whether every whole number gets a tick when there is room.
+   * @param {string} [options.character] Which piece jumps (pieces.js).
    */
-  constructor({ max, format, ticks = [], labels = null, labelEvery = null, units = false }) {
+  constructor({ max, format, ticks = [], labels = null, labelEvery = null, units = false, character = 'muelle' }) {
+    this.character = character;
     this.max = max;
     this.format = format;
     this.ticks = ticks;
@@ -264,31 +267,13 @@ export class Line {
     this.node.append(svg('circle', { class: 'nl-mark', cx: this.x(this.mark), cy: BASELINE, r: 11 }));
   }
 
-  /** The piece on the line, on a spring that stretches in the air, looking where it jumps. Drawn here, so it needs no images. */
+  /** The piece on the line, or in the middle of a jump: each one goes in its own way (pieces.js). */
   drawPiece() {
-    const flying = this.flying;
-    const at = flying ? flying.at : this.piece;
-    const lift = flying ? flying.lift : 0;
-    const dir = flying ? flying.dir : 0;
-    const coil = 7.4 * (flying ? 1 + 0.5 * Math.sin(Math.PI * flying.t) : 1);   // the spring's height
-    const x = this.x(at), foot = BASELINE - 1 - lift;
-    const cy = foot - coil - 9.6;                                               // the centre of the body
-    const piece = svg('g', { class: 'nl-piece' });
-    piece.append(svg('rect', { class: 'nl-piece-foot', x: x - 5.5, y: foot - 1.6, width: 11, height: 3, rx: 1.5 }));
-    const step = (coil - 0.4) / 5;
-    let d = `M${x} ${foot - 1}`;
-    [-4, 4, -4, 4].forEach((dx, i) => {
-      d += `L${x + dx} ${foot - 1 - step * (i + 1)}`; 
-    });
-    piece.append(svg('path', { class: 'nl-piece-spring', d: `${d}L${x} ${foot - 1 - coil}` }));
-    piece.append(svg('path', { class: 'nl-piece-tick', d: `M${x} ${cy - 9.5}v-3` }));
-    piece.append(svg('circle', { class: 'nl-piece-body', cx: x, cy, r: 9.6 }));
-    [-4.1, 4.1].forEach((dx) => {
-      piece.append(svg('circle', { class: 'nl-piece-eye', cx: x + dx, cy: cy - 2, r: 3.1 }));
-      piece.append(svg('circle', { class: 'nl-piece-pupil', cx: x + dx + dir, cy: cy - 2, r: 1.5 }));   // it looks where it goes
-    });
-    piece.append(svg('path', { class: 'nl-piece-mouth', d: `M${x - 2.8} ${cy + 3.4}q2.8 2.2 5.6 0` }));
-    this.node.append(piece);
+    const at = this.flying ? this.flying.at : this.piece;
+    const lift = this.flying ? this.flying.lift : 0;
+    const group = svg('g', { class: 'nl-piece' });
+    (PIECES[this.character] || PIECES.muelle)(group, svg, this.x(at), BASELINE - 1 - lift, this.flying);
+    this.node.append(group);
   }
 
   draw() {

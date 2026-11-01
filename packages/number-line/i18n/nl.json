@@ -164,6 +164,17 @@
     "@sum": "@sum",
     "Rounds: @count. No clock.": "Rondes: @count. Zonder klok.",
     "Jumps: @count": "Sprongen: @count",
-    "@path (jumps: @used; it could be done in @best)": "@path (sprongen: @used; het kon in @best)"
+    "@path (jumps: @used; it could be done in @best)": "@path (sprongen: @used; het kon in @best)",
+    "The piece that jumps": "Het figuurtje dat springt",
+    "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.": "De veer past het best bij jonge kinderen en de dobbelsteen bij oudere. Als spelers kiezen, zien ze alleen de tekening en de naam, zonder leeftijd.",
+    "Let the player choose": "Laat de speler kiezen",
+    "Spring": "Veer",
+    "Rocket": "Raket",
+    "Dice": "Dobbelsteen",
+    "Heading of the pieces": "Kop van de figuurtjes",
+    "Choose your piece": "Kies je figuurtje",
+    "Piece: spring": "Figuurtje: veer",
+    "Piece: rocket": "Figuurtje: raket",
+    "Piece: dice": "Figuurtje: dobbelsteen"
   }
 }

@@ -4,7 +4,7 @@
 [![Versión](https://img.shields.io/github/v/release/OksigeniaSL/h5p-oksigenia?label=versi%C3%B3n)](https://github.com/OksigeniaSL/h5p-oksigenia/releases)
 [![Patrocinio](https://img.shields.io/badge/patrocinio-Oksigenia-00d4ff)](https://oksigenia.com/en/open-source#sponsor)
 
-Juegos de palabras convertidos en tipos de contenido H5P. Cada alumno juega solo, el juego corrige y la nota llega al
+Juegos convertidos en tipos de contenido H5P. Cada alumno juega solo, el juego corrige y la nota llega al
 libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igual que cualquier otra actividad H5P.
 
 [Read in English](README.md)
@@ -25,10 +25,21 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
 
   <img src="docs/img/alphabet-wheel-end-es.webp" width="676" alt="El final de una partida: un anillo con 25 de 27, un mensaje, los botones para ver las respuestas o volver a jugar, y las primeras letras con sus respuestas.">
 
+- **Recta numérica** (`H5P.NumberLine`): sumas, restas, tablas, números y fracciones como saltos en una recta. Los saltos
+  son la respuesta, no una pregunta antes de saltar: no hay reloj, y un intento fallido enseña dónde ha caído. Cada
+  partida genera sus números, así que el docente solo elige qué se practica, o deja la elección para la primera pantalla.
+  Cada ronda queda en el informe de la actividad. Hay tres piezas a elegir, para que no resulte infantil a ninguna edad, y
+  una recta libre, sin puntos, para la pizarra.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/img/number-line-game-es-dark.webp">
+    <img src="docs/img/number-line-game-es.webp" width="676" alt="La Recta numérica a mitad de una suma: una recta del 0 al 50 con los arcos de los saltos dibujados, los botones para saltar y la pieza que salta.">
+  </picture>
+
 ## Idiomas
 
 Inglés, español, alemán, francés, italiano, neerlandés, portugués de Brasil y sueco, tanto para quien juega como para
-quien crea la rueda en el editor de H5P, y cada uno con su rueda de ejemplo. Las respuestas se corrigen con las reglas
+quien crea el contenido en el editor de H5P, y cada uno con su ejemplo. En la Rueda, las respuestas se corrigen con las reglas
 de su idioma: la Ñ, la Ä o la Å nunca cuentan como otra letra.
 
 ## Dónde funcionan

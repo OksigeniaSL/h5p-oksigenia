@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "Die Figur, die springt",
+      "description": "Die Feder passt am besten zu jüngeren Kindern, der Würfel zu älteren. Wenn die Spielenden wählen, sehen sie nur Bild und Namen, ohne Alter.",
+      "options": [
+        {
+          "label": "Die Spielenden wählen lassen"
+        },
+        {
+          "label": "Feder"
+        },
+        {
+          "label": "Rakete"
+        },
+        {
+          "label": "Würfel"
+        }
+      ]
+    },
+    {
       "label": "Runden pro Spiel"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Schaltfläche Start",
           "default": "Start"
+        },
+        {
+          "label": "Überschrift der Figuren",
+          "default": "Wähle deine Figur"
+        },
+        {
+          "label": "Figur: Feder",
+          "default": "Feder"
+        },
+        {
+          "label": "Figur: Rakete",
+          "default": "Rakete"
+        },
+        {
+          "label": "Figur: Würfel",
+          "default": "Würfel"
         },
         {
           "label": "Überschrift der Auswahl",

@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "Pjäsen som hoppar",
+      "description": "Fjädern passar bäst för yngre barn och tärningen för äldre. Om spelarna väljer ser de bara bilden och namnet, utan ålder.",
+      "options": [
+        {
+          "label": "Låt spelaren välja"
+        },
+        {
+          "label": "Fjäder"
+        },
+        {
+          "label": "Raket"
+        },
+        {
+          "label": "Tärning"
+        }
+      ]
+    },
+    {
       "label": "Omgångar per spel"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Startknapp",
           "default": "Starta"
+        },
+        {
+          "label": "Rubrik för pjäserna",
+          "default": "Välj din pjäs"
+        },
+        {
+          "label": "Pjäs: fjäder",
+          "default": "Fjäder"
+        },
+        {
+          "label": "Pjäs: raket",
+          "default": "Raket"
+        },
+        {
+          "label": "Pjäs: tärning",
+          "default": "Tärning"
         },
         {
           "label": "Rubrik för valen",

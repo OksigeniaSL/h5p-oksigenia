@@ -46,7 +46,8 @@ try {
   await page.check('input[name="action"][value="upload"]');
   await page.setInputFiles('#h5p-file', opt.package);
   await page.click('input[name="submit-button"]');
-  await page.waitForLoadState('networkidle');
+  await page.waitForLoadState('load');
+  await page.waitForTimeout(2000);
   const library = sql("SELECT CONCAT(major_version, '.', minor_version, '.', patch_version) FROM wp_h5p_libraries WHERE name = 'H5P.NumberLine'");
   check('uploading the example installs the game', library !== '', library);
   const content = sql('SELECT id FROM wp_h5p_contents ORDER BY id DESC LIMIT 1');
@@ -67,6 +68,13 @@ try {
     await game.locator('.nl-next').click();
   };
   await open();
+  // A game at rest asks for nothing: no request keeps going in the background.
+  const requests = [];
+  const note = (request) => requests.push(request.url());
+  page.on('request', note);
+  await page.waitForTimeout(3000);
+  page.off('request', note);
+  check('at rest, the game makes no requests', requests.length === 0, requests.slice(0, 3).join(' '));
   await game.locator('.nl-choice-tables').click();
   for (let i = 0; i < 6; i++) {
     await playRight();

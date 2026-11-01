@@ -164,6 +164,17 @@
     "@sum": "@sum",
     "Rounds: @count. No clock.": "Manches : @count. Sans chrono.",
     "Jumps: @count": "Sauts : @count",
-    "@path (jumps: @used; it could be done in @best)": "@path (sauts : @used ; possible en @best)"
+    "@path (jumps: @used; it could be done in @best)": "@path (sauts : @used ; possible en @best)",
+    "The piece that jumps": "Le pion qui saute",
+    "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.": "Le ressort convient mieux aux plus jeunes et le dé aux plus âgés. Si les joueurs choisissent, ils ne voient que le dessin et le nom, sans âge.",
+    "Let the player choose": "Laisser choisir le joueur",
+    "Spring": "Ressort",
+    "Rocket": "Fusée",
+    "Dice": "Dé",
+    "Heading of the pieces": "Titre des pions",
+    "Choose your piece": "Choisis ton pion",
+    "Piece: spring": "Pion : ressort",
+    "Piece: rocket": "Pion : fusée",
+    "Piece: dice": "Pion : dé"
   }
 }

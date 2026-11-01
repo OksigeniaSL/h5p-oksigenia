@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "La pieza que salta",
+      "description": "El muelle va mejor con los más pequeños y el dado, con los mayores. Si elige quien juega, solo ve el dibujo y el nombre, sin edades.",
+      "options": [
+        {
+          "label": "Que elija quien juega"
+        },
+        {
+          "label": "Muelle"
+        },
+        {
+          "label": "Cohete"
+        },
+        {
+          "label": "Dado"
+        }
+      ]
+    },
+    {
       "label": "Rondas de cada partida"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Botón de empezar",
           "default": "Empezar"
+        },
+        {
+          "label": "Título de las piezas",
+          "default": "Elige tu pieza"
+        },
+        {
+          "label": "Pieza: muelle",
+          "default": "Muelle"
+        },
+        {
+          "label": "Pieza: cohete",
+          "default": "Cohete"
+        },
+        {
+          "label": "Pieza: dado",
+          "default": "Dado"
         },
         {
           "label": "Título de las opciones",

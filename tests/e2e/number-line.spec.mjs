@@ -51,6 +51,8 @@ async function playRound(page, frame) {
   } else if (r.mode === 'exact') {
     await frame.locator('.nl-count', { hasText: new RegExp(`^${r.times}$`) }).click();
   } else {
+    // The round comes into view a moment after it opens, and the place to click moves with it.
+    await page.waitForTimeout(700);
     const box = await frame.locator('.nl-line').boundingBox();
     const padding = 26 * (box.width / await frame.evaluate(() => H5P.instances[0].line.width));
     await page.mouse.click(box.x + padding + (r.value / r.max) * (box.width - 2 * padding), box.y + box.height / 2);
@@ -90,6 +92,23 @@ test('the first screen offers every topic, and there is a way back from the end'
   await expect(frame.locator('.nl-choice')).toHaveCount(6);
   await frame.locator('.nl-choice-fractions').click();
   await expect(frame.locator('.nl-challenge')).toContainText('/');
+});
+
+test('the piece: three to choose from, without ages, remembered on this device', async ({ page }) => {
+  let frame = await open(page);
+  await expect(frame.locator('.nl-pick')).toHaveCount(3);
+  await expect(frame.locator('.nl-pick-muelle')).toHaveAttribute('aria-pressed', 'true');
+  await frame.locator('.nl-pick-dado').click();
+  await expect(frame.locator('.nl-pick-dado')).toHaveAttribute('aria-pressed', 'true');
+  await expect(frame.locator('.nl-pick-muelle')).toHaveAttribute('aria-pressed', 'false');
+  await frame.locator('.nl-choice-free').click();
+  expect(await frame.locator('.nl-piece-pip').count()).toBeGreaterThan(0);
+  expect(await frame.locator('.nl-line .nl-piece-mouth').count()).toBe(0);
+  frame = await open(page);
+  await expect(frame.locator('.nl-pick-dado')).toHaveAttribute('aria-pressed', 'true');
+  await frame.locator('.nl-pick-cohete').click();
+  await frame.locator('.nl-choice-free').click();
+  expect(await frame.locator('.nl-line .nl-piece-window').count()).toBe(1);
 });
 
 test('«how many jumps»: a wrong try shows where it landed, and two wrong tries show the way', async ({ page }) => {

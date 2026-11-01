@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "The piece that jumps",
+      "description": "The spring suits younger children best and the dice, older ones. If players choose, they see only the drawing and the name, with no age.",
+      "options": [
+        {
+          "label": "Let the player choose"
+        },
+        {
+          "label": "Spring"
+        },
+        {
+          "label": "Rocket"
+        },
+        {
+          "label": "Dice"
+        }
+      ]
+    },
+    {
       "label": "Rounds in a game"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Start button",
           "default": "Start"
+        },
+        {
+          "label": "Heading of the pieces",
+          "default": "Choose your piece"
+        },
+        {
+          "label": "Piece: spring",
+          "default": "Spring"
+        },
+        {
+          "label": "Piece: rocket",
+          "default": "Rocket"
+        },
+        {
+          "label": "Piece: dice",
+          "default": "Dice"
         },
         {
           "label": "Heading of the choices",

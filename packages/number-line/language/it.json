@@ -28,6 +28,24 @@
       ]
     },
     {
+      "label": "La pedina che salta",
+      "description": "La molla è più adatta ai più piccoli e il dado ai più grandi. Se sceglie chi gioca, vede solo il disegno e il nome, senza età.",
+      "options": [
+        {
+          "label": "Lascia scegliere a chi gioca"
+        },
+        {
+          "label": "Molla"
+        },
+        {
+          "label": "Razzo"
+        },
+        {
+          "label": "Dado"
+        }
+      ]
+    },
+    {
       "label": "Turni per partita"
     },
     {
@@ -70,6 +88,22 @@
         {
           "label": "Pulsante di avvio",
           "default": "Inizia"
+        },
+        {
+          "label": "Titolo delle pedine",
+          "default": "Scegli la tua pedina"
+        },
+        {
+          "label": "Pedina: molla",
+          "default": "Molla"
+        },
+        {
+          "label": "Pedina: razzo",
+          "default": "Razzo"
+        },
+        {
+          "label": "Pedina: dado",
+          "default": "Dado"
         },
         {
           "label": "Titolo delle scelte",
