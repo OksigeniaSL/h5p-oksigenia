@@ -101,8 +101,11 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   text-decoration: none;
 }
 
-.h5p-number-line .nl-button:hover:not(:disabled) {
-  filter: brightness(1.08);
+/* Only where a real pointer hovers: a tap must not leave the button lit. */
+@media (hover: hover) {
+  .h5p-number-line .nl-button:hover:not(:disabled) {
+    filter: brightness(1.08);
+  }
 }
 
 .h5p-number-line .nl-button:disabled {

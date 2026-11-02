@@ -134,8 +134,11 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   text-decoration: underline;
 }
 
-.h5p-alphabet-wheel .aw-button:hover {
-  filter: brightness(1.08);
+/* Only where a real pointer hovers: a tap must not leave the button lit. */
+@media (hover: hover) {
+  .h5p-alphabet-wheel .aw-button:hover {
+    filter: brightness(1.08);
+  }
 }
 
 .h5p-alphabet-wheel .aw-button:focus-visible,

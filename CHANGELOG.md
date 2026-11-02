@@ -6,6 +6,11 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
 - A game taken up again comes into view with the focus where it goes on: the answer field or the button that resumes it.
   Before, what was typed went nowhere until the field was tapped.
+- On a touch screen, a tapped button no longer stays lit as if the pointer were still over it.
+
+## Number Line, not released yet
+
+- On a touch screen, a tapped button no longer stays lit as if the pointer were still over it.
 
 ## Number Line 1.0.1 (1 November 2026)
 
