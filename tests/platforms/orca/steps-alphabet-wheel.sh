@@ -2,7 +2,7 @@
 #
 # @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
-step "Tab to the first control"; xdotool key Tab; sleep 2
+step "Tab to the fullscreen button, then to Start"; xdotool key Tab; sleep 1; xdotool key Tab; sleep 2
 step "Enter: start"; xdotool key Return; sleep 3
 step "type abeja, Enter (right)"; xdotool type --delay 60 abeja; xdotool key Return; sleep 3
 step "type bote, Enter (wrong)"; xdotool type --delay 60 bote; xdotool key Return; sleep 4

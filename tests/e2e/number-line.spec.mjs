@@ -62,6 +62,9 @@ async function playRound(page, frame) {
     await frame.evaluate((value) => H5P.instances[0].mark(value), r.value);
     await frame.locator('.nl-here').click();
   }
+  // The game looks again at 250 and 600 ms whether «Next» is in view, once the frames have grown, and may move the page:
+  // a person takes longer than that to reach for it, a test does not.
+  await page.waitForTimeout(650);
   await frame.locator('.nl-next').click();
 }
 
