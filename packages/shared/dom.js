@@ -144,16 +144,28 @@ function inView(node) {
  * for less motion.
  *
  * On a touch screen, a field goes to the top even if it shows now: the keyboard is about to cover the lower half, and
- * the page is not always told (the Moodle app does not resize its page for the keyboard).
+ * the page is not always told (the Moodle app does not resize its page for the keyboard). A press on the page stops the
+ * looks still to come.
  * @param {Element} node
  * @param {{keyboard?: boolean, through?: Element|null}} [options] `keyboard`: a text field that has just taken the focus.
  *   `through`: the last thing the next step needs on screen, so what is in view is not only its beginning.
  */
 export function bringIntoView(node, { keyboard = false, through = null } = {}) {
   const touch = keyboard && matchMedia('(pointer: coarse)').matches;
-  [50, 250, 600].forEach((ms) => setTimeout(() => {
-    if (touch || !inView(node) || (through && !inView(through))) {
+  // Once the player presses something, the page stays where it is: a late jump between pressing and letting go would
+  // move the button away from under the finger, and the press would be lost (seen on a slow machine).
+  let pressed = false;
+  const press = () => {
+    pressed = true;
+  };
+  document.addEventListener('pointerdown', press, { capture: true, once: true });
+  const looks = [50, 250, 600];
+  looks.forEach((ms, i) => setTimeout(() => {
+    if (!pressed && (touch || !inView(node) || (through && !inView(through)))) {
       node.scrollIntoView({ block: 'start' });
+    }
+    if (i === looks.length - 1) {
+      document.removeEventListener('pointerdown', press, { capture: true });
     }
   }, ms));
 }

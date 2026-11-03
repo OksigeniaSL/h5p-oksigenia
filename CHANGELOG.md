@@ -6,6 +6,9 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
 For classroom boards:
 
+- A press is never lost to the page moving. The game brings the next step into view and looks again a moment later,
+  when the frames around it have grown; on a slow machine that late move could come between pressing a button and
+  letting go. Once the player presses something, the page now stays put.
 - In browsers without container queries, such as the Firefox 98 of some boards with Android 8, the letters around the
   wheel were tiny, the one in the middle was the size of the text, and the wheel stayed above the clue. It now looks the
   same as anywhere else.
@@ -23,6 +26,9 @@ And:
 
 For classroom boards:
 
+- A press is never lost to the page moving. The game brings the next step into view and looks again a moment later,
+  when the frames around it have grown; on a slow machine that late move could come between pressing a button and
+  letting go. Once the player presses something, the page now stays put.
 - A round fits on the screen of a board, 1280 × 600 or 960 × 540 below the bar of a page, also once answered: the hint
   goes beside the sum, the help beside the jumps and the message beside «Next». Before, an answer made the round taller
   than the screen.
