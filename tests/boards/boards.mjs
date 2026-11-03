@@ -82,6 +82,8 @@ const GAMES = {
       } else {
         for (let i = 0; i < 40 && await frame.locator('.nl-next').isHidden() && !await frame.locator('.nl-option').count(); i++) {
           await frame.locator('.nl-controls:not(.nl-extra) button:not(:disabled)').first().click();
+          // A press while the piece is in the air counts for nothing.
+          await frame.waitForTimeout(250);
         }
         if (await frame.locator('.nl-option').count()) {
           await frame.locator('.nl-option').first().click();

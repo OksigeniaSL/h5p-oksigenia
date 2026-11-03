@@ -156,6 +156,8 @@ try {
       } else {
         for (let i = 0; i < 40 && await game.locator('.nl-next').isHidden() && !await game.locator('.nl-option').count(); i++) {
           await game.locator('.nl-controls:not(.nl-extra) button:not(:disabled)').first().click();
+          // A press while the piece is in the air counts for nothing.
+          await page.waitForTimeout(250);
         }
         if (await game.locator('.nl-option').count()) {
           await game.locator('.nl-option').first().click();
