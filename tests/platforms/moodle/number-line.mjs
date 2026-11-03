@@ -131,12 +131,19 @@ try {
 
   await boardChecks({
     page, game, root: '.nl', open, check, shots: opt.shots, name: 'nl',
+    // Whatever the earlier checks left (a round over, the last one, the results): on to a round in play.
     start: async () => {
-      if (await game.locator('.nl-choice-add20').isVisible()) {
-        await game.locator('.nl-choice-add20').click();
-      }
-      if (await game.locator('.nl-next').isVisible()) {
-        await game.locator('.nl-next').click();
+      for (let i = 0; i < 4; i++) {
+        if (await game.locator('.nl-results .nl-other').isVisible()) {
+          await game.locator('.nl-results .nl-other').click();
+        } else if (await game.locator('.nl-choice-add20').isVisible()) {
+          await game.locator('.nl-choice-add20').click();
+        } else if (await game.locator('.nl-next').isVisible()) {
+          await game.locator('.nl-next').click();
+        } else {
+          break;
+        }
+        await page.waitForTimeout(600);
       }
     },
     answer: async () => {
