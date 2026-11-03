@@ -11,6 +11,7 @@ import { chromium } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { parseArgs } from 'node:util';
+import { boardChecks } from './boards.mjs';
 
 const { values: opt } = parseArgs({
   options: {
@@ -127,6 +128,38 @@ try {
     await page.waitForTimeout(1500);
   }
   await page.setViewportSize({ width: 1200, height: 1000 });
+
+  await boardChecks({
+    page, game, root: '.nl', open, check, shots: opt.shots, name: 'nl',
+    start: async () => {
+      if (await game.locator('.nl-choice-add20').isVisible()) {
+        await game.locator('.nl-choice-add20').click();
+      }
+      if (await game.locator('.nl-next').isVisible()) {
+        await game.locator('.nl-next').click();
+      }
+    },
+    answer: async () => {
+      const r = await current();
+      if (r.mode === 'exact') {
+        await game.locator('.nl-count').first().click();
+      } else if (r.mode === 'place') {
+        await game.locator('.nl').evaluate((node, value) => H5P.instances[0].mark(value), r.value);
+        await game.locator('.nl-here').click();
+      } else {
+        for (let i = 0; i < 40 && await game.locator('.nl-next').isHidden() && !await game.locator('.nl-option').count(); i++) {
+          await game.locator('.nl-controls:not(.nl-extra) button:not(:disabled)').first().click();
+        }
+        if (await game.locator('.nl-option').count()) {
+          await game.locator('.nl-option').first().click();
+        }
+      }
+    },
+    leave: async () => {
+      await game.locator('.nl-next').click();
+      await page.waitForTimeout(4500);
+    },
+  });
 
   // Run after the Alphabet Wheel's check, which leaves Moodle 5 in dark mode.
   await open();

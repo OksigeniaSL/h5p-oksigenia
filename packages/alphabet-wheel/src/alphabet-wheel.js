@@ -6,7 +6,9 @@
 import semantics from '../semantics.json';
 import { createMatcher, splitAlternatives } from '../../shared/answer.js';
 import { Countdown, formatTime } from '../../shared/timer.js';
-import { Announcer, bringIntoView, el, fill, paintOuterFrames, plain, watchPageColourMode } from '../../shared/dom.js';
+import {
+  Announcer, bringIntoView, containerQueries, el, exitFullScreenButton, fill, paintOuterFrames, plain, watchPageColourMode,
+} from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds, volumeSlider } from '../../shared/sound.js';
@@ -29,6 +31,10 @@ const RING_RADIUS = 41;
 /** Largest size of a letter, in % of the wheel, and the budget shared by all the letters around the ring. */
 const DOT_MAX = 9;
 const DOT_BUDGET = 240;
+/** The same sizes as the styles, for browsers without container queries: the letter in the middle (26cqi) and the width
+ * of the game, in em, from which the wheel and the clue go side by side. */
+const HUB_SHARE = 0.26;
+const WIDE_EM = 34;
 /** Seconds left from which each second ticks, and the ones that are announced. */
 const TICK_FROM = 5;
 const ANNOUNCED = { 60: 'oneMinuteLeft', 10: 'tenSecondsLeft' };
@@ -43,9 +49,11 @@ const ICONS = {
   passed: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.8 8h9.4M8.8 4.4L12.4 8l-3.6 3.6" /></svg>',
   soundOn: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 5.6a3.4 3.4 0 0 1 0 4.8M12.6 3.6a6.2 6.2 0 0 1 0 8.8" /></svg>',
   soundOff: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 6.2l3.6 3.6M14.2 6.2l-3.6 3.6" /></svg>',
+  // Four corners pointing in: out of full screen.
+  exitFull: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5V6H2.5M10 2.5V6h3.5M6 13.5V10H2.5M10 13.5V10h3.5" /></svg>',
 };
 
-/** @typedef {'ok'|'bad'|'passed'|'soundOn'|'soundOff'} IconName */
+/** @typedef {'ok'|'bad'|'passed'|'soundOn'|'soundOff'|'exitFull'} IconName */
 
 /**
  * @param {IconName} name
@@ -223,7 +231,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       el('ol', { class: 'aw-letters', 'aria-label': t.wheel }, this.letters),
       el('div', { class: 'aw-hub', 'aria-hidden': 'true' }, [this.hubLetter]),
     ]);
-    this.wheel.style.setProperty('--aw-dot', `${Math.min(DOT_MAX, DOT_BUDGET / Math.max(n, 1))}cqi`);
+    this.dotShare = Math.min(DOT_MAX, DOT_BUDGET / Math.max(n, 1));
+    this.wheel.style.setProperty('--aw-dot', `${this.dotShare}cqi`);
 
     this.round = el('span', { class: 'aw-round' });
     this.clockValue = el('span', { class: 'aw-clock-value' });
@@ -295,7 +304,34 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     ]);
 
     this.empty = el('p', { class: 'aw-empty', text: t.noItems });
-    this.root = el('div', { class: 'aw' }, [this.empty, this.intro, this.gameView, this.results, this.announcer.node]);
+    this.root = el('div', { class: 'aw' }, [
+      this.empty, this.intro, this.gameView, this.results, exitFullScreenButton('aw', icon('exitFull')), this.announcer.node,
+    ]);
+    if (!containerQueries()) {
+      this.fitWithoutContainers();
+    }
+  }
+
+  /**
+   * Without container queries, the sizes the styles take from the game and from the wheel are measured here and given
+   * in pixels: side by side from WIDE_EM, the letters around and the one in the middle. On every change of size, as
+   * when a board is plugged into a laptop in the middle of a game.
+   */
+  fitWithoutContainers() {
+    if (typeof ResizeObserver !== 'function') {
+      return;
+    }
+    const fit = () => {
+      const style = getComputedStyle(this.root);
+      const inner = this.root.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      this.root.classList.toggle('aw-wide', inner >= WIDE_EM * parseFloat(style.fontSize));
+      const wheel = this.wheel.clientWidth;
+      this.wheel.style.setProperty('--aw-dot-px', `${(wheel * this.dotShare) / 100}px`);
+      this.wheel.style.setProperty('--aw-hub-px', `${wheel * HUB_SHARE}px`);
+    };
+    const observer = new ResizeObserver(fit);
+    observer.observe(this.root);
+    observer.observe(this.wheel);
   }
 
   /**

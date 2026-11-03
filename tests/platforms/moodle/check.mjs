@@ -15,6 +15,7 @@ import { chromium } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
+import { boardChecks } from './boards.mjs';
 
 const { values: opt } = parseArgs({
   options: {
@@ -223,6 +224,21 @@ try {
     await page.waitForTimeout(4000);
   }
   await page.setViewportSize({ width: 1200, height: 1000 });
+
+  await boardChecks({
+    page, game: game(), root: '.aw', open: openActivity, check, shots: opt.shots, name: 'aw',
+    start: () => game().locator('.aw-intro button').click(),
+    answer: async () => {
+      await game().locator('.aw-input').fill(answers[await letter()]);
+      await game().locator('.aw-input').press('Enter');
+    },
+    leave: async () => {
+      await game().locator('.aw-finish').click();
+      await game().locator('.aw-finish').click();
+      await game().locator('.aw-cheer-title').waitFor();
+      await page.waitForTimeout(4000);
+    },
+  });
 
   // On a touch screen the keyboard covers the lower part, and the page is not always told: the clue and the field go up
   // before it opens. Here the keyboard does not open, so it looks at where they end up.

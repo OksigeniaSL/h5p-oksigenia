@@ -4,14 +4,14 @@
   "machineName": "H5P.AlphabetWheel",
   "majorVersion": 1,
   "minorVersion": 0,
-  "patchVersion": 2,
+  "patchVersion": 3,
   "runnable": 1,
   "author": "Oksigenia",
   "license": "MIT",
   "embedTypes": [
     "iframe"
   ],
-  "fullscreen": 0,
+  "fullscreen": 1,
   "coreApi": {
     "majorVersion": 1,
     "minorVersion": 24

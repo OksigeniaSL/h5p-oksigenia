@@ -75,6 +75,34 @@ export class Announcer {
 const VIEW_MARGIN = 80;
 
 /**
+ * In real full screen H5P hides its own buttons and leaves only the Esc key to come out, and a board has no keyboard. This
+ * button, shown by the styles of each game only then, goes where the button to go in was, with the platform's own words.
+ * In the semi full screen of browsers without the full-screen API, H5P puts its own.
+ * @param {string} prefix The class prefix of the game (`aw`, `nl`).
+ * @param {Node} glyph Its icon.
+ * @returns {HTMLButtonElement}
+ */
+export function exitFullScreenButton(prefix, glyph) {
+  const label = H5P.t('disableFullscreen');
+  return /** @type {HTMLButtonElement} */ (el('button', {
+    type: 'button', class: `${prefix}-button ${prefix}-secondary ${prefix}-exit-full`, title: label, 'aria-label': label,
+    onclick: () => {
+      if (typeof H5P.exitFullScreen === 'function') {
+        H5P.exitFullScreen();
+      }
+    },
+  }, [glyph]));
+}
+
+/**
+ * @returns {boolean} Whether the browser has container queries. Firefox has them from version 110 (2023); some classroom
+ *   boards with Android 8 bring Firefox 98, and there the styles that need them are left out.
+ */
+export function containerQueries() {
+  return typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && CSS.supports('container-type', 'inline-size');
+}
+
+/**
  * The windows around this frame that can be read, from this one outwards. A frame of another site ends the list.
  * @returns {Window[]}
  */

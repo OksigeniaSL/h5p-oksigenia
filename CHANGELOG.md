@@ -2,14 +2,32 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Alphabet Wheel, not released yet
+## Alphabet Wheel 1.0.3 (3 November 2026)
+
+For classroom boards:
+
+- In browsers without container queries, such as the Firefox 98 of some boards with Android 8, the letters around the
+  wheel were tiny, the one in the middle was the size of the text, and the wheel stayed above the clue. It now looks the
+  same as anywhere else.
+- A full-screen button, with larger letters where the screen is tall enough for them. In full screen, a button to come
+  out of it: H5P hides its own there, and a board has no Esc key.
+- At 960 × 540 the answer field and its two buttons stay on one row, and the game fits on the screen.
+- On a touch screen, a tapped button no longer stays lit as if the pointer were still over it.
+
+And:
 
 - A game taken up again comes into view with the focus where it goes on: the answer field or the button that resumes it.
   Before, what was typed went nowhere until the field was tapped.
-- On a touch screen, a tapped button no longer stays lit as if the pointer were still over it.
 
-## Number Line, not released yet
+## Number Line 1.0.2 (3 November 2026)
 
+For classroom boards:
+
+- A round fits on the screen of a board, 1280 × 600 or 960 × 540 below the bar of a page, also once answered: the hint
+  goes beside the sum, the help beside the jumps and the message beside «Next». Before, an answer made the round taller
+  than the screen.
+- Full screen holds the whole round, with the text as large as the height allows, and a button to come out of it: H5P
+  hides its own there, and a board has no Esc key.
 - On a touch screen, a tapped button no longer stays lit as if the pointer were still over it.
 
 ## Number Line 1.0.1 (1 November 2026)

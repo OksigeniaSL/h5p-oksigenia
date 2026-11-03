@@ -5,7 +5,9 @@
 // @license   MIT
 
 import semantics from '../semantics.json';
-import { Announcer, bringIntoView, el, fill, paintOuterFrames, plain, watchPageColourMode } from '../../shared/dom.js';
+import {
+  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, watchPageColourMode,
+} from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds, volumeSlider } from '../../shared/sound.js';
@@ -58,6 +60,8 @@ const ICONS = {
   half: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10" /></svg>',
   soundOn: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 5.6a3.4 3.4 0 0 1 0 4.8M12.4 3.8a6 6 0 0 1 0 8.4" /></svg>',
   soundOff: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 6.2l3.4 3.6M14 6.2l-3.4 3.6" /></svg>',
+  // Four corners pointing in: out of full screen.
+  exitFull: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5V6H2.5M10 2.5V6h3.5M6 13.5V10H2.5M10 13.5V10h3.5" /></svg>',
 };
 
 /**
@@ -239,7 +243,7 @@ export default class NumberLine extends H5P.EventDispatcher {
       if (this.game.roundOver) {
         bringIntoView(this.nextButton);
       } else {
-        bringIntoView(this.challenge, { through: this.controls });
+        bringIntoView(this.challenge, { through: this.moves });
       }
     }
     // Inside another content type, the game keeps the colours of what is around it.
@@ -270,6 +274,10 @@ export default class NumberLine extends H5P.EventDispatcher {
     this.extraControls = el('div', { class: 'nl-controls nl-extra' });
     this.messageLine = el('p', { class: 'nl-message' });
     this.nextButton = btn({ type: 'button', class: 'nl-button nl-primary nl-next', onclick: () => this.next() });
+    // A round fits on a classroom board (1280×600 and less inside a page): the hint goes beside the sum, the help
+    // beside the jumps, and the message beside «Next», so answering does not make the round taller.
+    this.moves = el('div', { class: 'nl-moves' }, [this.controls, this.extraControls]);
+    this.after = el('div', { class: 'nl-after' }, [this.nextButton, this.messageLine]);
     this.gameView = el('div', { class: 'nl-game' }, [
       el('div', { class: 'nl-bar' }, [
         this.roundText, this.levelText, this.pointsText,
@@ -277,7 +285,7 @@ export default class NumberLine extends H5P.EventDispatcher {
           this.soundButton, volumeSlider(this.sounds, t.volume, 'nl-volume', () => this.render()),
         ]) : '',
       ]),
-      this.challenge, this.hint, this.lineBox, this.controls, this.extraControls, this.nextButton, this.messageLine,
+      el('div', { class: 'nl-ask' }, [this.challenge, this.hint]), this.lineBox, this.moves, this.after,
     ]);
 
     // After the game: a cheer that matches the score, the buttons and the review of every round.
@@ -295,7 +303,9 @@ export default class NumberLine extends H5P.EventDispatcher {
       this.cheer, el('div', { class: 'nl-actions' }, [this.otherButton, this.retryButton]), this.review,
     ]);
 
-    this.root = el('div', { class: 'nl' }, [this.intro, this.gameView, this.results, this.announcer.node]);
+    this.root = el('div', { class: 'nl' }, [
+      this.intro, this.gameView, this.results, exitFullScreenButton('nl', icon('exitFull')), this.announcer.node,
+    ]);
     this.fillIntro();
     if (this.topic === 'free') {
       this.openFree(FREE_RANGES[1][0]);
@@ -360,6 +370,7 @@ export default class NumberLine extends H5P.EventDispatcher {
       this.messageLine.textContent = m ? m.text : '';
       this.nextButton.hidden = !playing || !g.roundOver;
       this.nextButton.textContent = playing && g.lastRound ? t.seeResult : t.next;
+      this.after.hidden = this.nextButton.hidden && !m;
     }
     if (phase === 'finished') {
       this.renderResults();
@@ -380,7 +391,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     if (topic === 'free') {
       this.openFree(FREE_RANGES[1][0]);
       this.render();
-      bringIntoView(this.lineBox, { through: this.controls });
+      bringIntoView(this.lineBox, { through: this.moves });
       this.controls.querySelector('button').focus({ preventScroll: true });
       return;
     }
@@ -920,7 +931,7 @@ export default class NumberLine extends H5P.EventDispatcher {
       /** @type {HTMLElement} */ (first).focus({ preventScroll: true });
     }
     // The whole round in view, down to its buttons: the sum alone is not enough to play.
-    bringIntoView(this.challenge, { through: this.controls });
+    bringIntoView(this.challenge, { through: this.moves });
     this.announcer.say(`${this.challenge.textContent}. ${this.hint.textContent}`);
   }
 

@@ -147,9 +147,10 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   outline-offset: 2px;
 }
 
-/* Room above the field when it is brought into view: the clue goes with it. */
+/* Room above the field when it is brought into view: the clue goes with it. The field gives way first, so its two
+   buttons stay on its row in the narrow column of a board at 960 px. */
 .h5p-alphabet-wheel .aw-input {
-  flex: 1 1 10em;
+  flex: 1 1 5em;
   scroll-margin-top: 10em;
   min-width: 0;
   min-height: 2.75rem;
@@ -192,7 +193,9 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   margin-inline: auto;
 }
 
+/* Room for the full-screen button of H5P, which goes in the corner on top of the game. */
 .h5p-alphabet-wheel .aw-title {
+  padding-inline-end: 2.4rem;
   margin: 0;
   font-size: 1.5em;
   font-weight: 800;
@@ -230,6 +233,7 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   container-type: inline-size;
 }
 
+/* 34em, 26cqi and the letters' --aw-dot are also in the script (WIDE_EM, HUB_SHARE, dotShare), for the browsers below. */
 @container (min-width: 34em) {
   .h5p-alphabet-wheel .aw-game {
     grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
@@ -341,6 +345,27 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   line-height: 1;
 }
 
+/* Without container queries (Firefox before 110, on some classroom boards with Android 8), the script measures the game
+   and the wheel, and gives the same sizes. */
+@supports not (container-type: inline-size) {
+  .h5p-alphabet-wheel .aw-wide .aw-game {
+    grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-wheel {
+    width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
+  }
+
+  .h5p-alphabet-wheel .aw-letter {
+    width: var(--aw-dot-px, 1.2em);
+    font-size: calc(var(--aw-dot-px, 1.2em) * 0.52);
+  }
+
+  .h5p-alphabet-wheel .aw-hub-letter {
+    font-size: var(--aw-hub-px, 3.9em);
+  }
+}
+
 .h5p-alphabet-wheel .aw-panel {
   display: flex;
   flex-direction: column;
@@ -349,6 +374,7 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
 }
 
 .h5p-alphabet-wheel .aw-bar {
+  padding-inline-end: 2.4rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -631,6 +657,42 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6em;
+}
+
+/* Full screen, for a board: larger letters where the screen is tall enough for them, and a wheel no taller than it. */
+.h5p-fullscreen .h5p-alphabet-wheel .aw,
+.h5p-semi-fullscreen .h5p-alphabet-wheel .aw {
+  box-sizing: border-box;
+  min-height: 100%;
+  font-size: min(calc(var(--h5p-theme-font-size-m, 1rem) * 1.25), 3.3vh);
+}
+
+.h5p-fullscreen .h5p-alphabet-wheel .aw-wheel,
+.h5p-semi-fullscreen .h5p-alphabet-wheel .aw-wheel {
+  max-width: calc(100vh - 3em);
+}
+
+/* Out of full screen: only in the real one, where H5P hides its buttons; in the corner where its button to go in was. */
+.h5p-alphabet-wheel .aw-exit-full {
+  display: none;
+}
+
+.h5p-fullscreen .h5p-alphabet-wheel .aw-exit-full {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  padding-inline: 0.5em;
+}
+
+.h5p-fullscreen .h5p-alphabet-wheel .aw-exit-full .aw-icon {
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.h5p-fullscreen .h5p-alphabet-wheel .aw-bar,
+.h5p-fullscreen .h5p-alphabet-wheel .aw-title {
+  padding-inline-end: 3.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

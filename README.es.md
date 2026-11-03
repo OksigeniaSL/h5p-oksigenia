@@ -83,6 +83,14 @@ tests/platforms/wordpress/run.sh      # el plugin oficial de H5P: instalación, 
 node tests/platforms/lumi/check.mjs   # el motor H5P de Lumi Desktop 1.0.3, con el núcleo 1.27
 ```
 
+Como los muestra una pizarra de clase: enteros a 1280×600, 960×540 y 1366×768, un cambio de tamaño de golpe en mitad de
+una partida y la pantalla completa; con `--old`, también con los estilos que se quedan en el navegador antiguo de algunas
+pizarras (Firefox 98):
+
+```
+node tests/boards/boards.mjs [--old]
+```
+
 ## En la pizarra de clase
 
 Los mismos juegos, para toda la clase a la vez y con el docente llevando la cuenta, están en
