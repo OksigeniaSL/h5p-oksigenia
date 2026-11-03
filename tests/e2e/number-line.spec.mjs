@@ -37,6 +37,9 @@ async function jumpOnce(frame, left) {
 
 /** Plays one round well: the fewest jumps, the right count, the right place. */
 async function playRound(page, frame) {
+  // A new round brings itself into view at 50, 250 and 600 ms, once the frames have grown, and may move the page under
+  // a click: a person takes longer than that to reach for the first button, a test does not. The same for «Next».
+  await page.waitForTimeout(650);
   const r = await round(frame);
   if (r.mode === 'goal') {
     for (const jump of r.best) {
@@ -62,8 +65,6 @@ async function playRound(page, frame) {
     await frame.evaluate((value) => H5P.instances[0].mark(value), r.value);
     await frame.locator('.nl-here').click();
   }
-  // The game looks again at 250 and 600 ms whether «Next» is in view, once the frames have grown, and may move the page:
-  // a person takes longer than that to reach for it, a test does not.
   await page.waitForTimeout(650);
   await frame.locator('.nl-next').click();
 }
@@ -123,6 +124,7 @@ test('«how many jumps»: a wrong try shows where it landed, and two wrong tries
   await frame.locator('.nl-choice-tables').click();
   const r = await round(frame);
   const wrong = r.times === 2 ? 3 : 2;
+  await page.waitForTimeout(650);
   await frame.locator('.nl-count', { hasText: new RegExp(`^${wrong}$`) }).click();
   await expect(frame.locator('.nl-message')).toContainText(String(wrong * r.size));
   await expect(frame.locator('.nl-next')).toBeHidden();
@@ -224,6 +226,7 @@ test('a reload in the middle of a sum keeps the jumps already made', async ({ pa
   const session = `nl-jumps-${test.info().project.name}`;
   let frame = await open(page, 'es', session);
   await frame.locator('.nl-choice-add100').click();
+  await page.waitForTimeout(650);
   await frame.locator('.nl-jump').first().click();
   const before = await frame.evaluate(() => H5P.instances[0].game.position);
   await frame.evaluate(() => {
@@ -282,6 +285,8 @@ for (const [width, height] of [[1100, 540], [360, 640]]) {
     await shows('.nl-challenge');
     await shows('.nl-line');
     await shows('.nl-count >> nth=11');
+    // The first look of the game, at 50 ms, can still be moving the page: see playRound.
+    await page.waitForTimeout(650);
     const r = await round(frame);
     await frame.locator('.nl-count', { hasText: new RegExp(`^${r.times}$`) }).click();
     await shows('.nl-next');
