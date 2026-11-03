@@ -83,12 +83,14 @@ tests/platforms/wordpress/run.sh      # el plugin oficial de H5P: instalación, 
 node tests/platforms/lumi/check.mjs   # el motor H5P de Lumi Desktop 1.0.3, con el núcleo 1.27
 ```
 
-Como los muestra una pizarra de clase: enteros a 1280×600, 960×540 y 1366×768, un cambio de tamaño de golpe en mitad de
-una partida y la pantalla completa; con `--old`, también con los estilos que se quedan en el navegador antiguo de algunas
-pizarras (Firefox 98):
+Como los muestra una pizarra de clase: enteros a 1280×600, 960×540, 1366×768, 1517×717 y 1115×555, un cambio de tamaño de golpe en
+mitad de una partida y la pantalla completa; con `--old`, también con los estilos que se quedan en el navegador antiguo de
+algunas pizarras (Firefox 98). Lo mismo en ese navegador, dentro de un contenedor, con `firefox98.mjs` (cómo arrancarlo, al
+principio del fichero):
 
 ```
 node tests/boards/boards.mjs [--old]
+node tests/boards/firefox98.mjs
 ```
 
 ## En la pizarra de clase

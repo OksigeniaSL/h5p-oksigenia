@@ -1,5 +1,5 @@
-// Classroom boards, inside a Moodle activity: at 1280×600, 960×540 and 1366×768 (what boards measured in a school leave
-// to the page, and a Chromebook mirrored on one), the game in play fits under Moodle's fixed bar, before and after an
+// Classroom boards, inside a Moodle activity: at 1280×600, 960×540, 1366×768 and 1517×717 (what boards measured in a
+// school leave to the page, and a Chromebook mirrored on one), the game in play fits under Moodle's fixed bar, before and after an
 // answer; the full-screen button of H5P puts it on the whole screen, and the game's own button brings it back, since
 // H5P hides its buttons in full screen and a board has no Esc key. tests/boards/boards.mjs checks the same outside an
 // LMS, and with the styles of an old browser.
@@ -8,7 +8,7 @@
 // @license   MIT
 
 /** @type {[number, number][]} */
-export const BOARD_SIZES = [[1280, 600], [960, 540], [1366, 768]];
+export const BOARD_SIZES = [[1280, 600], [960, 540], [1366, 768], [1517, 717]];
 /** Moodle's fixed top bar. */
 const BAR = 60;
 

@@ -82,11 +82,13 @@ tests/platforms/wordpress/run.sh      # the official H5P plugin: install, result
 node tests/platforms/lumi/check.mjs   # the H5P engine of Lumi Desktop 1.0.3, on core 1.27
 ```
 
-As a classroom board shows them: whole at 1280×600, 960×540 and 1366×768, a sudden change of size in the middle of a
-game, and full screen; with `--old`, also with the styles that the old browser of some boards (Firefox 98) keeps:
+As a classroom board shows them: whole at 1280×600, 960×540, 1366×768, 1517×717 and 1115×555, a sudden change of size in the
+middle of a game, and full screen; with `--old`, also with the styles that the old browser of some boards (Firefox 98) keeps.
+The same in that browser itself, in a container, with `firefox98.mjs` (how to start it, at the top of the file):
 
 ```
 node tests/boards/boards.mjs [--old]
+node tests/boards/firefox98.mjs
 ```
 
 ## On the classroom board

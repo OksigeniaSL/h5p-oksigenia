@@ -1,12 +1,11 @@
-// The games as a classroom board shows them. Boards measured in a school in November 2026 leave 1280×624 to the page
-// with the browser bars, less inside an LMS; a Chromebook mirrored on one gives 1366×768. So, in the h5p-cli dev server
-// and at 1280×600, 960×540 and 1366×768:
+// The games as a classroom board shows them, in the h5p-cli dev server and at the sizes of board.mjs:
 //   - the game in play fits in the height, with room for the fixed bar of an LMS page above it (BAR), and nothing
 //     sticks out sideways;
 //   - a sudden change of size in the middle of a game (an HDMI cable plugged in or pulled out) keeps the game as it was,
 //     without a reload;
 //   - the full-screen button of H5P puts the game on the whole screen.
 // With --old, every stylesheet is first cut down to what Firefox 98 keeps (old-css.mjs), as on a board with Android 8.
+// firefox98.mjs checks the same in that browser.
 // Screenshots, with --shots <dir>, of what the board shows with the game scrolled up to just under that bar.
 //
 //   node tests/boards/boards.mjs [--old] [--shots dir] [--port 8094] [--game alphabet-wheel]
@@ -17,10 +16,9 @@
 // @license   MIT
 
 import { chromium } from '@playwright/test';
-import { spawn } from 'node:child_process';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT } from '../../tools/packages.mjs';
+import { answers, barAt, serve, SIZES } from './board.mjs';
 import { oldBrowserCss } from './old-css.mjs';
 
 const args = process.argv.slice(2);
@@ -30,20 +28,12 @@ const shots = option('--shots', '');
 const port = option('--port', '8094');
 const only = option('--game', '');
 const base = `http://localhost:${port}`;
-/** @type {[number, number][]} */
-const SIZES = [[1280, 600], [960, 540], [1366, 768]];
-// The fixed top bar of Moodle's page, which stays over the game when it is scrolled up.
-const BAR = 60;
 
 let failures = 0;
 const report = (ok, what) => {
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${what}`);
   failures += ok ? 0 : 1;
 };
-
-const answers = Object.fromEntries(JSON.parse(readFileSync(
-  join(ROOT, 'packages/alphabet-wheel/content/es/content/content.json'), 'utf8',
-)).items.map((it) => [it.letter, it.answer]));
 
 const GAMES = {
   'alphabet-wheel': {
@@ -122,11 +112,13 @@ async function openGame(page, name) {
 async function measure(page, frame, iframe) {
   const height = (await iframe.boundingBox()).height;
   const wide = await frame.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  return { height: Math.round(height), room: page.viewportSize().height - BAR, wide };
+  const size = page.viewportSize();
+  return { height: Math.round(height), room: size.height - barAt(size.width), wide };
 }
 
 async function showAsBoard(page, iframe, file) {
-  await iframe.evaluate((node, bar) => window.scrollTo(0, node.getBoundingClientRect().top + window.scrollY - bar), BAR);
+  await iframe.evaluate((node, bar) => window.scrollTo(0, node.getBoundingClientRect().top + window.scrollY - bar),
+    barAt(page.viewportSize().width));
   if (shots) {
     await page.screenshot({ path: join(shots, file) });
   }
@@ -220,21 +212,8 @@ async function check(browser, name, [width, height]) {
 if (shots) {
   mkdirSync(shots, { recursive: true });
 }
-const server = spawn(process.execPath, [join(ROOT, 'tools/dev.mjs'), '--port', port, '--no-watch'], { stdio: 'ignore' });
+const server = await serve(port);
 try {
-  for (let i = 0; ; i++) {
-    try {
-      if ((await fetch(`${base}/view/h5p-alphabet-wheel/alphabet-wheel-es?session=null`)).ok) {
-        break;
-      }
-    } catch {
-      // Not up yet.
-    }
-    if (i > 240) {
-      throw new Error('the dev server did not start');
-    }
-    await new Promise((resolve) => setTimeout(resolve, 500));
-  }
   const browser = await chromium.launch({ channel: 'chrome', args: ['--mute-audio'] });
   for (const name of Object.keys(GAMES).filter((n) => !only || n === only)) {
     for (const size of SIZES) {
