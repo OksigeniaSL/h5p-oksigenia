@@ -84,7 +84,9 @@ node tests/platforms/lumi/check.mjs   # the H5P engine of Lumi Desktop 1.0.3, on
 
 As a classroom board shows them: whole at 1280×600, 960×540, 1366×768, 1517×717 and 1115×555, a sudden change of size in the
 middle of a game, and full screen; with `--old`, also with the styles that the old browser of some boards (Firefox 98) keeps.
-The same in that browser itself, in a container, with `firefox98.mjs` (how to start it, at the top of the file):
+The same in that browser itself, in a container and outside an LMS, with `firefox98.mjs` (how to start it, at the top of the
+file). Inside Moodle 5.3 that browser shows no H5P content and sends no results, whatever the content: the scripts of Moodle's
+embed page need import maps, which arrive in Firefox 108. Moodle 4.5 works.
 
 ```
 node tests/boards/boards.mjs [--old]

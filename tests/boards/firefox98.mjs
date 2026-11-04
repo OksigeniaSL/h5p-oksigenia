@@ -1,5 +1,7 @@
 // The games in a real Firefox 98, the browser of some classroom boards with Android 8, at their ×1.5: what boards.mjs
 // checks in Chrome, here by WebDriver and with real clicks and keys. boards.mjs --old only simulates this browser.
+// Outside an LMS, in the dev server. Inside Moodle 5.3 this browser shows no H5P and sends no results, whatever the game
+// does: the scripts of Moodle's embed page need import maps, which arrive in Firefox 108. Moodle 4.5 works.
 //
 //   docker run -d --rm --name h5p-ff98 --network host --shm-size=1g --memory=2g --cpus=4 -e SE_OPTS="--port 4492" \
 //     -e SE_START_VNC=false -e SE_RECORD_VIDEO=false -e VIDEO_READY_PORT=9092 -e DISPLAY_NUM=92 -e DISPLAY=:92 \

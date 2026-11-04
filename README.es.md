@@ -85,8 +85,10 @@ node tests/platforms/lumi/check.mjs   # el motor H5P de Lumi Desktop 1.0.3, con 
 
 Como los muestra una pizarra de clase: enteros a 1280×600, 960×540, 1366×768, 1517×717 y 1115×555, un cambio de tamaño de golpe en
 mitad de una partida y la pantalla completa; con `--old`, también con los estilos que se quedan en el navegador antiguo de
-algunas pizarras (Firefox 98). Lo mismo en ese navegador, dentro de un contenedor, con `firefox98.mjs` (cómo arrancarlo, al
-principio del fichero):
+algunas pizarras (Firefox 98). Lo mismo en ese navegador, dentro de un contenedor y fuera de un LMS, con `firefox98.mjs` (cómo
+arrancarlo, al principio del fichero). Dentro de Moodle 5.3 ese navegador no muestra ningún contenido H5P ni envía resultados,
+sea cual sea: los guiones de la página de Moodle que incrusta H5P necesitan mapas de importación, que llegan en Firefox 108.
+Moodle 4.5 funciona.
 
 ```
 node tests/boards/boards.mjs [--old]
