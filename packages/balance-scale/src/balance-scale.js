@@ -254,15 +254,43 @@ export default class BalanceScale extends H5P.EventDispatcher {
     }
     if (!this.watching) {
       this.watching = true;
-      let width = 0;
-      new ResizeObserver(() => {
-        const w = this.root.clientWidth;
-        if (Math.abs(w - width) >= 2) {
-          width = w;
-          this.fit();
+      let width = 0, room = 0, queued = 0;
+      // Fits again on the next frame, once, whatever asked for it.
+      const soon = () => {
+        if (!queued) {
+          queued = requestAnimationFrame(() => {
+            queued = 0;
+            this.fit();
+          });
         }
-      }).observe(this.root);
-      window.addEventListener('resize', () => this.fit());
+      };
+      // The room that counts is the width of the game and the height of the page's window, not the height of this
+      // frame, which H5P grows and shrinks to the game: listening to that made an endless round of fits in Firefox.
+      const check = () => {
+        const w = this.root.clientWidth, h = this.viewHeight();
+        if (Math.abs(w - width) >= 2 || Math.abs(h - room) >= 2) {
+          width = w;
+          room = h;
+          soon();
+        }
+      };
+      new ResizeObserver(check).observe(this.root);
+      /** @type {Window} */
+      let page = window;
+      try {
+        while (page.parent !== page && page.parent.document) {
+          page = page.parent;
+        }
+      } catch (e) {
+        // A frame of another site: its own window is the last one that can be read.
+      }
+      page.addEventListener('resize', check);
+      if (page !== window) {
+        window.addEventListener('resize', check);
+      }
+      // What is above and beside the scale changes height as a round goes on: the scale takes what is left.
+      const around = new ResizeObserver(soon);
+      [this.ask, this.messageLine, this.trayBox, this.actionsBox].forEach((node) => around.observe(node));
       // In and out of full screen the room changes at once; the game's own «resize» goes to H5P, not back here.
       this.on('enterFullScreen', () => setTimeout(() => this.fit(), 200));
       this.on('exitFullScreen', () => setTimeout(() => this.fit(), 200));
