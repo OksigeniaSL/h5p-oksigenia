@@ -23,6 +23,8 @@ import { sizeOf } from './game.js';
 export const VIEWS = { market: ['puesto', market], laboratory: ['precision', laboratory], notebook: ['cuaderno', notebook] };
 
 const D2R = Math.PI / 180;
+/** Room left under the hook of a hanging pan, in units of the view: the ring and where the chains meet. */
+const HOOK_CLEARANCE = 34;
 
 /** @typedef {import('./game.js').Thing} Thing */
 /**
@@ -317,10 +319,25 @@ export class View {
     return rows;
   }
 
+  /**
+   * @param {Array<Array<{c: Object}>>} rows
+   * @param {number} k
+   * @returns {number} How high the things of a pan reach over its floor.
+   */
+  heightOf(rows, k) {
+    let h = 0;
+    rows.forEach((row, i) => {
+      h += Math.max(...row.map((f) => (i === rows.length - 1 ? f.c.apoyo.y : f.c.apila))) * k;
+    });
+    return h;
+  }
+
   arrange(list, hx, floorY) {
     const A = this.G.apilar, things = list.map((t) => ({ t, c: this.G.cosas[this.key(t)] }));
+    // Under hanging pans, the things stay below the hook, clear of the beam and the chains (seen on a phone, 7 Nov).
+    const room = this.G.cuelgue > 0 ? this.G.cuelgue - HOOK_CLEARANCE : Infinity;
     let k = 1, rows = this.rowsOf(things, k);
-    while (rows.length > 2 && k > 0.5) {
+    while ((rows.length > 2 || this.heightOf(rows, k) > room) && k > 0.5) {
       k -= 0.05;
       rows = this.rowsOf(things, k);
     }

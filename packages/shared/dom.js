@@ -185,10 +185,15 @@ export function paintOuterFrames(colour) {
   });
 }
 
+/** The colour scheme of the device, for a game whose page cannot be read. */
+const deviceDark = matchMedia('(prefers-color-scheme: dark)');
+
 /**
  * @param {Window[]} windows
  * @returns {boolean} Whether the page is in dark mode: `data-bs-theme` in Moodle and other Bootstrap sites, the class
- *   `dark` in the Moodle app. The outermost window decides, because it is the one the player can change.
+ *   `dark` in the Moodle app. The outermost window decides, because it is the one the player can change. When none says
+ *   and the page around cannot be read (a frame of another site, as in the Moodle app's online player), the device's
+ *   colour scheme; a page that can be read and says nothing is light, as Moodle 4.5.
  */
 function pageIsDark(windows) {
   for (const win of [...windows].reverse()) {
@@ -198,7 +203,7 @@ function pageIsDark(windows) {
       return mode ? mode === 'dark' : true;
     }
   }
-  return false;
+  return windows[windows.length - 1] !== window.top && deviceDark.matches;
 }
 
 /**
@@ -210,6 +215,9 @@ export function watchPageColourMode(onChange) {
   const windows = readableWindows();
   const update = () => onChange(pageIsDark(windows));
   update();
+  if (windows[windows.length - 1] !== window.top) {
+    deviceDark.addEventListener('change', update);
+  }
   windows.forEach((win) => {
     new MutationObserver(update).observe(win.document.documentElement, {
       attributes: true, attributeFilter: ['data-bs-theme', 'class'],

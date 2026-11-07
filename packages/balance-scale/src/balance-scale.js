@@ -112,7 +112,11 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.l10n = { ...L10N, ...(params.l10n || {}) };
     this.behaviour = { ...BEHAVIOUR, ...(params.behaviour || {}) };
     this.tuning = { ...TUNING, ...(params.tuning || {}) };
+    // A package exported by Moodle carries the library's name as its title («Balance Scale», in English): not shown.
     this.title = plain(extras.metadata && extras.metadata.title);
+    if (this.title === FALLBACK_TITLE) {
+      this.title = '';
+    }
     this.id = `h5p-bs-${++uid}-${Math.random().toString(36).slice(2, 8)}`;
     this.locale = plain(extras.metadata && extras.metadata.defaultLanguage) || document.documentElement.lang || undefined;
     this.topic = params.topic || 'choose';

@@ -21,6 +21,8 @@ written under it with =, < or >.
 - The volume starts at a quarter and has its own wide slider, easy to touch on a board.
 - It fits on classroom boards (1280 × 600, 960 × 540, 1366 × 768, 1517 × 717 and 1115 × 555 under the bar of a page) and
   in browsers without container queries, such as Firefox 98.
+- In a frame of another site, whose page it cannot read (as in the Moodle app's online player), it follows the dark mode
+  of the device. A package exported by Moodle, which carries the library's name as its title, shows no title.
 
 ## Alphabet Wheel 1.0.3 (3 November 2026)
 

@@ -240,6 +240,47 @@ test('it never saves a null state, the one H5P takes for changed content', async
   expect(await frame.evaluate(() => H5P.instances[0].getCurrentState() === undefined)).toBe(true);
 });
 
+test('in a frame of another site, whose page cannot be read, it follows the dark mode of the device', async ({ page, baseURL }) => {
+  // The Moodle app's online player is like this: the game cannot see the app's colours (seen on a phone, 7 Nov 2026).
+  await page.emulateMedia({ colorScheme: 'dark' });
+  // The game, framed by a page of another origin (about:blank).
+  await page.setContent(`<iframe src="${baseURL}/view/h5p-balance-scale/balance-scale-es?session=null" style="width:900px;height:700px"></iframe>`);
+  const host = await (await page.locator('iframe').elementHandle()).contentFrame();
+  const frame = await (await host.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
+  await frame.waitForSelector('.bs');
+  await expect.poll(() => frame.evaluate(() => getComputedStyle(document.querySelector('.bs')).backgroundColor)).toBe('rgb(29, 33, 37)');
+  await page.emulateMedia({ colorScheme: 'light' });
+  await expect.poll(() => frame.evaluate(() => getComputedStyle(document.querySelector('.bs')).backgroundColor)).not.toBe('rgb(29, 33, 37)');
+});
+
+test('a title that is only the name of the library, as Moodle writes it in an exported package, is not shown', async ({ page }) => {
+  const frame = await open(page);
+  const titles = await frame.evaluate(() => {
+    const Game = H5P.BalanceScale;
+    const mk = (title) => new Game({}, 99, { metadata: { title } }).title;
+    return [mk('Balance Scale'), mk('Balanza de 3.º A')];
+  });
+  expect(titles).toEqual(['', 'Balanza de 3.º A']);
+});
+
+test('under a hanging pan, a tall pile stays below the hook, clear of the beam and the chains', async ({ page }) => {
+  const frame = await open(page);
+  const heights = await frame.evaluate(() => {
+    const view = H5P.instances[0].view();
+    const big = (v) => ({ id: `t${v}`, kind: 'w', v, fixed: true });
+    const mine = (v) => ({ id: `m${v}`, kind: 'w', v, fixed: false });
+    // The pile seen on the phone: a 36 with a 5 on top; and a bigger one.
+    return [[big(36), mine(5)], [big(36), big(40), mine(5), mine(10), mine(20)]].map((list) => {
+      const out = view.arrange(list, 0, 0);
+      const top = Math.min(...out.map((q) => q.y0));
+      return { reach: -top, room: view.G.cuelgue };
+    });
+  });
+  for (const { reach, room } of heights) {
+    expect(reach).toBeLessThanOrEqual(room - 30);
+  }
+});
+
 test('it changes along with the dark mode of the page, frame included', async ({ page }) => {
   const frame = await open(page);
   const background = () => frame.evaluate(() => getComputedStyle(document.querySelector('.bs')).backgroundColor);
