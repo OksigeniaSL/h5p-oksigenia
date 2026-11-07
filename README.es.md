@@ -43,6 +43,12 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
   soltarla. Cada partida genera sus números, una ronda que sale mal vuelve más tarde con otros, y cada ronda queda en el
   informe de la actividad. Tres balanzas pintadas a elegir (un mercado, un laboratorio y un dibujo a lápiz en papel
   cuadriculado), las instrucciones grabadas en español y en inglés, y una balanza libre, sin puntos, para la pizarra.
+  **[Juega ahora](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D79)**.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/img/balance-scale-game-es-dark.webp">
+    <img src="docs/img/balance-scale-game-es.webp" width="676" alt="La Balanza equilibrada en un mercado: pesas en los dos platillos, la igualdad escrita debajo con el signo igual y el aviso de que se ha equilibrado sin quitar ninguna pesa.">
+  </picture>
 
 ## Idiomas
 

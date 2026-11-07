@@ -43,6 +43,12 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
   numbers, a round that goes wrong comes back later with other numbers, and every round goes to the report of the
   activity. Three painted scales to choose from (a market, a laboratory and a pencil drawing on squared paper), the
   instructions recorded in Spanish and English, and a free balance with no points, for a board.
+  **[Play it now](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D79)**, in Spanish.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/img/balance-scale-game-dark.webp">
+    <img src="docs/img/balance-scale-game.webp" width="676" alt="The Balance Scale balanced in a market: 4 + 2 on the left pan and 5 + 1 on the right, the equality written under it with an equals sign, and the message that it balanced without taking any weight off.">
+  </picture>
 
 ## Languages
 
