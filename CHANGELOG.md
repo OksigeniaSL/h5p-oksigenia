@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Balance Scale 1.0.0 (not released yet)
+## Balance Scale 1.0.0 (7 November 2026)
 
 The first version: equalities on a two-pan balance, where what is put on the scale is the answer and the equality is
 written under it with =, < or >.

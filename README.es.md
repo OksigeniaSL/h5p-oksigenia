@@ -36,7 +36,7 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
     <img src="docs/img/number-line-game-es.webp" width="676" alt="La Recta numérica a mitad de una suma: una recta del 0 al 50 con los arcos de los saltos dibujados, los botones para saltar y la pieza que salta.">
   </picture>
 
-- **Balanza** (`H5P.BalanceScale`, sin publicar todavía): igualdades en una balanza de dos platillos. Lo que se pone en la
+- **Balanza** (`H5P.BalanceScale`): igualdades en una balanza de dos platillos. Lo que se pone en la
   balanza es la respuesta, y debajo se escribe la igualdad con =, < o >: sumas con el hueco en cualquier lado, grupos
   iguales (multiplicar y dividir), repartir todas las pesas y una bolsa misteriosa. Por defecto la balanza se inclina al
   momento, que es lo que mejor funciona en los estudios con balanzas en pantalla; también puede quedar sujeta hasta
