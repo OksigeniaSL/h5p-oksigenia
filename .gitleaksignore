@@ -1,5 +1,6 @@
-# The keys under which the games remember the mute button, the volume and the piece in localStorage: plain names, not
+# The keys under which the games remember the mute button, the volume, the piece and the scale in localStorage: plain names, not
 # secrets. The generic rule of Gitleaks takes them for API keys.
 7f9ace13825c450d9bf5da333c85aaaf341baa2d:packages/shared/sound.js:generic-api-key:7
 5a3e0c4ebfc956d686252b1d09fc6176bccf9b0d:packages/shared/sound.js:generic-api-key:8
 1939d86ed3c92f22209f85aed4f5ec19db4608d0:packages/number-line/src/number-line.js:generic-api-key:35
+8a96f42b79cf310f2f9f5d256fe84e90bcdf32e6:packages/balance-scale/src/balance-scale.js:generic-api-key:34
