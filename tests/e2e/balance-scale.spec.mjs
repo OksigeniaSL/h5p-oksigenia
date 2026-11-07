@@ -264,6 +264,19 @@ for (const width of [320, 360, 412]) {
   });
 }
 
+test('with the keyboard only: the focus stays on the tray while the scale is drawn, and Enter puts a weight', async ({ page }) => {
+  const frame = await open(page);
+  await frame.locator('.bs-choice-equalities').focus();
+  await page.keyboard.press('Enter');
+  await expect(frame.locator('.bs-scene.bs-painted canvas')).toBeVisible();
+  await page.waitForTimeout(400);
+  expect(await frame.evaluate(() => document.activeElement.classList.contains('bs-weight')), 'a weight of the tray in focus').toBe(true);
+  const before = await frame.locator('.bs-stage [aria-live]').textContent();
+  await page.keyboard.press('Enter');
+  await expect(frame.locator('.bs-scene .bs-mine')).toHaveCount(1);
+  await expect(frame.locator('.bs-stage [aria-live]')).not.toHaveText(before);
+});
+
 test('on a phone, the button to listen stays beside the sentence, so the weights come into view with the scale', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 640 });
   const frame = await open(page);

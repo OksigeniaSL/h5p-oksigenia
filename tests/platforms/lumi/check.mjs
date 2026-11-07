@@ -177,6 +177,59 @@ try {
   const lineScore = await lineFrame.locator('.nl').evaluate(() => H5P.instances[H5P.instances.length - 1].getScore());
   check('the number line plays to the end, with its score', lineScore === 6, String(lineScore));
   check('the number line has no script errors', lineErrors.length === 0, lineErrors.join(' | '));
+
+  // The third game: it carries pictures and recorded voice, which Lumi's file whitelists have to take.
+  const scale = packages().find((p) => p.name === 'balance-scale');
+  const scaleUpload = await editor.uploadPackage(readFileSync(join(ROOT, 'dist', `balance-scale-${scale.version}-es.h5p`)), user);
+  check('the balance scale is accepted and installs on core 1.27, pictures and voice included',
+    scaleUpload.metadata.mainLibrary === 'H5P.BalanceScale', scaleUpload.metadata.title);
+  const scaleId = await editor.saveOrUpdateContent(undefined, scaleUpload.parameters, scaleUpload.metadata,
+    `H5P.BalanceScale ${scale.library.majorVersion}.${scale.library.minorVersion}`, user);
+  const scalePage = await browser.newPage({ viewport: { width: 1100, height: 900 } });
+  const scaleErrors = [];
+  const pictures = [];
+  scalePage.on('pageerror', (e) => scaleErrors.push(e.message));
+  scalePage.on('response', (r) => {
+    if (/H5P\.BalanceScale[^/]*\/assets\//.test(r.url())) {
+      pictures.push(r.status());
+    }
+  });
+  app.get('/play-scale', async (req, res) => res.send(await player.render(scaleId, user, 'es')));
+  await scalePage.goto(`http://127.0.0.1:${server.address().port}/play-scale`, { waitUntil: 'networkidle' });
+  const scaleFramed = await scalePage.locator('iframe.h5p-iframe').count() > 0;
+  const scaleFrame = scaleFramed ? scalePage.frameLocator('iframe.h5p-iframe') : scalePage.locator('body');
+  await scaleFrame.locator('.bs').waitFor({ timeout: 30_000 });
+  await scaleFrame.locator('.bs-choice-equalities').click();
+  await scaleFrame.locator('.bs-scene.bs-painted canvas').waitFor({ timeout: 30_000 });
+  check('the painted scale loads its pictures from the library', pictures.length > 0 && pictures.every((s) => s === 200 || s === 304),
+    `${pictures.length} pictures, ${[...new Set(pictures)].join(' ')}`);
+  for (let i = 0; i < 6; i++) {
+    await scalePage.waitForTimeout(650);
+    const weights = await scaleFrame.locator('.bs').evaluate(() => {
+      const r = H5P.instances[H5P.instances.length - 1].game.current;
+      const weigh = (list) => list.reduce((s, t) => s + t.v, 0);
+      let need = weigh(r[r.target === 'left' ? 'right' : 'left']) - weigh(r[r.target].filter((t) => t.fixed));
+      const out = [];
+      for (const w of [...r.tray].sort((x, y) => y - x)) {
+        while (need >= w) {
+          out.push(w);
+          need -= w;
+        }
+      }
+      return out;
+    });
+    for (const value of weights) {
+      await scaleFrame.locator(`.bs-tray .bs-weight[data-value="${value}"]`).first().click();
+    }
+    await scaleFrame.locator('.bs-next').waitFor();
+    await scalePage.waitForTimeout(650);
+    await scaleFrame.locator('.bs-next').click();
+  }
+  await scaleFrame.locator('.bs-cheer-title').waitFor();
+  await scalePage.screenshot({ path: join(shots, 'lumi-balance-scale.png') });
+  const scaleScore = await scaleFrame.locator('.bs').evaluate(() => H5P.instances[H5P.instances.length - 1].getScore());
+  check('the balance scale plays to the end, with its score', scaleScore === 12, String(scaleScore));
+  check('the balance scale has no script errors', scaleErrors.length === 0, scaleErrors.join(' | '));
 } finally {
   await browser.close();
   if (server) {

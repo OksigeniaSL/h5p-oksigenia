@@ -7,7 +7,7 @@
 //     -e SE_START_VNC=false -e SE_RECORD_VIDEO=false -e VIDEO_READY_PORT=9092 -e DISPLAY_NUM=92 -e DISPLAY=:92 \
 //     -e SE_EVENT_BUS_PUBLISH_PORT=4483 -e SE_EVENT_BUS_SUBSCRIBE_PORT=4484 -e SE_SCREEN_WIDTH=2400 \
 //     -e SE_SCREEN_HEIGHT=1500 selenium/standalone-firefox:98.0-20261010
-//   node tests/boards/firefox98.mjs [--shots dir] [--port 8094] [--driver http://127.0.0.1:4492]
+//   node tests/boards/firefox98.mjs [--shots dir] [--port 8094] [--driver http://127.0.0.1:4492] [--game balance-scale]
 //   docker stop h5p-ff98
 //
 // Needs the built games (npm run build); it starts the dev server itself. Exits with 1 if a check fails.
@@ -24,6 +24,7 @@ const option = (name, fallback) => (args.includes(name) ? args[args.indexOf(name
 const shots = option('--shots', '');
 const port = option('--port', '8094');
 const driver = option('--driver', 'http://127.0.0.1:4492');
+const only = option('--game', '');
 const base = `http://127.0.0.1:${port}`;
 const ELEMENT = 'element-6066-11e4-a52e-4f735466cecf';
 const ENTER = '';
@@ -139,6 +140,47 @@ const GAMES = {
       return { line: Math.round(line.width), game: Math.round(document.querySelector('.nl').getBoundingClientRect().width) };`,
     shapeOk: (s) => s.line >= 0.6 * s.game,
   },
+  'balance-scale': {
+    root: '.bs',
+    async start() {
+      await click('.bs-choice-equalities');
+      await until('.bs-scene.bs-painted canvas');
+    },
+    /** One move: a weight that does not balance, on the player's pan, with a real click. */
+    async move() {
+      const value = await js(`var r = H5P.instances[0].game.current;
+        var weigh = function (list) { return list.reduce(function (s, t) { return s + t.v; }, 0); };
+        var need = weigh(r[r.target === 'left' ? 'right' : 'left']) - weigh(r[r.target].filter(function (t) { return t.fixed; }));
+        return r.tray.filter(function (v) { return v !== need; })[0];`);
+      await click(`.bs-tray .bs-weight[data-value="${value}"]`);
+    },
+    /** Balances the round: the tallest moment of a round, with the message and «Next». */
+    async answer() {
+      if (await shown('.bs-empty') && await js("return !document.querySelector('.bs-empty').disabled;")) {
+        await click('.bs-empty');
+        await sleep(300);
+      }
+      const weights = await js(`var r = H5P.instances[0].game.current;
+        var weigh = function (list) { return list.reduce(function (s, t) { return s + t.v; }, 0); };
+        var need = weigh(r[r.target === 'left' ? 'right' : 'left']) - weigh(r[r.target].filter(function (t) { return t.fixed; }));
+        var out = [];
+        r.tray.slice().sort(function (x, y) { return y - x; }).forEach(function (w) { while (need >= w) { out.push(w); need -= w; } });
+        return out;`);
+      for (const value of weights) {
+        await click(`.bs-tray .bs-weight[data-value="${value}"]`);
+        await sleep(250);
+      }
+      await until('.bs-next');
+    },
+    state: `var g = H5P.instances[0].game;
+      return JSON.stringify({ round: g.number, left: g.current.left.map(function (t) { return t.id; }),
+        right: g.current.right.map(function (t) { return t.id; }) });`,
+    /** The scale takes most of the width beside the tray, and is tall enough to read. */
+    shape: `var scene = document.querySelector('.bs-scene').getBoundingClientRect();
+      return { scene: Math.round(scene.width), height: Math.round(scene.height),
+        game: Math.round(document.querySelector('.bs').getBoundingClientRect().width) };`,
+    shapeOk: (s) => s.scene >= 0.55 * s.game && s.height >= 180,
+  },
 };
 
 async function open(name) {
@@ -239,7 +281,7 @@ try {
   await inSession('POST', '/url', { url: `${base}/view/h5p-alphabet-wheel/alphabet-wheel-es?session=null` });
   const browser = await js("return { agent: navigator.userAgent, ratio: devicePixelRatio, containers: CSS.supports('container-type: inline-size') };");
   report(/Firefox\/98/.test(browser.agent) && !browser.containers, `the browser is ${browser.agent} at ×${browser.ratio}, without container queries`);
-  for (const name of Object.keys(GAMES)) {
+  for (const name of Object.keys(GAMES).filter((n) => !only || n === only)) {
     for (const board of SIZES) {
       try {
         await check(name, board);

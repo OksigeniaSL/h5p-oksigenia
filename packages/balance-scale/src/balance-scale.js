@@ -322,7 +322,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.relationBox = el('span', { class: 'bs-relation', 'aria-hidden': 'true', text: '?' });
     this.rightSide = el('span', { class: 'bs-side' });
     this.equality = el('div', { class: 'bs-equality' }, [this.leftSide, this.relationBox, this.rightSide]);
-    this.reading = el('p', { class: 'h5p-oksigenia-sr-only', 'aria-live': 'polite' });
+    this.reading = el('p', { class: 'h5p-oksigenia-sr-only', 'aria-live': 'polite', 'aria-atomic': 'true' });
     this.messageLine = el('p', { class: 'bs-message', role: 'status' });
     this.trayBox = el('div', { class: 'bs-tray' });
     this.actionsBox = el('div', { class: 'bs-actions' });
@@ -844,7 +844,13 @@ export default class BalanceScale extends H5P.EventDispatcher {
     // While playing with the free balance, < and > are information, not a mistake: no red.
     const quiet = rel === '?' || g.free || (!g.held && !g.roundOver && r.topic !== 'bag');
     this.relationBox.className = `bs-relation${rel === '=' ? ' bs-relation-equal' : quiet ? '' : ' bs-relation-unequal'}${rel === '=' && was !== '=' ? ' bs-pop' : ''}`;
-    this.reading.textContent = this.arrangementText(r, shown, rel === '?' ? '?' : rel);
+    // A moment later, as the Announcer does: when the focus moves in the same instant (sharing out takes the next weight
+    // of the tray), a screen reader says the new focus first and would drop the equality.
+    const said = this.arrangementText(r, shown, rel === '?' ? '?' : rel);
+    clearTimeout(this.readingTimer);
+    this.readingTimer = setTimeout(() => {
+      this.reading.textContent = said;
+    }, 150);
     this.paintSceneText();
   }
 
@@ -859,7 +865,29 @@ export default class BalanceScale extends H5P.EventDispatcher {
 
   // --- The tray and the buttons ------------------------------------------------------------------------------------
 
+  /**
+   * Draws the tray again (a new round, the scale's pictures arriving, another size) and keeps the focus where it was:
+   * replacing the button in focus would drop it to the page, and the next Enter of a keyboard or a screen reader would
+   * do nothing.
+   */
   fillTray() {
+    const active = /** @type {HTMLElement|null} */ (this.trayBox.contains(document.activeElement) ? document.activeElement : null);
+    const was = active && {
+      value: active.dataset.value, pool: active.dataset.pool,
+      step: active.classList.contains('bs-less') ? '.bs-less' : active.classList.contains('bs-more') ? '.bs-more' : '',
+    };
+    this.drawTray();
+    if (was) {
+      const again = was.step ? this.trayBox.querySelector(was.step)
+        : this.trayBox.querySelector(was.pool ? `.bs-weight[data-pool="${was.pool}"]` : `.bs-weight[data-value="${was.value}"]`);
+      const target = /** @type {HTMLElement|null} */ (again || this.trayBox.querySelector('button:not(:disabled)'));
+      if (target) {
+        target.focus({ preventScroll: true });
+      }
+    }
+  }
+
+  drawTray() {
     const g = this.game, r = g.current, t = this.l10n;
     if (r.topic === 'bag') {
       this.guessOutput = el('output', { class: 'bs-guess', id: `${this.id}-guess`, text: g.guess === null || g.guess === undefined ? '?' : this.format(g.guess) });

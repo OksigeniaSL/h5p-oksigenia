@@ -1,6 +1,6 @@
 #!/bin/sh
-# Plays the Alphabet Wheel in a throwaway WordPress with the official H5P plugin and checks results and resume
-# (check.mjs).
+# Plays the games in a throwaway WordPress with the official H5P plugin and checks results and resume: the Alphabet
+# Wheel (check.mjs), the Number Line (number-line.mjs) and the Balance Scale (balance-scale.mjs).
 #
 #   tests/platforms/wordpress/run.sh
 #
@@ -77,4 +77,10 @@ node "$here/check.mjs" --url http://localhost:8098 --container $c --db h5p-wordp
 line_package="$root/dist/number-line-$(node -p "const l=require('$root/packages/number-line/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
 node "$here/number-line.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
   --admin-password "$admin_password" --student-password "$student_password" --package "$line_package" \
+  --shots "$base/report-wordpress"
+
+# The balance scale, on the same site: the third game.
+scale_package="$root/dist/balance-scale-$(node -p "const l=require('$root/packages/balance-scale/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
+node "$here/balance-scale.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
+  --admin-password "$admin_password" --student-password "$student_password" --package "$scale_package" \
   --shots "$base/report-wordpress"
