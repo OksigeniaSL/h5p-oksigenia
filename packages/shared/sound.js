@@ -41,7 +41,7 @@ function click(a, out, f, when = 0, vol = 0.12) {
   o.stop(t + 0.06);
 }
 
-/** @type {Object<string, (a: AudioContext, out: AudioNode) => void>} */
+/** @type {Object<string, (a: AudioContext, out: AudioNode, value?: number) => void>} */
 const SOUNDS = {
   ok: (a, out) => {
     bell(a, out, 880, 0, 0.35, 1.2);
@@ -74,7 +74,52 @@ const SOUNDS = {
   cheer: (a, out) => [0, 1.5].forEach((r) => [[783.99, 0], [1046.5, 0.22], [1318.51, 0.44]]
     .forEach(([f, d]) => bell(a, out, f, r + d, 0.45, 2.2))),
   done: (a, out) => bell(a, out, 659.25, 0, 0.3, 1.4),
+  // H5P.BalanceScale. A weight sounds lower the more it weighs.
+  drop: (a, out, weight = 1) => {
+    const f = 700 / (1 + 0.33 * Math.log2(Math.max(1, weight)));
+    glide(a, out, f, f * 0.78, 0.16, 0.3, 'triangle');
+    click(a, out, 3200, 0, 0.05);
+  },
+  take: (a, out) => glide(a, out, 520, 760, 0.09, 0.12, 'sine'),
+  // The stops of the held balance going down.
+  clack: (a, out) => {
+    click(a, out, 1700, 0, 0.2);
+    click(a, out, 240, 0.01, 0.08);
+  },
+  // The heavy pan knocking against the end of its travel.
+  thud: (a, out) => glide(a, out, 120, 62, 0.22, 0.4, 'sine'),
+  // Balanced: a chord, a semitone higher for every right answer in a row.
+  balanced: (a, out, streak = 0) => {
+    const base = 523.25 * 2 ** (Math.min(7, streak) / 12);
+    [0, 4, 7].forEach((n, k) => bell(a, out, base * 2 ** (n / 12), k * 0.07, 0.22, 0.9));
+  },
+  miss: (a, out) => {
+    glide(a, out, 330, 330, 0.18, 0.2, 'triangle');
+    glide(a, out, 262, 262, 0.26, 0.2, 'triangle', 0.14);
+  },
+  levelUp: (a, out) => [0, 4, 7, 12].forEach((n, k) => bell(a, out, 587.33 * 2 ** (n / 12), k * 0.08, 0.2, 0.8)),
+  // The needle passing the middle: the «almost».
+  centre: (a, out) => click(a, out, 1320, 0, 0.05),
 };
+
+/** A tone that slides from one pitch to another and dies out. */
+function glide(a, out, from, to, dur, vol, type, when = 0) {
+  const t = a.currentTime + when;
+  const o = a.createOscillator();
+  const g = a.createGain();
+  o.type = type;
+  o.frequency.setValueAtTime(from, t);
+  if (to !== from) {
+    o.frequency.exponentialRampToValueAtTime(to, t + dur);
+  }
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g);
+  g.connect(out);
+  o.start(t);
+  o.stop(t + dur + 0.02);
+}
 
 export class Sounds {
   /** @param {{enabled?: boolean}} [options] `enabled` false: the author left the sounds out. */
@@ -150,14 +195,17 @@ export class Sounds {
     return this.context;
   }
 
-  /** @param {'ok'|'bad'|'pass'|'tick'|'timeUp'|'cheer'|'done'} name */
-  play(name) {
+  /**
+   * @param {'ok'|'bad'|'pass'|'tick'|'timeUp'|'cheer'|'done'|'drop'|'take'|'clack'|'thud'|'balanced'|'miss'|'levelUp'|'centre'} name
+   * @param {number} [value] What some sounds depend on: the weight that drops, the right answers in a row.
+   */
+  play(name, value) {
     const a = this.wake();
     if (!a || !SOUNDS[name]) {
       return;
     }
     try {
-      SOUNDS[name](a, this.output);
+      SOUNDS[name](a, this.output, value);
     } catch (e) {
       // A device without audio output: the game goes on in silence.
     }

@@ -1,0 +1,343 @@
+{
+ "vista": "puesto",
+ "unidades": "px de la escena a su tamaño de referencia (1404 × 540); cada pieza se guarda a 1:1",
+ "escena": {
+  "x": 0,
+  "y": 0,
+  "w": 1404,
+  "h": 540
+ },
+ "pivote": {
+  "x": 702,
+  "y": 98
+ },
+ "brazo": {
+  "largo": 190,
+  "max_grados": 12,
+  "signo": "ángulo positivo: baja el platillo derecho"
+ },
+ "cuelgue": 150,
+ "platillo": {
+  "ancho_util": 140,
+  "fondo_bajo_apoyo": 30.4,
+  "apoyo_a_nivel_y": 248
+ },
+ "apilar": {
+  "ancho_fila": 162,
+  "hueco": 6,
+  "nota": "las cosas, en orden, en filas centradas en el platillo: una fila mientras quepan en ancho_fila; la siguiente, encima de la más alta de la anterior (su apila)"
+ },
+ "piezas": {
+  "fondo": {
+   "archivo": "fondo.jpg",
+   "w": 1404,
+   "h": 540,
+   "ancla": {
+    "x": 0,
+    "y": 0
+   }
+  },
+  "base": {
+   "archivo": "base.png",
+   "w": 167,
+   "h": 351,
+   "ancla": {
+    "x": 83.5,
+    "y": 85.5
+   },
+   "nota": "ancla = el pivote (se pinta con el ancla en pivote); no se mueve"
+  },
+  "brazo": {
+   "archivo": "brazo.png",
+   "w": 415,
+   "h": 106,
+   "ancla": {
+    "x": 207.4,
+    "y": 77.1
+   },
+   "nota": "ancla = el pivote; la aguja va dentro y gira con la cruz; los pasadores de los extremos, a ±largo del ancla"
+  },
+  "platillo-izq": {
+   "archivo": "platillo.png",
+   "w": 176,
+   "h": 186,
+   "ancla": {
+    "x": 87.7,
+    "y": 5.4
+   },
+   "apoyo_y": 155.6,
+   "nota": "ancla = el enganche (el aro sobre el pasador); cuelga siempre derecho. apoyo_y: el suelo visible del platillo, donde se apoyan las cosas, enteras y por encima de todo el platillo (nada las tapa). Un solo archivo para los dos"
+  },
+  "platillo-der": {
+   "archivo": "platillo.png",
+   "w": 176,
+   "h": 186,
+   "ancla": {
+    "x": 87.7,
+    "y": 5.4
+   },
+   "apoyo_y": 155.6,
+   "nota": "ancla = el enganche (el aro sobre el pasador); cuelga siempre derecho. apoyo_y: el suelo visible del platillo, donde se apoyan las cosas, enteras y por encima de todo el platillo (nada las tapa). Un solo archivo para los dos"
+  },
+  "tope": {
+   "archivo": "tope.png",
+   "w": 52,
+   "h": 84,
+   "ancla": {
+    "x": 26.0,
+    "y": 0
+   },
+   "nota": "ancla = el centro de su cara de arriba; se recorta en el mostrador (base_y + hundido)"
+  }
+ },
+ "cosas": {
+  "bolsa-puesta": {
+   "archivo": "bolsa-puesta.png",
+   "w": 66,
+   "h": 77,
+   "apoyo": {
+    "x": 33.0,
+    "y": 76
+   },
+   "apila": 66.2,
+   "numero": {
+    "x": 14.5,
+    "y": 32.3,
+    "w": 37.0,
+    "h": 27.7
+   },
+   "tinta": "oscuro"
+  },
+  "bolsa-tuya": {
+   "archivo": "bolsa-tuya.png",
+   "w": 68,
+   "h": 88,
+   "apoyo": {
+    "x": 34.0,
+    "y": 87
+   },
+   "apila": 70.4,
+   "numero": {
+    "x": 15.0,
+    "y": 45.8,
+    "w": 38.1,
+    "h": 28.2
+   },
+   "tinta": "oscuro"
+  },
+  "misteriosa-puesta": {
+   "archivo": "misteriosa-puesta.png",
+   "w": 66,
+   "h": 77,
+   "apoyo": {
+    "x": 33.0,
+    "y": 76
+   },
+   "apila": 66.2,
+   "numero": {
+    "x": 8,
+    "y": 35,
+    "w": 46,
+    "h": 28
+   },
+   "tinta": "oscuro"
+  },
+  "misteriosa-tuya": {
+   "archivo": "misteriosa-tuya.png",
+   "w": 68,
+   "h": 88,
+   "apoyo": {
+    "x": 34.0,
+    "y": 87
+   },
+   "apila": 70.4,
+   "numero": {
+    "x": 13.6,
+    "y": 54.6,
+    "w": 40.8,
+    "h": 21.1
+   },
+   "tinta": "oscuro"
+  },
+  "pesa-puesta-1": {
+   "archivo": "pesa-puesta-1.png",
+   "w": 58,
+   "h": 70,
+   "apoyo": {
+    "x": 29.0,
+    "y": 69
+   },
+   "apila": 47.6,
+   "numero": {
+    "x": 12.8,
+    "y": 39.2,
+    "w": 32.5,
+    "h": 26.6
+   },
+   "tinta": "claro"
+  },
+  "pesa-tuya-1": {
+   "archivo": "pesa-tuya-1.png",
+   "w": 58,
+   "h": 69,
+   "apoyo": {
+    "x": 29.0,
+    "y": 68
+   },
+   "apila": 41.4,
+   "numero": {
+    "x": 13.0,
+    "y": 37.5,
+    "w": 32,
+    "h": 25
+   },
+   "tinta": "oscuro"
+  },
+  "pesa-puesta-2": {
+   "archivo": "pesa-puesta-2.png",
+   "w": 68,
+   "h": 80,
+   "apoyo": {
+    "x": 34.0,
+    "y": 79
+   },
+   "apila": 54.4,
+   "numero": {
+    "x": 15.0,
+    "y": 44.8,
+    "w": 38.1,
+    "h": 30.4
+   },
+   "tinta": "claro"
+  },
+  "pesa-tuya-2": {
+   "archivo": "pesa-tuya-2.png",
+   "w": 68,
+   "h": 80,
+   "apoyo": {
+    "x": 34.0,
+    "y": 79
+   },
+   "apila": 48.0,
+   "numero": {
+    "x": 15.5,
+    "y": 45.5,
+    "w": 37,
+    "h": 25
+   },
+   "tinta": "oscuro"
+  },
+  "pesa-puesta-3": {
+   "archivo": "pesa-puesta-3.png",
+   "w": 80,
+   "h": 93,
+   "apoyo": {
+    "x": 40.0,
+    "y": 92
+   },
+   "apila": 63.2,
+   "numero": {
+    "x": 17.6,
+    "y": 52.1,
+    "w": 44.8,
+    "h": 35.3
+   },
+   "tinta": "claro"
+  },
+  "pesa-tuya-3": {
+   "archivo": "pesa-tuya-3.png",
+   "w": 80,
+   "h": 93,
+   "apoyo": {
+    "x": 40.0,
+    "y": 92
+   },
+   "apila": 55.8,
+   "numero": {
+    "x": 18.0,
+    "y": 54.1,
+    "w": 44,
+    "h": 27
+   },
+   "tinta": "oscuro"
+  },
+  "pesa-puesta-4": {
+   "archivo": "pesa-puesta-4.png",
+   "w": 94,
+   "h": 109,
+   "apoyo": {
+    "x": 47.0,
+    "y": 108
+   },
+   "apila": 74.1,
+   "numero": {
+    "x": 20.7,
+    "y": 61.0,
+    "w": 52.6,
+    "h": 41.4
+   },
+   "tinta": "claro"
+  },
+  "pesa-tuya-4": {
+   "archivo": "pesa-tuya-4.png",
+   "w": 94,
+   "h": 120,
+   "apoyo": {
+    "x": 47.0,
+    "y": 119
+   },
+   "apila": 72.0,
+   "numero": {
+    "x": 21.0,
+    "y": 71.9,
+    "w": 52,
+    "h": 29
+   },
+   "tinta": "oscuro"
+  }
+ },
+ "relleno": {
+  "color": "#b0815c",
+  "como": "si el hueco es más ancho que la escena: el borde de la pintura en espejo, fundido hacia este color"
+ },
+ "base_apoyo_y": 349.5,
+ "topes": {
+  "x": [
+   516.2,
+   887.8
+  ],
+  "base_y": 352,
+  "hundido": 4,
+  "arriba_y": 278.4,
+  "abajo_y": 317.9,
+  "bajada": 39.5,
+  "nota": "arriba_y: la cara de arriba con la balanza sujeta (los dos platillos, a nivel); abajo_y: suelta, donde para el platillo que baja a ±max_grados"
+ },
+ "tallas": {
+  "1": [
+   1,
+   2
+  ],
+  "2": [
+   3,
+   5
+  ],
+  "3": [
+   6,
+   10
+  ],
+  "4": [
+   11,
+   null
+  ],
+  "nota": "pesa-puesta-N y pesa-tuya-N según el valor: 1–2, 3–5, 6–10 y más de 10"
+ },
+ "cosas_nota": "apoyo: el punto de la cosa que se pone sobre el suelo del platillo (o sobre la de abajo); apila: a qué altura sobre su apoyo se pone la siguiente fila; numero: la caja del número, desde la esquina de la pieza; tinta: claro (blanco con sombra) u oscuro (tinta casi negra)",
+ "nucleo": {
+  "x": 418,
+  "y": 0,
+  "w": 568,
+  "h": 374,
+  "nota": "lo que se ve siempre: la balanza entera con los platillos a ±12° y dos filas de cosas. Escala = min(ancho del hueco / nucleo.w, alto / nucleo.h); el resto del hueco enseña más escena, centrada en el núcleo"
+ }
+}

@@ -48,6 +48,11 @@ for (const pkg of packages()) {
     recursive: true,
     filter: (src) => !basename(src).startsWith('.'),
   });
+  // What a game loads at run time (pictures, recorded voice), at H5P.getLibraryPath(<folder>)/assets/. Only types that
+  // H5P core takes in a library: no WebP, for instance.
+  if (existsSync(join(pkg.dir, 'assets'))) {
+    cpSync(join(pkg.dir, 'assets'), join(target, 'assets'), { recursive: true });
+  }
   const toDev = {
     name: 'to-dev-server',
     setup(b) {

@@ -1,0 +1,805 @@
+{
+ "vista": "cuaderno",
+ "unidades": "px de la escena a su tamaño de referencia; cada pieza se guarda a 1:1",
+ "pivote": {
+  "x": 702,
+  "y": 250
+ },
+ "brazo": {
+  "largo": 208,
+  "max_grados": 12,
+  "signo": "ángulo positivo: baja el platillo derecho"
+ },
+ "cuelgue": -34,
+ "platillo": {
+  "ancho_util": 150,
+  "apoyo_a_nivel_y": 216
+ },
+ "apilar": {
+  "ancho_fila": 150,
+  "hueco": 6,
+  "nota": "las cosas, en orden, en filas centradas en el platillo: una fila mientras quepan en ancho_fila; la siguiente, encima de la más alta de la anterior (su apila)"
+ },
+ "piezas": {
+  "brazo": {
+   "archivo": "brazo.png",
+   "w": 428,
+   "h": 21,
+   "ancla": {
+    "x": 214.0,
+    "y": 10.2
+   },
+   "trazo": "lapiz",
+   "nota": "ancla = el pivote (la marca redonda de la barra); los postes de las bandejas, a ±largo del ancla"
+  },
+  "base": {
+   "archivo": "base.png",
+   "w": 448,
+   "h": 114,
+   "ancla": {
+    "x": 224.0,
+    "y": 3.7
+   },
+   "trazo": "lapiz",
+   "nota": "ancla = el pivote (el circulito del vértice); no se mueve. Lleva el triángulo, el suelo con su rayado y la línea de nivel, de trazos"
+  },
+  "platillo-izq": {
+   "archivo": "platillo.png",
+   "w": 170,
+   "h": 50,
+   "ancla": {
+    "x": 83.3,
+    "y": 48.1
+   },
+   "apoyo_y": 14.1,
+   "trazo": "lapiz",
+   "nota": "ancla = el pie del poste, sobre el extremo de la barra (la barra, que se pinta después, lo tapa); la bandeja va encima y siempre derecha. apoyo_y: el suelo de la bandeja, donde se apoyan las cosas, enteras y por encima de todo. Un solo archivo para los dos"
+  },
+  "platillo-der": {
+   "archivo": "platillo.png",
+   "w": 170,
+   "h": 50,
+   "ancla": {
+    "x": 83.3,
+    "y": 48.1
+   },
+   "apoyo_y": 14.1,
+   "trazo": "lapiz",
+   "nota": "ancla = el pie del poste, sobre el extremo de la barra (la barra, que se pinta después, lo tapa); la bandeja va encima y siempre derecha. apoyo_y: el suelo de la bandeja, donde se apoyan las cosas, enteras y por encima de todo. Un solo archivo para los dos"
+  },
+  "tope": {
+   "archivo": "tope.png",
+   "w": 30,
+   "h": 105,
+   "ancla": {
+    "x": 15.0,
+    "y": 0
+   },
+   "trazo": "lapiz",
+   "nota": "ancla = el centro de su cara de arriba; sale del suelo: se recorta en base_y + hundido"
+  }
+ },
+ "cosas": {
+  "bolsa-puesta": {
+   "archivo": "bolsa-puesta.png",
+   "w": 72,
+   "h": 90,
+   "apoyo": {
+    "x": 36.0,
+    "y": 89
+   },
+   "apila": 78.5,
+   "numero": {
+    "x": 15.8,
+    "y": 47,
+    "w": 42.8,
+    "h": 26
+   },
+   "tinta": "lapiz",
+   "trazo": "lapiz",
+   "caja": {
+    "x": -0.5,
+    "y": 11.5,
+    "w": 72.0,
+    "h": 78.0
+   },
+   "contorno": [
+    [
+     69.0,
+     89.5
+    ],
+    [
+     2.0,
+     89.5
+    ],
+    [
+     -0.5,
+     87.0
+    ],
+    [
+     -0.5,
+     37.0
+    ],
+    [
+     25.0,
+     11.5
+    ],
+    [
+     29.0,
+     14.5
+    ],
+    [
+     32.0,
+     11.5
+    ],
+    [
+     39.0,
+     11.5
+    ],
+    [
+     42.0,
+     14.5
+    ],
+    [
+     46.0,
+     11.5
+    ],
+    [
+     71.5,
+     38.0
+    ],
+    [
+     71.5,
+     87.0
+    ]
+   ]
+  },
+  "bolsa-tuya": {
+   "archivo": "bolsa-tuya.png",
+   "w": 72,
+   "h": 90,
+   "apoyo": {
+    "x": 36.0,
+    "y": 89
+   },
+   "apila": 77.5,
+   "numero": {
+    "x": 15.9,
+    "y": 47,
+    "w": 43.0,
+    "h": 26
+   },
+   "tinta": "lapiz",
+   "trazo": "tema",
+   "caja": {
+    "x": 62.5,
+    "y": 80.5,
+    "w": 9.0,
+    "h": 9.0
+   },
+   "contorno": [
+    [
+     69.0,
+     89.5
+    ],
+    [
+     62.5,
+     86.0
+    ],
+    [
+     67.0,
+     80.5
+    ],
+    [
+     71.5,
+     84.0
+    ]
+   ]
+  },
+  "misteriosa-puesta": {
+   "archivo": "misteriosa-puesta.png",
+   "w": 72,
+   "h": 88,
+   "apoyo": {
+    "x": 36.0,
+    "y": 87
+   },
+   "apila": 76.5,
+   "numero": {
+    "x": 15.3,
+    "y": 45,
+    "w": 41.1,
+    "h": 25
+   },
+   "tinta": "lapiz",
+   "trazo": "lapiz",
+   "caja": {
+    "x": -0.5,
+    "y": 11.5,
+    "w": 72.0,
+    "h": 76.0
+   },
+   "contorno": [
+    [
+     69.0,
+     87.5
+    ],
+    [
+     2.0,
+     87.5
+    ],
+    [
+     -0.5,
+     85.0
+    ],
+    [
+     -0.5,
+     37.0
+    ],
+    [
+     25.0,
+     11.5
+    ],
+    [
+     45.0,
+     11.5
+    ],
+    [
+     71.5,
+     37.0
+    ],
+    [
+     71.5,
+     85.0
+    ]
+   ]
+  },
+  "misteriosa-tuya": {
+   "archivo": "misteriosa-tuya.png",
+   "w": 72,
+   "h": 89,
+   "apoyo": {
+    "x": 36.0,
+    "y": 88
+   },
+   "apila": 76.5,
+   "numero": {
+    "x": 15.4,
+    "y": 45,
+    "w": 41.5,
+    "h": 26
+   },
+   "tinta": "lapiz",
+   "trazo": "tema",
+   "caja": {
+    "x": -0.5,
+    "y": 31.5,
+    "w": 72.0,
+    "h": 57.0
+   },
+   "contorno": [
+    [
+     69.0,
+     88.5
+    ],
+    [
+     55.0,
+     86.5
+    ],
+    [
+     2.0,
+     88.5
+    ],
+    [
+     -0.5,
+     86.0
+    ],
+    [
+     -0.5,
+     38.0
+    ],
+    [
+     6.0,
+     31.5
+    ],
+    [
+     16.0,
+     41.5
+    ],
+    [
+     55.0,
+     41.5
+    ],
+    [
+     65.0,
+     31.5
+    ],
+    [
+     71.5,
+     38.0
+    ],
+    [
+     71.5,
+     86.0
+    ]
+   ]
+  },
+  "pesa-puesta-1": {
+   "archivo": "pesa-puesta-1.png",
+   "w": 54,
+   "h": 44,
+   "apoyo": {
+    "x": 27.0,
+    "y": 43
+   },
+   "apila": 42.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 42,
+    "h": 32
+   },
+   "tinta": "lapiz",
+   "trazo": "lapiz",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 54.0,
+    "h": 44.0
+   },
+   "contorno": [
+    [
+     51.0,
+     43.5
+    ],
+    [
+     2.0,
+     43.5
+    ],
+    [
+     -0.5,
+     41.0
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     2.0,
+     -0.5
+    ],
+    [
+     51.0,
+     -0.5
+    ],
+    [
+     53.5,
+     2.0
+    ],
+    [
+     53.5,
+     41.0
+    ]
+   ]
+  },
+  "pesa-tuya-1": {
+   "archivo": "pesa-tuya-1.png",
+   "w": 54,
+   "h": 44,
+   "apoyo": {
+    "x": 27.0,
+    "y": 43
+   },
+   "apila": 42.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 42,
+    "h": 32
+   },
+   "tinta": "lapiz",
+   "trazo": "tema",
+   "caja": {
+    "x": 43.5,
+    "y": -0.5,
+    "w": 10.0,
+    "h": 9.0
+   },
+   "contorno": [
+    [
+     50.0,
+     8.5
+    ],
+    [
+     43.5,
+     3.0
+    ],
+    [
+     47.0,
+     -0.5
+    ],
+    [
+     53.5,
+     2.0
+    ]
+   ]
+  },
+  "pesa-puesta-2": {
+   "archivo": "pesa-puesta-2.png",
+   "w": 66,
+   "h": 50,
+   "apoyo": {
+    "x": 33.0,
+    "y": 49
+   },
+   "apila": 48.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 54,
+    "h": 38
+   },
+   "tinta": "lapiz",
+   "trazo": "lapiz",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 66.0,
+    "h": 50.0
+   },
+   "contorno": [
+    [
+     63.0,
+     49.5
+    ],
+    [
+     2.0,
+     49.5
+    ],
+    [
+     -0.5,
+     47.0
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     2.0,
+     -0.5
+    ],
+    [
+     63.0,
+     -0.5
+    ],
+    [
+     65.5,
+     2.0
+    ],
+    [
+     65.5,
+     47.0
+    ]
+   ]
+  },
+  "pesa-tuya-2": {
+   "archivo": "pesa-tuya-2.png",
+   "w": 66,
+   "h": 50,
+   "apoyo": {
+    "x": 33.0,
+    "y": 49
+   },
+   "apila": 48.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 54,
+    "h": 38
+   },
+   "tinta": "lapiz",
+   "trazo": "tema",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 9.0,
+    "h": 9.0
+   },
+   "contorno": [
+    [
+     3.0,
+     8.5
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     5.0,
+     -0.5
+    ],
+    [
+     8.5,
+     3.0
+    ]
+   ]
+  },
+  "pesa-puesta-3": {
+   "archivo": "pesa-puesta-3.png",
+   "w": 80,
+   "h": 56,
+   "apoyo": {
+    "x": 40.0,
+    "y": 55
+   },
+   "apila": 54.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 68,
+    "h": 44
+   },
+   "tinta": "lapiz",
+   "trazo": "lapiz",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 80.0,
+    "h": 56.0
+   },
+   "contorno": [
+    [
+     77.0,
+     55.5
+    ],
+    [
+     2.0,
+     55.5
+    ],
+    [
+     -0.5,
+     53.0
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     2.0,
+     -0.5
+    ],
+    [
+     77.0,
+     -0.5
+    ],
+    [
+     79.5,
+     2.0
+    ],
+    [
+     79.5,
+     53.0
+    ]
+   ]
+  },
+  "pesa-tuya-3": {
+   "archivo": "pesa-tuya-3.png",
+   "w": 80,
+   "h": 56,
+   "apoyo": {
+    "x": 40.0,
+    "y": 55
+   },
+   "apila": 54.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 68,
+    "h": 44
+   },
+   "tinta": "lapiz",
+   "trazo": "tema",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 9.0,
+    "h": 9.0
+   },
+   "contorno": [
+    [
+     3.0,
+     8.5
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     5.0,
+     -0.5
+    ],
+    [
+     8.5,
+     3.0
+    ]
+   ]
+  },
+  "pesa-puesta-4": {
+   "archivo": "pesa-puesta-4.png",
+   "w": 96,
+   "h": 64,
+   "apoyo": {
+    "x": 48.0,
+    "y": 63
+   },
+   "apila": 62.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 84,
+    "h": 52
+   },
+   "tinta": "lapiz",
+   "trazo": "lapiz",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 96.0,
+    "h": 64.0
+   },
+   "contorno": [
+    [
+     93.0,
+     63.5
+    ],
+    [
+     2.0,
+     63.5
+    ],
+    [
+     -0.5,
+     61.0
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     2.0,
+     -0.5
+    ],
+    [
+     93.0,
+     -0.5
+    ],
+    [
+     95.5,
+     2.0
+    ],
+    [
+     95.5,
+     61.0
+    ]
+   ]
+  },
+  "pesa-tuya-4": {
+   "archivo": "pesa-tuya-4.png",
+   "w": 96,
+   "h": 64,
+   "apoyo": {
+    "x": 48.0,
+    "y": 63
+   },
+   "apila": 62.5,
+   "numero": {
+    "x": 6,
+    "y": 6,
+    "w": 84,
+    "h": 52
+   },
+   "tinta": "lapiz",
+   "trazo": "tema",
+   "caja": {
+    "x": -0.5,
+    "y": -0.5,
+    "w": 7.0,
+    "h": 7.0
+   },
+   "contorno": [
+    [
+     2.0,
+     6.5
+    ],
+    [
+     -0.5,
+     2.0
+    ],
+    [
+     4.0,
+     -0.5
+    ],
+    [
+     6.5,
+     2.0
+    ]
+   ]
+  }
+ },
+ "base_apoyo_y": 348.7,
+ "topes": {
+  "x": [
+   498.5,
+   905.5
+  ],
+  "base_y": 348.7,
+  "hundido": 1,
+  "arriba_y": 254.0,
+  "abajo_y": 297.2,
+  "bajada": 43.2,
+  "nota": "aquí paran la barra, no las bandejas: arriba_y, la cara de arriba con la balanza sujeta (la barra, a nivel); abajo_y, suelta, donde para el extremo de la barra que baja a ±max_grados"
+ },
+ "tallas": {
+  "1": [
+   1,
+   2
+  ],
+  "2": [
+   3,
+   5
+  ],
+  "3": [
+   6,
+   10
+  ],
+  "4": [
+   11,
+   null
+  ],
+  "nota": "pesa-puesta-N y pesa-tuya-N según el valor: 1–2, 3–5, 6–10 y más de 10"
+ },
+ "cosas_nota": "apoyo: el punto de la cosa que se pone sobre el suelo de la bandeja (o sobre la de abajo); apila: a qué altura sobre su apoyo se pone la siguiente fila; numero: la caja del número, desde la esquina de la pieza; tinta: lapiz = el color del lápiz del tema (colores.<tema>.lapiz). contorno: el polígono de la forma (sin el lazo de las bolsas), desde la esquina de la pieza: debajo de cada cosa se rellena con colores.<tema>.puesta o .tuya, para tapar la cuadrícula; caja: su rectángulo exacto. trazo: con qué color se tiñe la pieza (source-in): lapiz, el del lápiz; tema, --h5p-theme-main-cta-base (lo «tuyo» viene dibujado a trazos; si se prefiere trazarlo por código, con contorno)",
+ "colores": {
+  "claro": {
+   "papel": "#fbfaf6",
+   "linea": "#d3deea",
+   "lapiz": "#34373d",
+   "puesta": "#e7e6e1",
+   "tuya": "#fbfaf6"
+  },
+  "oscuro": {
+   "papel": "#1d2125",
+   "linea": "#303b46",
+   "lapiz": "#d6dbe1",
+   "puesta": "#2d343b",
+   "tuya": "#1d2125"
+  }
+ },
+ "colores_nota": "todas las piezas son grafito: un color plano y el trazo en el alfa. En claro se pintan tal cual o teñidas de lapiz; en oscuro, teñidas de colores.oscuro.lapiz sobre el papel oscuro (tiza clara sobre pizarra, no un negativo)",
+ "nucleo": {
+  "x": 402,
+  "y": -1,
+  "w": 600,
+  "h": 369,
+  "nota": "lo que se ve siempre: la balanza entera con las bandejas a ±12° y dos filas de cosas. Escala = min(ancho del hueco / nucleo.w, alto / nucleo.h); el resto del hueco enseña más papel, centrado en el núcleo"
+ },
+ "escena": {
+  "x": 0,
+  "y": 0,
+  "w": 1404,
+  "h": 367,
+  "nota": "sin pintura: el papel no se acaba; la escena solo sirve para centrar el encuadre en el núcleo"
+ },
+ "cuadricula": {
+  "paso": 24,
+  "origen": {
+   "x": 714.0,
+   "y": 262.0
+  },
+  "grosor_px": 1,
+  "nota": "líneas de colores.<tema>.linea cada paso unidades, en todo el hueco, con una línea por origen (media celda fuera del pivote, para que la línea de nivel no caiga encima de una)"
+ },
+ "relleno": {
+  "color": "#fbfaf6",
+  "como": "sin pintura de fondo: el papel (colores.<tema>.papel) y la cuadrícula llenan todo el hueco"
+ }
+}
