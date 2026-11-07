@@ -1,0 +1,554 @@
+{
+  "semantics": [
+    {
+      "label": "O que praticar",
+      "description": "Com “Escolher ao começar”, quem joga escolhe na primeira tela: prático no meio de uma aula.",
+      "options": [
+        {
+          "label": "Escolher ao começar"
+        },
+        {
+          "label": "Igualdades: somas com a lacuna em qualquer lado"
+        },
+        {
+          "label": "Grupos iguais: multiplicar e dividir"
+        },
+        {
+          "label": "Distribuir todos os pesos"
+        },
+        {
+          "label": "O saco misterioso"
+        },
+        {
+          "label": "Balança livre, para o quadro, sem pontos"
+        }
+      ]
+    },
+    {
+      "label": "Como a balança se move",
+      "description": "Livre é o que funciona melhor nos estudos com balanças na tela: a balança se inclina e a igualdade muda ao mesmo tempo (Otten, Van den Heuvel-Panhuizen e Veldhuis, 2019, revisão de 34 estudos, https://doi.org/10.1186/s40594-019-0183-2). Pontos: 2 se equilibrar sem tirar nenhum peso, 1 tirando um ou dois. Travada obriga a decidir antes de conferir: para quem já domina o sinal de igual.",
+      "options": [
+        {
+          "label": "Livre: inclina na hora (recomendado)"
+        },
+        {
+          "label": "Travada: não se move até ser solta"
+        }
+      ]
+    },
+    {
+      "label": "A balança",
+      "description": "A feira combina mais com os menores, e o caderno, com os maiores. Se quem joga escolher, vê só a imagem e o nome, sem idade.",
+      "options": [
+        {
+          "label": "Deixar quem joga escolher"
+        },
+        {
+          "label": "Feira"
+        },
+        {
+          "label": "Laboratório"
+        },
+        {
+          "label": "Caderno"
+        }
+      ]
+    },
+    {
+      "label": "Rodadas por partida"
+    },
+    {
+      "label": "Ajuste fino",
+      "description": "Opcional. Onde o jogo começa; ele sobe de nível com três rodadas boas seguidas.",
+      "fields": [
+        {
+          "label": "Começar em",
+          "options": [
+            {
+              "label": "Peso pena (o primeiro nível)"
+            },
+            {
+              "label": "Peso médio"
+            },
+            {
+              "label": "Peso pesado"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Comportamento",
+      "fields": [
+        {
+          "label": "Com sons",
+          "description": "Quem joga pode abaixá-los ou desligá-los. Começam em um quarto do volume."
+        },
+        {
+          "label": "Oferecer ouvir as instruções",
+          "description": "Gravadas em espanhol e em inglês. Nos outros idiomas, o texto fica sem voz."
+        },
+        {
+          "label": "Oferecer jogar de novo"
+        }
+      ]
+    },
+    {
+      "label": "Textos e traduções",
+      "fields": [
+        {
+          "label": "Botão de começar",
+          "default": "Começar"
+        },
+        {
+          "label": "Título dos temas",
+          "default": "O que você quer praticar?"
+        },
+        {
+          "label": "Tema: igualdades",
+          "default": "Igualdades"
+        },
+        {
+          "label": "Tema: igualdades, do que se trata",
+          "default": "Somas com a lacuna em qualquer lado"
+        },
+        {
+          "label": "Tema: grupos iguais",
+          "default": "Grupos iguais"
+        },
+        {
+          "label": "Tema: grupos iguais, do que se trata",
+          "default": "Multiplicar e dividir com sacos"
+        },
+        {
+          "label": "Tema: distribuir",
+          "default": "Distribuir"
+        },
+        {
+          "label": "Tema: distribuir, do que se trata",
+          "default": "Todos os pesos, e o mesmo dos dois lados"
+        },
+        {
+          "label": "Tema: o saco misterioso",
+          "default": "O saco misterioso"
+        },
+        {
+          "label": "Tema: o saco misterioso, do que se trata",
+          "default": "Quanto pesa cada saco?"
+        },
+        {
+          "label": "Tema: balança livre",
+          "default": "Balança livre"
+        },
+        {
+          "label": "Tema: balança livre, do que se trata",
+          "default": "Para o quadro, sem pontos"
+        },
+        {
+          "label": "Do que se trata uma partida (@count: rodadas)",
+          "default": "@count rodadas. Coloque pesos na balança até ela se equilibrar."
+        },
+        {
+          "label": "Título das balanças",
+          "default": "Escolha sua balança"
+        },
+        {
+          "label": "Balança: feira",
+          "default": "Feira"
+        },
+        {
+          "label": "Balança: laboratório",
+          "default": "Laboratório"
+        },
+        {
+          "label": "Balança: caderno",
+          "default": "Caderno"
+        },
+        {
+          "label": "Rodada e pontos, para leitores de tela (@round, @total, @count)",
+          "default": "Rodada @round de @total. Pontos: @count."
+        },
+        {
+          "label": "Primeiro nível",
+          "default": "Peso pena"
+        },
+        {
+          "label": "Segundo nível",
+          "default": "Peso médio"
+        },
+        {
+          "label": "Terceiro nível",
+          "default": "Peso pesado"
+        },
+        {
+          "label": "Subida de nível (@level)",
+          "default": "Três seguidas: você passa para @level."
+        },
+        {
+          "label": "Botão para ouvir a instrução",
+          "default": "Ouvir"
+        },
+        {
+          "label": "Botão de silenciar",
+          "default": "Silenciar"
+        },
+        {
+          "label": "Botão de ativar o som",
+          "default": "Ativar o som"
+        },
+        {
+          "label": "Anunciado ao silenciar",
+          "default": "Som desativado"
+        },
+        {
+          "label": "Anunciado ao ativar o som",
+          "default": "Som ativado"
+        },
+        {
+          "label": "Controle do volume",
+          "default": "Volume"
+        },
+        {
+          "label": "Instrução: igualdades, lacuna à direita",
+          "default": "Coloque pesos no prato da direita até a balança se equilibrar."
+        },
+        {
+          "label": "Instrução: igualdades, lacuna à esquerda",
+          "default": "Coloque pesos no prato da esquerda até a balança se equilibrar."
+        },
+        {
+          "label": "Instrução: quanto pesam os sacos",
+          "default": "Quanto pesam os sacos? Mostre com pesos à direita."
+        },
+        {
+          "label": "Instrução: quantos sacos",
+          "default": "Quantos sacos equilibram a balança?"
+        },
+        {
+          "label": "Instrução: distribuir",
+          "default": "Distribua todos os pesos para a balança se equilibrar."
+        },
+        {
+          "label": "Instrução: um saco misterioso",
+          "default": "Quanto pesa o saco? Escolha um número e teste."
+        },
+        {
+          "label": "Instrução: vários sacos misteriosos",
+          "default": "Todos os sacos pesam o mesmo. Quanto? Escolha um número e teste."
+        },
+        {
+          "label": "Instrução: balança livre",
+          "default": "Coloque pesos dos dois lados e veja o que acontece."
+        },
+        {
+          "label": "Instrução acrescentada com a balança travada",
+          "default": "Depois, solte a balança."
+        },
+        {
+          "label": "Título da bandeja de pesos",
+          "default": "Pesos"
+        },
+        {
+          "label": "Título da bandeja de sacos",
+          "default": "Sacos"
+        },
+        {
+          "label": "Bandeja vazia ao distribuir",
+          "default": "Todos os pesos estão na balança."
+        },
+        {
+          "label": "Título do número dos sacos",
+          "default": "Cada saco pesa"
+        },
+        {
+          "label": "Botão: um a menos",
+          "default": "Um a menos"
+        },
+        {
+          "label": "Botão: um a mais",
+          "default": "Um a mais"
+        },
+        {
+          "label": "Um peso (@value)",
+          "default": "Peso de @value"
+        },
+        {
+          "label": "Um saco (@value)",
+          "default": "Saco de @value"
+        },
+        {
+          "label": "Algo no prato da esquerda (@thing)",
+          "default": "@thing no prato da esquerda. Toque para tirar."
+        },
+        {
+          "label": "Algo no prato da direita (@thing)",
+          "default": "@thing no prato da direita. Toque para tirar."
+        },
+        {
+          "label": "Pergunta sobre o lado (@value)",
+          "default": "Para que lado vai o @value?"
+        },
+        {
+          "label": "Botão: para a esquerda",
+          "default": "Esquerda"
+        },
+        {
+          "label": "Botão: para a direita",
+          "default": "Direita"
+        },
+        {
+          "label": "O lado esquerdo, dentro de outros textos",
+          "default": "esquerda"
+        },
+        {
+          "label": "O lado direito, dentro de outros textos",
+          "default": "direita"
+        },
+        {
+          "label": "Botão para soltar a balança travada",
+          "default": "Soltar a balança"
+        },
+        {
+          "label": "Botão para testar o número dos sacos",
+          "default": "Testar"
+        },
+        {
+          "label": "Botão para esvaziar o prato de quem joga",
+          "default": "Esvaziar o prato"
+        },
+        {
+          "label": "Botão para esvaziar os dois pratos",
+          "default": "Esvaziar os pratos"
+        },
+        {
+          "label": "Botão de próxima",
+          "default": "Próxima"
+        },
+        {
+          "label": "Botão depois da última rodada",
+          "default": "Ver o resultado"
+        },
+        {
+          "label": "Peso no prato errado (@side)",
+          "default": "Esse prato já está pronto: os pesos vão no prato da @side."
+        },
+        {
+          "label": "Ao tocar algo que vem com a balança",
+          "default": "Esse vem com a balança: ele fica."
+        },
+        {
+          "label": "Ao tocar um saco misterioso",
+          "default": "Os sacos ficam: escolha abaixo quanto pesa cada um."
+        },
+        {
+          "label": "Soltar sem nada no prato (@side)",
+          "default": "Primeiro coloque algo no prato da @side."
+        },
+        {
+          "label": "Falta colocar um peso",
+          "default": "Falta colocar um peso."
+        },
+        {
+          "label": "Faltam pesos para colocar (@count)",
+          "default": "Faltam colocar @count pesos."
+        },
+        {
+          "label": "Testar sem número",
+          "default": "Primeiro escolha abaixo quanto pesa cada saco."
+        },
+        {
+          "label": "Equilibrada sem tirar nada",
+          "default": "Equilibrada sem tirar nenhum! +2."
+        },
+        {
+          "label": "Equilibrada depois de tirar um ou dois",
+          "default": "Equilibrada! +1. Sem tirar nenhum, teria sido +2."
+        },
+        {
+          "label": "Equilibrada depois de tirar mais",
+          "default": "Equilibrada! Sem tirar nenhum, teria sido +2."
+        },
+        {
+          "label": "Equilibrada de primeira (balança travada)",
+          "default": "Equilibrada de primeira! +2."
+        },
+        {
+          "label": "Equilibrada na segunda tentativa (balança travada)",
+          "default": "Equilibrada na segunda tentativa! +1."
+        },
+        {
+          "label": "Os sacos, na primeira tentativa (@value)",
+          "default": "Cada saco pesa @value! De primeira: +2."
+        },
+        {
+          "label": "Os sacos, na segunda tentativa (@value)",
+          "default": "Cada saco pesa @value! Na segunda tentativa: +1."
+        },
+        {
+          "label": "Depois de um erro com a balança travada",
+          "default": "Solte de novo."
+        },
+        {
+          "label": "Fazer juntos",
+          "default": "Vamos fazer juntos."
+        },
+        {
+          "label": "Feito juntos: igualdades (@side, @amount)",
+          "default": "Vamos fazer juntos: a @side precisava de mais @amount."
+        },
+        {
+          "label": "Feito juntos: quantos sacos (@count, @size)",
+          "default": "Vamos fazer juntos: eram precisos @count sacos de @size."
+        },
+        {
+          "label": "Feito juntos: quanto pesam os sacos (@count, @size, @total)",
+          "default": "Vamos fazer juntos: @count sacos de @size pesam @total."
+        },
+        {
+          "label": "Feito juntos: distribuir (@half)",
+          "default": "Vamos fazer juntos: assim pesam o mesmo, @half de cada lado."
+        },
+        {
+          "label": "Feito juntos: o saco misterioso (@value)",
+          "default": "Vamos fazer juntos: cada saco pesa @value."
+        },
+        {
+          "label": "Dica: falta um (@side, @amount, @relation)",
+          "default": "Na @side falta @amount (@relation)."
+        },
+        {
+          "label": "Dica: faltam vários (@side, @amount, @relation)",
+          "default": "Na @side faltam @amount (@relation)."
+        },
+        {
+          "label": "Dica: sobra um (@side, @amount, @relation)",
+          "default": "Na @side sobra @amount (@relation)."
+        },
+        {
+          "label": "Dica: sobram vários (@side, @amount, @relation)",
+          "default": "Na @side sobram @amount (@relation)."
+        },
+        {
+          "label": "Um saco, dentro de uma dica (@size)",
+          "default": "um saco de @size"
+        },
+        {
+          "label": "Sacos, dentro de uma dica (@count, @size)",
+          "default": "@count sacos de @size"
+        },
+        {
+          "label": "Dica: distribuir (@half, @heavy, @weighs, @move, @light)",
+          "default": "Cada lado tem que pesar @half, e a @heavy pesa @weighs: passe @move da @heavy para a @light."
+        },
+        {
+          "label": "Dica: distribuir, total ímpar (@relation)",
+          "default": "@relation: passe pesos de um lado para o outro."
+        },
+        {
+          "label": "Tudo colocado, sem equilíbrio (@hint)",
+          "default": "Todos os pesos estão na balança. @hint"
+        },
+        {
+          "label": "Dica: um número menor para os sacos (@value, @relation)",
+          "default": "Com @value em cada saco não fica igual (@relation): teste um número menor."
+        },
+        {
+          "label": "Dica: um número maior para os sacos (@value, @relation)",
+          "default": "Com @value em cada saco não fica igual (@relation): teste um número maior."
+        },
+        {
+          "label": "Um número que já estava no prato, dentro do erro típico (@value)",
+          "default": "um @value"
+        },
+        {
+          "label": "O erro típico: o que pesa o outro lado (@mine, @other, @side, @already, @relation)",
+          "default": "Você colocou @mine, o que pesa a @other, mas na @side já tinha @already: @relation."
+        },
+        {
+          "label": "O erro típico: todos os números somados (@side, @already, @relation)",
+          "default": "Você somou todos os números, mas na @side já tinha @already: @relation."
+        },
+        {
+          "label": "A cena, para leitores de tela: travada",
+          "default": "A balança está presa pelos apoios."
+        },
+        {
+          "label": "A cena, para leitores de tela: em equilíbrio",
+          "default": "A balança está em equilíbrio."
+        },
+        {
+          "label": "A cena, para leitores de tela: a esquerda pesa mais",
+          "default": "A balança se inclina: a esquerda pesa mais."
+        },
+        {
+          "label": "A cena, para leitores de tela: a direita pesa mais",
+          "default": "A balança se inclina: a direita pesa mais."
+        },
+        {
+          "label": "Título no final: tudo certo",
+          "default": "Tudo de primeira!"
+        },
+        {
+          "label": "Título no final: muito bem",
+          "default": "Muito bem equilibrado!"
+        },
+        {
+          "label": "Título no final: bem",
+          "default": "Muito bem. Mais uma partida e vai ficar ainda melhor."
+        },
+        {
+          "label": "Título no final: para continuar",
+          "default": "Mais uma partida, com calma."
+        },
+        {
+          "label": "Resultado (@score, @total)",
+          "default": "@score de @total pontos"
+        },
+        {
+          "label": "Botão de jogar de novo",
+          "default": "Jogar de novo"
+        },
+        {
+          "label": "Botão de praticar outra coisa",
+          "default": "Praticar outra coisa"
+        },
+        {
+          "label": "Pontos de uma rodada na revisão (@got, @of)",
+          "default": "@got de @of"
+        },
+        {
+          "label": "Distribuir, na revisão (@values)",
+          "default": "Distribuir @values"
+        },
+        {
+          "label": "Uma rodada que volta, na revisão",
+          "default": "revisão"
+        },
+        {
+          "label": "Na revisão: sem tirar nenhum",
+          "default": "sem tirar nenhum"
+        },
+        {
+          "label": "Na revisão: depois de tirar (@count)",
+          "default": "tirando @count vezes"
+        },
+        {
+          "label": "Na revisão: de primeira",
+          "default": "de primeira"
+        },
+        {
+          "label": "Na revisão: na segunda tentativa (@try)",
+          "default": "na segunda tentativa (antes: @try)"
+        },
+        {
+          "label": "Na revisão: feito juntos (@tries)",
+          "default": "feito juntos (tentativas: @tries)"
+        },
+        {
+          "label": "Na revisão: feito juntos depois de tirar (@count)",
+          "default": "feito juntos, depois de tirar @count vezes"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "topic": "choose",
+  "movement": "free",
+  "view": "choose",
+  "rounds": 6,
+  "behaviour": {
+    "enableSound": true,
+    "enableVoice": true,
+    "enableRetry": true
+  }
+}

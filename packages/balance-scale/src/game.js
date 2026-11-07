@@ -388,7 +388,7 @@ export class BalanceGame {
   }
 
   /**
-   * @param {'left'|'right'} side
+   * @param {string} side
    * @returns {number} What a pan weighs; a mystery bag weighs the number being tried, or its own weight.
    */
   weight(side) {
@@ -403,7 +403,7 @@ export class BalanceGame {
   }
 
   /**
-   * @param {'left'|'right'} side
+   * @param {string} side
    * @returns {Thing[]} What the player put on a pan.
    */
   placed(side) {
@@ -423,7 +423,7 @@ export class BalanceGame {
   notReady() {
     const r = this.current;
     if (r.topic === 'bag') {
-      return this.tried == null ? 'chooseFirst' : null;
+      return this.tried === null ? 'chooseFirst' : null;
     }
     if (r.topic === 'share') {
       return r.pool.length ? 'placeAll' : null;
@@ -433,7 +433,7 @@ export class BalanceGame {
 
   /**
    * A weight or a bag from the tray onto a pan.
-   * @param {'left'|'right'} side
+   * @param {string} side
    * @param {{value?: number, kind?: 'w'|'bag', poolId?: string}} what
    * @returns {{thing?: Thing, refused?: 'otherPan'|'over'}} What went on, or why it could not.
    */

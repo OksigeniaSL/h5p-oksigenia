@@ -1,0 +1,24 @@
+{
+  "title": "Balanza de ejemplo",
+  "language": "es",
+  "defaultLanguage": "es",
+  "mainLibrary": "H5P.BalanceScale",
+  "embedTypes": [
+    "iframe"
+  ],
+  "license": "CC BY",
+  "licenseVersion": "4.0",
+  "authors": [
+    {
+      "name": "Oksigenia",
+      "role": "Author"
+    }
+  ],
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.BalanceScale",
+      "majorVersion": "1",
+      "minorVersion": "0"
+    }
+  ]
+}

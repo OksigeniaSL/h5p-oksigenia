@@ -1,0 +1,554 @@
+{
+  "semantics": [
+    {
+      "label": "Wat wordt geoefend",
+      "description": "Met ‘Kiezen bij het starten’ kiest de speler op het eerste scherm: handig midden in een les.",
+      "options": [
+        {
+          "label": "Kiezen bij het starten"
+        },
+        {
+          "label": "Gelijkheden: sommen met het gat aan een van beide kanten"
+        },
+        {
+          "label": "Gelijke groepen: vermenigvuldigen en delen"
+        },
+        {
+          "label": "Alle gewichten verdelen"
+        },
+        {
+          "label": "Het geheime zakje"
+        },
+        {
+          "label": "Vrije balans, voor het bord, zonder punten"
+        }
+      ]
+    },
+    {
+      "label": "Hoe de balans beweegt",
+      "description": "Vrij werkt het best in onderzoek met balansen op het scherm: de balans helt over en de gelijkheid verandert tegelijk (Otten, Van den Heuvel-Panhuizen en Veldhuis, 2019, overzicht van 34 studies, https://doi.org/10.1186/s40594-019-0183-2). Punten: 2 als hij in evenwicht komt zonder gewichten weg te halen, 1 als er één of twee weggehaald zijn. Vastgezet laat spelers eerst beslissen en dan pas controleren: voor wie het gelijkteken al goed kent.",
+      "options": [
+        {
+          "label": "Vrij: hij helt meteen over (aanbevolen)"
+        },
+        {
+          "label": "Vastgezet: hij beweegt pas als je hem loslaat"
+        }
+      ]
+    },
+    {
+      "label": "De balans",
+      "description": "De markt past het best bij jongere kinderen en het schrift bij oudere. Als spelers kiezen, zien ze alleen de afbeelding en de naam, zonder leeftijd.",
+      "options": [
+        {
+          "label": "Laat de speler kiezen"
+        },
+        {
+          "label": "Markt"
+        },
+        {
+          "label": "Laboratorium"
+        },
+        {
+          "label": "Schrift"
+        }
+      ]
+    },
+    {
+      "label": "Rondes per spel"
+    },
+    {
+      "label": "Fijnafstelling",
+      "description": "Optioneel. Waar het spel begint; met drie goede rondes op rij gaat het een niveau omhoog.",
+      "fields": [
+        {
+          "label": "Beginnen bij",
+          "options": [
+            {
+              "label": "Vedergewicht (het eerste niveau)"
+            },
+            {
+              "label": "Middengewicht"
+            },
+            {
+              "label": "Zwaargewicht"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Gedrag",
+      "fields": [
+        {
+          "label": "Met geluid",
+          "description": "Spelers kunnen ze zachter of uit zetten. Ze beginnen op een kwart van het volume."
+        },
+        {
+          "label": "Aanbieden om de instructies te beluisteren",
+          "description": "Ingesproken in het Spaans en het Engels. In andere talen staat de tekst er zonder stem."
+        },
+        {
+          "label": "Opnieuw spelen aanbieden"
+        }
+      ]
+    },
+    {
+      "label": "Teksten en vertalingen",
+      "fields": [
+        {
+          "label": "Startknop",
+          "default": "Starten"
+        },
+        {
+          "label": "Kop van de onderwerpen",
+          "default": "Wat wil je oefenen?"
+        },
+        {
+          "label": "Onderwerp: gelijkheden",
+          "default": "Gelijkheden"
+        },
+        {
+          "label": "Onderwerp: gelijkheden, waar het om gaat",
+          "default": "Sommen met het gat aan een van beide kanten"
+        },
+        {
+          "label": "Onderwerp: gelijke groepen",
+          "default": "Gelijke groepen"
+        },
+        {
+          "label": "Onderwerp: gelijke groepen, waar het om gaat",
+          "default": "Vermenigvuldigen en delen met zakjes"
+        },
+        {
+          "label": "Onderwerp: verdelen",
+          "default": "Verdelen"
+        },
+        {
+          "label": "Onderwerp: verdelen, waar het om gaat",
+          "default": "Alle gewichten, en aan beide kanten evenveel"
+        },
+        {
+          "label": "Onderwerp: het geheime zakje",
+          "default": "Het geheime zakje"
+        },
+        {
+          "label": "Onderwerp: het geheime zakje, waar het om gaat",
+          "default": "Hoeveel weegt elk zakje?"
+        },
+        {
+          "label": "Onderwerp: vrije balans",
+          "default": "Vrije balans"
+        },
+        {
+          "label": "Onderwerp: vrije balans, waar het om gaat",
+          "default": "Voor het bord, zonder punten"
+        },
+        {
+          "label": "Waar een spel om gaat (@count: rondes)",
+          "default": "@count rondes. Leg gewichten op de balans tot hij in evenwicht is."
+        },
+        {
+          "label": "Kop van de balansen",
+          "default": "Kies je balans"
+        },
+        {
+          "label": "Balans: markt",
+          "default": "Markt"
+        },
+        {
+          "label": "Balans: laboratorium",
+          "default": "Laboratorium"
+        },
+        {
+          "label": "Balans: schrift",
+          "default": "Schrift"
+        },
+        {
+          "label": "Ronde en punten, voor schermlezers (@round, @total, @count)",
+          "default": "Ronde @round van @total. Punten: @count."
+        },
+        {
+          "label": "Eerste niveau",
+          "default": "Vedergewicht"
+        },
+        {
+          "label": "Tweede niveau",
+          "default": "Middengewicht"
+        },
+        {
+          "label": "Derde niveau",
+          "default": "Zwaargewicht"
+        },
+        {
+          "label": "Een niveau omhoog (@level)",
+          "default": "Drie op rij: door naar @level."
+        },
+        {
+          "label": "Knop om de instructie te beluisteren",
+          "default": "Luisteren"
+        },
+        {
+          "label": "Knop om het geluid uit te zetten",
+          "default": "Geluid uit"
+        },
+        {
+          "label": "Knop om het geluid aan te zetten",
+          "default": "Geluid aan"
+        },
+        {
+          "label": "Wordt gezegd bij geluid uit",
+          "default": "Het geluid is uit"
+        },
+        {
+          "label": "Wordt gezegd bij geluid aan",
+          "default": "Het geluid is aan"
+        },
+        {
+          "label": "Volumeregeling",
+          "default": "Volume"
+        },
+        {
+          "label": "Instructie: gelijkheden, gat rechts",
+          "default": "Leg gewichten op de rechterschaal tot de balans in evenwicht is."
+        },
+        {
+          "label": "Instructie: gelijkheden, gat links",
+          "default": "Leg gewichten op de linkerschaal tot de balans in evenwicht is."
+        },
+        {
+          "label": "Instructie: hoeveel de zakjes wegen",
+          "default": "Hoeveel wegen de zakjes? Laat het zien met gewichten rechts."
+        },
+        {
+          "label": "Instructie: hoeveel zakjes",
+          "default": "Hoeveel zakjes brengen de balans in evenwicht?"
+        },
+        {
+          "label": "Instructie: verdelen",
+          "default": "Verdeel alle gewichten zodat de balans in evenwicht is."
+        },
+        {
+          "label": "Instructie: één geheim zakje",
+          "default": "Hoeveel weegt het zakje? Kies een getal en probeer het."
+        },
+        {
+          "label": "Instructie: meerdere geheime zakjes",
+          "default": "Alle zakjes wegen evenveel. Hoeveel? Kies een getal en probeer het."
+        },
+        {
+          "label": "Instructie: vrije balans",
+          "default": "Leg gewichten aan elke kant en kijk wat er gebeurt."
+        },
+        {
+          "label": "Instructie die erbij komt als de balans vastgezet is",
+          "default": "Laat daarna de balans los."
+        },
+        {
+          "label": "Kop van het blad met gewichten",
+          "default": "Gewichten"
+        },
+        {
+          "label": "Kop van het blad met zakjes",
+          "default": "Zakjes"
+        },
+        {
+          "label": "Leeg blad bij het verdelen",
+          "default": "Alle gewichten liggen op de balans."
+        },
+        {
+          "label": "Kop van het getal van de zakjes",
+          "default": "Elk zakje weegt"
+        },
+        {
+          "label": "Knop: één minder",
+          "default": "Eén minder"
+        },
+        {
+          "label": "Knop: één meer",
+          "default": "Eén meer"
+        },
+        {
+          "label": "Een gewicht (@value)",
+          "default": "Gewicht van @value"
+        },
+        {
+          "label": "Een zakje (@value)",
+          "default": "Zakje van @value"
+        },
+        {
+          "label": "Iets op de linkerschaal (@thing)",
+          "default": "@thing op de linkerschaal. Druk om het weg te halen."
+        },
+        {
+          "label": "Iets op de rechterschaal (@thing)",
+          "default": "@thing op de rechterschaal. Druk om het weg te halen."
+        },
+        {
+          "label": "Vraag naar de kant (@value)",
+          "default": "Aan welke kant komt de @value?"
+        },
+        {
+          "label": "Knop: naar links",
+          "default": "Links"
+        },
+        {
+          "label": "Knop: naar rechts",
+          "default": "Rechts"
+        },
+        {
+          "label": "De linkerkant, in andere teksten",
+          "default": "links"
+        },
+        {
+          "label": "De rechterkant, in andere teksten",
+          "default": "rechts"
+        },
+        {
+          "label": "Knop om de vastgezette balans los te laten",
+          "default": "Laat de balans los"
+        },
+        {
+          "label": "Knop om het getal van de zakjes te proberen",
+          "default": "Proberen"
+        },
+        {
+          "label": "Knop om de eigen schaal leeg te maken",
+          "default": "Schaal leegmaken"
+        },
+        {
+          "label": "Knop om beide schalen leeg te maken",
+          "default": "Schalen leegmaken"
+        },
+        {
+          "label": "Knop volgende",
+          "default": "Volgende"
+        },
+        {
+          "label": "Knop na de laatste ronde",
+          "default": "Resultaat bekijken"
+        },
+        {
+          "label": "Gewicht op de verkeerde schaal (@side)",
+          "default": "Die schaal is klaar: de gewichten gaan op de schaal @side."
+        },
+        {
+          "label": "Bij het aanraken van iets dat bij de balans hoort",
+          "default": "Dat hoort bij de balans: het blijft liggen."
+        },
+        {
+          "label": "Bij het aanraken van een geheim zakje",
+          "default": "De zakjes blijven liggen: kies hieronder hoeveel elk weegt."
+        },
+        {
+          "label": "Loslaten zonder iets op de schaal (@side)",
+          "default": "Leg eerst iets op de schaal @side."
+        },
+        {
+          "label": "Er moet nog één gewicht op",
+          "default": "Er moet nog één gewicht op."
+        },
+        {
+          "label": "Er moeten nog gewichten op (@count)",
+          "default": "Er moeten nog @count gewichten op."
+        },
+        {
+          "label": "Proberen zonder getal",
+          "default": "Kies eerst hieronder hoeveel elk zakje weegt."
+        },
+        {
+          "label": "In evenwicht zonder iets weg te halen",
+          "default": "In evenwicht, zonder iets weg te halen! +2."
+        },
+        {
+          "label": "In evenwicht na één of twee keer weghalen",
+          "default": "In evenwicht! +1. Zonder iets weg te halen was het +2 geweest."
+        },
+        {
+          "label": "In evenwicht na vaker weghalen",
+          "default": "In evenwicht! Zonder iets weg te halen was het +2 geweest."
+        },
+        {
+          "label": "In evenwicht in één keer (vastgezette balans)",
+          "default": "In één keer in evenwicht! +2."
+        },
+        {
+          "label": "In evenwicht bij de tweede poging (vastgezette balans)",
+          "default": "In evenwicht bij de tweede poging! +1."
+        },
+        {
+          "label": "De zakjes, bij de eerste poging (@value)",
+          "default": "Elk zakje weegt @value! In één keer: +2."
+        },
+        {
+          "label": "De zakjes, bij de tweede poging (@value)",
+          "default": "Elk zakje weegt @value! Bij de tweede poging: +1."
+        },
+        {
+          "label": "Na een fout met de vastgezette balans",
+          "default": "Laat hem nog een keer los."
+        },
+        {
+          "label": "Samen doen",
+          "default": "Laten we het samen doen."
+        },
+        {
+          "label": "Samen gedaan: gelijkheden (@side, @amount)",
+          "default": "Laten we het samen doen: op de schaal @side moest er nog @amount bij."
+        },
+        {
+          "label": "Samen gedaan: hoeveel zakjes (@count, @size)",
+          "default": "Laten we het samen doen: er waren @count zakjes van @size nodig."
+        },
+        {
+          "label": "Samen gedaan: hoeveel de zakjes wegen (@count, @size, @total)",
+          "default": "Laten we het samen doen: @count zakjes van @size wegen @total."
+        },
+        {
+          "label": "Samen gedaan: verdelen (@half)",
+          "default": "Laten we het samen doen: zo wegen ze evenveel, @half aan elke kant."
+        },
+        {
+          "label": "Samen gedaan: het geheime zakje (@value)",
+          "default": "Laten we het samen doen: elk zakje weegt @value."
+        },
+        {
+          "label": "Tip: er ontbreekt er één (@side, @amount, @relation)",
+          "default": "Op de schaal @side ontbreekt nog @amount (@relation)."
+        },
+        {
+          "label": "Tip: er ontbreken er meer (@side, @amount, @relation)",
+          "default": "Op de schaal @side ontbreken nog @amount (@relation)."
+        },
+        {
+          "label": "Tip: één te veel (@side, @amount, @relation)",
+          "default": "Op de schaal @side ligt @amount te veel (@relation)."
+        },
+        {
+          "label": "Tip: meer te veel (@side, @amount, @relation)",
+          "default": "Op de schaal @side liggen @amount te veel (@relation)."
+        },
+        {
+          "label": "Eén zakje, in een tip (@size)",
+          "default": "één zakje van @size"
+        },
+        {
+          "label": "Zakjes, in een tip (@count, @size)",
+          "default": "@count zakjes van @size"
+        },
+        {
+          "label": "Tip: verdelen (@half, @heavy, @weighs, @move, @light)",
+          "default": "Elke kant moet @half wegen, en @heavy is het @weighs: verplaats @move van @heavy naar @light."
+        },
+        {
+          "label": "Tip: verdelen, oneven totaal (@relation)",
+          "default": "@relation: verplaats gewichten van de ene kant naar de andere."
+        },
+        {
+          "label": "Alles ligt erop, geen evenwicht (@hint)",
+          "default": "Alle gewichten liggen op de balans. @hint"
+        },
+        {
+          "label": "Tip: een kleiner getal voor de zakjes (@value, @relation)",
+          "default": "Met @value in elk zakje is het niet gelijk (@relation): probeer een kleiner getal."
+        },
+        {
+          "label": "Tip: een groter getal voor de zakjes (@value, @relation)",
+          "default": "Met @value in elk zakje is het niet gelijk (@relation): probeer een groter getal."
+        },
+        {
+          "label": "Een getal dat al op de schaal lag, in de typische fout (@value)",
+          "default": "een @value"
+        },
+        {
+          "label": "De typische fout: wat de andere kant weegt (@mine, @other, @side, @already, @relation)",
+          "default": "Je legde @mine, wat de schaal @other weegt, maar @side lag al @already: @relation."
+        },
+        {
+          "label": "De typische fout: alle getallen opgeteld (@side, @already, @relation)",
+          "default": "Je telde alle getallen op, maar @side lag al @already: @relation."
+        },
+        {
+          "label": "De scène, voor schermlezers: vastgezet",
+          "default": "De balans wordt vastgehouden door de steunen."
+        },
+        {
+          "label": "De scène, voor schermlezers: in evenwicht",
+          "default": "De balans is in evenwicht."
+        },
+        {
+          "label": "De scène, voor schermlezers: links is zwaarder",
+          "default": "De balans helt over: links is zwaarder."
+        },
+        {
+          "label": "De scène, voor schermlezers: rechts is zwaarder",
+          "default": "De balans helt over: rechts is zwaarder."
+        },
+        {
+          "label": "Kop aan het eind: alles goed",
+          "default": "Alles in één keer!"
+        },
+        {
+          "label": "Kop aan het eind: heel goed",
+          "default": "Heel goed in evenwicht!"
+        },
+        {
+          "label": "Kop aan het eind: goed",
+          "default": "Goed gedaan. Nog een spel en het gaat nog beter."
+        },
+        {
+          "label": "Kop aan het eind: om door te gaan",
+          "default": "Nog een spel, rustig aan."
+        },
+        {
+          "label": "Resultaat (@score, @total)",
+          "default": "@score van de @total punten"
+        },
+        {
+          "label": "Knop om opnieuw te spelen",
+          "default": "Opnieuw spelen"
+        },
+        {
+          "label": "Knop om iets anders te oefenen",
+          "default": "Iets anders oefenen"
+        },
+        {
+          "label": "Punten van een ronde in het overzicht (@got, @of)",
+          "default": "@got van @of"
+        },
+        {
+          "label": "Verdelen, in het overzicht (@values)",
+          "default": "Verdeel @values"
+        },
+        {
+          "label": "Een ronde die terugkomt, in het overzicht",
+          "default": "herhaling"
+        },
+        {
+          "label": "In het overzicht: zonder iets weg te halen",
+          "default": "zonder iets weg te halen"
+        },
+        {
+          "label": "In het overzicht: na weghalen (@count)",
+          "default": "@count keer weggehaald"
+        },
+        {
+          "label": "In het overzicht: in één keer",
+          "default": "in één keer"
+        },
+        {
+          "label": "In het overzicht: bij de tweede poging (@try)",
+          "default": "bij de tweede poging (eerst: @try)"
+        },
+        {
+          "label": "In het overzicht: samen gedaan (@tries)",
+          "default": "samen gedaan (pogingen: @tries)"
+        },
+        {
+          "label": "In het overzicht: samen gedaan na weghalen (@count)",
+          "default": "samen gedaan, na @count keer weghalen"
+        }
+      ]
+    }
+  ]
+}

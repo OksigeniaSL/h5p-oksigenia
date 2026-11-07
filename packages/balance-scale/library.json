@@ -1,0 +1,33 @@
+{
+  "title": "Balance Scale",
+  "description": "Equalities on a two-pan balance: what is put on the scale is the answer, and the equality is written under it with =, < or >. Sums with the gap on either side, equal groups, sharing out and a mystery bag. Each game makes up its own numbers.",
+  "machineName": "H5P.BalanceScale",
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
+  "runnable": 1,
+  "author": "Oksigenia",
+  "license": "MIT",
+  "embedTypes": [
+    "iframe"
+  ],
+  "fullscreen": 1,
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 24
+  },
+  "preloadedJs": [
+    {
+      "path": "dist/balance-scale.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/balance-scale.css"
+    }
+  ],
+  "metadataSettings": {
+    "disable": 0,
+    "disableExtraTitleField": 1
+  }
+}

@@ -1,0 +1,554 @@
+{
+  "semantics": [
+    {
+      "label": "What to practise",
+      "description": "With «Choose when starting», whoever plays picks it on the first screen: handy in the middle of a class.",
+      "options": [
+        {
+          "label": "Choose when starting"
+        },
+        {
+          "label": "Equalities: sums with the gap on either side"
+        },
+        {
+          "label": "Equal groups: multiplying and dividing"
+        },
+        {
+          "label": "Sharing out every weight"
+        },
+        {
+          "label": "The mystery bag"
+        },
+        {
+          "label": "Free balance, for the board, with no points"
+        }
+      ]
+    },
+    {
+      "label": "How the scale moves",
+      "description": "Free is what works best in studies with on-screen balances: the scale leans and the equality changes at the same time (Otten, Van den Heuvel-Panhuizen and Veldhuis, 2019, a review of 34 studies, https://doi.org/10.1186/s40594-019-0183-2). Points: 2 if it balances without taking any weight off, 1 with one or two taken off. Held makes players decide before they check: for those who already know the equal sign well.",
+      "options": [
+        {
+          "label": "Free: it leans at once (recommended)"
+        },
+        {
+          "label": "Held: it stays still until it is let go"
+        }
+      ]
+    },
+    {
+      "label": "The scale",
+      "description": "The market suits younger children best and the notebook, older ones. If players choose, they see only the picture and the name, with no age.",
+      "options": [
+        {
+          "label": "Let the player choose"
+        },
+        {
+          "label": "Market"
+        },
+        {
+          "label": "Laboratory"
+        },
+        {
+          "label": "Notebook"
+        }
+      ]
+    },
+    {
+      "label": "Rounds in a game"
+    },
+    {
+      "label": "Fine tuning",
+      "description": "Optional. Where the game starts; it moves up a level with three good rounds in a row.",
+      "fields": [
+        {
+          "label": "Start at",
+          "options": [
+            {
+              "label": "Featherweight (the first level)"
+            },
+            {
+              "label": "Middleweight"
+            },
+            {
+              "label": "Heavyweight"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Behaviour settings",
+      "fields": [
+        {
+          "label": "Play sounds",
+          "description": "Players can turn them down or off. They start at a quarter of the volume."
+        },
+        {
+          "label": "Offer to listen to the instructions",
+          "description": "Recorded in Spanish and English. In other languages the text goes without voice."
+        },
+        {
+          "label": "Offer to play again"
+        }
+      ]
+    },
+    {
+      "label": "Texts and translations",
+      "fields": [
+        {
+          "label": "Start button",
+          "default": "Start"
+        },
+        {
+          "label": "Heading of the topics",
+          "default": "What do you want to practise?"
+        },
+        {
+          "label": "Topic: equalities",
+          "default": "Equalities"
+        },
+        {
+          "label": "Topic: equalities, what it is",
+          "default": "Sums with the gap on either side"
+        },
+        {
+          "label": "Topic: equal groups",
+          "default": "Equal groups"
+        },
+        {
+          "label": "Topic: equal groups, what it is",
+          "default": "Multiplying and dividing with bags"
+        },
+        {
+          "label": "Topic: share out",
+          "default": "Share out"
+        },
+        {
+          "label": "Topic: share out, what it is",
+          "default": "Every weight, and the same on both sides"
+        },
+        {
+          "label": "Topic: the mystery bag",
+          "default": "The mystery bag"
+        },
+        {
+          "label": "Topic: the mystery bag, what it is",
+          "default": "How much does each bag weigh?"
+        },
+        {
+          "label": "Topic: free balance",
+          "default": "Free balance"
+        },
+        {
+          "label": "Topic: free balance, what it is",
+          "default": "For the board, with no points"
+        },
+        {
+          "label": "What a game is (@count: rounds)",
+          "default": "@count rounds. Put weights on the scale until it balances."
+        },
+        {
+          "label": "Heading of the scales",
+          "default": "Choose your scale"
+        },
+        {
+          "label": "Scale: market",
+          "default": "Market"
+        },
+        {
+          "label": "Scale: laboratory",
+          "default": "Laboratory"
+        },
+        {
+          "label": "Scale: notebook",
+          "default": "Notebook"
+        },
+        {
+          "label": "Round and points, for screen readers (@round, @total, @count)",
+          "default": "Round @round of @total. Points: @count."
+        },
+        {
+          "label": "First level",
+          "default": "Featherweight"
+        },
+        {
+          "label": "Second level",
+          "default": "Middleweight"
+        },
+        {
+          "label": "Third level",
+          "default": "Heavyweight"
+        },
+        {
+          "label": "Moving up a level (@level)",
+          "default": "Three in a row: up to @level."
+        },
+        {
+          "label": "Button to listen to the instruction",
+          "default": "Listen"
+        },
+        {
+          "label": "Button to mute",
+          "default": "Mute"
+        },
+        {
+          "label": "Button to turn the sound on",
+          "default": "Turn the sound on"
+        },
+        {
+          "label": "Said when muting",
+          "default": "Sound off"
+        },
+        {
+          "label": "Said when turning the sound on",
+          "default": "Sound on"
+        },
+        {
+          "label": "Volume control",
+          "default": "Volume"
+        },
+        {
+          "label": "Instruction: equalities, gap on the right",
+          "default": "Put weights on the right pan until the scale balances."
+        },
+        {
+          "label": "Instruction: equalities, gap on the left",
+          "default": "Put weights on the left pan until the scale balances."
+        },
+        {
+          "label": "Instruction: how much the bags weigh",
+          "default": "How much do the bags weigh? Show it with weights on the right."
+        },
+        {
+          "label": "Instruction: how many bags",
+          "default": "How many bags balance the scale?"
+        },
+        {
+          "label": "Instruction: share out",
+          "default": "Share out all the weights so the scale balances."
+        },
+        {
+          "label": "Instruction: one mystery bag",
+          "default": "How much does the bag weigh? Choose a number and try it."
+        },
+        {
+          "label": "Instruction: several mystery bags",
+          "default": "All the bags weigh the same. How much? Choose a number and try it."
+        },
+        {
+          "label": "Instruction: free balance",
+          "default": "Put weights on each side and see what happens."
+        },
+        {
+          "label": "Instruction added when the scale is held",
+          "default": "Then let go of the scale."
+        },
+        {
+          "label": "Heading of the tray of weights",
+          "default": "Weights"
+        },
+        {
+          "label": "Heading of the tray of bags",
+          "default": "Bags"
+        },
+        {
+          "label": "Empty tray when sharing out",
+          "default": "All the weights are on the scale."
+        },
+        {
+          "label": "Heading of the number of the bags",
+          "default": "Each bag weighs"
+        },
+        {
+          "label": "Button: one less",
+          "default": "One less"
+        },
+        {
+          "label": "Button: one more",
+          "default": "One more"
+        },
+        {
+          "label": "A weight (@value)",
+          "default": "Weight of @value"
+        },
+        {
+          "label": "A bag (@value)",
+          "default": "Bag of @value"
+        },
+        {
+          "label": "Something on the left pan (@thing)",
+          "default": "@thing on the left pan. Press to take it off."
+        },
+        {
+          "label": "Something on the right pan (@thing)",
+          "default": "@thing on the right pan. Press to take it off."
+        },
+        {
+          "label": "Asking for the side (@value)",
+          "default": "Which side does the @value go on?"
+        },
+        {
+          "label": "Button: to the left",
+          "default": "Left"
+        },
+        {
+          "label": "Button: to the right",
+          "default": "Right"
+        },
+        {
+          "label": "The left side, inside other texts",
+          "default": "left"
+        },
+        {
+          "label": "The right side, inside other texts",
+          "default": "right"
+        },
+        {
+          "label": "Button to let go of the held scale",
+          "default": "Let go of the scale"
+        },
+        {
+          "label": "Button to try the number of the bags",
+          "default": "Try"
+        },
+        {
+          "label": "Button to empty the player's pan",
+          "default": "Empty the pan"
+        },
+        {
+          "label": "Button to empty both pans",
+          "default": "Empty the pans"
+        },
+        {
+          "label": "Next button",
+          "default": "Next"
+        },
+        {
+          "label": "Button after the last round",
+          "default": "See the result"
+        },
+        {
+          "label": "Weight on the wrong pan (@side)",
+          "default": "That pan is ready: the weights go on the @side one."
+        },
+        {
+          "label": "Touching something that came with the scale",
+          "default": "That one comes with the scale: it stays."
+        },
+        {
+          "label": "Touching a mystery bag",
+          "default": "The bags stay: choose below how much each one weighs."
+        },
+        {
+          "label": "Letting go with nothing on the pan (@side)",
+          "default": "First put something on the @side pan."
+        },
+        {
+          "label": "One weight left to place",
+          "default": "One weight still to place."
+        },
+        {
+          "label": "Weights left to place (@count)",
+          "default": "@count weights still to place."
+        },
+        {
+          "label": "Trying with no number",
+          "default": "First choose below how much each bag weighs."
+        },
+        {
+          "label": "Balanced without taking anything off",
+          "default": "Balanced, without taking any off! +2."
+        },
+        {
+          "label": "Balanced after taking one or two off",
+          "default": "Balanced! +1. Without taking any off, it would have been +2."
+        },
+        {
+          "label": "Balanced after taking more off",
+          "default": "Balanced! Without taking any off, it would have been +2."
+        },
+        {
+          "label": "Balanced at the first go (held scale)",
+          "default": "Balanced at the first go! +2."
+        },
+        {
+          "label": "Balanced at the second go (held scale)",
+          "default": "Balanced at the second go! +1."
+        },
+        {
+          "label": "The bags, at the first try (@value)",
+          "default": "Each bag weighs @value! At the first go: +2."
+        },
+        {
+          "label": "The bags, at the second try (@value)",
+          "default": "Each bag weighs @value! At the second go: +1."
+        },
+        {
+          "label": "After a miss with the held scale",
+          "default": "Let go of it again."
+        },
+        {
+          "label": "Doing it together",
+          "default": "Let's do it together."
+        },
+        {
+          "label": "Done together: equalities (@side, @amount)",
+          "default": "Let's do it together: the @side side needed @amount more."
+        },
+        {
+          "label": "Done together: how many bags (@count, @size)",
+          "default": "Let's do it together: it took @count bags of @size."
+        },
+        {
+          "label": "Done together: how much the bags weigh (@count, @size, @total)",
+          "default": "Let's do it together: @count bags of @size weigh @total."
+        },
+        {
+          "label": "Done together: share out (@half)",
+          "default": "Let's do it together: like this they weigh the same, @half on each side."
+        },
+        {
+          "label": "Done together: the mystery bag (@value)",
+          "default": "Let's do it together: each bag weighs @value."
+        },
+        {
+          "label": "Hint: one missing (@side, @amount, @relation)",
+          "default": "The @side side needs @amount more (@relation)."
+        },
+        {
+          "label": "Hint: several missing (@side, @amount, @relation)",
+          "default": "The @side side needs @amount more (@relation)."
+        },
+        {
+          "label": "Hint: one too many (@side, @amount, @relation)",
+          "default": "The @side side has @amount too many (@relation)."
+        },
+        {
+          "label": "Hint: several too many (@side, @amount, @relation)",
+          "default": "The @side side has @amount too many (@relation)."
+        },
+        {
+          "label": "One bag, inside a hint (@size)",
+          "default": "one bag of @size"
+        },
+        {
+          "label": "Bags, inside a hint (@count, @size)",
+          "default": "@count bags of @size"
+        },
+        {
+          "label": "Hint: share out (@half, @heavy, @weighs, @move, @light)",
+          "default": "Each side has to weigh @half, and the @heavy one weighs @weighs: move @move from the @heavy side to the @light one."
+        },
+        {
+          "label": "Hint: share out, odd total (@relation)",
+          "default": "@relation: move weights from one side to the other."
+        },
+        {
+          "label": "Everything placed, not balanced (@hint)",
+          "default": "All the weights are on the scale. @hint"
+        },
+        {
+          "label": "Hint: a smaller number for the bags (@value, @relation)",
+          "default": "With @value in each bag it is not equal (@relation): try a smaller number."
+        },
+        {
+          "label": "Hint: a bigger number for the bags (@value, @relation)",
+          "default": "With @value in each bag it is not equal (@relation): try a bigger number."
+        },
+        {
+          "label": "One number already on the pan, inside the usual mistake (@value)",
+          "default": "a @value"
+        },
+        {
+          "label": "The usual mistake: what the other side weighs (@mine, @other, @side, @already, @relation)",
+          "default": "You put @mine, what the @other side weighs, but there was already @already on the @side: @relation."
+        },
+        {
+          "label": "The usual mistake: every number added up (@side, @already, @relation)",
+          "default": "You added up every number, but there was already @already on the @side: @relation."
+        },
+        {
+          "label": "The scene, for screen readers: held",
+          "default": "The scale is held by its stops."
+        },
+        {
+          "label": "The scene, for screen readers: balanced",
+          "default": "The scale is balanced."
+        },
+        {
+          "label": "The scene, for screen readers: the left side weighs more",
+          "default": "The scale leans: the left side weighs more."
+        },
+        {
+          "label": "The scene, for screen readers: the right side weighs more",
+          "default": "The scale leans: the right side weighs more."
+        },
+        {
+          "label": "Heading at the end: everything right",
+          "default": "All at the first go!"
+        },
+        {
+          "label": "Heading at the end: very good",
+          "default": "Very well balanced!"
+        },
+        {
+          "label": "Heading at the end: good",
+          "default": "Well done. Another game and it will go even better."
+        },
+        {
+          "label": "Heading at the end: to keep going",
+          "default": "Another game, calmly."
+        },
+        {
+          "label": "Result (@score, @total)",
+          "default": "@score of @total points"
+        },
+        {
+          "label": "Button to play again",
+          "default": "Play again"
+        },
+        {
+          "label": "Button to practise something else",
+          "default": "Practise something else"
+        },
+        {
+          "label": "Points of a round in the review (@got, @of)",
+          "default": "@got of @of"
+        },
+        {
+          "label": "Share out, in the review (@values)",
+          "default": "Share out @values"
+        },
+        {
+          "label": "A round that came back, in the review",
+          "default": "review"
+        },
+        {
+          "label": "In the review: without taking any off",
+          "default": "without taking any off"
+        },
+        {
+          "label": "In the review: after taking some off (@count)",
+          "default": "taking off @count"
+        },
+        {
+          "label": "In the review: at the first go",
+          "default": "at the first go"
+        },
+        {
+          "label": "In the review: at the second go (@try)",
+          "default": "at the second go (before, @try)"
+        },
+        {
+          "label": "In the review: done together (@tries)",
+          "default": "done together (tried @tries)"
+        },
+        {
+          "label": "In the review: done together after taking some off (@count)",
+          "default": "done together, after taking off @count"
+        }
+      ]
+    }
+  ]
+}

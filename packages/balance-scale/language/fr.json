@@ -1,0 +1,554 @@
+{
+  "semantics": [
+    {
+      "label": "Ce qu'on travaille",
+      "description": "Avec « Choisir au début », la personne qui joue choisit sur le premier écran : pratique en pleine classe.",
+      "options": [
+        {
+          "label": "Choisir au début"
+        },
+        {
+          "label": "Égalités : sommes avec le trou d'un côté ou de l'autre"
+        },
+        {
+          "label": "Groupes égaux : multiplier et diviser"
+        },
+        {
+          "label": "Répartir tous les poids"
+        },
+        {
+          "label": "Le sac mystère"
+        },
+        {
+          "label": "Balance libre, pour le tableau, sans points"
+        }
+      ]
+    },
+    {
+      "label": "Comment bouge la balance",
+      "description": "Libre est ce qui marche le mieux dans les études avec des balances à l'écran : la balance penche et l'égalité change en même temps (Otten, Van den Heuvel-Panhuizen et Veldhuis, 2019, revue de 34 études, https://doi.org/10.1186/s40594-019-0183-2). Points : 2 si elle s'équilibre sans retirer de poids, 1 en en retirant un ou deux. Bloquée oblige à décider avant de vérifier : pour ceux qui maîtrisent déjà le signe égal.",
+      "options": [
+        {
+          "label": "Libre : elle penche tout de suite (recommandé)"
+        },
+        {
+          "label": "Bloquée : elle ne bouge pas tant qu'on ne la lâche pas"
+        }
+      ]
+    },
+    {
+      "label": "La balance",
+      "description": "Le marché convient mieux aux plus jeunes, et le cahier, aux plus grands. Si les joueurs choisissent, ils ne voient que l'image et le nom, sans âge.",
+      "options": [
+        {
+          "label": "Laisser choisir le joueur"
+        },
+        {
+          "label": "Marché"
+        },
+        {
+          "label": "Laboratoire"
+        },
+        {
+          "label": "Cahier"
+        }
+      ]
+    },
+    {
+      "label": "Manches par partie"
+    },
+    {
+      "label": "Réglages fins",
+      "description": "Facultatif. Où commence le jeu ; il monte d'un niveau avec trois bonnes manches d'affilée.",
+      "fields": [
+        {
+          "label": "Commencer à",
+          "options": [
+            {
+              "label": "Poids plume (le premier niveau)"
+            },
+            {
+              "label": "Poids moyen"
+            },
+            {
+              "label": "Poids lourd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Comportement",
+      "fields": [
+        {
+          "label": "Avec des sons",
+          "description": "Les joueurs peuvent les baisser ou les couper. Ils commencent au quart du volume."
+        },
+        {
+          "label": "Proposer d'écouter les consignes",
+          "description": "Enregistrées en espagnol et en anglais. Dans les autres langues, le texte est sans voix."
+        },
+        {
+          "label": "Proposer de rejouer"
+        }
+      ]
+    },
+    {
+      "label": "Textes et traductions",
+      "fields": [
+        {
+          "label": "Bouton de démarrage",
+          "default": "Commencer"
+        },
+        {
+          "label": "Titre des sujets",
+          "default": "Que veux-tu travailler ?"
+        },
+        {
+          "label": "Sujet : égalités",
+          "default": "Égalités"
+        },
+        {
+          "label": "Sujet : égalités, en quoi ça consiste",
+          "default": "Des sommes avec le trou d'un côté ou de l'autre"
+        },
+        {
+          "label": "Sujet : groupes égaux",
+          "default": "Groupes égaux"
+        },
+        {
+          "label": "Sujet : groupes égaux, en quoi ça consiste",
+          "default": "Multiplier et diviser avec des sacs"
+        },
+        {
+          "label": "Sujet : répartir",
+          "default": "Répartir"
+        },
+        {
+          "label": "Sujet : répartir, en quoi ça consiste",
+          "default": "Tous les poids, et autant de chaque côté"
+        },
+        {
+          "label": "Sujet : le sac mystère",
+          "default": "Le sac mystère"
+        },
+        {
+          "label": "Sujet : le sac mystère, en quoi ça consiste",
+          "default": "Combien pèse chaque sac ?"
+        },
+        {
+          "label": "Sujet : balance libre",
+          "default": "Balance libre"
+        },
+        {
+          "label": "Sujet : balance libre, en quoi ça consiste",
+          "default": "Pour le tableau, sans points"
+        },
+        {
+          "label": "En quoi consiste une partie (@count : manches)",
+          "default": "@count manches. Mets des poids sur la balance jusqu'à ce qu'elle s'équilibre."
+        },
+        {
+          "label": "Titre des balances",
+          "default": "Choisis ta balance"
+        },
+        {
+          "label": "Balance : marché",
+          "default": "Marché"
+        },
+        {
+          "label": "Balance : laboratoire",
+          "default": "Laboratoire"
+        },
+        {
+          "label": "Balance : cahier",
+          "default": "Cahier"
+        },
+        {
+          "label": "Manche et points, pour les lecteurs d'écran (@round, @total, @count)",
+          "default": "Manche @round sur @total. Points : @count."
+        },
+        {
+          "label": "Premier niveau",
+          "default": "Poids plume"
+        },
+        {
+          "label": "Deuxième niveau",
+          "default": "Poids moyen"
+        },
+        {
+          "label": "Troisième niveau",
+          "default": "Poids lourd"
+        },
+        {
+          "label": "Montée de niveau (@level)",
+          "default": "Trois d'affilée : tu passes en @level."
+        },
+        {
+          "label": "Bouton pour écouter la consigne",
+          "default": "Écouter"
+        },
+        {
+          "label": "Bouton pour couper le son",
+          "default": "Couper le son"
+        },
+        {
+          "label": "Bouton pour remettre le son",
+          "default": "Remettre le son"
+        },
+        {
+          "label": "Annoncé en coupant le son",
+          "default": "Son coupé"
+        },
+        {
+          "label": "Annoncé en remettant le son",
+          "default": "Son remis"
+        },
+        {
+          "label": "Réglage du volume",
+          "default": "Volume"
+        },
+        {
+          "label": "Consigne : égalités, trou à droite",
+          "default": "Mets des poids sur le plateau de droite jusqu'à ce que la balance s'équilibre."
+        },
+        {
+          "label": "Consigne : égalités, trou à gauche",
+          "default": "Mets des poids sur le plateau de gauche jusqu'à ce que la balance s'équilibre."
+        },
+        {
+          "label": "Consigne : combien pèsent les sacs",
+          "default": "Combien pèsent les sacs ? Montre-le avec des poids à droite."
+        },
+        {
+          "label": "Consigne : combien de sacs",
+          "default": "Combien de sacs équilibrent la balance ?"
+        },
+        {
+          "label": "Consigne : répartir",
+          "default": "Répartis tous les poids pour que la balance s'équilibre."
+        },
+        {
+          "label": "Consigne : un sac mystère",
+          "default": "Combien pèse le sac ? Choisis un nombre et essaie-le."
+        },
+        {
+          "label": "Consigne : plusieurs sacs mystère",
+          "default": "Tous les sacs pèsent pareil. Combien ? Choisis un nombre et essaie-le."
+        },
+        {
+          "label": "Consigne : balance libre",
+          "default": "Mets des poids de chaque côté et regarde ce qui se passe."
+        },
+        {
+          "label": "Consigne ajoutée avec la balance bloquée",
+          "default": "Ensuite, lâche la balance."
+        },
+        {
+          "label": "Titre du plateau de poids",
+          "default": "Poids"
+        },
+        {
+          "label": "Titre du plateau de sacs",
+          "default": "Sacs"
+        },
+        {
+          "label": "Plateau vide en répartissant",
+          "default": "Tous les poids sont sur la balance."
+        },
+        {
+          "label": "Titre du nombre des sacs",
+          "default": "Chaque sac pèse"
+        },
+        {
+          "label": "Bouton : un de moins",
+          "default": "Un de moins"
+        },
+        {
+          "label": "Bouton : un de plus",
+          "default": "Un de plus"
+        },
+        {
+          "label": "Un poids (@value)",
+          "default": "Poids de @value"
+        },
+        {
+          "label": "Un sac (@value)",
+          "default": "Sac de @value"
+        },
+        {
+          "label": "Quelque chose sur le plateau de gauche (@thing)",
+          "default": "@thing sur le plateau de gauche. Appuie pour le retirer."
+        },
+        {
+          "label": "Quelque chose sur le plateau de droite (@thing)",
+          "default": "@thing sur le plateau de droite. Appuie pour le retirer."
+        },
+        {
+          "label": "Question sur le côté (@value)",
+          "default": "De quel côté va le @value ?"
+        },
+        {
+          "label": "Bouton : à gauche",
+          "default": "Gauche"
+        },
+        {
+          "label": "Bouton : à droite",
+          "default": "Droite"
+        },
+        {
+          "label": "Le côté gauche, dans d'autres textes",
+          "default": "gauche"
+        },
+        {
+          "label": "Le côté droit, dans d'autres textes",
+          "default": "droite"
+        },
+        {
+          "label": "Bouton pour lâcher la balance bloquée",
+          "default": "Lâcher la balance"
+        },
+        {
+          "label": "Bouton pour essayer le nombre des sacs",
+          "default": "Essayer"
+        },
+        {
+          "label": "Bouton pour vider le plateau du joueur",
+          "default": "Vider le plateau"
+        },
+        {
+          "label": "Bouton pour vider les deux plateaux",
+          "default": "Vider les plateaux"
+        },
+        {
+          "label": "Bouton suivant",
+          "default": "Suivant"
+        },
+        {
+          "label": "Bouton après la dernière manche",
+          "default": "Voir le résultat"
+        },
+        {
+          "label": "Poids sur le mauvais plateau (@side)",
+          "default": "Ce plateau est prêt : les poids vont sur le plateau de @side."
+        },
+        {
+          "label": "En touchant quelque chose qui vient avec la balance",
+          "default": "Celui-là vient avec la balance : il reste."
+        },
+        {
+          "label": "En touchant un sac mystère",
+          "default": "Les sacs restent : choisis en bas combien pèse chacun."
+        },
+        {
+          "label": "Lâcher sans rien sur le plateau (@side)",
+          "default": "Mets d'abord quelque chose sur le plateau de @side."
+        },
+        {
+          "label": "Il reste un poids à placer",
+          "default": "Il reste un poids à placer."
+        },
+        {
+          "label": "Il reste des poids à placer (@count)",
+          "default": "Il reste @count poids à placer."
+        },
+        {
+          "label": "Essayer sans nombre",
+          "default": "Choisis d'abord en bas combien pèse chaque sac."
+        },
+        {
+          "label": "Équilibrée sans rien retirer",
+          "default": "Équilibrée sans rien retirer ! +2."
+        },
+        {
+          "label": "Équilibrée après en avoir retiré un ou deux",
+          "default": "Équilibrée ! +1. Sans rien retirer, c'était +2."
+        },
+        {
+          "label": "Équilibrée après en avoir retiré davantage",
+          "default": "Équilibrée ! Sans rien retirer, c'était +2."
+        },
+        {
+          "label": "Équilibrée du premier coup (balance bloquée)",
+          "default": "Équilibrée du premier coup ! +2."
+        },
+        {
+          "label": "Équilibrée au deuxième essai (balance bloquée)",
+          "default": "Équilibrée au deuxième essai ! +1."
+        },
+        {
+          "label": "Les sacs, au premier essai (@value)",
+          "default": "Chaque sac pèse @value ! Du premier coup : +2."
+        },
+        {
+          "label": "Les sacs, au deuxième essai (@value)",
+          "default": "Chaque sac pèse @value ! Au deuxième essai : +1."
+        },
+        {
+          "label": "Après une erreur avec la balance bloquée",
+          "default": "Lâche-la encore une fois."
+        },
+        {
+          "label": "Faire ensemble",
+          "default": "Faisons-le ensemble."
+        },
+        {
+          "label": "Fait ensemble : égalités (@side, @amount)",
+          "default": "Faisons-le ensemble : à @side, il manquait @amount."
+        },
+        {
+          "label": "Fait ensemble : combien de sacs (@count, @size)",
+          "default": "Faisons-le ensemble : il fallait @count sacs de @size."
+        },
+        {
+          "label": "Fait ensemble : combien pèsent les sacs (@count, @size, @total)",
+          "default": "Faisons-le ensemble : @count sacs de @size pèsent @total."
+        },
+        {
+          "label": "Fait ensemble : répartir (@half)",
+          "default": "Faisons-le ensemble : comme ça, ils pèsent pareil, @half de chaque côté."
+        },
+        {
+          "label": "Fait ensemble : le sac mystère (@value)",
+          "default": "Faisons-le ensemble : chaque sac pèse @value."
+        },
+        {
+          "label": "Indice : il en manque un (@side, @amount, @relation)",
+          "default": "À @side, il manque @amount (@relation)."
+        },
+        {
+          "label": "Indice : il en manque plusieurs (@side, @amount, @relation)",
+          "default": "À @side, il manque @amount (@relation)."
+        },
+        {
+          "label": "Indice : un de trop (@side, @amount, @relation)",
+          "default": "À @side, il y a @amount de trop (@relation)."
+        },
+        {
+          "label": "Indice : plusieurs de trop (@side, @amount, @relation)",
+          "default": "À @side, il y a @amount de trop (@relation)."
+        },
+        {
+          "label": "Un sac, dans un indice (@size)",
+          "default": "un sac de @size"
+        },
+        {
+          "label": "Des sacs, dans un indice (@count, @size)",
+          "default": "@count sacs de @size"
+        },
+        {
+          "label": "Indice : répartir (@half, @heavy, @weighs, @move, @light)",
+          "default": "Chaque côté doit peser @half, et celui de @heavy pèse @weighs : passe @move de @heavy à @light."
+        },
+        {
+          "label": "Indice : répartir, total impair (@relation)",
+          "default": "@relation : passe des poids d'un côté à l'autre."
+        },
+        {
+          "label": "Tout est placé, pas d'équilibre (@hint)",
+          "default": "Tous les poids sont sur la balance. @hint"
+        },
+        {
+          "label": "Indice : un nombre plus petit pour les sacs (@value, @relation)",
+          "default": "Avec @value dans chaque sac, ce n'est pas égal (@relation) : essaie un nombre plus petit."
+        },
+        {
+          "label": "Indice : un nombre plus grand pour les sacs (@value, @relation)",
+          "default": "Avec @value dans chaque sac, ce n'est pas égal (@relation) : essaie un nombre plus grand."
+        },
+        {
+          "label": "Un nombre déjà sur le plateau, dans l'erreur typique (@value)",
+          "default": "un @value"
+        },
+        {
+          "label": "L'erreur typique : ce que pèse l'autre côté (@mine, @other, @side, @already, @relation)",
+          "default": "Tu as mis @mine, ce que pèse le côté de @other, mais à @side il y avait déjà @already : @relation."
+        },
+        {
+          "label": "L'erreur typique : tous les nombres additionnés (@side, @already, @relation)",
+          "default": "Tu as additionné tous les nombres, mais à @side il y avait déjà @already : @relation."
+        },
+        {
+          "label": "La scène, pour les lecteurs d'écran : bloquée",
+          "default": "La balance est bloquée par ses butées."
+        },
+        {
+          "label": "La scène, pour les lecteurs d'écran : équilibrée",
+          "default": "La balance est équilibrée."
+        },
+        {
+          "label": "La scène, pour les lecteurs d'écran : la gauche pèse plus",
+          "default": "La balance penche : la gauche pèse plus."
+        },
+        {
+          "label": "La scène, pour les lecteurs d'écran : la droite pèse plus",
+          "default": "La balance penche : la droite pèse plus."
+        },
+        {
+          "label": "Titre à la fin : tout juste",
+          "default": "Tout du premier coup !"
+        },
+        {
+          "label": "Titre à la fin : très bien",
+          "default": "Très bien équilibré !"
+        },
+        {
+          "label": "Titre à la fin : bien",
+          "default": "Bien joué. Encore une partie et ce sera encore mieux."
+        },
+        {
+          "label": "Titre à la fin : pour continuer",
+          "default": "Encore une partie, tranquillement."
+        },
+        {
+          "label": "Résultat (@score, @total)",
+          "default": "@score sur @total points"
+        },
+        {
+          "label": "Bouton pour rejouer",
+          "default": "Rejouer"
+        },
+        {
+          "label": "Bouton pour travailler autre chose",
+          "default": "Travailler autre chose"
+        },
+        {
+          "label": "Points d'une manche dans le bilan (@got, @of)",
+          "default": "@got sur @of"
+        },
+        {
+          "label": "Répartir, dans le bilan (@values)",
+          "default": "Répartir @values"
+        },
+        {
+          "label": "Une manche qui revient, dans le bilan",
+          "default": "révision"
+        },
+        {
+          "label": "Dans le bilan : sans rien retirer",
+          "default": "sans rien retirer"
+        },
+        {
+          "label": "Dans le bilan : après en avoir retiré (@count)",
+          "default": "en retirant @count fois"
+        },
+        {
+          "label": "Dans le bilan : du premier coup",
+          "default": "du premier coup"
+        },
+        {
+          "label": "Dans le bilan : au deuxième essai (@try)",
+          "default": "au deuxième essai (avant : @try)"
+        },
+        {
+          "label": "Dans le bilan : fait ensemble (@tries)",
+          "default": "fait ensemble (essais : @tries)"
+        },
+        {
+          "label": "Dans le bilan : fait ensemble après en avoir retiré (@count)",
+          "default": "fait ensemble, après avoir retiré @count fois"
+        }
+      ]
+    }
+  ]
+}

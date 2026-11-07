@@ -1,0 +1,554 @@
+{
+  "semantics": [
+    {
+      "label": "Che cosa si pratica",
+      "description": "Con «Scegli all'inizio», chi gioca sceglie nella prima schermata: comodo nel mezzo di una lezione.",
+      "options": [
+        {
+          "label": "Scegli all'inizio"
+        },
+        {
+          "label": "Uguaglianze: somme con lo spazio vuoto da una parte o dall'altra"
+        },
+        {
+          "label": "Gruppi uguali: moltiplicare e dividere"
+        },
+        {
+          "label": "Distribuire tutti i pesi"
+        },
+        {
+          "label": "Il sacchetto misterioso"
+        },
+        {
+          "label": "Bilancia libera, per la lavagna, senza punti"
+        }
+      ]
+    },
+    {
+      "label": "Come si muove la bilancia",
+      "description": "Libera è ciò che funziona meglio negli studi con bilance sullo schermo: la bilancia si inclina e l'uguaglianza cambia nello stesso momento (Otten, Van den Heuvel-Panhuizen e Veldhuis, 2019, rassegna di 34 studi, https://doi.org/10.1186/s40594-019-0183-2). Punti: 2 se si equilibra senza togliere pesi, 1 togliendone uno o due. Bloccata obbliga a decidere prima di controllare: per chi conosce già bene il segno uguale.",
+      "options": [
+        {
+          "label": "Libera: si inclina subito (consigliato)"
+        },
+        {
+          "label": "Bloccata: resta ferma finché non la si lascia"
+        }
+      ]
+    },
+    {
+      "label": "La bilancia",
+      "description": "Il mercato è più adatto ai più piccoli e il quaderno ai più grandi. Se sceglie chi gioca, vede solo l'immagine e il nome, senza età.",
+      "options": [
+        {
+          "label": "Lascia scegliere a chi gioca"
+        },
+        {
+          "label": "Mercato"
+        },
+        {
+          "label": "Laboratorio"
+        },
+        {
+          "label": "Quaderno"
+        }
+      ]
+    },
+    {
+      "label": "Turni per partita"
+    },
+    {
+      "label": "Regolazioni fini",
+      "description": "Facoltativo. Da dove parte il gioco; sale di livello con tre turni buoni di fila.",
+      "fields": [
+        {
+          "label": "Inizia da",
+          "options": [
+            {
+              "label": "Peso piuma (il primo livello)"
+            },
+            {
+              "label": "Peso medio"
+            },
+            {
+              "label": "Peso massimo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Comportamento",
+      "fields": [
+        {
+          "label": "Con suoni",
+          "description": "Chi gioca può abbassarli o toglierli. Partono a un quarto del volume."
+        },
+        {
+          "label": "Proponi di ascoltare le istruzioni",
+          "description": "Registrate in spagnolo e in inglese. Nelle altre lingue il testo è senza voce."
+        },
+        {
+          "label": "Proporre di giocare di nuovo"
+        }
+      ]
+    },
+    {
+      "label": "Testi e traduzioni",
+      "fields": [
+        {
+          "label": "Pulsante di avvio",
+          "default": "Inizia"
+        },
+        {
+          "label": "Titolo degli argomenti",
+          "default": "Che cosa vuoi praticare?"
+        },
+        {
+          "label": "Argomento: uguaglianze",
+          "default": "Uguaglianze"
+        },
+        {
+          "label": "Argomento: uguaglianze, in che cosa consiste",
+          "default": "Somme con lo spazio vuoto da una parte o dall'altra"
+        },
+        {
+          "label": "Argomento: gruppi uguali",
+          "default": "Gruppi uguali"
+        },
+        {
+          "label": "Argomento: gruppi uguali, in che cosa consiste",
+          "default": "Moltiplicare e dividere con i sacchetti"
+        },
+        {
+          "label": "Argomento: distribuire",
+          "default": "Distribuire"
+        },
+        {
+          "label": "Argomento: distribuire, in che cosa consiste",
+          "default": "Tutti i pesi, e lo stesso da ogni parte"
+        },
+        {
+          "label": "Argomento: il sacchetto misterioso",
+          "default": "Il sacchetto misterioso"
+        },
+        {
+          "label": "Argomento: il sacchetto misterioso, in che cosa consiste",
+          "default": "Quanto pesa ogni sacchetto?"
+        },
+        {
+          "label": "Argomento: bilancia libera",
+          "default": "Bilancia libera"
+        },
+        {
+          "label": "Argomento: bilancia libera, in che cosa consiste",
+          "default": "Per la lavagna, senza punti"
+        },
+        {
+          "label": "In che cosa consiste una partita (@count: turni)",
+          "default": "@count turni. Metti pesi sulla bilancia finché non è in equilibrio."
+        },
+        {
+          "label": "Titolo delle bilance",
+          "default": "Scegli la tua bilancia"
+        },
+        {
+          "label": "Bilancia: mercato",
+          "default": "Mercato"
+        },
+        {
+          "label": "Bilancia: laboratorio",
+          "default": "Laboratorio"
+        },
+        {
+          "label": "Bilancia: quaderno",
+          "default": "Quaderno"
+        },
+        {
+          "label": "Turno e punti, per i lettori di schermo (@round, @total, @count)",
+          "default": "Turno @round di @total. Punti: @count."
+        },
+        {
+          "label": "Primo livello",
+          "default": "Peso piuma"
+        },
+        {
+          "label": "Secondo livello",
+          "default": "Peso medio"
+        },
+        {
+          "label": "Terzo livello",
+          "default": "Peso massimo"
+        },
+        {
+          "label": "Salita di livello (@level)",
+          "default": "Tre di fila: passi a @level."
+        },
+        {
+          "label": "Pulsante per ascoltare l'istruzione",
+          "default": "Ascolta"
+        },
+        {
+          "label": "Pulsante per togliere l'audio",
+          "default": "Togli l'audio"
+        },
+        {
+          "label": "Pulsante per attivare l'audio",
+          "default": "Attiva l'audio"
+        },
+        {
+          "label": "Annunciato togliendo l'audio",
+          "default": "Audio disattivato"
+        },
+        {
+          "label": "Annunciato attivando l'audio",
+          "default": "Audio attivato"
+        },
+        {
+          "label": "Controllo del volume",
+          "default": "Volume"
+        },
+        {
+          "label": "Istruzione: uguaglianze, spazio vuoto a destra",
+          "default": "Metti pesi sul piatto di destra finché la bilancia non è in equilibrio."
+        },
+        {
+          "label": "Istruzione: uguaglianze, spazio vuoto a sinistra",
+          "default": "Metti pesi sul piatto di sinistra finché la bilancia non è in equilibrio."
+        },
+        {
+          "label": "Istruzione: quanto pesano i sacchetti",
+          "default": "Quanto pesano i sacchetti? Mostralo con i pesi a destra."
+        },
+        {
+          "label": "Istruzione: quanti sacchetti",
+          "default": "Quanti sacchetti equilibrano la bilancia?"
+        },
+        {
+          "label": "Istruzione: distribuire",
+          "default": "Distribuisci tutti i pesi in modo che la bilancia sia in equilibrio."
+        },
+        {
+          "label": "Istruzione: un sacchetto misterioso",
+          "default": "Quanto pesa il sacchetto? Scegli un numero e provalo."
+        },
+        {
+          "label": "Istruzione: più sacchetti misteriosi",
+          "default": "Tutti i sacchetti pesano uguale. Quanto? Scegli un numero e provalo."
+        },
+        {
+          "label": "Istruzione: bilancia libera",
+          "default": "Metti pesi da ogni parte e guarda che cosa succede."
+        },
+        {
+          "label": "Istruzione aggiunta con la bilancia bloccata",
+          "default": "Poi lascia la bilancia."
+        },
+        {
+          "label": "Titolo del vassoio dei pesi",
+          "default": "Pesi"
+        },
+        {
+          "label": "Titolo del vassoio dei sacchetti",
+          "default": "Sacchetti"
+        },
+        {
+          "label": "Vassoio vuoto distribuendo",
+          "default": "Tutti i pesi sono sulla bilancia."
+        },
+        {
+          "label": "Titolo del numero dei sacchetti",
+          "default": "Ogni sacchetto pesa"
+        },
+        {
+          "label": "Pulsante: uno in meno",
+          "default": "Uno in meno"
+        },
+        {
+          "label": "Pulsante: uno in più",
+          "default": "Uno in più"
+        },
+        {
+          "label": "Un peso (@value)",
+          "default": "Peso da @value"
+        },
+        {
+          "label": "Un sacchetto (@value)",
+          "default": "Sacchetto da @value"
+        },
+        {
+          "label": "Qualcosa sul piatto di sinistra (@thing)",
+          "default": "@thing sul piatto di sinistra. Premi per toglierlo."
+        },
+        {
+          "label": "Qualcosa sul piatto di destra (@thing)",
+          "default": "@thing sul piatto di destra. Premi per toglierlo."
+        },
+        {
+          "label": "Domanda sul lato (@value)",
+          "default": "Da che parte va il @value?"
+        },
+        {
+          "label": "Pulsante: a sinistra",
+          "default": "Sinistra"
+        },
+        {
+          "label": "Pulsante: a destra",
+          "default": "Destra"
+        },
+        {
+          "label": "Il lato sinistro, dentro altri testi",
+          "default": "sinistra"
+        },
+        {
+          "label": "Il lato destro, dentro altri testi",
+          "default": "destra"
+        },
+        {
+          "label": "Pulsante per lasciare la bilancia bloccata",
+          "default": "Lascia la bilancia"
+        },
+        {
+          "label": "Pulsante per provare il numero dei sacchetti",
+          "default": "Prova"
+        },
+        {
+          "label": "Pulsante per svuotare il piatto di chi gioca",
+          "default": "Svuota il piatto"
+        },
+        {
+          "label": "Pulsante per svuotare i due piatti",
+          "default": "Svuota i piatti"
+        },
+        {
+          "label": "Pulsante avanti",
+          "default": "Avanti"
+        },
+        {
+          "label": "Pulsante dopo l'ultimo turno",
+          "default": "Vedi il risultato"
+        },
+        {
+          "label": "Peso sul piatto sbagliato (@side)",
+          "default": "Quel piatto è pronto: i pesi vanno sul piatto di @side."
+        },
+        {
+          "label": "Toccando qualcosa che viene con la bilancia",
+          "default": "Quello viene con la bilancia: resta lì."
+        },
+        {
+          "label": "Toccando un sacchetto misterioso",
+          "default": "I sacchetti restano: scegli sotto quanto pesa ciascuno."
+        },
+        {
+          "label": "Lasciare senza niente sul piatto (@side)",
+          "default": "Prima metti qualcosa sul piatto di @side."
+        },
+        {
+          "label": "Resta un peso da mettere",
+          "default": "Resta un peso da mettere."
+        },
+        {
+          "label": "Restano pesi da mettere (@count)",
+          "default": "Restano @count pesi da mettere."
+        },
+        {
+          "label": "Provare senza numero",
+          "default": "Prima scegli sotto quanto pesa ogni sacchetto."
+        },
+        {
+          "label": "In equilibrio senza togliere niente",
+          "default": "In equilibrio senza togliere niente! +2."
+        },
+        {
+          "label": "In equilibrio dopo averne tolti uno o due",
+          "default": "In equilibrio! +1. Senza togliere niente, sarebbe stato +2."
+        },
+        {
+          "label": "In equilibrio dopo averne tolti di più",
+          "default": "In equilibrio! Senza togliere niente, sarebbe stato +2."
+        },
+        {
+          "label": "In equilibrio al primo colpo (bilancia bloccata)",
+          "default": "In equilibrio al primo colpo! +2."
+        },
+        {
+          "label": "In equilibrio al secondo tentativo (bilancia bloccata)",
+          "default": "In equilibrio al secondo tentativo! +1."
+        },
+        {
+          "label": "I sacchetti, al primo tentativo (@value)",
+          "default": "Ogni sacchetto pesa @value! Al primo colpo: +2."
+        },
+        {
+          "label": "I sacchetti, al secondo tentativo (@value)",
+          "default": "Ogni sacchetto pesa @value! Al secondo tentativo: +1."
+        },
+        {
+          "label": "Dopo un errore con la bilancia bloccata",
+          "default": "Lasciala di nuovo."
+        },
+        {
+          "label": "Farlo insieme",
+          "default": "Facciamolo insieme."
+        },
+        {
+          "label": "Fatto insieme: uguaglianze (@side, @amount)",
+          "default": "Facciamolo insieme: a @side bisognava aggiungere @amount."
+        },
+        {
+          "label": "Fatto insieme: quanti sacchetti (@count, @size)",
+          "default": "Facciamolo insieme: servivano @count sacchetti da @size."
+        },
+        {
+          "label": "Fatto insieme: quanto pesano i sacchetti (@count, @size, @total)",
+          "default": "Facciamolo insieme: @count sacchetti da @size pesano @total."
+        },
+        {
+          "label": "Fatto insieme: distribuire (@half)",
+          "default": "Facciamolo insieme: così pesano uguale, @half per parte."
+        },
+        {
+          "label": "Fatto insieme: il sacchetto misterioso (@value)",
+          "default": "Facciamolo insieme: ogni sacchetto pesa @value."
+        },
+        {
+          "label": "Indizio: ne manca uno (@side, @amount, @relation)",
+          "default": "A @side manca @amount (@relation)."
+        },
+        {
+          "label": "Indizio: ne mancano diversi (@side, @amount, @relation)",
+          "default": "A @side mancano @amount (@relation)."
+        },
+        {
+          "label": "Indizio: uno di troppo (@side, @amount, @relation)",
+          "default": "A @side ce n'è @amount di troppo (@relation)."
+        },
+        {
+          "label": "Indizio: diversi di troppo (@side, @amount, @relation)",
+          "default": "A @side ce ne sono @amount di troppo (@relation)."
+        },
+        {
+          "label": "Un sacchetto, dentro un indizio (@size)",
+          "default": "un sacchetto da @size"
+        },
+        {
+          "label": "Sacchetti, dentro un indizio (@count, @size)",
+          "default": "@count sacchetti da @size"
+        },
+        {
+          "label": "Indizio: distribuire (@half, @heavy, @weighs, @move, @light)",
+          "default": "Ogni parte deve pesare @half, e quella di @heavy pesa @weighs: sposta @move da @heavy a @light."
+        },
+        {
+          "label": "Indizio: distribuire, totale dispari (@relation)",
+          "default": "@relation: sposta pesi da una parte all'altra."
+        },
+        {
+          "label": "Tutto messo, senza equilibrio (@hint)",
+          "default": "Tutti i pesi sono sulla bilancia. @hint"
+        },
+        {
+          "label": "Indizio: un numero più piccolo per i sacchetti (@value, @relation)",
+          "default": "Con @value in ogni sacchetto non è uguale (@relation): prova un numero più piccolo."
+        },
+        {
+          "label": "Indizio: un numero più grande per i sacchetti (@value, @relation)",
+          "default": "Con @value in ogni sacchetto non è uguale (@relation): prova un numero più grande."
+        },
+        {
+          "label": "Un numero che era già sul piatto, nell'errore tipico (@value)",
+          "default": "un @value"
+        },
+        {
+          "label": "L'errore tipico: quanto pesa l'altra parte (@mine, @other, @side, @already, @relation)",
+          "default": "Hai messo @mine, quanto pesa la parte di @other, ma a @side c'era già @already: @relation."
+        },
+        {
+          "label": "L'errore tipico: tutti i numeri sommati (@side, @already, @relation)",
+          "default": "Hai sommato tutti i numeri, ma a @side c'era già @already: @relation."
+        },
+        {
+          "label": "La scena, per i lettori di schermo: bloccata",
+          "default": "La bilancia è bloccata dai fermi."
+        },
+        {
+          "label": "La scena, per i lettori di schermo: in equilibrio",
+          "default": "La bilancia è in equilibrio."
+        },
+        {
+          "label": "La scena, per i lettori di schermo: pesa di più la sinistra",
+          "default": "La bilancia si inclina: pesa di più la sinistra."
+        },
+        {
+          "label": "La scena, per i lettori di schermo: pesa di più la destra",
+          "default": "La bilancia si inclina: pesa di più la destra."
+        },
+        {
+          "label": "Titolo alla fine: tutto giusto",
+          "default": "Tutto al primo colpo!"
+        },
+        {
+          "label": "Titolo alla fine: molto bene",
+          "default": "Equilibrio perfetto!"
+        },
+        {
+          "label": "Titolo alla fine: bene",
+          "default": "Bene. Un'altra partita e andrà ancora meglio."
+        },
+        {
+          "label": "Titolo alla fine: per continuare",
+          "default": "Un'altra partita, con calma."
+        },
+        {
+          "label": "Risultato (@score, @total)",
+          "default": "@score su @total punti"
+        },
+        {
+          "label": "Pulsante per giocare di nuovo",
+          "default": "Gioca di nuovo"
+        },
+        {
+          "label": "Pulsante per praticare altro",
+          "default": "Pratica altro"
+        },
+        {
+          "label": "Punti di un turno nel riepilogo (@got, @of)",
+          "default": "@got su @of"
+        },
+        {
+          "label": "Distribuire, nel riepilogo (@values)",
+          "default": "Distribuisci @values"
+        },
+        {
+          "label": "Un turno che ritorna, nel riepilogo",
+          "default": "ripasso"
+        },
+        {
+          "label": "Nel riepilogo: senza togliere niente",
+          "default": "senza togliere niente"
+        },
+        {
+          "label": "Nel riepilogo: dopo averne tolti (@count)",
+          "default": "togliendo @count volte"
+        },
+        {
+          "label": "Nel riepilogo: al primo colpo",
+          "default": "al primo colpo"
+        },
+        {
+          "label": "Nel riepilogo: al secondo tentativo (@try)",
+          "default": "al secondo tentativo (prima: @try)"
+        },
+        {
+          "label": "Nel riepilogo: fatto insieme (@tries)",
+          "default": "fatto insieme (tentativi: @tries)"
+        },
+        {
+          "label": "Nel riepilogo: fatto insieme dopo averne tolti (@count)",
+          "default": "fatto insieme, dopo aver tolto @count volte"
+        }
+      ]
+    }
+  ]
+}

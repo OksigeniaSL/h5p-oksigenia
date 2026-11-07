@@ -1,0 +1,952 @@
+[
+  {
+    "name": "topic",
+    "type": "select",
+    "label": "What to practise",
+    "importance": "high",
+    "description": "With «Choose when starting», whoever plays picks it on the first screen: handy in the middle of a class.",
+    "options": [
+      {
+        "value": "choose",
+        "label": "Choose when starting"
+      },
+      {
+        "value": "equalities",
+        "label": "Equalities: sums with the gap on either side"
+      },
+      {
+        "value": "groups",
+        "label": "Equal groups: multiplying and dividing"
+      },
+      {
+        "value": "share",
+        "label": "Sharing out every weight"
+      },
+      {
+        "value": "bag",
+        "label": "The mystery bag"
+      },
+      {
+        "value": "free",
+        "label": "Free balance, for the board, with no points"
+      }
+    ],
+    "default": "choose"
+  },
+  {
+    "name": "movement",
+    "type": "select",
+    "label": "How the scale moves",
+    "importance": "medium",
+    "description": "Free is what works best in studies with on-screen balances: the scale leans and the equality changes at the same time (Otten, Van den Heuvel-Panhuizen and Veldhuis, 2019, a review of 34 studies, https://doi.org/10.1186/s40594-019-0183-2). Points: 2 if it balances without taking any weight off, 1 with one or two taken off. Held makes players decide before they check: for those who already know the equal sign well.",
+    "options": [
+      {
+        "value": "free",
+        "label": "Free: it leans at once (recommended)"
+      },
+      {
+        "value": "held",
+        "label": "Held: it stays still until it is let go"
+      }
+    ],
+    "default": "free"
+  },
+  {
+    "name": "view",
+    "type": "select",
+    "label": "The scale",
+    "importance": "medium",
+    "description": "The market suits younger children best and the notebook, older ones. If players choose, they see only the picture and the name, with no age.",
+    "options": [
+      {
+        "value": "choose",
+        "label": "Let the player choose"
+      },
+      {
+        "value": "market",
+        "label": "Market"
+      },
+      {
+        "value": "laboratory",
+        "label": "Laboratory"
+      },
+      {
+        "value": "notebook",
+        "label": "Notebook"
+      }
+    ],
+    "default": "choose"
+  },
+  {
+    "name": "rounds",
+    "type": "number",
+    "label": "Rounds in a game",
+    "importance": "medium",
+    "min": 1,
+    "max": 30,
+    "default": 6
+  },
+  {
+    "name": "tuning",
+    "type": "group",
+    "label": "Fine tuning",
+    "importance": "low",
+    "optional": true,
+    "description": "Optional. Where the game starts; it moves up a level with three good rounds in a row.",
+    "fields": [
+      {
+        "name": "startLevel",
+        "type": "select",
+        "label": "Start at",
+        "importance": "low",
+        "optional": true,
+        "options": [
+          {
+            "value": "0",
+            "label": "Featherweight (the first level)"
+          },
+          {
+            "value": "1",
+            "label": "Middleweight"
+          },
+          {
+            "value": "2",
+            "label": "Heavyweight"
+          }
+        ],
+        "default": "0"
+      }
+    ]
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Behaviour settings",
+    "importance": "low",
+    "fields": [
+      {
+        "name": "enableSound",
+        "type": "boolean",
+        "label": "Play sounds",
+        "importance": "low",
+        "default": true,
+        "description": "Players can turn them down or off. They start at a quarter of the volume."
+      },
+      {
+        "name": "enableVoice",
+        "type": "boolean",
+        "label": "Offer to listen to the instructions",
+        "importance": "low",
+        "default": true,
+        "description": "Recorded in Spanish and English. In other languages the text goes without voice."
+      },
+      {
+        "name": "enableRetry",
+        "type": "boolean",
+        "label": "Offer to play again",
+        "importance": "low",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "label": "Texts and translations",
+    "importance": "low",
+    "common": true,
+    "fields": [
+      {
+        "name": "start",
+        "type": "text",
+        "label": "Start button",
+        "importance": "low",
+        "default": "Start"
+      },
+      {
+        "name": "chooseTitle",
+        "type": "text",
+        "label": "Heading of the topics",
+        "importance": "low",
+        "default": "What do you want to practise?"
+      },
+      {
+        "name": "topicEqualities",
+        "type": "text",
+        "label": "Topic: equalities",
+        "importance": "low",
+        "default": "Equalities"
+      },
+      {
+        "name": "topicEqualitiesLine",
+        "type": "text",
+        "label": "Topic: equalities, what it is",
+        "importance": "low",
+        "default": "Sums with the gap on either side"
+      },
+      {
+        "name": "topicGroups",
+        "type": "text",
+        "label": "Topic: equal groups",
+        "importance": "low",
+        "default": "Equal groups"
+      },
+      {
+        "name": "topicGroupsLine",
+        "type": "text",
+        "label": "Topic: equal groups, what it is",
+        "importance": "low",
+        "default": "Multiplying and dividing with bags"
+      },
+      {
+        "name": "topicShare",
+        "type": "text",
+        "label": "Topic: share out",
+        "importance": "low",
+        "default": "Share out"
+      },
+      {
+        "name": "topicShareLine",
+        "type": "text",
+        "label": "Topic: share out, what it is",
+        "importance": "low",
+        "default": "Every weight, and the same on both sides"
+      },
+      {
+        "name": "topicBag",
+        "type": "text",
+        "label": "Topic: the mystery bag",
+        "importance": "low",
+        "default": "The mystery bag"
+      },
+      {
+        "name": "topicBagLine",
+        "type": "text",
+        "label": "Topic: the mystery bag, what it is",
+        "importance": "low",
+        "default": "How much does each bag weigh?"
+      },
+      {
+        "name": "topicFree",
+        "type": "text",
+        "label": "Topic: free balance",
+        "importance": "low",
+        "default": "Free balance"
+      },
+      {
+        "name": "topicFreeLine",
+        "type": "text",
+        "label": "Topic: free balance, what it is",
+        "importance": "low",
+        "default": "For the board, with no points"
+      },
+      {
+        "name": "introSummary",
+        "type": "text",
+        "label": "What a game is (@count: rounds)",
+        "importance": "low",
+        "default": "@count rounds. Put weights on the scale until it balances."
+      },
+      {
+        "name": "viewTitle",
+        "type": "text",
+        "label": "Heading of the scales",
+        "importance": "low",
+        "default": "Choose your scale"
+      },
+      {
+        "name": "viewMarket",
+        "type": "text",
+        "label": "Scale: market",
+        "importance": "low",
+        "default": "Market"
+      },
+      {
+        "name": "viewLaboratory",
+        "type": "text",
+        "label": "Scale: laboratory",
+        "importance": "low",
+        "default": "Laboratory"
+      },
+      {
+        "name": "viewNotebook",
+        "type": "text",
+        "label": "Scale: notebook",
+        "importance": "low",
+        "default": "Notebook"
+      },
+      {
+        "name": "progress",
+        "type": "text",
+        "label": "Round and points, for screen readers (@round, @total, @count)",
+        "importance": "low",
+        "default": "Round @round of @total. Points: @count."
+      },
+      {
+        "name": "levelOne",
+        "type": "text",
+        "label": "First level",
+        "importance": "low",
+        "default": "Featherweight"
+      },
+      {
+        "name": "levelTwo",
+        "type": "text",
+        "label": "Second level",
+        "importance": "low",
+        "default": "Middleweight"
+      },
+      {
+        "name": "levelThree",
+        "type": "text",
+        "label": "Third level",
+        "importance": "low",
+        "default": "Heavyweight"
+      },
+      {
+        "name": "levelUp",
+        "type": "text",
+        "label": "Moving up a level (@level)",
+        "importance": "low",
+        "default": "Three in a row: up to @level."
+      },
+      {
+        "name": "listen",
+        "type": "text",
+        "label": "Button to listen to the instruction",
+        "importance": "low",
+        "default": "Listen"
+      },
+      {
+        "name": "soundOff",
+        "type": "text",
+        "label": "Button to mute",
+        "importance": "low",
+        "default": "Mute"
+      },
+      {
+        "name": "soundOn",
+        "type": "text",
+        "label": "Button to turn the sound on",
+        "importance": "low",
+        "default": "Turn the sound on"
+      },
+      {
+        "name": "soundMuted",
+        "type": "text",
+        "label": "Said when muting",
+        "importance": "low",
+        "default": "Sound off"
+      },
+      {
+        "name": "soundUnmuted",
+        "type": "text",
+        "label": "Said when turning the sound on",
+        "importance": "low",
+        "default": "Sound on"
+      },
+      {
+        "name": "volume",
+        "type": "text",
+        "label": "Volume control",
+        "importance": "low",
+        "default": "Volume"
+      },
+      {
+        "name": "doEqualitiesRight",
+        "type": "text",
+        "label": "Instruction: equalities, gap on the right",
+        "importance": "low",
+        "default": "Put weights on the right pan until the scale balances."
+      },
+      {
+        "name": "doEqualitiesLeft",
+        "type": "text",
+        "label": "Instruction: equalities, gap on the left",
+        "importance": "low",
+        "default": "Put weights on the left pan until the scale balances."
+      },
+      {
+        "name": "doGroupsWeights",
+        "type": "text",
+        "label": "Instruction: how much the bags weigh",
+        "importance": "low",
+        "default": "How much do the bags weigh? Show it with weights on the right."
+      },
+      {
+        "name": "doGroupsBags",
+        "type": "text",
+        "label": "Instruction: how many bags",
+        "importance": "low",
+        "default": "How many bags balance the scale?"
+      },
+      {
+        "name": "doShare",
+        "type": "text",
+        "label": "Instruction: share out",
+        "importance": "low",
+        "default": "Share out all the weights so the scale balances."
+      },
+      {
+        "name": "doBagOne",
+        "type": "text",
+        "label": "Instruction: one mystery bag",
+        "importance": "low",
+        "default": "How much does the bag weigh? Choose a number and try it."
+      },
+      {
+        "name": "doBagMany",
+        "type": "text",
+        "label": "Instruction: several mystery bags",
+        "importance": "low",
+        "default": "All the bags weigh the same. How much? Choose a number and try it."
+      },
+      {
+        "name": "doFree",
+        "type": "text",
+        "label": "Instruction: free balance",
+        "importance": "low",
+        "default": "Put weights on each side and see what happens."
+      },
+      {
+        "name": "doRelease",
+        "type": "text",
+        "label": "Instruction added when the scale is held",
+        "importance": "low",
+        "default": "Then let go of the scale."
+      },
+      {
+        "name": "trayWeights",
+        "type": "text",
+        "label": "Heading of the tray of weights",
+        "importance": "low",
+        "default": "Weights"
+      },
+      {
+        "name": "trayBags",
+        "type": "text",
+        "label": "Heading of the tray of bags",
+        "importance": "low",
+        "default": "Bags"
+      },
+      {
+        "name": "allPlaced",
+        "type": "text",
+        "label": "Empty tray when sharing out",
+        "importance": "low",
+        "default": "All the weights are on the scale."
+      },
+      {
+        "name": "bagWeighs",
+        "type": "text",
+        "label": "Heading of the number of the bags",
+        "importance": "low",
+        "default": "Each bag weighs"
+      },
+      {
+        "name": "oneLess",
+        "type": "text",
+        "label": "Button: one less",
+        "importance": "low",
+        "default": "One less"
+      },
+      {
+        "name": "oneMore",
+        "type": "text",
+        "label": "Button: one more",
+        "importance": "low",
+        "default": "One more"
+      },
+      {
+        "name": "weightOf",
+        "type": "text",
+        "label": "A weight (@value)",
+        "importance": "low",
+        "default": "Weight of @value"
+      },
+      {
+        "name": "bagOf",
+        "type": "text",
+        "label": "A bag (@value)",
+        "importance": "low",
+        "default": "Bag of @value"
+      },
+      {
+        "name": "onLeftPan",
+        "type": "text",
+        "label": "Something on the left pan (@thing)",
+        "importance": "low",
+        "default": "@thing on the left pan. Press to take it off."
+      },
+      {
+        "name": "onRightPan",
+        "type": "text",
+        "label": "Something on the right pan (@thing)",
+        "importance": "low",
+        "default": "@thing on the right pan. Press to take it off."
+      },
+      {
+        "name": "whichSide",
+        "type": "text",
+        "label": "Asking for the side (@value)",
+        "importance": "low",
+        "default": "Which side does the @value go on?"
+      },
+      {
+        "name": "toLeft",
+        "type": "text",
+        "label": "Button: to the left",
+        "importance": "low",
+        "default": "Left"
+      },
+      {
+        "name": "toRight",
+        "type": "text",
+        "label": "Button: to the right",
+        "importance": "low",
+        "default": "Right"
+      },
+      {
+        "name": "sideLeft",
+        "type": "text",
+        "label": "The left side, inside other texts",
+        "importance": "low",
+        "default": "left"
+      },
+      {
+        "name": "sideRight",
+        "type": "text",
+        "label": "The right side, inside other texts",
+        "importance": "low",
+        "default": "right"
+      },
+      {
+        "name": "release",
+        "type": "text",
+        "label": "Button to let go of the held scale",
+        "importance": "low",
+        "default": "Let go of the scale"
+      },
+      {
+        "name": "tryIt",
+        "type": "text",
+        "label": "Button to try the number of the bags",
+        "importance": "low",
+        "default": "Try"
+      },
+      {
+        "name": "emptyPan",
+        "type": "text",
+        "label": "Button to empty the player's pan",
+        "importance": "low",
+        "default": "Empty the pan"
+      },
+      {
+        "name": "emptyPans",
+        "type": "text",
+        "label": "Button to empty both pans",
+        "importance": "low",
+        "default": "Empty the pans"
+      },
+      {
+        "name": "next",
+        "type": "text",
+        "label": "Next button",
+        "importance": "low",
+        "default": "Next"
+      },
+      {
+        "name": "seeResult",
+        "type": "text",
+        "label": "Button after the last round",
+        "importance": "low",
+        "default": "See the result"
+      },
+      {
+        "name": "otherPan",
+        "type": "text",
+        "label": "Weight on the wrong pan (@side)",
+        "importance": "low",
+        "default": "That pan is ready: the weights go on the @side one."
+      },
+      {
+        "name": "comesWithScale",
+        "type": "text",
+        "label": "Touching something that came with the scale",
+        "importance": "low",
+        "default": "That one comes with the scale: it stays."
+      },
+      {
+        "name": "bagsStay",
+        "type": "text",
+        "label": "Touching a mystery bag",
+        "importance": "low",
+        "default": "The bags stay: choose below how much each one weighs."
+      },
+      {
+        "name": "putFirst",
+        "type": "text",
+        "label": "Letting go with nothing on the pan (@side)",
+        "importance": "low",
+        "default": "First put something on the @side pan."
+      },
+      {
+        "name": "placeOne",
+        "type": "text",
+        "label": "One weight left to place",
+        "importance": "low",
+        "default": "One weight still to place."
+      },
+      {
+        "name": "placeMany",
+        "type": "text",
+        "label": "Weights left to place (@count)",
+        "importance": "low",
+        "default": "@count weights still to place."
+      },
+      {
+        "name": "chooseFirst",
+        "type": "text",
+        "label": "Trying with no number",
+        "importance": "low",
+        "default": "First choose below how much each bag weighs."
+      },
+      {
+        "name": "balancedClean",
+        "type": "text",
+        "label": "Balanced without taking anything off",
+        "importance": "low",
+        "default": "Balanced, without taking any off! +2."
+      },
+      {
+        "name": "balancedOne",
+        "type": "text",
+        "label": "Balanced after taking one or two off",
+        "importance": "low",
+        "default": "Balanced! +1. Without taking any off, it would have been +2."
+      },
+      {
+        "name": "balancedZero",
+        "type": "text",
+        "label": "Balanced after taking more off",
+        "importance": "low",
+        "default": "Balanced! Without taking any off, it would have been +2."
+      },
+      {
+        "name": "balancedFirst",
+        "type": "text",
+        "label": "Balanced at the first go (held scale)",
+        "importance": "low",
+        "default": "Balanced at the first go! +2."
+      },
+      {
+        "name": "balancedSecond",
+        "type": "text",
+        "label": "Balanced at the second go (held scale)",
+        "importance": "low",
+        "default": "Balanced at the second go! +1."
+      },
+      {
+        "name": "bagFirst",
+        "type": "text",
+        "label": "The bags, at the first try (@value)",
+        "importance": "low",
+        "default": "Each bag weighs @value! At the first go: +2."
+      },
+      {
+        "name": "bagSecond",
+        "type": "text",
+        "label": "The bags, at the second try (@value)",
+        "importance": "low",
+        "default": "Each bag weighs @value! At the second go: +1."
+      },
+      {
+        "name": "letGoAgain",
+        "type": "text",
+        "label": "After a miss with the held scale",
+        "importance": "low",
+        "default": "Let go of it again."
+      },
+      {
+        "name": "together",
+        "type": "text",
+        "label": "Doing it together",
+        "importance": "low",
+        "default": "Let's do it together."
+      },
+      {
+        "name": "togetherEqualities",
+        "type": "text",
+        "label": "Done together: equalities (@side, @amount)",
+        "importance": "low",
+        "default": "Let's do it together: the @side side needed @amount more."
+      },
+      {
+        "name": "togetherBags",
+        "type": "text",
+        "label": "Done together: how many bags (@count, @size)",
+        "importance": "low",
+        "default": "Let's do it together: it took @count bags of @size."
+      },
+      {
+        "name": "togetherGroups",
+        "type": "text",
+        "label": "Done together: how much the bags weigh (@count, @size, @total)",
+        "importance": "low",
+        "default": "Let's do it together: @count bags of @size weigh @total."
+      },
+      {
+        "name": "togetherShare",
+        "type": "text",
+        "label": "Done together: share out (@half)",
+        "importance": "low",
+        "default": "Let's do it together: like this they weigh the same, @half on each side."
+      },
+      {
+        "name": "togetherBag",
+        "type": "text",
+        "label": "Done together: the mystery bag (@value)",
+        "importance": "low",
+        "default": "Let's do it together: each bag weighs @value."
+      },
+      {
+        "name": "hintMissingOne",
+        "type": "text",
+        "label": "Hint: one missing (@side, @amount, @relation)",
+        "importance": "low",
+        "default": "The @side side needs @amount more (@relation)."
+      },
+      {
+        "name": "hintMissing",
+        "type": "text",
+        "label": "Hint: several missing (@side, @amount, @relation)",
+        "importance": "low",
+        "default": "The @side side needs @amount more (@relation)."
+      },
+      {
+        "name": "hintExtraOne",
+        "type": "text",
+        "label": "Hint: one too many (@side, @amount, @relation)",
+        "importance": "low",
+        "default": "The @side side has @amount too many (@relation)."
+      },
+      {
+        "name": "hintExtra",
+        "type": "text",
+        "label": "Hint: several too many (@side, @amount, @relation)",
+        "importance": "low",
+        "default": "The @side side has @amount too many (@relation)."
+      },
+      {
+        "name": "oneBag",
+        "type": "text",
+        "label": "One bag, inside a hint (@size)",
+        "importance": "low",
+        "default": "one bag of @size"
+      },
+      {
+        "name": "manyBags",
+        "type": "text",
+        "label": "Bags, inside a hint (@count, @size)",
+        "importance": "low",
+        "default": "@count bags of @size"
+      },
+      {
+        "name": "hintShare",
+        "type": "text",
+        "label": "Hint: share out (@half, @heavy, @weighs, @move, @light)",
+        "importance": "low",
+        "default": "Each side has to weigh @half, and the @heavy one weighs @weighs: move @move from the @heavy side to the @light one."
+      },
+      {
+        "name": "hintShareOdd",
+        "type": "text",
+        "label": "Hint: share out, odd total (@relation)",
+        "importance": "low",
+        "default": "@relation: move weights from one side to the other."
+      },
+      {
+        "name": "allPlacedHint",
+        "type": "text",
+        "label": "Everything placed, not balanced (@hint)",
+        "importance": "low",
+        "default": "All the weights are on the scale. @hint"
+      },
+      {
+        "name": "hintBagSmaller",
+        "type": "text",
+        "label": "Hint: a smaller number for the bags (@value, @relation)",
+        "importance": "low",
+        "default": "With @value in each bag it is not equal (@relation): try a smaller number."
+      },
+      {
+        "name": "hintBagBigger",
+        "type": "text",
+        "label": "Hint: a bigger number for the bags (@value, @relation)",
+        "importance": "low",
+        "default": "With @value in each bag it is not equal (@relation): try a bigger number."
+      },
+      {
+        "name": "alreadyOne",
+        "type": "text",
+        "label": "One number already on the pan, inside the usual mistake (@value)",
+        "importance": "low",
+        "default": "a @value"
+      },
+      {
+        "name": "slipOther",
+        "type": "text",
+        "label": "The usual mistake: what the other side weighs (@mine, @other, @side, @already, @relation)",
+        "importance": "low",
+        "default": "You put @mine, what the @other side weighs, but there was already @already on the @side: @relation."
+      },
+      {
+        "name": "slipAll",
+        "type": "text",
+        "label": "The usual mistake: every number added up (@side, @already, @relation)",
+        "importance": "low",
+        "default": "You added up every number, but there was already @already on the @side: @relation."
+      },
+      {
+        "name": "sceneHeld",
+        "type": "text",
+        "label": "The scene, for screen readers: held",
+        "importance": "low",
+        "default": "The scale is held by its stops."
+      },
+      {
+        "name": "sceneBalanced",
+        "type": "text",
+        "label": "The scene, for screen readers: balanced",
+        "importance": "low",
+        "default": "The scale is balanced."
+      },
+      {
+        "name": "sceneLeft",
+        "type": "text",
+        "label": "The scene, for screen readers: the left side weighs more",
+        "importance": "low",
+        "default": "The scale leans: the left side weighs more."
+      },
+      {
+        "name": "sceneRight",
+        "type": "text",
+        "label": "The scene, for screen readers: the right side weighs more",
+        "importance": "low",
+        "default": "The scale leans: the right side weighs more."
+      },
+      {
+        "name": "cheerPerfect",
+        "type": "text",
+        "label": "Heading at the end: everything right",
+        "importance": "low",
+        "default": "All at the first go!"
+      },
+      {
+        "name": "cheerGreat",
+        "type": "text",
+        "label": "Heading at the end: very good",
+        "importance": "low",
+        "default": "Very well balanced!"
+      },
+      {
+        "name": "cheerGood",
+        "type": "text",
+        "label": "Heading at the end: good",
+        "importance": "low",
+        "default": "Well done. Another game and it will go even better."
+      },
+      {
+        "name": "cheerKeep",
+        "type": "text",
+        "label": "Heading at the end: to keep going",
+        "importance": "low",
+        "default": "Another game, calmly."
+      },
+      {
+        "name": "resultTitle",
+        "type": "text",
+        "label": "Result (@score, @total)",
+        "importance": "low",
+        "default": "@score of @total points"
+      },
+      {
+        "name": "retry",
+        "type": "text",
+        "label": "Button to play again",
+        "importance": "low",
+        "default": "Play again"
+      },
+      {
+        "name": "otherTopic",
+        "type": "text",
+        "label": "Button to practise something else",
+        "importance": "low",
+        "default": "Practise something else"
+      },
+      {
+        "name": "reviewPoints",
+        "type": "text",
+        "label": "Points of a round in the review (@got, @of)",
+        "importance": "low",
+        "default": "@got of @of"
+      },
+      {
+        "name": "reviewShare",
+        "type": "text",
+        "label": "Share out, in the review (@values)",
+        "importance": "low",
+        "default": "Share out @values"
+      },
+      {
+        "name": "reviewAgain",
+        "type": "text",
+        "label": "A round that came back, in the review",
+        "importance": "low",
+        "default": "review"
+      },
+      {
+        "name": "didClean",
+        "type": "text",
+        "label": "In the review: without taking any off",
+        "importance": "low",
+        "default": "without taking any off"
+      },
+      {
+        "name": "didBacks",
+        "type": "text",
+        "label": "In the review: after taking some off (@count)",
+        "importance": "low",
+        "default": "taking off @count"
+      },
+      {
+        "name": "didFirst",
+        "type": "text",
+        "label": "In the review: at the first go",
+        "importance": "low",
+        "default": "at the first go"
+      },
+      {
+        "name": "didSecond",
+        "type": "text",
+        "label": "In the review: at the second go (@try)",
+        "importance": "low",
+        "default": "at the second go (before, @try)"
+      },
+      {
+        "name": "didTogether",
+        "type": "text",
+        "label": "In the review: done together (@tries)",
+        "importance": "low",
+        "default": "done together (tried @tries)"
+      },
+      {
+        "name": "didTogetherBacks",
+        "type": "text",
+        "label": "In the review: done together after taking some off (@count)",
+        "importance": "low",
+        "default": "done together, after taking off @count"
+      }
+    ]
+  }
+]

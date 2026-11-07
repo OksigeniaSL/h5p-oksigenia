@@ -1,0 +1,554 @@
+{
+  "semantics": [
+    {
+      "label": "Vad ska övas",
+      "description": "Med ”Välj vid start” väljer den som spelar på första skärmen: praktiskt mitt i en lektion.",
+      "options": [
+        {
+          "label": "Välj vid start"
+        },
+        {
+          "label": "Likheter: summor med luckan på någon av sidorna"
+        },
+        {
+          "label": "Lika grupper: multiplicera och dividera"
+        },
+        {
+          "label": "Fördela alla vikter"
+        },
+        {
+          "label": "Den hemliga påsen"
+        },
+        {
+          "label": "Fri våg, för tavlan, utan poäng"
+        }
+      ]
+    },
+    {
+      "label": "Hur vågen rör sig",
+      "description": "Fri fungerar bäst i studier med vågar på skärmen: vågen lutar och likheten ändras samtidigt (Otten, Van den Heuvel-Panhuizen och Veldhuis, 2019, en översikt över 34 studier, https://doi.org/10.1186/s40594-019-0183-2). Poäng: 2 om den väger jämnt utan att någon vikt tas bort, 1 om en eller två tas bort. Låst gör att spelarna bestämmer sig innan de kontrollerar: för den som redan kan likhetstecknet väl.",
+      "options": [
+        {
+          "label": "Fri: den lutar direkt (rekommenderas)"
+        },
+        {
+          "label": "Låst: den står still tills man släpper den"
+        }
+      ]
+    },
+    {
+      "label": "Vågen",
+      "description": "Marknaden passar bäst för de yngre och häftet för de äldre. Om spelarna väljer ser de bara bilden och namnet, utan ålder.",
+      "options": [
+        {
+          "label": "Låt spelaren välja"
+        },
+        {
+          "label": "Marknad"
+        },
+        {
+          "label": "Laboratorium"
+        },
+        {
+          "label": "Häfte"
+        }
+      ]
+    },
+    {
+      "label": "Omgångar per spel"
+    },
+    {
+      "label": "Finjustering",
+      "description": "Valfritt. Var spelet börjar; det går upp en nivå efter tre bra omgångar i rad.",
+      "fields": [
+        {
+          "label": "Börja på",
+          "options": [
+            {
+              "label": "Fjädervikt (den första nivån)"
+            },
+            {
+              "label": "Mellanvikt"
+            },
+            {
+              "label": "Tungvikt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Beteende",
+      "fields": [
+        {
+          "label": "Med ljud",
+          "description": "Den som spelar kan sänka eller stänga av dem. De börjar på en fjärdedel av volymen."
+        },
+        {
+          "label": "Erbjud att lyssna på instruktionerna",
+          "description": "Inspelade på spanska och engelska. På andra språk finns texten utan röst."
+        },
+        {
+          "label": "Erbjud att spela igen"
+        }
+      ]
+    },
+    {
+      "label": "Texter och översättningar",
+      "fields": [
+        {
+          "label": "Startknapp",
+          "default": "Starta"
+        },
+        {
+          "label": "Rubrik för ämnena",
+          "default": "Vad vill du öva på?"
+        },
+        {
+          "label": "Ämne: likheter",
+          "default": "Likheter"
+        },
+        {
+          "label": "Ämne: likheter, vad det går ut på",
+          "default": "Summor med luckan på någon av sidorna"
+        },
+        {
+          "label": "Ämne: lika grupper",
+          "default": "Lika grupper"
+        },
+        {
+          "label": "Ämne: lika grupper, vad det går ut på",
+          "default": "Multiplicera och dividera med påsar"
+        },
+        {
+          "label": "Ämne: fördela",
+          "default": "Fördela"
+        },
+        {
+          "label": "Ämne: fördela, vad det går ut på",
+          "default": "Alla vikter, och lika mycket på båda sidor"
+        },
+        {
+          "label": "Ämne: den hemliga påsen",
+          "default": "Den hemliga påsen"
+        },
+        {
+          "label": "Ämne: den hemliga påsen, vad det går ut på",
+          "default": "Hur mycket väger varje påse?"
+        },
+        {
+          "label": "Ämne: fri våg",
+          "default": "Fri våg"
+        },
+        {
+          "label": "Ämne: fri våg, vad det går ut på",
+          "default": "För tavlan, utan poäng"
+        },
+        {
+          "label": "Vad ett spel går ut på (@count: omgångar)",
+          "default": "@count omgångar. Lägg vikter på vågen tills den väger jämnt."
+        },
+        {
+          "label": "Rubrik för vågarna",
+          "default": "Välj din våg"
+        },
+        {
+          "label": "Våg: marknad",
+          "default": "Marknad"
+        },
+        {
+          "label": "Våg: laboratorium",
+          "default": "Laboratorium"
+        },
+        {
+          "label": "Våg: häfte",
+          "default": "Häfte"
+        },
+        {
+          "label": "Omgång och poäng, för skärmläsare (@round, @total, @count)",
+          "default": "Omgång @round av @total. Poäng: @count."
+        },
+        {
+          "label": "Första nivån",
+          "default": "Fjädervikt"
+        },
+        {
+          "label": "Andra nivån",
+          "default": "Mellanvikt"
+        },
+        {
+          "label": "Tredje nivån",
+          "default": "Tungvikt"
+        },
+        {
+          "label": "Upp en nivå (@level)",
+          "default": "Tre i rad: vidare till @level."
+        },
+        {
+          "label": "Knapp för att lyssna på instruktionen",
+          "default": "Lyssna"
+        },
+        {
+          "label": "Knapp för att stänga av ljudet",
+          "default": "Stäng av ljudet"
+        },
+        {
+          "label": "Knapp för att sätta på ljudet",
+          "default": "Sätt på ljudet"
+        },
+        {
+          "label": "Sägs när ljudet stängs av",
+          "default": "Ljudet är av"
+        },
+        {
+          "label": "Sägs när ljudet sätts på",
+          "default": "Ljudet är på"
+        },
+        {
+          "label": "Volymreglage",
+          "default": "Volym"
+        },
+        {
+          "label": "Instruktion: likheter, lucka till höger",
+          "default": "Lägg vikter i den högra vågskålen tills vågen väger jämnt."
+        },
+        {
+          "label": "Instruktion: likheter, lucka till vänster",
+          "default": "Lägg vikter i den vänstra vågskålen tills vågen väger jämnt."
+        },
+        {
+          "label": "Instruktion: hur mycket påsarna väger",
+          "default": "Hur mycket väger påsarna? Visa det med vikter till höger."
+        },
+        {
+          "label": "Instruktion: hur många påsar",
+          "default": "Hur många påsar får vågen att väga jämnt?"
+        },
+        {
+          "label": "Instruktion: fördela",
+          "default": "Fördela alla vikter så att vågen väger jämnt."
+        },
+        {
+          "label": "Instruktion: en hemlig påse",
+          "default": "Hur mycket väger påsen? Välj ett tal och prova det."
+        },
+        {
+          "label": "Instruktion: flera hemliga påsar",
+          "default": "Alla påsar väger lika mycket. Hur mycket? Välj ett tal och prova det."
+        },
+        {
+          "label": "Instruktion: fri våg",
+          "default": "Lägg vikter på båda sidor och se vad som händer."
+        },
+        {
+          "label": "Instruktion som läggs till när vågen är låst",
+          "default": "Släpp sedan vågen."
+        },
+        {
+          "label": "Rubrik för brickan med vikter",
+          "default": "Vikter"
+        },
+        {
+          "label": "Rubrik för brickan med påsar",
+          "default": "Påsar"
+        },
+        {
+          "label": "Tom bricka vid fördelning",
+          "default": "Alla vikter ligger på vågen."
+        },
+        {
+          "label": "Rubrik för påsarnas tal",
+          "default": "Varje påse väger"
+        },
+        {
+          "label": "Knapp: en mindre",
+          "default": "En mindre"
+        },
+        {
+          "label": "Knapp: en till",
+          "default": "En till"
+        },
+        {
+          "label": "En vikt (@value)",
+          "default": "Vikt på @value"
+        },
+        {
+          "label": "En påse (@value)",
+          "default": "Påse på @value"
+        },
+        {
+          "label": "Något i den vänstra skålen (@thing)",
+          "default": "@thing i den vänstra skålen. Tryck för att ta bort."
+        },
+        {
+          "label": "Något i den högra skålen (@thing)",
+          "default": "@thing i den högra skålen. Tryck för att ta bort."
+        },
+        {
+          "label": "Fråga om sidan (@value)",
+          "default": "På vilken sida ska @value ligga?"
+        },
+        {
+          "label": "Knapp: till vänster",
+          "default": "Vänster"
+        },
+        {
+          "label": "Knapp: till höger",
+          "default": "Höger"
+        },
+        {
+          "label": "Vänster sida, i andra texter",
+          "default": "vänster"
+        },
+        {
+          "label": "Höger sida, i andra texter",
+          "default": "höger"
+        },
+        {
+          "label": "Knapp för att släppa den låsta vågen",
+          "default": "Släpp vågen"
+        },
+        {
+          "label": "Knapp för att prova påsarnas tal",
+          "default": "Prova"
+        },
+        {
+          "label": "Knapp för att tömma spelarens skål",
+          "default": "Töm skålen"
+        },
+        {
+          "label": "Knapp för att tömma båda skålarna",
+          "default": "Töm skålarna"
+        },
+        {
+          "label": "Knapp för nästa",
+          "default": "Nästa"
+        },
+        {
+          "label": "Knapp efter sista omgången",
+          "default": "Se resultatet"
+        },
+        {
+          "label": "Vikt i fel skål (@side)",
+          "default": "Den skålen är klar: vikterna ska i skålen på @side sida."
+        },
+        {
+          "label": "När man trycker på något som hör till vågen",
+          "default": "Den hör till vågen: den ligger kvar."
+        },
+        {
+          "label": "När man trycker på en hemlig påse",
+          "default": "Påsarna ligger kvar: välj nedanför hur mycket varje påse väger."
+        },
+        {
+          "label": "Släppa utan något i skålen (@side)",
+          "default": "Lägg först något i skålen på @side sida."
+        },
+        {
+          "label": "En vikt kvar att lägga",
+          "default": "En vikt är kvar att lägga."
+        },
+        {
+          "label": "Vikter kvar att lägga (@count)",
+          "default": "@count vikter är kvar att lägga."
+        },
+        {
+          "label": "Prova utan tal",
+          "default": "Välj först nedanför hur mycket varje påse väger."
+        },
+        {
+          "label": "Jämnvikt utan att ta bort något",
+          "default": "Jämnvikt, utan att ta bort någon! +2."
+        },
+        {
+          "label": "Jämnvikt efter att ha tagit bort en eller två",
+          "default": "Jämnvikt! +1. Utan att ta bort någon hade det blivit +2."
+        },
+        {
+          "label": "Jämnvikt efter att ha tagit bort fler",
+          "default": "Jämnvikt! Utan att ta bort någon hade det blivit +2."
+        },
+        {
+          "label": "Jämnvikt på första försöket (låst våg)",
+          "default": "Jämnvikt på första försöket! +2."
+        },
+        {
+          "label": "Jämnvikt på andra försöket (låst våg)",
+          "default": "Jämnvikt på andra försöket! +1."
+        },
+        {
+          "label": "Påsarna, på första försöket (@value)",
+          "default": "Varje påse väger @value! På första försöket: +2."
+        },
+        {
+          "label": "Påsarna, på andra försöket (@value)",
+          "default": "Varje påse väger @value! På andra försöket: +1."
+        },
+        {
+          "label": "Efter ett fel med den låsta vågen",
+          "default": "Släpp den igen."
+        },
+        {
+          "label": "Göra det tillsammans",
+          "default": "Vi gör det tillsammans."
+        },
+        {
+          "label": "Gjort tillsammans: likheter (@side, @amount)",
+          "default": "Vi gör det tillsammans: på @side sida behövdes @amount till."
+        },
+        {
+          "label": "Gjort tillsammans: hur många påsar (@count, @size)",
+          "default": "Vi gör det tillsammans: det behövdes @count påsar på @size."
+        },
+        {
+          "label": "Gjort tillsammans: hur mycket påsarna väger (@count, @size, @total)",
+          "default": "Vi gör det tillsammans: @count påsar på @size väger @total."
+        },
+        {
+          "label": "Gjort tillsammans: fördela (@half)",
+          "default": "Vi gör det tillsammans: så väger de lika mycket, @half på varje sida."
+        },
+        {
+          "label": "Gjort tillsammans: den hemliga påsen (@value)",
+          "default": "Vi gör det tillsammans: varje påse väger @value."
+        },
+        {
+          "label": "Ledtråd: en fattas (@side, @amount, @relation)",
+          "default": "På @side sida fattas @amount (@relation)."
+        },
+        {
+          "label": "Ledtråd: flera fattas (@side, @amount, @relation)",
+          "default": "På @side sida fattas @amount (@relation)."
+        },
+        {
+          "label": "Ledtråd: en för mycket (@side, @amount, @relation)",
+          "default": "På @side sida är det @amount för mycket (@relation)."
+        },
+        {
+          "label": "Ledtråd: flera för mycket (@side, @amount, @relation)",
+          "default": "På @side sida är det @amount för mycket (@relation)."
+        },
+        {
+          "label": "En påse, i en ledtråd (@size)",
+          "default": "en påse på @size"
+        },
+        {
+          "label": "Påsar, i en ledtråd (@count, @size)",
+          "default": "@count påsar på @size"
+        },
+        {
+          "label": "Ledtråd: fördela (@half, @heavy, @weighs, @move, @light)",
+          "default": "Varje sida ska väga @half, och @heavy sida väger @weighs: flytta @move från @heavy till @light sida."
+        },
+        {
+          "label": "Ledtråd: fördela, udda summa (@relation)",
+          "default": "@relation: flytta vikter från den ena sidan till den andra."
+        },
+        {
+          "label": "Allt ligger, ingen jämnvikt (@hint)",
+          "default": "Alla vikter ligger på vågen. @hint"
+        },
+        {
+          "label": "Ledtråd: ett mindre tal för påsarna (@value, @relation)",
+          "default": "Med @value i varje påse blir det inte lika (@relation): prova ett mindre tal."
+        },
+        {
+          "label": "Ledtråd: ett större tal för påsarna (@value, @relation)",
+          "default": "Med @value i varje påse blir det inte lika (@relation): prova ett större tal."
+        },
+        {
+          "label": "Ett tal som redan låg i skålen, i det typiska felet (@value)",
+          "default": "en @value"
+        },
+        {
+          "label": "Det typiska felet: det den andra sidan väger (@mine, @other, @side, @already, @relation)",
+          "default": "Du lade @mine, det som @other sida väger, men på @side sida fanns redan @already: @relation."
+        },
+        {
+          "label": "Det typiska felet: alla tal ihoplagda (@side, @already, @relation)",
+          "default": "Du lade ihop alla tal, men på @side sida fanns redan @already: @relation."
+        },
+        {
+          "label": "Scenen, för skärmläsare: låst",
+          "default": "Vågen hålls av stöden."
+        },
+        {
+          "label": "Scenen, för skärmläsare: jämnvikt",
+          "default": "Vågen väger jämnt."
+        },
+        {
+          "label": "Scenen, för skärmläsare: vänster väger mer",
+          "default": "Vågen lutar: vänster sida väger mer."
+        },
+        {
+          "label": "Scenen, för skärmläsare: höger väger mer",
+          "default": "Vågen lutar: höger sida väger mer."
+        },
+        {
+          "label": "Rubrik i slutet: allt rätt",
+          "default": "Allt på första försöket!"
+        },
+        {
+          "label": "Rubrik i slutet: mycket bra",
+          "default": "Mycket bra balanserat!"
+        },
+        {
+          "label": "Rubrik i slutet: bra",
+          "default": "Bra gjort. Ett spel till så går det ännu bättre."
+        },
+        {
+          "label": "Rubrik i slutet: för att fortsätta",
+          "default": "Ett spel till, i lugn och ro."
+        },
+        {
+          "label": "Resultat (@score, @total)",
+          "default": "@score av @total poäng"
+        },
+        {
+          "label": "Knapp för att spela igen",
+          "default": "Spela igen"
+        },
+        {
+          "label": "Knapp för att öva på något annat",
+          "default": "Öva på något annat"
+        },
+        {
+          "label": "Poäng för en omgång i översikten (@got, @of)",
+          "default": "@got av @of"
+        },
+        {
+          "label": "Fördela, i översikten (@values)",
+          "default": "Fördela @values"
+        },
+        {
+          "label": "En omgång som kommer tillbaka, i översikten",
+          "default": "repetition"
+        },
+        {
+          "label": "I översikten: utan att ta bort någon",
+          "default": "utan att ta bort någon"
+        },
+        {
+          "label": "I översikten: efter att ha tagit bort (@count)",
+          "default": "efter att ha tagit bort @count gånger"
+        },
+        {
+          "label": "I översikten: på första försöket",
+          "default": "på första försöket"
+        },
+        {
+          "label": "I översikten: på andra försöket (@try)",
+          "default": "på andra försöket (före: @try)"
+        },
+        {
+          "label": "I översikten: gjort tillsammans (@tries)",
+          "default": "gjort tillsammans (försök: @tries)"
+        },
+        {
+          "label": "I översikten: gjort tillsammans efter att ha tagit bort (@count)",
+          "default": "gjort tillsammans, efter att ha tagit bort @count gånger"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,953 @@
+/*
+ * H5P.BalanceScale. The colours of the interface come from the H5P theme of core 1.28 (light, dark or the site's own),
+ * with the values of the default theme as fallbacks for older cores; the scale itself is a painting. Every state has a
+ * shape or a sign besides its colour. Nothing here needs color-mix(), :has() or container queries: classroom boards
+ * with Android 8 bring Firefox 98.
+ *
+ * @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
+ * @license   MIT
+ */
+
+.h5p-balance-scale .bs {
+  --bs-main: var(--h5p-theme-main-cta-base, #006fbf);
+  --bs-on-main: var(--h5p-theme-contrast-cta, #fff);
+  --bs-main-text: var(--h5p-theme-contrast-cta-white, #006fbf);
+  --bs-ink: var(--h5p-theme-text-primary, #101729);
+  --bs-soft-ink: var(--h5p-theme-text-secondary, #354054);
+  --bs-line: var(--h5p-theme-text-third, #737373);
+  --bs-surface: var(--h5p-theme-background, #f9fbff);
+  --bs-card: var(--h5p-theme-ui-base, #fff);
+  --bs-soft: var(--h5p-theme-alternative-base, #eef2f7);
+  --bs-ok: var(--h5p-theme-feedback-correct-main, #256d1d);
+  --bs-ok-soft: var(--h5p-theme-feedback-correct-secondary, #e6f5e3);
+  --bs-bad: var(--h5p-theme-feedback-incorrect-main, #a13236);
+  --bs-bad-soft: var(--h5p-theme-feedback-incorrect-secondary, #fbeaec);
+  --bs-focus: var(--h5p-theme-text-primary, #101729);
+  --bs-radius: var(--h5p-theme-border-radius-medium, 0.6em);
+
+  position: relative;
+  padding: 0.8em 1em 1em;
+  color: var(--bs-ink);
+  background: var(--bs-surface);
+  font-size: var(--h5p-theme-font-size-m, 1rem);
+  line-height: 1.4;
+}
+
+.h5p-balance-scale .bs [hidden] {
+  display: none !important;
+}
+
+.h5p-balance-scale .h5p-oksigenia-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.h5p-balance-scale .bs p {
+  margin: 0;
+}
+
+/* Buttons */
+
+.h5p-balance-scale .bs-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-width: 3rem;
+  min-height: 3rem;
+  padding: 0.5em 1em;
+  border: 2px solid var(--bs-main);
+  border-radius: var(--bs-radius);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.h5p-balance-scale .bs-primary {
+  background: var(--bs-main);
+  color: var(--bs-on-main);
+}
+
+.h5p-balance-scale .bs-secondary {
+  border-color: var(--bs-main-text);
+  background: var(--bs-card);
+  color: var(--bs-main-text);
+}
+
+@media (hover: hover) {
+  .h5p-balance-scale .bs-button:hover:not(:disabled) {
+    filter: brightness(1.08);
+  }
+}
+
+.h5p-balance-scale .bs-button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.h5p-balance-scale .bs-button:focus-visible,
+.h5p-balance-scale .bs-weight:focus-visible,
+.h5p-balance-scale .bs-thing:focus-visible,
+.h5p-balance-scale .bs-volume:focus-visible {
+  outline: 3px solid var(--bs-focus);
+  outline-offset: 2px;
+}
+
+.h5p-balance-scale .bs-icon {
+  display: inline-flex;
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+}
+
+.h5p-balance-scale .bs-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.h5p-balance-scale .bs-icon .bs-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Before the game */
+
+.h5p-balance-scale .bs-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8em;
+  text-align: center;
+}
+
+/* Room for the full screen button of H5P, which goes in the corner on top of the game. */
+.h5p-balance-scale .bs-title {
+  padding-inline: 2.4rem;
+  font-size: 1.5em;
+  font-weight: 800;
+}
+
+.h5p-balance-scale .bs-summary {
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.h5p-balance-scale .bs-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.h5p-balance-scale .bs-picker-title {
+  width: 100%;
+  color: var(--bs-soft-ink);
+  font-weight: 700;
+}
+
+.h5p-balance-scale .bs-pick[aria-pressed="true"] {
+  background: var(--bs-main);
+  border-color: var(--bs-main);
+  color: var(--bs-on-main);
+}
+
+.h5p-balance-scale .bs-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6em;
+  width: 100%;
+}
+
+.h5p-balance-scale .bs-choice {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15em;
+  min-height: 5.5em;
+  padding: 0.7em 0.9em;
+  border-color: var(--bs-line);
+  color: var(--bs-ink);
+  text-align: start;
+}
+
+.h5p-balance-scale .bs-choice-free {
+  grid-column: 1 / -1;
+  min-height: 0;
+}
+
+.h5p-balance-scale .bs-choice-name {
+  color: var(--bs-main-text);
+  font-size: 1.05em;
+}
+
+.h5p-balance-scale .bs-choice-sample {
+  font-size: 1.15em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.h5p-balance-scale .bs-choice-line {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .h5p-balance-scale .bs-choices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The bar: the rounds as dots that fill with their points, the level and the sound */
+
+.h5p-balance-scale .bs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4em 1em;
+  min-height: 2.75rem;
+  /* Room for the full screen button of H5P in the corner. */
+  padding-inline-end: 2.4rem;
+}
+
+.h5p-balance-scale .bs-progress {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 2.75rem;
+}
+
+.h5p-balance-scale .bs-dot {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--bs-line);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.h5p-balance-scale .bs-dot-full {
+  border-color: var(--bs-ok);
+  background: var(--bs-ok);
+}
+
+.h5p-balance-scale .bs-dot-half {
+  border-color: var(--bs-ok);
+  background: linear-gradient(90deg, var(--bs-ok) 50%, transparent 50%);
+}
+
+.h5p-balance-scale .bs-dot-none {
+  border-style: dashed;
+  border-color: var(--bs-soft-ink);
+}
+
+.h5p-balance-scale .bs-dot-now {
+  border-color: var(--bs-main-text);
+  transform: scale(1.25);
+}
+
+.h5p-balance-scale .bs-level {
+  padding: 0.15em 0.8em;
+  border-radius: 999px;
+  background: var(--bs-soft);
+  color: var(--bs-main-text);
+  font-weight: 800;
+}
+
+.h5p-balance-scale .bs-level-up {
+  animation: bs-level-up 0.8s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes bs-level-up {
+  0% {
+    transform: scale(0.6);
+  }
+
+  60% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+.h5p-balance-scale .bs-sound-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.h5p-balance-scale .bs-round-button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border-color: var(--bs-line);
+  border-radius: 50%;
+  color: var(--bs-soft-ink);
+}
+
+.h5p-balance-scale .bs-sound .bs-icon {
+  width: 1.3em;
+  height: 1.3em;
+}
+
+/* The volume, easy to find and to touch on a board (some boards hide their own buttons): wide, with a big thumb. */
+.h5p-balance-scale .bs-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8.5em;
+  height: 2.75rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.h5p-balance-scale .bs-volume::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--bs-main) var(--bs-filled, 25%), var(--bs-soft) var(--bs-filled, 25%));
+}
+
+.h5p-balance-scale .bs-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -9px;
+  border: 3px solid var(--bs-card);
+  border-radius: 50%;
+  background: var(--bs-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.h5p-balance-scale .bs-volume::-moz-range-track {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--bs-soft);
+}
+
+.h5p-balance-scale .bs-volume::-moz-range-progress {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--bs-main);
+}
+
+.h5p-balance-scale .bs-volume::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--bs-card);
+  border-radius: 50%;
+  background: var(--bs-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 520px) {
+  .h5p-balance-scale .bs-volume {
+    width: 6em;
+  }
+}
+
+/* The instruction, with the button to listen to it */
+
+.h5p-balance-scale .bs-instruction {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em 0.6em;
+  min-height: 2.75rem;
+  margin: 0.2em 0 0.4em;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-align: center;
+  /* Room above it when it is brought into view. */
+  scroll-margin-top: 5em;
+}
+
+.h5p-balance-scale .bs-listen {
+  min-height: 2.5rem;
+  padding: 0.2em 0.8em 0.2em 0.6em;
+  border-color: var(--bs-line);
+  border-radius: 999px;
+  font-size: 0.9em;
+}
+
+.h5p-balance-scale .bs-listen .bs-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+/* The board: the scale and its equality, and beside them on wide screens, the message, the tray and the buttons */
+
+.h5p-balance-scale .bs-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.h5p-balance-scale .bs-stage {
+  width: 100%;
+}
+
+.h5p-balance-scale .bs-side-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+  width: 100%;
+}
+
+.h5p-balance-scale .bs.bs-wide .bs-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14em, 29%);
+  align-items: center;
+  gap: 0.5em 1.2em;
+}
+
+.h5p-balance-scale .bs.bs-wide .bs-side-panel {
+  align-items: stretch;
+}
+
+.h5p-balance-scale .bs-scene {
+  position: relative;
+  height: var(--bs-scene-h, 300px);
+  overflow: hidden;
+  border-radius: var(--h5p-theme-border-radius-large, 0.75em);
+  background: var(--bs-soft);
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.h5p-balance-scale .bs-scene canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.h5p-balance-scale .bs-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.h5p-balance-scale .bs-thing {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.h5p-balance-scale .bs-mine {
+  cursor: pointer;
+}
+
+.h5p-balance-scale .bs-thing:focus {
+  outline: none;
+}
+
+.h5p-balance-scale .bs-thing:focus-visible {
+  border-radius: 10px;
+}
+
+/* The numbers on the things: text, crisp at any size, in the ink each picture asks for. */
+.h5p-balance-scale .bs-num {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.h5p-balance-scale .bs-num-claro {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
+.h5p-balance-scale .bs-num-oscuro {
+  color: #2b1d0e;
+}
+
+.h5p-balance-scale .bs-num-lapiz {
+  color: var(--bs-pencil, #34373d);
+}
+
+.h5p-balance-scale .bs-halo {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 3px solid var(--bs-ok);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: bs-halo 0.9s ease-out both;
+}
+
+@keyframes bs-halo {
+  from {
+    opacity: 0.9;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+/* The equality under the scale: it changes with every weight */
+
+.h5p-balance-scale .bs-equality {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em 0.7em;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2.6em;
+  margin: 0.4em auto 0;
+  padding: 0.2em 1.1em;
+  border-radius: 16px;
+  background: var(--bs-soft);
+  font-size: 1.6em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.h5p-balance-scale .bs-side {
+  white-space: nowrap;
+}
+
+.h5p-balance-scale .bs-term {
+  display: inline-block;
+}
+
+.h5p-balance-scale .bs-arrive {
+  color: var(--bs-main-text);
+  animation: bs-pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.h5p-balance-scale .bs-gap {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6em;
+  height: 1.35em;
+  padding: 0 0.2em;
+  border: 3px dashed var(--bs-soft-ink);
+  border-radius: 8px;
+  color: var(--bs-soft-ink);
+  font-size: 0.85em;
+  vertical-align: 0.05em;
+}
+
+.h5p-balance-scale .bs-relation {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7em;
+  height: 1.7em;
+  border: 2px solid var(--bs-line);
+  border-radius: 50%;
+  background: var(--bs-card);
+  color: var(--bs-soft-ink);
+  font-size: 0.85em;
+}
+
+.h5p-balance-scale .bs-relation-equal {
+  border-color: var(--bs-ok);
+  background: var(--bs-ok-soft);
+  color: var(--bs-ok);
+}
+
+.h5p-balance-scale .bs-relation-unequal {
+  border-color: var(--bs-bad);
+  background: var(--bs-bad-soft);
+  color: var(--bs-bad);
+}
+
+.h5p-balance-scale .bs-pop {
+  animation: bs-pop 0.55s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes bs-pop {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+/* The message, beside the scale: big, with its icon */
+
+.h5p-balance-scale .bs-message {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.4em 0.85em;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 1.08em;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.h5p-balance-scale .bs-message:empty {
+  display: none;
+}
+
+.h5p-balance-scale .bs-message .bs-icon {
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.h5p-balance-scale .bs-message-ok {
+  border-color: var(--bs-ok);
+  background: var(--bs-ok-soft);
+  color: var(--bs-ok);
+  animation: bs-pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.h5p-balance-scale .bs-message-bad {
+  border-color: var(--bs-bad);
+  background: var(--bs-bad-soft);
+  color: var(--bs-bad);
+}
+
+.h5p-balance-scale .bs-message-hint {
+  border-color: var(--bs-main);
+  background: var(--bs-card);
+  color: var(--bs-main-text);
+}
+
+.h5p-balance-scale .bs:not(.bs-wide) .bs-message {
+  font-size: 1em;
+}
+
+/* The tray: the weights, as they will land on the pan, each the size of what it weighs */
+
+.h5p-balance-scale .bs-tray {
+  position: relative;
+  padding: 0.3em 0.7em 0.6em;
+  border-radius: 14px;
+  background: var(--bs-soft);
+}
+
+.h5p-balance-scale .bs-tray-title {
+  display: block;
+  color: var(--bs-soft-ink);
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+.h5p-balance-scale .bs-tray-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.45em;
+}
+
+.h5p-balance-scale .bs-tray-empty {
+  padding: 0.4em 0.2em;
+  color: var(--bs-soft-ink);
+  font-weight: 600;
+}
+
+.h5p-balance-scale .bs-weight {
+  position: relative;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.2em 0.5em;
+  border: 0;
+  border-radius: 8px;
+  background: var(--bs-main);
+  color: var(--bs-on-main);
+  font: inherit;
+  font-size: 1.2em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 0.12s;
+}
+
+.h5p-balance-scale .bs-weight.bs-face {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: none;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+}
+
+.h5p-balance-scale .bs-weight canvas {
+  display: block;
+  pointer-events: none;
+}
+
+.h5p-balance-scale .bs-weight:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.h5p-balance-scale .bs-weight:active:not(:disabled) {
+  transform: translateY(-4px);
+}
+
+@media (hover: hover) {
+  .h5p-balance-scale .bs-weight:hover:not(:disabled) {
+    transform: translateY(-3px);
+  }
+}
+
+.h5p-balance-scale .bs-ghost {
+  position: fixed;
+  z-index: 9;
+  margin: 0;
+  opacity: 0.95;
+  pointer-events: none;
+  transition: none;
+  filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.3));
+}
+
+.h5p-balance-scale .bs-stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.h5p-balance-scale .bs-step {
+  min-width: 3.2rem;
+  font-size: 1.3em;
+}
+
+.h5p-balance-scale .bs-guess {
+  min-width: 3ch;
+  font-size: 2em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.h5p-balance-scale .bs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.h5p-balance-scale .bs-next {
+  scroll-margin-top: 5em;
+}
+
+.h5p-balance-scale .bs-ask-side {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  gap: 0.4em;
+  padding: 0.45em;
+  border: 2px solid var(--bs-main-text);
+  border-radius: 12px;
+  background: var(--bs-card);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.h5p-balance-scale .bs-flying {
+  position: fixed;
+  z-index: 8;
+  padding: 0 0.35em;
+  border: 2px solid var(--bs-main);
+  border-radius: 8px;
+  background: var(--bs-card);
+  color: var(--bs-main-text);
+  font-size: 1.45em;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.45s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+/* After the game */
+
+.h5p-balance-scale .bs-results {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8em;
+  max-width: 40em;
+  margin-inline: auto;
+}
+
+.h5p-balance-scale .bs-cheer {
+  /* Room above it when it is brought into view. */
+  scroll-margin-top: 5em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em 1.4em;
+  width: 100%;
+  padding: 1em 1.2em;
+  border-radius: var(--h5p-theme-border-radius-large, 1em);
+  background: var(--bs-card);
+  box-sizing: border-box;
+}
+
+.h5p-balance-scale .bs-ring {
+  width: 7em;
+  flex: none;
+}
+
+.h5p-balance-scale .bs-cheer-text {
+  display: flex;
+  flex: 1 1 12em;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* The end message takes the focus only so screen readers read it out; it is not a control, so no focus ring. */
+.h5p-balance-scale .bs-cheer-text:focus {
+  outline: none;
+}
+
+.h5p-balance-scale .bs-cheer-title {
+  color: var(--bs-ink);
+  font-size: 1.9em;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.h5p-balance-scale .bs-cheer-perfect .bs-cheer-title,
+.h5p-balance-scale .bs-cheer-great .bs-cheer-title {
+  animation: bs-pop 0.6s 0.3s ease-out both;
+}
+
+.h5p-balance-scale .bs-result-title {
+  color: var(--bs-soft-ink);
+  font-weight: 700;
+}
+
+.h5p-balance-scale .bs-end-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.h5p-balance-scale .bs-review {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.h5p-balance-scale .bs-review-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+  padding: 0.6em 0.8em;
+  border: 2px solid var(--bs-line);
+  border-radius: var(--bs-radius);
+  background: var(--bs-card);
+}
+
+.h5p-balance-scale .bs-review-item > .bs-icon {
+  margin-top: 0.15em;
+}
+
+.h5p-balance-scale .bs-review-item.bs-ok {
+  border-color: var(--bs-ok);
+}
+
+.h5p-balance-scale .bs-review-item.bs-ok > .bs-icon {
+  color: var(--bs-ok);
+}
+
+.h5p-balance-scale .bs-review-item.bs-bad {
+  border-color: var(--bs-bad);
+}
+
+.h5p-balance-scale .bs-review-item.bs-bad > .bs-icon {
+  color: var(--bs-bad);
+}
+
+.h5p-balance-scale .bs-review-item.bs-half {
+  border-style: dashed;
+}
+
+.h5p-balance-scale .bs-review-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.h5p-balance-scale .bs-review-asked,
+.h5p-balance-scale .bs-review-points {
+  font-weight: 700;
+}
+
+.h5p-balance-scale .bs-review-points {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Full screen, for a board: the game on the whole screen */
+
+.h5p-fullscreen .h5p-balance-scale .bs,
+.h5p-semi-fullscreen .h5p-balance-scale .bs {
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+/* Out of full screen: only in the real one, where H5P hides its buttons; in the corner where its button to go in was. */
+.h5p-balance-scale .bs-exit-full {
+  display: none;
+}
+
+.h5p-fullscreen .h5p-balance-scale .bs-exit-full {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  padding-inline: 0.5em;
+}
+
+.h5p-fullscreen .h5p-balance-scale .bs-exit-full .bs-icon {
+  width: 1.3em;
+  height: 1.3em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h5p-balance-scale .bs *,
+  .h5p-balance-scale .bs *::before,
+  .h5p-balance-scale .bs *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
