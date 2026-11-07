@@ -137,6 +137,8 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.fresh = null;
     /** @type {'left'|'right'|null} The pan a dragged weight would land in. */
     this.aim = null;
+    /** How big the weights of the tray are drawn: smaller on a short board. */
+    this.trayScale = 0.8;
 
     const state = extras.previousState;
     const saved = state && (this.topic === 'choose' ? state.topic : this.topic);
@@ -261,7 +263,9 @@ export default class BalanceScale extends H5P.EventDispatcher {
         }
       }).observe(this.root);
       window.addEventListener('resize', () => this.fit());
-      this.on('resize', () => this.fit(), this);
+      // In and out of full screen the room changes at once; the game's own «resize» goes to H5P, not back here.
+      this.on('enterFullScreen', () => setTimeout(() => this.fit(), 200));
+      this.on('exitFullScreen', () => setTimeout(() => this.fit(), 200));
     }
   }
 
@@ -892,7 +896,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     }
     const v = this.view();
     if (v.ready) {
-      v.face(b, value, kind);
+      v.face(b, value, kind, this.trayScale);
     }
     this.hookDrag(b);
     return b;
@@ -900,6 +904,8 @@ export default class BalanceScale extends H5P.EventDispatcher {
 
   paintActions() {
     const g = this.game, t = this.l10n, r = g.current;
+    // Once the round is over the tray is of no use: the message and «Next» take its place.
+    this.trayBox.hidden = g.roundOver && !this.busy;
     const buttons = [];
     if (g.roundOver && !this.busy) {
       this.nextButton = btn({ type: 'button', class: 'bs-button bs-primary bs-next', text: g.lastRound ? t.seeResult : t.next, onclick: () => this.next() });
@@ -1524,6 +1530,14 @@ export default class BalanceScale extends H5P.EventDispatcher {
     }
     this.root.classList.toggle('bs-wide', this.root.clientWidth >= 760);
     const full = !!(this.container && this.container.closest('.h5p-fullscreen, .h5p-semi-fullscreen'));
+    // On a short board the weights of the tray are drawn smaller, so it takes fewer rows.
+    const scale = this.viewHeight() - (full ? 0 : BAR) < 600 ? 0.62 : 0.8;
+    if (scale !== this.trayScale) {
+      this.trayScale = scale;
+      if (this.game && this.game.current && !this.game.roundOver) {
+        this.fillTray();
+      }
+    }
     const wide = this.root.classList.contains('bs-wide');
     for (let k = 0; k < 3; k++) {
       const page = document.documentElement.scrollHeight;

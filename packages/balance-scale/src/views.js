@@ -488,9 +488,10 @@ export class View {
    * @param {HTMLElement} button
    * @param {number} value
    * @param {'w'|'bag'} kind
+   * @param {number} [k] How big, against the size of the thing on the scale.
    */
-  face(button, value, kind) {
-    const key = kind === 'w' ? `pesa-tuya-${sizeOf(value) + 1}` : 'bolsa-tuya', c = this.G.cosas[key], k = 0.8;
+  face(button, value, kind, k = 0.8) {
+    const key = kind === 'w' ? `pesa-tuya-${sizeOf(value) + 1}` : 'bolsa-tuya', c = this.G.cosas[key];
     const w = Math.round(c.w * k), h = Math.round(c.h * k), nb = c.numero, dpr = window.devicePixelRatio || 1;
     const picture = document.createElement('canvas');
     picture.width = Math.round(w * dpr);

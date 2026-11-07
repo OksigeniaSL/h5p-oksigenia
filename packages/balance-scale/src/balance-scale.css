@@ -414,7 +414,7 @@
 
 .h5p-balance-scale .bs.bs-wide .bs-board {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(14em, 29%);
+  grid-template-columns: minmax(0, 1fr) minmax(14em, 33%);
   align-items: center;
   gap: 0.5em 1.2em;
 }

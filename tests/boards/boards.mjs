@@ -100,6 +100,55 @@ const GAMES = {
     }),
     shapeOk: (s) => s.line >= 0.6 * s.game,
   },
+  'balance-scale': {
+    root: '.bs',
+    async start(frame) {
+      await frame.locator('.bs-choice-equalities').click();
+      await frame.locator('.bs-scene.bs-painted canvas').waitFor();
+    },
+    /** One move: a weight that does not balance, on the player's pan. */
+    async move(frame) {
+      const value = await frame.evaluate(() => {
+        const r = H5P.instances[0].game.current;
+        const weigh = (list) => list.reduce((s, t) => s + t.v, 0);
+        const need = weigh(r[r.target === 'left' ? 'right' : 'left']) - weigh(r[r.target].filter((t) => t.fixed));
+        return r.tray.find((v) => v !== need);
+      });
+      await frame.locator(`.bs-tray .bs-weight[data-value="${value}"]`).first().click();
+    },
+    /** Balances the round: the tallest moment of a round, with the message and «Next». */
+    async answer(frame) {
+      await frame.locator('.bs-empty').click();
+      const weights = await frame.evaluate(() => {
+        const r = H5P.instances[0].game.current;
+        const weigh = (list) => list.reduce((s, t) => s + t.v, 0);
+        let need = weigh(r[r.target === 'left' ? 'right' : 'left']) - weigh(r[r.target].filter((t) => t.fixed));
+        const out = [];
+        for (const w of [...r.tray].sort((x, y) => y - x)) {
+          while (need >= w) {
+            out.push(w);
+            need -= w;
+          }
+        }
+        return out;
+      });
+      for (const value of weights) {
+        await frame.locator(`.bs-tray .bs-weight[data-value="${value}"]`).first().click();
+      }
+      await frame.locator('.bs-next').waitFor();
+    },
+    state: (frame) => frame.evaluate(() => {
+      const g = H5P.instances[0].game;
+      return JSON.stringify({ round: g.number, left: g.current.left.map((t) => t.id), right: g.current.right.map((t) => t.id) });
+    }),
+    /** The scale takes most of the width beside the tray, and is tall enough to read. */
+    shape: (frame) => frame.evaluate(() => {
+      const scene = document.querySelector('.bs-scene').getBoundingClientRect();
+      return { scene: Math.round(scene.width), height: Math.round(scene.height),
+        game: Math.round(document.querySelector('.bs').getBoundingClientRect().width) };
+    }),
+    shapeOk: (s) => s.scene >= 0.55 * s.game && s.height >= 180,
+  },
 };
 
 async function openGame(page, name) {
