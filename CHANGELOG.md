@@ -2,6 +2,26 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Balance Scale 1.0.0 (not released yet)
+
+The first version: equalities on a two-pan balance, where what is put on the scale is the answer and the equality is
+written under it with =, < or >.
+
+- Four topics, three levels each (featherweight, middleweight and heavyweight): equalities with the gap on either side,
+  in the order of Rittle-Johnson et al. (2011); equal groups; sharing out every weight; and the mystery bag, with whole
+  positive numbers and sums only. A free balance with no points, for a board.
+- The scale leans at once by default, and the round ends when it balances: 2 points without taking any weight off, 1
+  with one or two. As an option, it is held until it is let go: 2 points at the first go, 1 at the second. After that,
+  the game does it together, with no points. The usual mistake (putting what the other side weighs) is explained at
+  once, and every hint says what is missing and where.
+- A round that does not go well comes back two rounds later with other numbers, marked as a review in the report.
+- Three painted scales to choose from, remembered on the device: a market, a laboratory and a pencil drawing on squared
+  paper. The weights grow with what they weigh, and their numbers are text, crisp at any size.
+- The instructions recorded in Spanish and English, at the volume of the game; in other languages, the text alone.
+- The volume starts at a quarter and has its own wide slider, easy to touch on a board.
+- It fits on classroom boards (1280 × 600, 960 × 540, 1366 × 768, 1517 × 717 and 1115 × 555 under the bar of a page) and
+  in browsers without container queries, such as Firefox 98.
+
 ## Alphabet Wheel 1.0.3 (3 November 2026)
 
 For classroom boards:

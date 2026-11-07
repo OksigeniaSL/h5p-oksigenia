@@ -36,6 +36,14 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
     <img src="docs/img/number-line-game.webp" width="676" alt="The Number Line in the middle of a sum: a line from 0 to 50 with the arcs of the jumps drawn on it, the buttons to jump and the piece that jumps.">
   </picture>
 
+- **Balance Scale** (`H5P.BalanceScale`, not released yet): equalities on a two-pan balance. What is put on the scale is
+  the answer, and the equality is written under it with =, < or >: sums with the gap on either side, equal groups
+  (multiplying and dividing), sharing out every weight and a mystery bag. By default the scale leans at once, which is
+  what works best in studies with on-screen balances; it can also be held until it is let go. Each game makes up its own
+  numbers, a round that goes wrong comes back later with other numbers, and every round goes to the report of the
+  activity. Three painted scales to choose from (a market, a laboratory and a pencil drawing on squared paper), the
+  instructions recorded in Spanish and English, and a free balance with no points, for a board.
+
 ## Languages
 
 English, Spanish, German, French, Italian, Dutch, Portuguese (Brazil) and Swedish, both for players and for authors
