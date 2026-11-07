@@ -391,6 +391,35 @@
   height: 1.2em;
 }
 
+/* One above the other (a phone, a narrow frame): the button to listen stays beside the sentence, as an icon, instead of
+   taking a line of its own; its word is still there for screen readers. */
+.h5p-balance-scale .bs:not(.bs-wide) .bs-instruction {
+  flex-wrap: nowrap;
+  text-align: left;
+}
+
+.h5p-balance-scale .bs:not(.bs-wide) .bs-instruction-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.h5p-balance-scale .bs:not(.bs-wide) .bs-listen {
+  flex: none;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  justify-content: center;
+}
+
+.h5p-balance-scale .bs:not(.bs-wide) .bs-listen > span:not(.bs-icon) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* The board: the scale and its equality, and beside them on wide screens, the message, the tray and the buttons */
 
 .h5p-balance-scale .bs-board {

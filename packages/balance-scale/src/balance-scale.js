@@ -50,6 +50,11 @@ const MAX_ANGLE = 12;
 const BAR = 60;
 /** The smallest the scene gets, so the scale and its numbers still read. */
 const MIN_SCENE = 190;
+/** From this width of the game on, the tray goes beside the scale: a Moodle page at 1100 px with its course index open
+ * leaves the game about 670 px, and one above the other did not fit in the height left. */
+const WIDE = 600;
+/** One above the other, the page may also keep a bar at the bottom (Moodle's activity navigation, a phone's toolbar). */
+const BOTTOM_BAR = 65;
 /** A balanced scale swings a little before the round is told as won. */
 const WIN_DELAY_MS = 520;
 /** A wrong try stays on the scale a moment before doing it together. */
@@ -1556,7 +1561,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     if (!this.root || this.gameView.hidden || !this.scene.isConnected) {
       return;
     }
-    this.root.classList.toggle('bs-wide', this.root.clientWidth >= 760);
+    this.root.classList.toggle('bs-wide', this.root.clientWidth >= WIDE);
     const full = !!(this.container && this.container.closest('.h5p-fullscreen, .h5p-semi-fullscreen'));
     // On a short board the weights of the tray are drawn smaller, so it takes fewer rows.
     const scale = this.viewHeight() - (full ? 0 : BAR) < 600 ? 0.62 : 0.8;
@@ -1570,7 +1575,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     for (let k = 0; k < 3; k++) {
       const page = document.documentElement.scrollHeight;
       const used = page - this.scene.getBoundingClientRect().height;
-      const room = this.viewHeight() - (full ? 0 : BAR) - used - 10;
+      const room = this.viewHeight() - (full ? 0 : BAR + (wide ? 0 : BOTTOM_BAR)) - used - 10;
       const height = Math.round(Math.max(MIN_SCENE, Math.min(room, 560, this.scene.clientWidth / (wide ? 1.15 : 1.35))));
       const now = parseFloat(this.root.style.getPropertyValue('--bs-scene-h')) || 0;
       if (Math.abs(now - height) < 2) {

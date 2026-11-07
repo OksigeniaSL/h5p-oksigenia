@@ -264,6 +264,17 @@ for (const width of [320, 360, 412]) {
   });
 }
 
+test('on a phone, the button to listen stays beside the sentence, so the weights come into view with the scale', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 640 });
+  const frame = await open(page);
+  await frame.locator('.bs-choice-equalities').click();
+  const text = await frame.locator('.bs-instruction-text').boundingBox();
+  const listen = await frame.locator('.bs-listen').boundingBox();
+  expect(listen.y, 'the button on the row of the sentence').toBeLessThan(text.y + text.height);
+  expect(listen.x, 'beside it').toBeGreaterThanOrEqual(text.x + text.width - 1);
+  await expect(frame.locator('.bs-listen')).toHaveAccessibleName(/./);
+});
+
 /** @type {Array<[number, boolean]>} */
 const SCREENS = [[320, false], [1100, false], [320, true], [1100, true]];
 for (const [width, dark] of SCREENS) {
