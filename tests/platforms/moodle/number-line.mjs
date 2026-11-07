@@ -161,6 +161,11 @@ try {
         }
         if (await game.locator('.nl-option').count()) {
           await game.locator('.nl-option').first().click();
+        } else if (await game.locator('.nl-next').isHidden() && await game.locator('.nl-together').isVisible()) {
+          // Always pressing the first button can go round and round (6 → 15 with jumps of 2 ends up between 18 and 20):
+          // the game does it together, as a player stuck would ask it to.
+          await game.locator('.nl-together').click();
+          await game.locator('.nl-next').waitFor({ state: 'visible', timeout: 15000 });
         }
       }
     },
