@@ -202,7 +202,7 @@ test('the instruction can be heard in Spanish and English, and there is no butto
       sources.push(url);
       return { play: () => Promise.resolve(), pause: () => {}, addEventListener: () => {}, volume: 1 };
     });
-    document.querySelector('.bs-listen').click();
+    /** @type {HTMLElement} */ (document.querySelector('.bs-listen')).click();
     return sources[0];
   });
   expect(src).toMatch(/assets\/voice\/es\/igualdades-(der|izq)\.mp3$/);
