@@ -2,6 +2,27 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Alphabet Wheel 1.0.4 (not released yet)
+
+- A picture can be the clue of a letter, beside its text or instead of it, as a teacher asked. It goes in the middle of
+  the wheel, so it does not push the answer field down, with the letter as a badge under it; the end screen shows it
+  next to its clue. Authors write what the picture shows, without the answer, and screen readers read it with the
+  clue. The example wheels have two drawings: the sun beside its text and the moon alone.
+- The letter just answered jumps when it is right and shakes a little when it is wrong, never the whole screen, and
+  not at all when the system asks for less motion. Each right answer in a row rings a little higher.
+- The volume has a wide slider with a big thumb, easy to touch on a board, and it is dimmed while the sound is muted.
+- In a frame of another site, whose page it cannot read (as in the Moodle app's online player), it follows the dark
+  mode of the device. A package exported by Moodle, which carries the library's name as its title, shows no title.
+- The dark mode of the page comes from the same styles as in the other games.
+
+## Number Line 1.0.3 (not released yet)
+
+- The piece lands with weight: it squashes a little on its foot and comes back with a small bounce, not when the system
+  asks for less motion. Each right round in a row rings a little higher.
+- The volume has a wide slider with a big thumb, easy to touch on a board, and it is dimmed while the sound is muted.
+- In a frame of another site, whose page it cannot read (as in the Moodle app's online player), it follows the dark
+  mode of the device. A package exported by Moodle, which carries the library's name as its title, shows no title.
+
 ## Balance Scale 1.0.0 (7 November 2026)
 
 The first version: equalities on a two-pan balance, where what is put on the scale is the answer and the equality is

@@ -11,6 +11,8 @@ const SVG = 'http://www.w3.org/2000/svg';
 const PADDING = 26;
 const HEIGHT = 190;
 const BASELINE = 130;
+/** How long a piece takes to settle after a jump, in ms. */
+const SETTLE_MS = 160;
 /** The steps labels can go by: the first one that leaves them room. */
 const LABEL_STEPS = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
 const LABEL_ROOM = 26;
@@ -68,6 +70,9 @@ export class Line {
     this.piece = null;
     /** @type {{at: number, lift: number, t: number, dir: number}|null} The piece in the middle of a jump. */
     this.flying = null;
+    /** @type {{x: number, y: number, sx: number, sy: number}|null} The piece squashing as it lands, around its foot. */
+    this.settling = null;
+    this.settleToken = 0;
     /** @type {number|null} */
     this.flag = null;
     /** @type {string|null} What the flag says, when it is not the number itself. */
@@ -275,6 +280,10 @@ export class Line {
     const lift = this.flying ? this.flying.lift : 0;
     const group = svg('g', { class: 'nl-piece' });
     (PIECES[this.character] || PIECES.muelle)(group, svg, this.x(at), BASELINE - 1 - lift, this.flying);
+    const s = this.settling;
+    if (s) {
+      group.setAttribute('transform', `translate(${s.x} ${s.y}) scale(${s.sx} ${s.sy}) translate(${-s.x} ${-s.y})`);
+    }
     this.node.append(group);
   }
 
@@ -319,6 +328,8 @@ export class Line {
    */
   hop(to, { text = null, off = false, ms = 420 } = {}) {
     const from = this.piece;
+    const token = ++this.settleToken;
+    this.settling = null;
     const land = () => {
       this.piece = to;
       this.flying = null;
@@ -340,10 +351,35 @@ export class Line {
           requestAnimationFrame(step);
         } else {
           land();
+          this.settle(to, token);
           done();
         }
       };
       requestAnimationFrame(step);
     });
+  }
+
+  /**
+   * After a jump the piece lands with weight: it squashes a little on its foot and comes back with a small bounce. Only
+   * a drawing: the game goes on meanwhile, and the next jump stops it.
+   * @param {number} at Where it landed.
+   * @param {number} token The jump it belongs to.
+   */
+  settle(at, token) {
+    const started = performance.now();
+    const step = (now) => {
+      if (token !== this.settleToken) {
+        return;
+      }
+      const u = Math.min(1, (now - started) / SETTLE_MS);
+      // Squashed at the touch, back up at a third, a little stretched at two thirds, still at the end.
+      const sy = 1 - 0.16 * Math.cos(1.5 * Math.PI * u) * (1 - u);
+      this.settling = u < 1 ? { x: this.x(at), y: BASELINE - 1, sx: 1 + (1 - sy) * 0.6, sy } : null;
+      this.draw();
+      if (u < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+    requestAnimationFrame(step);
   }
 }

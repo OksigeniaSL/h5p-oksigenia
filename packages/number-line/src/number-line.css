@@ -206,11 +206,70 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   gap: 0.4em;
 }
 
+/* The volume, easy to find and to touch on a board (some boards hide their own buttons): wide, with a big thumb. Dimmed
+   while the sound is muted. */
 .h5p-number-line .nl-volume {
-  width: 5em;
-  min-height: 2.75rem;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8.5em;
+  height: 2.75rem;
   margin: 0;
-  accent-color: var(--nl-main);
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.h5p-number-line .nl-volume.nl-volume-off {
+  opacity: 0.45;
+}
+
+.h5p-number-line .nl-volume:focus-visible {
+  outline: 3px solid var(--nl-focus);
+  outline-offset: 2px;
+}
+
+.h5p-number-line .nl-volume::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--nl-main) var(--nl-filled, 25%), var(--nl-line) var(--nl-filled, 25%));
+}
+
+.h5p-number-line .nl-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -9px;
+  border: 3px solid var(--nl-card);
+  border-radius: 50%;
+  background: var(--nl-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.h5p-number-line .nl-volume::-moz-range-track {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--nl-line);
+}
+
+.h5p-number-line .nl-volume::-moz-range-progress {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--nl-main);
+}
+
+.h5p-number-line .nl-volume::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--nl-card);
+  border-radius: 50%;
+  background: var(--nl-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 520px) {
+  .h5p-number-line .nl-volume {
+    width: 6em;
+  }
 }
 
 .h5p-number-line .nl-sound {

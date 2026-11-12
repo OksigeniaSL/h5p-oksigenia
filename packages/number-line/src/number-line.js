@@ -103,7 +103,11 @@ export default class NumberLine extends H5P.EventDispatcher {
     this.extras = extras;
     this.l10n = { ...L10N, ...(params.l10n || {}) };
     this.behaviour = { ...BEHAVIOUR, ...(params.behaviour || {}) };
+    // A package exported by Moodle carries the library's name as its title («Number Line», in English): not shown.
     this.title = plain(extras.metadata && extras.metadata.title);
+    if (this.title === FALLBACK_TITLE) {
+      this.title = '';
+    }
     this.id = `h5p-nl-${++uid}-${Math.random().toString(36).slice(2, 8)}`;
     this.locale = plain(extras.metadata && extras.metadata.defaultLanguage) || document.documentElement.lang || undefined;
     this.topic = params.topic || 'choose';
@@ -267,6 +271,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     this.levelText = el('span', { class: 'nl-level' });
     this.pointsText = el('span', { class: 'nl-points' });
     this.soundButton = btn({ type: 'button', class: 'nl-button nl-secondary nl-sound', onclick: () => this.toggleSound() });
+    this.volume = volumeSlider(this.sounds, t.volume, 'nl-volume', () => this.render());
     this.challenge = el('p', { class: 'nl-challenge' });
     this.hint = el('p', { class: 'nl-hint' });
     this.lineBox = el('div', { class: 'nl-line-box' });
@@ -282,7 +287,7 @@ export default class NumberLine extends H5P.EventDispatcher {
       el('div', { class: 'nl-bar' }, [
         this.roundText, this.levelText, this.pointsText,
         this.sounds.enabled ? el('span', { class: 'nl-sound-group' }, [
-          this.soundButton, volumeSlider(this.sounds, t.volume, 'nl-volume', () => this.render()),
+          this.soundButton, this.volume,
         ]) : '',
       ]),
       el('div', { class: 'nl-ask' }, [this.challenge, this.hint]), this.lineBox, this.moves, this.after,
@@ -362,9 +367,13 @@ export default class NumberLine extends H5P.EventDispatcher {
       const levels = [t.levelOne, t.levelTwo, t.levelThree];
       this.levelText.textContent = playing && g.plan.levels.length > 1 ? levels[g.level] : '';
       this.pointsText.textContent = playing ? fill(t.points, { count: g.score }) : '';
-      // An icon button: the speaker is known to everyone, and its name is there for screen readers.
-      this.soundButton.replaceChildren(icon(this.sounds.muted ? 'soundOff' : 'soundOn'));
+      // An icon button: the speaker is known to everyone, and its name is there for screen readers. The volume is dimmed
+      // while muted, so a muted game does not look as if it sounded low.
+      this.soundButton.replaceChildren(icon(this.sounds.muted || !this.sounds.volume ? 'soundOff' : 'soundOn'));
       this.soundButton.setAttribute('aria-label', this.sounds.muted ? t.soundOn : t.soundOff);
+      this.volume.classList.toggle('nl-volume-off', this.sounds.muted);
+      this.volume.style.setProperty('--nl-filled', `${Math.round(this.sounds.volume * 100)}%`);
+      this.volume.setAttribute('aria-valuetext', `${Math.round(this.sounds.volume * 100)} %`);
       const m = this.message;
       this.messageLine.className = `nl-message${m ? ` nl-message-${m.kind}` : ''}`;
       this.messageLine.textContent = m ? m.text : '';
@@ -904,7 +913,9 @@ export default class NumberLine extends H5P.EventDispatcher {
   afterRound(text, kind, sound, levelUp) {
     const t = this.l10n;
     const levels = [t.levelOne, t.levelTwo, t.levelThree];
-    this.sounds.play(sound);
+    // Each right round in a row rings a little higher; not saved, so a game taken up again starts from the bottom.
+    this.rightInRow = sound === 'ok' ? (this.rightInRow || 0) + 1 : 0;
+    this.sounds.play(sound, this.rightInRow - 1);
     const said = levelUp ? `${text} ${fill(t.levelUp, { place: levels[this.game.level] })}` : text;
     this.message = { text: said, kind };
     this.render();
@@ -1190,6 +1201,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     }
     // A new attempt: its duration in the xAPI result counts from its own start.
     this.activityStartTime = undefined;
+    this.rightInRow = 0;
     this.message = null;
     this.busy = false;
     this.render();
