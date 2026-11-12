@@ -32,6 +32,8 @@ const answers = Object.fromEntries(items.map((i) => [i.letter, i.answer]));
 const sql = (query) => execFileSync('docker', ['exec', opt.db, 'mariadb', '-umoodle', `-p${opt['db-password']}`, 'moodle',
   '-N', '-B', '-e', query], { encoding: 'utf8' }).trim();
 const report = { moodle: '', games: [], checks: [] };
+/** The activity under test: the site can have others, such as one made with the previous release. */
+const activity = () => sql(`SELECT instance FROM mdl_course_modules WHERE id = ${Number(opt.cmid)}`);
 const check = (name, ok, detail) => {
   report.checks.push({ name, ok: !!ok, detail });
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${detail ? ` · ${detail}` : ''}`);
@@ -84,7 +86,8 @@ try {
     await game().locator('.aw-cheer-title').waitFor();
   };
   const attempts = () => sql(`SELECT a.attempt, a.rawscore, a.maxscore, a.completion FROM mdl_h5pactivity_attempts a
-    JOIN mdl_user u ON u.id = a.userid WHERE u.username = '${opt.student}' ORDER BY a.attempt`)
+    JOIN mdl_user u ON u.id = a.userid WHERE u.username = '${opt.student}' AND a.h5pactivityid = ${activity()}
+    ORDER BY a.attempt`)
     .split('\n').filter(Boolean).map((line) => line.split('\t').map(Number));
 
   await login(opt.student, opt['student-password']);
@@ -129,7 +132,8 @@ try {
     report.games.map((r) => `${r.raw}/${r.max}`).join(' '));
   const last = report.games.at(-1);
   const grade = Number(sql(`SELECT g.finalgrade FROM mdl_grade_grades g JOIN mdl_grade_items i ON i.id = g.itemid
-    JOIN mdl_user u ON u.id = g.userid WHERE i.itemmodule = 'h5pactivity' AND u.username = '${opt.student}'`));
+    JOIN mdl_user u ON u.id = g.userid WHERE i.itemmodule = 'h5pactivity' AND i.iteminstance = ${activity()}
+    AND u.username = '${opt.student}'`));
   const expectedGrade = Math.round((10 * last.expected / items.length) * 100000) / 100000;
   check('the grade is max grade × right / letters, from the last attempt',
     Math.abs(grade - expectedGrade) < 0.001, `${grade} (expected ${expectedGrade.toFixed(5)})`);
@@ -179,7 +183,8 @@ try {
   await page.goto(`${opt.url}/mod/h5pactivity/report.php?a=${instance}&userid=${userid}`);
   await closeDrawer();
   await page.screenshot({ path: `${opt.shots}/moodle-attempts.png`, fullPage: true });
-  const firstAttempt = sql(`SELECT id FROM mdl_h5pactivity_attempts WHERE userid = ${userid} ORDER BY attempt DESC LIMIT 1 OFFSET 1`);
+  const firstAttempt = sql(`SELECT id FROM mdl_h5pactivity_attempts WHERE userid = ${userid} AND h5pactivityid = ${instance}
+    ORDER BY attempt DESC LIMIT 1 OFFSET 1`);
   await page.goto(`${opt.url}/mod/h5pactivity/report.php?a=${instance}&attemptid=${firstAttempt}`);
   await closeDrawer();
   // The heading of the results is the description of the statement: the title of the wheel, not every clue.
