@@ -56,48 +56,7 @@
   margin: 0;
 }
 
-/*
- * Dark mode of the page around the frames (see watchPageColourMode). The theme variables take dark values here, so the
- * shared end screen follows too; the main colour stays the site's.
- */
-.h5p-alphabet-wheel .aw.aw-dark {
-  --h5p-theme-contrast-cta-white: #8cc4f0;
-  --h5p-theme-text-primary: #eef1f4;
-  --h5p-theme-text-secondary: #c3cad1;
-  --h5p-theme-text-third: #8d97a1;
-  --h5p-theme-background: #1d2125;
-  --h5p-theme-ui-base: #2a2f35;
-  --h5p-theme-alternative-base: #2a2f35;
-  --h5p-theme-stroke-1: #454c54;
-  --h5p-theme-feedback-correct-main: #86d67f;
-  --h5p-theme-feedback-correct-secondary: #10260d;
-  --h5p-theme-feedback-incorrect-main: #ff9da2;
-  --h5p-theme-feedback-incorrect-secondary: #3a0f12;
-
-  color-scheme: dark;
-}
-
-@supports (color: color-mix(in srgb, red, blue)) {
-  .h5p-alphabet-wheel .aw.aw-dark {
-    --h5p-theme-contrast-cta-white: color-mix(in srgb, var(--h5p-theme-main-cta-base, #006fbf) 40%, white);
-  }
-}
-
-html.h5p-oksigenia-dark,
-html.h5p-oksigenia-dark body,
-html.h5p-oksigenia-dark .h5p-content {
-  background: #1d2125;
-}
-
-html.h5p-oksigenia-dark .h5p-actions {
-  border-color: #454c54;
-  background: #1d2125;
-}
-
-html.h5p-oksigenia-dark .h5p-actions > .h5p-button,
-html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
-  color: #c3cad1;
-}
+/* Dark mode of the page around the frames: shared/dark.css, which every game uses (see watchPageColourMode). */
 
 /* Buttons and field */
 
@@ -290,6 +249,53 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   transform: translate(-50%, -50%) scale(1.25);
 }
 
+/* The letter just answered: a small jump when right, a short shake when wrong. Never the whole screen: with children
+   and on a board, that makes them dizzy. */
+.h5p-alphabet-wheel .aw-letter.aw-flash-ok {
+  z-index: 1;
+  animation: aw-jump 0.22s ease-out;
+}
+
+.h5p-alphabet-wheel .aw-letter.aw-flash-bad {
+  z-index: 1;
+  animation: aw-shake 0.25s ease-in-out;
+}
+
+@keyframes aw-jump {
+  0% {
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+
+  45% {
+    transform: translate(-50%, -78%) scale(1.3);
+  }
+
+  75% {
+    transform: translate(-50%, -44%) scale(0.96);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes aw-shake {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+
+  20%,
+  60% {
+    transform: translate(calc(-50% - 4px), -50%);
+  }
+
+  40%,
+  80% {
+    transform: translate(calc(-50% + 4px), -50%);
+  }
+}
+
 .h5p-alphabet-wheel .aw-badge {
   position: absolute;
   top: calc(50% + var(--aw-y, -1) * 72%);
@@ -345,6 +351,42 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   line-height: 1;
 }
 
+/* A clue with a picture: the picture in the middle, inside a square that fits in the circle whatever its shape, and the
+   letter as a badge on the lower edge. */
+.h5p-alphabet-wheel .aw-hub-picture {
+  display: none;
+}
+
+.h5p-alphabet-wheel .aw-with-picture .aw-hub-picture {
+  display: grid;
+  place-items: center;
+  width: 70%;
+  height: 70%;
+}
+
+.h5p-alphabet-wheel .aw-hub-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.h5p-alphabet-wheel .aw-with-picture .aw-hub-letter {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 1.7em;
+  aspect-ratio: 1;
+  border: 2px solid var(--aw-card);
+  border-radius: 50%;
+  background: var(--aw-main);
+  color: var(--aw-on-main);
+  font-size: 8cqi;
+  transform: translate(-50%, 45%);
+}
+
 /* Without container queries (Firefox before 110, on some classroom boards with Android 8), the script measures the game
    and the wheel, and gives the same sizes. */
 @supports not (container-type: inline-size) {
@@ -363,6 +405,10 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
 
   .h5p-alphabet-wheel .aw-hub-letter {
     font-size: var(--aw-hub-px, 3.9em);
+  }
+
+  .h5p-alphabet-wheel .aw-with-picture .aw-hub-letter {
+    font-size: calc(var(--aw-hub-px, 3.9em) * 0.31);
   }
 }
 
@@ -389,11 +435,70 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
   gap: 0.4em;
 }
 
+/* The volume, easy to find and to touch on a board (some boards hide their own buttons): wide, with a big thumb. Dimmed
+   while the sound is muted, so it does not look as if the game sounded low. */
 .h5p-alphabet-wheel .aw-volume {
-  width: 5em;
-  min-height: 2.75rem;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8.5em;
+  height: 2.75rem;
   margin: 0;
-  accent-color: var(--aw-main);
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.h5p-alphabet-wheel .aw-volume.aw-volume-off {
+  opacity: 0.45;
+}
+
+.h5p-alphabet-wheel .aw-volume:focus-visible {
+  outline: 3px solid var(--aw-focus);
+  outline-offset: 2px;
+}
+
+.h5p-alphabet-wheel .aw-volume::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--aw-main) var(--aw-filled, 25%), var(--aw-line) var(--aw-filled, 25%));
+}
+
+.h5p-alphabet-wheel .aw-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -9px;
+  border: 3px solid var(--aw-card);
+  border-radius: 50%;
+  background: var(--aw-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.h5p-alphabet-wheel .aw-volume::-moz-range-track {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--aw-line);
+}
+
+.h5p-alphabet-wheel .aw-volume::-moz-range-progress {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--aw-main);
+}
+
+.h5p-alphabet-wheel .aw-volume::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--aw-card);
+  border-radius: 50%;
+  background: var(--aw-main);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 520px) {
+  .h5p-alphabet-wheel .aw-volume {
+    width: 6em;
+  }
 }
 
 .h5p-alphabet-wheel .aw-sound {
@@ -621,8 +726,17 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
 .h5p-alphabet-wheel .aw-review-body {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.2em;
   min-width: 0;
+}
+
+.h5p-alphabet-wheel .aw-review-image {
+  display: block;
+  max-width: 100%;
+  max-height: 4.5em;
+  margin-block: 0.2em;
+  object-fit: contain;
 }
 
 .h5p-alphabet-wheel .aw-review-status {
@@ -698,6 +812,7 @@ html.h5p-oksigenia-dark .h5p-actions > .h5p-link {
 @media (prefers-reduced-motion: reduce) {
   .h5p-alphabet-wheel .aw-letter {
     transition: none;
+    animation: none !important;
   }
 
   .h5p-alphabet-wheel .aw-cheer-title {

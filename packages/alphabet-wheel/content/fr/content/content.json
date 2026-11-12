@@ -69,7 +69,18 @@
     {
       "letter": "L",
       "kind": "starts",
-      "clue": "Satellite naturel de la Terre",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Un croissant jaune pâle dans un ciel de nuit plein d'étoiles",
       "answer": "Lune"
     },
     {
@@ -112,6 +123,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Étoile qui nous donne la lumière et la chaleur",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Un disque jaune entouré de rayons dans un ciel bleu",
       "answer": "Soleil"
     },
     {

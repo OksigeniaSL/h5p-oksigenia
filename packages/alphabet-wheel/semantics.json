@@ -42,7 +42,26 @@
           "name": "clue",
           "type": "text",
           "label": "Clue",
+          "description": "It can be left empty if the letter has a picture.",
           "importance": "high",
+          "optional": true,
+          "maxLength": 300
+        },
+        {
+          "name": "image",
+          "type": "image",
+          "label": "Picture",
+          "description": "Optional. A picture as the clue, with the text or instead of it.",
+          "importance": "medium",
+          "optional": true
+        },
+        {
+          "name": "imageAlt",
+          "type": "text",
+          "label": "What the picture shows",
+          "description": "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.",
+          "importance": "medium",
+          "optional": true,
           "maxLength": 300
         },
         {
@@ -174,6 +193,7 @@
       { "name": "introHelp", "type": "text", "label": "How to play", "importance": "low", "default": "Type the answer for each letter. If you do not know it, pass: the letter comes back in the next round." },
       { "name": "startsWith", "type": "text", "label": "The answer starts with (@letter)", "importance": "low", "default": "Starts with @letter" },
       { "name": "contains", "type": "text", "label": "The answer contains (@letter)", "importance": "low", "default": "Contains @letter" },
+      { "name": "picture", "type": "text", "label": "The picture of a clue, for screen readers (@description)", "importance": "low", "default": "Picture: @description" },
       { "name": "yourAnswer", "type": "text", "label": "Answer field", "importance": "low", "default": "Your answer" },
       { "name": "check", "type": "text", "label": "Check button", "importance": "low", "default": "Check" },
       { "name": "pass", "type": "text", "label": "Pass button", "importance": "low", "default": "Pass" },

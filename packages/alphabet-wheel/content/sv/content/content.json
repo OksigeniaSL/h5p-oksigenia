@@ -76,7 +76,18 @@
     {
       "letter": "M",
       "kind": "starts",
-      "clue": "Jordens naturliga satellit",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "En ljusgul skära på en mörk himmel full av stjärnor",
       "answer": "Månen",
       "alternatives": "måne"
     },
@@ -114,6 +125,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Stjärnan som ger oss ljus och värme",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "En gul cirkel med strålar på en blå himmel",
       "answer": "Solen",
       "alternatives": "sol"
     },

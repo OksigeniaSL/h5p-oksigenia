@@ -70,7 +70,18 @@
     {
       "letter": "L",
       "kind": "starts",
-      "clue": "Satélite natural da Terra",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Uma forma curva amarelo-clara em um céu noturno cheio de estrelas",
       "answer": "Lua"
     },
     {
@@ -113,6 +124,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Estrela que nos dá luz e calor",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Um círculo amarelo com raios em um céu azul",
       "answer": "Sol"
     },
     {

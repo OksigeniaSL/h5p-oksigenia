@@ -142,6 +142,13 @@
     "Count of letters left (@count)": "Recuento de letras que faltan (@count)",
     "Left: @count": "Faltan: @count",
     "A letter and its state (@letter, @status)": "Una letra y su estado (@letter, @status)",
-    "@letter: @status": "@letter: @status"
+    "@letter: @status": "@letter: @status",
+    "It can be left empty if the letter has a picture.": "Puede quedar vacía si la letra lleva una imagen.",
+    "Picture": "Imagen",
+    "Optional. A picture as the clue, with the text or instead of it.": "Opcional. Una imagen como pista, junto al texto o en su lugar.",
+    "What the picture shows": "Qué se ve en la imagen",
+    "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Para quien no puede verla: los lectores de pantalla la leen en voz alta. Descríbela sin dar la respuesta: «un círculo amarillo con rayos», no «el sol».",
+    "The picture of a clue, for screen readers (@description)": "La imagen de una pista, para lectores de pantalla (@description)",
+    "Picture: @description": "Imagen: @description"
   }
 }

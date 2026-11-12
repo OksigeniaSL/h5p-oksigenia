@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Indizio"
+            "label": "Indizio",
+            "description": "Può restare vuoto se la lettera ha un'immagine."
+          },
+          {
+            "label": "Immagine",
+            "description": "Facoltativo. Un'immagine come indizio, insieme al testo o al suo posto."
+          },
+          {
+            "label": "Che cosa mostra l'immagine",
+            "description": "Per chi non può vederla: i lettori di schermo leggono questo testo ad alta voce. Descrivila senza svelare la risposta: «un cerchio giallo con dei raggi», non «il sole»."
           },
           {
             "label": "Risposta"
@@ -141,6 +150,10 @@
         {
           "label": "La risposta contiene (@letter)",
           "default": "Contiene la @letter"
+        },
+        {
+          "label": "L'immagine di un indizio, per i lettori di schermo (@description)",
+          "default": "Immagine: @description"
         },
         {
           "label": "Campo della risposta",

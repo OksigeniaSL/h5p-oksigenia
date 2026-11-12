@@ -8,7 +8,8 @@
 # random passwords, runs with capped memory and CPU (compose.yaml) and is removed with its volumes at the end, also
 # when something fails. Screenshots go to $H5P_PLATFORM_DIR/report-moodle-<branch> (default ~/.cache/h5p-oksigenia).
 # H5P_MOODLE_PORT picks another port when 8096 is taken. H5P_ONLY=alphabet-wheel, number-line or balance-scale runs only
-# that game, for a quick run.
+# that game, for a quick run. H5P_PREVIOUS=<the Spanish package of the previous release of the wheel> installs it first,
+# with an activity, and checks that activity once the new version is in (upgrade.mjs).
 #
 # @copyright 2026 Oksigenia SL <dev@oksigenia.cc>
 # @license   MIT
@@ -60,7 +61,19 @@ docker cp "$package" $c:/tmp/$(basename "$package")
 docker cp "$work/SHA256SUMS" $c:/tmp/SHA256SUMS
 docker exec $c chown www-data /tmp/install-library.php /tmp/$(basename "$package") /tmp/SHA256SUMS
 install() { docker exec -u www-data $c php /tmp/install-library.php --package=/tmp/$(basename "$package") "$@"; }
-install --sums=/tmp/SHA256SUMS | grep -q 'installed$' || { echo "FAIL the installer did not install the library" >&2; exit 1; }
+# H5P_PREVIOUS=<package.h5p of the previous release>: that version first, with an activity made with it, so the new one
+# goes in as an upgrade and the old activity is checked with it (upgrade.mjs).
+if [ -n "${H5P_PREVIOUS:-}" ]; then
+  docker cp "$here/setup.php" $c:/tmp/setup.php
+  docker cp "$H5P_PREVIOUS" $c:/tmp/previous.h5p
+  docker exec $c chown www-data /tmp/setup.php /tmp/previous.h5p
+  docker exec -u www-data $c php /tmp/install-library.php --package=/tmp/previous.h5p \
+    --sha256="$(sha256sum "$H5P_PREVIOUS" | cut -d' ' -f1)" | grep -q 'installed$' \
+    || { echo "FAIL the previous release did not install" >&2; exit 1; }
+  old_cmid=$(docker exec -u www-data $c php /tmp/setup.php /tmp/previous.h5p 3 'Rueda de la versión anterior' | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s.trim().split("\n").pop()).cmid))')
+  echo "ok   the previous release is on the site, with an activity made with it ($(basename "$H5P_PREVIOUS"))"
+fi
+install --sums=/tmp/SHA256SUMS | grep -qE 'installed( \(the site had [0-9.]+\))?$' || { echo "FAIL the installer did not install the library" >&2; exit 1; }
 echo "ok   the command-line installer installs the library"
 install --sums=/tmp/SHA256SUMS | grep -q 'nothing to do' || { echo "FAIL a second run did not leave it as it was" >&2; exit 1; }
 echo "ok   a second run does nothing"
@@ -75,6 +88,11 @@ cmid=$(docker exec -u www-data h5p-moodle-moodle-1 php /tmp/setup.php /tmp/alpha
 
 node "$here/check.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$cmid" --container h5p-moodle-moodle-1 --db h5p-moodle-db-1 \
   --db-password "$db_password" --admin-password "$admin_password" --shots "$work/../report-moodle-$branch"
+
+if [ -n "${H5P_PREVIOUS:-}" ]; then
+  node "$here/upgrade.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$old_cmid" --db h5p-moodle-db-1 \
+    --db-password "$db_password" --version "$(node -p "const l=require('$root/packages/alphabet-wheel/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")"
+fi
 
 # Never downgrade: with a newer version on the site (a copy marked 1.0.99), the released package leaves it alone.
 python3 - "$package" "$work/newer.h5p" <<'PY'

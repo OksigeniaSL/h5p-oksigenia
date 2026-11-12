@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Clue"
+            "label": "Clue",
+            "description": "It can be left empty if the letter has a picture."
+          },
+          {
+            "label": "Picture",
+            "description": "Optional. A picture as the clue, with the text or instead of it."
+          },
+          {
+            "label": "What the picture shows",
+            "description": "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”."
           },
           {
             "label": "Answer"
@@ -140,6 +149,10 @@
         {
           "label": "The answer contains (@letter)",
           "default": "Contains @letter"
+        },
+        {
+          "label": "The picture of a clue, for screen readers (@description)",
+          "default": "Picture: @description"
         },
         {
           "label": "Answer field",

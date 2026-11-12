@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Pista"
+            "label": "Pista",
+            "description": "Puede quedar vacía si la letra lleva una imagen."
+          },
+          {
+            "label": "Imagen",
+            "description": "Opcional. Una imagen como pista, junto al texto o en su lugar."
+          },
+          {
+            "label": "Qué se ve en la imagen",
+            "description": "Para quien no puede verla: los lectores de pantalla la leen en voz alta. Descríbela sin dar la respuesta: «un círculo amarillo con rayos», no «el sol»."
           },
           {
             "label": "Respuesta"
@@ -141,6 +150,10 @@
         {
           "label": "La respuesta contiene (@letter)",
           "default": "Contiene la @letter"
+        },
+        {
+          "label": "La imagen de una pista, para lectores de pantalla (@description)",
+          "default": "Imagen: @description"
         },
         {
           "label": "Campo de respuesta",

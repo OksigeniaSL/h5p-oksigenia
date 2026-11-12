@@ -142,6 +142,13 @@
     "Count of letters left (@count)": "Aantal letters te gaan (@count)",
     "Left: @count": "Te gaan: @count",
     "A letter and its state (@letter, @status)": "Een letter en zijn stand (@letter, @status)",
-    "@letter: @status": "@letter: @status"
+    "@letter: @status": "@letter: @status",
+    "It can be left empty if the letter has a picture.": "Mag leeg blijven als de letter een afbeelding heeft.",
+    "Picture": "Afbeelding",
+    "Optional. A picture as the clue, with the text or instead of it.": "Optioneel. Een afbeelding als hint, naast de tekst of in plaats ervan.",
+    "What the picture shows": "Wat er op de afbeelding staat",
+    "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Voor wie de afbeelding niet kan zien: schermlezers lezen deze tekst voor. Beschrijf wat erop staat zonder het antwoord te verklappen: ‘een gele cirkel met stralen’, niet ‘de zon’.",
+    "The picture of a clue, for screen readers (@description)": "De afbeelding bij een hint, voor schermlezers (@description)",
+    "Picture: @description": "Afbeelding: @description"
   }
 }

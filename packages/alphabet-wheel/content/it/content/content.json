@@ -70,7 +70,18 @@
     {
       "letter": "L",
       "kind": "starts",
-      "clue": "Satellite naturale della Terra",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Una falce giallo chiaro in un cielo notturno pieno di stelle",
       "answer": "Luna"
     },
     {
@@ -113,6 +124,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Stella che ci dà luce e calore",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Un cerchio giallo con dei raggi in un cielo azzurro",
       "answer": "Sole"
     },
     {

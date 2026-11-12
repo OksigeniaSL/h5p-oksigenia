@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Indice"
+            "label": "Indice",
+            "description": "Peut rester vide si la lettre a une image."
+          },
+          {
+            "label": "Image",
+            "description": "Facultatif. Une image comme indice, avec le texte ou à sa place."
+          },
+          {
+            "label": "Ce que montre l'image",
+            "description": "Pour les joueurs qui ne peuvent pas la voir : les lecteurs d'écran lisent ce texte à voix haute. Décrivez l'image sans donner la réponse : « un disque jaune entouré de rayons », pas « le soleil »."
           },
           {
             "label": "Réponse"
@@ -141,6 +150,10 @@
         {
           "label": "La réponse contient (@letter)",
           "default": "Contient @letter"
+        },
+        {
+          "label": "L'image d'un indice, pour les lecteurs d'écran (@description)",
+          "default": "Image : @description"
         },
         {
           "label": "Champ de réponse",

@@ -19,8 +19,8 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
 
 ## Juegos
 
-- **Rueda de letras** (`H5P.AlphabetWheel`): una pista por cada letra del alfabeto. El alumno escribe la respuesta o
-  pasa la letra a la siguiente vuelta. Un punto por letra. Al terminar, el alumno ve su nota y cómo le fue en cada letra,
+- **Rueda de letras** (`H5P.AlphabetWheel`): una pista por cada letra del alfabeto, con palabras, con una imagen o con
+  las dos. El alumno escribe la respuesta o pasa la letra a la siguiente vuelta. Un punto por letra. Al terminar, el alumno ve su nota y cómo le fue en cada letra,
   y el docente tiene cada intento en el informe de la actividad.
 
   <img src="docs/img/alphabet-wheel-end-es.webp" width="676" alt="El final de una partida: un anillo con 25 de 27, un mensaje, los botones para ver las respuestas o volver a jugar, y las primeras letras con sus respuestas.">

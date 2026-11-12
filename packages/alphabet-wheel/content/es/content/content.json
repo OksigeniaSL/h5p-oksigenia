@@ -71,7 +71,18 @@
     {
       "letter": "L",
       "kind": "starts",
-      "clue": "Satélite natural de la Tierra",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Una forma curva de color amarillo pálido en un cielo de noche con estrellas",
       "answer": "Luna"
     },
     {
@@ -120,6 +131,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Estrella que nos da luz y calor",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Un círculo amarillo con rayos en un cielo azul",
       "answer": "Sol"
     },
     {

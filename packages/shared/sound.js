@@ -43,9 +43,11 @@ function click(a, out, f, when = 0, vol = 0.12) {
 
 /** @type {Object<string, (a: AudioContext, out: AudioNode, value?: number) => void>} */
 const SOUNDS = {
-  ok: (a, out) => {
-    bell(a, out, 880, 0, 0.35, 1.2);
-    bell(a, out, 1318.51, 0.12, 0.35, 1.6);
+  // A right answer: a semitone higher for every right answer in a row before it, up to a fifth.
+  ok: (a, out, streak = 0) => {
+    const k = 2 ** (Math.min(7, Math.max(0, streak)) / 12);
+    bell(a, out, 880 * k, 0, 0.35, 1.2);
+    bell(a, out, 1318.51 * k, 0.12, 0.35, 1.6);
   },
   bad: (a, out) => {
     const t = a.currentTime;

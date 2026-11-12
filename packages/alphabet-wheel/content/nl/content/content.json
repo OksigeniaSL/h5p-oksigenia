@@ -75,7 +75,18 @@
     {
       "letter": "M",
       "kind": "starts",
-      "clue": "Natuurlijke satelliet van de aarde",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Een lichtgele sikkel aan een donkere hemel vol sterren",
       "answer": "Maan"
     },
     {
@@ -156,6 +167,18 @@
       "letter": "Z",
       "kind": "starts",
       "clue": "Ster die ons licht en warmte geeft",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Een gele cirkel met stralen in een blauwe lucht",
       "answer": "Zon"
     }
   ],

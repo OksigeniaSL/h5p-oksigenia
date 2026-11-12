@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Ledtråd"
+            "label": "Ledtråd",
+            "description": "Kan lämnas tom om bokstaven har en bild."
+          },
+          {
+            "label": "Bild",
+            "description": "Valfritt. En bild som ledtråd, tillsammans med texten eller i stället för den."
+          },
+          {
+            "label": "Vad bilden visar",
+            "description": "För den som inte kan se bilden: skärmläsare läser upp texten. Beskriv den utan att avslöja svaret: ”en gul cirkel med strålar”, inte ”solen”."
           },
           {
             "label": "Svar"
@@ -141,6 +150,10 @@
         {
           "label": "Svaret innehåller (@letter)",
           "default": "Innehåller @letter"
+        },
+        {
+          "label": "Bilden till en ledtråd, för skärmläsare (@description)",
+          "default": "Bild: @description"
         },
         {
           "label": "Svarsfält",

@@ -13,6 +13,7 @@ import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds, volumeSlider } from '../../shared/sound.js';
 import { WheelGame } from './game.js';
+import '../../shared/dark.css';
 import './alphabet-wheel.css';
 
 const H5P = window.H5P = window.H5P || {};
@@ -65,6 +66,13 @@ const icon = (name) => {
   return span;
 };
 
+/**
+ * @param {string[]} parts
+ * @returns {string} The parts that have something, one after the other, each closed with a full stop if it has no
+ *   punctuation of its own.
+ */
+const sentences = (parts) => parts.filter(Boolean).map((p) => (/[.!?…:;]$/.test(p) ? p : `${p}.`)).join(' ');
+
 let uid = 0;
 
 export default class AlphabetWheel extends H5P.EventDispatcher {
@@ -80,7 +88,11 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.extras = extras;
     this.l10n = { ...L10N, ...(params.l10n || {}) };
     this.behaviour = { ...BEHAVIOUR, ...(params.behaviour || {}) };
+    // A package exported by Moodle carries the library's name as its title («Alphabet Wheel», in English): not shown.
     this.title = plain(extras.metadata && extras.metadata.title);
+    if (this.title === FALLBACK_TITLE) {
+      this.title = '';
+    }
     this.id = `h5p-aw-${++uid}-${Math.random().toString(36).slice(2, 8)}`;
 
     this.items = (params.items || [])
@@ -88,9 +100,11 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
         letter: plain(it.letter),
         kind: it.kind === 'contains' ? 'contains' : 'starts',
         clue: plain(it.clue),
+        image: it.image && typeof it.image.path === 'string' && it.image.path ? it.image : null,
+        imageAlt: plain(it.imageAlt),
         answers: [plain(it.answer), ...splitAlternatives(plain(it.alternatives))].filter(Boolean),
       }))
-      .filter((it) => it.letter && it.clue && it.answers.length);
+      .filter((it) => it.letter && (it.clue || it.image) && it.answers.length);
 
     this.game = new WheelGame(this.items, createMatcher({
       language: params.language,
@@ -105,6 +119,10 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.confirmingFinish = false;
     this.solutionsShown = false;
     this.feedback = null;
+    /** Right answers in a row, for the sound; not saved. */
+    this.streak = 0;
+    /** @type {{index: number, result: string}|null} The letter just answered, which jumps or shakes once. */
+    this.flash = null;
 
     let timeLeft = this.timeLimit;
     const state = extras.previousState;
@@ -175,7 +193,6 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     if (this.isRoot() && !this.colourWatched) {
       this.colourWatched = true;
       watchPageColourMode((dark) => {
-        this.root.classList.toggle('aw-dark', dark);
         document.documentElement.classList.toggle('h5p-oksigenia-dark', dark);
         paintOuterFrames(dark ? getComputedStyle(this.root).backgroundColor : '');
       });
@@ -224,12 +241,22 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       // The badge goes outwards, so it never covers the next letter.
       li.style.setProperty('--aw-x', Math.cos(angle).toFixed(3));
       li.style.setProperty('--aw-y', Math.sin(angle).toFixed(3));
+      li.addEventListener('animationend', () => {
+        if (this.flash && this.flash.index === i) {
+          this.flash = null;
+          li.classList.remove('aw-flash-ok', 'aw-flash-bad');
+        }
+      });
       return li;
     });
     this.hubLetter = el('span', { class: 'aw-hub-letter', 'aria-hidden': 'true' });
+    // The picture of a clue goes in the middle of the wheel, where it does not push the answer field down; the letter
+    // becomes a small badge under it. They load with the game, so each letter shows its own at once.
+    this.pictures = this.items.map((it) => (it.image ? this.picture(it, 'aw-hub-image', '') : null));
+    this.hubPicture = el('span', { class: 'aw-hub-picture' });
     this.wheel = el('div', { class: 'aw-wheel' }, [
       el('ol', { class: 'aw-letters', 'aria-label': t.wheel }, this.letters),
-      el('div', { class: 'aw-hub', 'aria-hidden': 'true' }, [this.hubLetter]),
+      el('div', { class: 'aw-hub', 'aria-hidden': 'true' }, [this.hubPicture, this.hubLetter]),
     ]);
     this.dotShare = Math.min(DOT_MAX, DOT_BUDGET / Math.max(n, 1));
     this.wheel.style.setProperty('--aw-dot', `${this.dotShare}cqi`);
@@ -241,8 +268,11 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     ]);
     this.pauseButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pause', onclick: () => this.setPaused(!this.paused, true) });
     this.soundButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-sound', onclick: () => this.toggleSound() });
+    this.volume = volumeSlider(this.sounds, t.volume, 'aw-volume', () => this.render());
     this.kind = el('p', { class: 'aw-kind' });
     this.clue = el('p', { class: 'aw-clue' });
+    // What the picture shows, where a screen reader finds it again: the picture itself is in the hidden middle.
+    this.clueOfPicture = el('span', { class: 'aw-clue-picture h5p-oksigenia-sr-only' });
     this.input = /** @type {HTMLInputElement} */ (el('input', {
       id: ids.input, class: 'aw-input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false',
       // No description pointing at the clue: screen readers would read it again each time it changes, before the
@@ -262,7 +292,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
         this.passButton,
       ]),
     ]);
-    this.question = el('div', { class: 'aw-question' }, [this.kind, this.clue, this.form]);
+    this.question = el('div', { class: 'aw-question' }, [this.kind, this.clue, this.clueOfPicture, this.form]);
     this.pausedNote = el('p', { class: 'aw-paused', text: t.paused });
     this.feedbackLine = el('p', { class: 'aw-feedback' });
     this.counts = el('p', { class: 'aw-counts' });
@@ -271,7 +301,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       el('div', { class: 'aw-bar' }, [
         this.round, this.timer ? this.clock : '', this.timer ? this.pauseButton : '',
         this.sounds.enabled ? el('span', { class: 'aw-sound-group' }, [
-          this.soundButton, volumeSlider(this.sounds, t.volume, 'aw-volume', () => this.render()),
+          this.soundButton, this.volume,
         ]) : '',
       ]),
       this.question, this.pausedNote, this.feedbackLine, this.counts, this.finishButton,
@@ -344,6 +374,40 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
   }
 
   /**
+   * @param {WheelItem} it A letter with a picture.
+   * @param {string} className
+   * @param {string} alt What a screen reader says for it: empty where the text beside it says it already.
+   * @returns {HTMLImageElement} The picture of its clue.
+   */
+  picture(it, className, alt) {
+    const img = /** @type {HTMLImageElement} */ (el('img', { class: className, alt, decoding: 'async' }));
+    // setSource also asks for the image with the cross-origin setting of the site, as other content types do.
+    if (typeof H5P.setSource === 'function') {
+      H5P.setSource(img, it.image, this.contentId);
+    } else {
+      img.src = H5P.getPath(it.image.path, this.contentId);
+    }
+    img.addEventListener('load', () => this.trigger('resize'));
+    return img;
+  }
+
+  /**
+   * @param {WheelItem} it
+   * @returns {string} What a screen reader says for the clue: its text and what its picture shows.
+   */
+  clueText(it) {
+    return sentences([it.clue, this.pictureText(it)]);
+  }
+
+  /**
+   * @param {WheelItem} it
+   * @returns {string} «Picture: a yellow circle with rays», or nothing if the clue has no picture or no description.
+   */
+  pictureText(it) {
+    return it.image && it.imageAlt ? fill(this.l10n.picture, { description: it.imageAlt }) : '';
+  }
+
+  /**
    * @param {WheelItem} it
    * @returns {string} «Starts with A» or «Contains A».
    */
@@ -368,7 +432,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.letters.forEach((li, i) => {
       const status = g.status[i];
       const current = phase === 'playing' && i === g.pos;
-      li.className = `aw-letter aw-${status}${current ? ' aw-current' : ''}`;
+      const flash = this.flash && this.flash.index === i ? ` aw-flash-${this.flash.result}` : '';
+      li.className = `aw-letter aw-${status}${current ? ' aw-current' : ''}${flash}`;
       li.toggleAttribute('aria-current', current);
       li.querySelector('.aw-badge').replaceChildren(status in ICONS ? icon(/** @type {IconName} */ (status)) : '');
       li.querySelector('.aw-letter-state').textContent =
@@ -378,15 +443,20 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     if (phase === 'playing') {
       const it = g.current;
       this.hubLetter.textContent = this.paused ? '' : it.letter;
+      // Paused, the clue is hidden, and its picture with it.
+      const picture = this.paused ? null : this.pictures[g.pos];
+      this.hubPicture.replaceChildren(picture || '');
+      this.wheel.classList.toggle('aw-with-picture', !!picture);
       this.round.textContent = fill(t.round, { round: g.round });
       this.kind.textContent = this.kindText(it);
       this.clue.textContent = it.clue;
+      this.clue.hidden = !it.clue;
+      this.clueOfPicture.textContent = this.pictureText(it);
       this.question.hidden = this.paused;
       this.pausedNote.hidden = !this.paused;
       this.pauseButton.textContent = this.paused ? t.resume : t.pause;
       // An icon button: the speaker is known to everyone, and its name is there for screen readers.
-      this.soundButton.replaceChildren(icon(this.sounds.muted ? 'soundOff' : 'soundOn'));
-      this.soundButton.setAttribute('aria-label', this.sounds.muted ? t.soundOn : t.soundOff);
+      this.paintSound();
       this.paintClock();
       this.paintFeedback();
       this.counts.replaceChildren(
@@ -439,6 +509,9 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       const lines = [
         el('p', { class: 'aw-review-clue' }, [el('span', { class: 'aw-review-kind', text: `${this.kindText(it)}. ` }), it.clue]),
       ];
+      if (it.image) {
+        lines.unshift(this.picture(it, 'aw-review-image', it.imageAlt));
+      }
       if (g.given[i] !== null) {
         lines.push(el('p', { class: 'aw-review-given', text: fill(t.yourAnswerWas, { answer: g.given[i] }) }));
       }
@@ -490,7 +563,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     if (!it) {
       return;
     }
-    this.announcer.say(`${before ? `${before} ` : ''}${this.kindText(it)}. ${it.clue}`);
+    this.announcer.say(sentences([before, this.kindText(it), this.clueText(it)]));
   }
 
   /** «Check»: the answer typed for the current letter. */
@@ -508,7 +581,9 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       return;
     }
     const it = this.items[index];
-    this.sounds.play(result === 'ok' ? 'ok' : 'bad');
+    this.sounds.play(result === 'ok' ? 'ok' : 'bad', this.streak);
+    this.streak = result === 'ok' ? this.streak + 1 : 0;
+    this.flash = { index, result };
     let text = this.letterStatus(it.letter, result === 'ok' ? t.correctFeedback : t.wrongFeedback);
     if (result === 'bad' && this.behaviour.showAnswerOnWrong) {
       text += ` ${fill(t.answerWas, { answer: it.answers[0] })}`;
@@ -525,6 +600,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     const index = this.game.pass();
     this.sounds.play('pass');
+    this.streak = 0;
     const text = fill(this.l10n.passedFeedback, { letter: this.items[index].letter });
     this.feedback = { result: 'passed', text };
     this.input.value = '';
@@ -621,6 +697,17 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
   }
 
+  /** The speaker and the volume: crossed out and dimmed when muted, so a muted game does not look as if it sounded low. */
+  paintSound() {
+    const t = this.l10n, off = this.sounds.muted || !this.sounds.volume;
+    // An icon button: the speaker is known to everyone, and its name is there for screen readers.
+    this.soundButton.replaceChildren(icon(off ? 'soundOff' : 'soundOn'));
+    this.soundButton.setAttribute('aria-label', this.sounds.muted ? t.soundOn : t.soundOff);
+    this.volume.classList.toggle('aw-volume-off', this.sounds.muted);
+    this.volume.style.setProperty('--aw-filled', `${Math.round(this.sounds.volume * 100)}%`);
+    this.volume.setAttribute('aria-valuetext', `${Math.round(this.sounds.volume * 100)} %`);
+  }
+
   /** The speaker button: mutes or brings the sound back, and remembers it. */
   toggleSound() {
     this.sounds.setMuted(!this.sounds.muted);
@@ -691,6 +778,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     // A new attempt: its duration in the xAPI result counts from its own start.
     this.activityStartTime = undefined;
     this.feedback = null;
+    this.streak = 0;
+    this.flash = null;
     this.paused = false;
     this.confirmingFinish = false;
     this.solutionsShown = false;

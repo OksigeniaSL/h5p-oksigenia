@@ -77,7 +77,18 @@
     {
       "letter": "M",
       "kind": "starts",
-      "clue": "Natural satellite of the Earth",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "A pale yellow crescent in a night sky full of stars",
       "answer": "Moon"
     },
     {
@@ -114,6 +125,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Star that gives us light and heat",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "A yellow circle with rays in a blue sky",
       "answer": "Sun"
     },
     {

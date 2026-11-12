@@ -10,7 +10,9 @@ export const STATE_VERSION = 1;
  * @typedef {object} WheelItem
  * @property {string} letter
  * @property {'starts'|'contains'} kind
- * @property {string} clue
+ * @property {string} clue Empty when the picture is the whole clue.
+ * @property {{path: string, width?: number, height?: number}|null} [image] A picture for the clue, as the editor saved it.
+ * @property {string} [imageAlt] What the picture shows, for those who cannot see it.
  * @property {string[]} answers The answer first, then the alternatives.
  */
 

@@ -246,6 +246,106 @@ test('odd content: no letters, very long text, encoded characters and markup in 
   expect(result.wide).toBeLessThanOrEqual(0);
 });
 
+test('a picture can be the clue, alone or beside the text, in the middle of the wheel', async ({ page }) => {
+  const frame = await open(page, 'en');
+  const moon = example('en').items.find((it) => it.letter === 'M');
+  await frame.locator('.aw-intro button').click();
+  while (await currentLetter(frame) !== 'M') {
+    await frame.locator('.aw-row button.aw-secondary').click();
+  }
+  // The Moon: a picture and no text. The picture is in the middle, loaded, and the letter is a badge under it.
+  await expect(frame.locator('.aw-wheel')).toHaveClass(/aw-with-picture/);
+  const hubImage = frame.locator('.aw-hub-image');
+  await expect(hubImage).toHaveCount(1);
+  await expect.poll(() => hubImage.evaluate((img) => /** @type {HTMLImageElement} */ (img).naturalWidth)).toBe(480);
+  await expect(hubImage).toHaveAttribute('alt', '');
+  await expect(frame.locator('.aw-hub-letter')).toHaveText('M');
+  await expect(frame.locator('.aw-clue')).toBeHidden();
+  // A screen reader finds what the picture shows in the panel, and hears it with the letter.
+  await expect(frame.locator('.aw-clue-picture')).toHaveText(`Picture: ${moon.imageAlt}`);
+  await expect(frame.locator('[aria-live]')).toHaveText(new RegExp(`Starts with M\\. Picture: ${moon.imageAlt}\\.$`));
+  // The picture fits in the circle of the middle.
+  const fit = await frame.evaluate(() => {
+    const hub = document.querySelector('.aw-hub').getBoundingClientRect();
+    const img = document.querySelector('.aw-hub-image').getBoundingClientRect();
+    const r = hub.width / 2, cx = hub.left + r, cy = hub.top + r;
+    return Math.max(...[[img.left, img.top], [img.right, img.top], [img.left, img.bottom], [img.right, img.bottom]]
+      .map(([x, y]) => Math.hypot(x - cx, y - cy))) <= r + 1;
+  });
+  expect(fit).toBe(true);
+  const axe = await new AxeBuilder({ page }).include({ fromFrames: ['iframe.h5p-iframe', '.aw'] })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
+  expect(axe.violations.map((v) => `${v.id} (${v.nodes.length})`)).toEqual([]);
+
+  await frame.locator('.aw-input').fill('moon');
+  await frame.locator('.aw-input').press('Enter');
+  // The next letter has no picture: the big letter again.
+  await expect(frame.locator('.aw-wheel')).not.toHaveClass(/aw-with-picture/);
+  await expect(frame.locator('.aw-hub-image')).toHaveCount(0);
+  await expect(frame.locator('.aw-hub-letter')).toHaveText('N');
+  await expect(frame.locator('.aw-clue-picture')).toHaveText('');
+
+  // The Sun: the picture and the text.
+  while (await currentLetter(frame) !== 'S') {
+    await frame.locator('.aw-row button.aw-secondary').click();
+  }
+  const sun = example('en').items.find((it) => it.letter === 'S');
+  await expect(frame.locator('.aw-wheel')).toHaveClass(/aw-with-picture/);
+  await expect(frame.locator('.aw-clue')).toHaveText(sun.clue);
+  await expect(frame.locator('.aw-clue-picture')).toHaveText(`Picture: ${sun.imageAlt}`);
+
+  // At the end, each clue with its picture, described.
+  await frame.locator('.aw-finish').click();
+  await frame.locator('.aw-finish').click();
+  await expect(frame.locator('.aw-review-image')).toHaveCount(2);
+  await expect(frame.locator('.aw-review-item.aw-ok .aw-review-image')).toHaveAttribute('alt', moon.imageAlt);
+});
+
+test('pictures: paused, they hide with the clue; a letter with neither text nor picture is left out', async ({ page }) => {
+  const frame = await open(page, 'en');
+  const result = await frame.evaluate(() => {
+    const contentId = H5P.instances[0].contentId;
+    const box = document.createElement('div');
+    document.body.append(box);
+    const sun = { path: 'images/sun.png', mime: 'image/png', width: 480, height: 480 };
+    const wheel = new H5P.AlphabetWheel({
+      items: [
+        { letter: 'S', kind: 'starts', image: sun, answer: 'Sun' },
+        { letter: 'T', kind: 'starts', answer: 'Tree' },
+        { letter: 'U', kind: 'starts', clue: 'Under the rain', answer: 'Umbrella' },
+      ],
+      timeLimit: 60,
+    }, contentId);
+    wheel.attach(H5P.jQuery(box));
+    wheel.start();
+    const letters = box.querySelectorAll('.aw-letter').length;
+    const withPicture = box.querySelectorAll('.aw-with-picture .aw-hub-image').length;
+    wheel.setPaused(true, false);
+    const paused = box.querySelectorAll('.aw-with-picture, .aw-hub-image').length;
+    wheel.setPaused(false, false);
+    // A right answer makes its letter jump once.
+    wheel.input.value = 'sun';
+    wheel.check();
+    const jump = box.querySelector('.aw-letter').classList.contains('aw-flash-ok');
+    wheel.timer.pause();
+    return { letters, withPicture, paused, jump, streak: wheel.streak };
+  });
+  expect(result).toEqual({ letters: 2, withPicture: 1, paused: 0, jump: true, streak: 1 });
+});
+
+test('a package exported by Moodle, titled with the name of the library, shows no title', async ({ page }) => {
+  const frame = await open(page, 'en');
+  const titles = await frame.evaluate(() => ['Alphabet Wheel', 'Christmas alphabet'].map((title) => {
+    const box = document.createElement('div');
+    document.body.append(box);
+    const wheel = new H5P.AlphabetWheel({ items: [{ letter: 'A', kind: 'starts', clue: 'A', answer: 'Apple' }] }, 999,
+      { metadata: { title } });
+    wheel.attach(H5P.jQuery(box));
+    return box.querySelectorAll('.aw-title').length;
+  }));
+  expect(titles).toEqual([0, 1]);
+});
+
 test('the Ñ is not the N', async ({ page }) => {
   const frame = await open(page, 'es');
   await frame.locator('.aw-intro button').click();

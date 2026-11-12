@@ -76,7 +76,18 @@
     {
       "letter": "M",
       "kind": "starts",
-      "clue": "Natürlicher Begleiter der Erde, der nachts am Himmel leuchtet",
+      "image": {
+        "path": "images/moon.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Eine schmale hellgelbe Sichel am Nachthimmel voller Sterne",
       "answer": "Mond"
     },
     {
@@ -113,6 +124,18 @@
       "letter": "S",
       "kind": "starts",
       "clue": "Stern, der uns Licht und Wärme gibt",
+      "image": {
+        "path": "images/sun.png",
+        "mime": "image/png",
+        "width": 480,
+        "height": 480,
+        "copyright": {
+          "license": "CC BY",
+          "version": "4.0",
+          "author": "Oksigenia"
+        }
+      },
+      "imageAlt": "Ein gelber Kreis mit Strahlen am blauen Himmel",
       "answer": "Sonne"
     },
     {

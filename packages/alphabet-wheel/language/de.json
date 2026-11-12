@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Hinweis"
+            "label": "Hinweis",
+            "description": "Kann leer bleiben, wenn der Buchstabe ein Bild hat."
+          },
+          {
+            "label": "Bild",
+            "description": "Optional. Ein Bild als Hinweis, zusätzlich zum Text oder an seiner Stelle."
+          },
+          {
+            "label": "Was das Bild zeigt",
+            "description": "Für alle, die das Bild nicht sehen können: Screenreader lesen diesen Text vor. Beschreiben, ohne die Antwort zu verraten: „ein gelber Kreis mit Strahlen“, nicht „die Sonne“."
           },
           {
             "label": "Antwort"
@@ -141,6 +150,10 @@
         {
           "label": "Die Antwort enthält (@letter)",
           "default": "Enthält @letter"
+        },
+        {
+          "label": "Das Bild eines Hinweises, für Screenreader (@description)",
+          "default": "Bild: @description"
         },
         {
           "label": "Antwortfeld",

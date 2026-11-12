@@ -22,7 +22,16 @@
             ]
           },
           {
-            "label": "Hint"
+            "label": "Hint",
+            "description": "Mag leeg blijven als de letter een afbeelding heeft."
+          },
+          {
+            "label": "Afbeelding",
+            "description": "Optioneel. Een afbeelding als hint, naast de tekst of in plaats ervan."
+          },
+          {
+            "label": "Wat er op de afbeelding staat",
+            "description": "Voor wie de afbeelding niet kan zien: schermlezers lezen deze tekst voor. Beschrijf wat erop staat zonder het antwoord te verklappen: ‘een gele cirkel met stralen’, niet ‘de zon’."
           },
           {
             "label": "Antwoord"
@@ -141,6 +150,10 @@
         {
           "label": "Het antwoord bevat (@letter)",
           "default": "Bevat de @letter"
+        },
+        {
+          "label": "De afbeelding bij een hint, voor schermlezers (@description)",
+          "default": "Afbeelding: @description"
         },
         {
           "label": "Antwoordveld",
