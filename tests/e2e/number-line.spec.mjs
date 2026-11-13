@@ -6,6 +6,10 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+/** What H5P does to plain text fields when a package is uploaded: htmlspecialchars, quotes included. */
+const escapeAsH5P = (text) => String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+
 // No animation: the jumps land at once, and a whole game takes seconds.
 test.use({ reducedMotion: 'reduce' });
 
@@ -88,6 +92,15 @@ for (const topic of TOPICS) {
     expect(statement.result.response.split('[,]')).toHaveLength(6);
   });
 }
+
+test('texts kept with entities by the platform show as text', async ({ page }) => {
+  const frame = await open(page, 'fr');
+  const texts = await frame.evaluate((l10n) => {
+    const line = new H5P.NumberLine({ l10n }, 999);
+    return [line.l10n.retry, line.l10n.cheerKeep];
+  }, { retry: escapeAsH5P('Rejouer l\'exercice & «gagner»'), cheerKeep: escapeAsH5P('Continue à t\'entraîner !') });
+  expect(texts).toEqual(["Rejouer l'exercice & «gagner»", "Continue à t'entraîner !"]);
+});
 
 test('the first screen offers every topic, and there is a way back from the end', async ({ page }) => {
   const frame = await open(page);

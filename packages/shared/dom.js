@@ -42,6 +42,17 @@ export function plain(value) {
 }
 
 /**
+ * The texts of a game: its defaults, with those of the content on top. Once a package is uploaded, H5P keeps plain text
+ * fields with entities («t&#039;entraîner»), so each one is turned back into text, to be set with textContent.
+ * @param {Object<string, string>} defaults
+ * @param {Object<string, string>} [given]
+ * @returns {Object<string, string>}
+ */
+export function texts(defaults, given) {
+  return Object.fromEntries(Object.entries({ ...defaults, ...(given || {}) }).map(([key, value]) => [key, plain(value)]));
+}
+
+/**
  * Replaces @placeholders in a translated text.
  * @param {string} text
  * @param {Object<string, string|number>} values

@@ -317,6 +317,10 @@
   touch-action: none;
 }
 
+.h5p-balance-scale .bs-volume.bs-volume-off {
+  opacity: 0.45;
+}
+
 .h5p-balance-scale .bs-volume::-webkit-slider-runnable-track {
   height: 10px;
   border-radius: 5px;

@@ -6,6 +6,10 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+/** What H5P does to plain text fields when a package is uploaded: htmlspecialchars, quotes included. */
+const escapeAsH5P = (text) => String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+
 // No animation: the beam settles at once, and a whole game takes seconds.
 test.use({ reducedMotion: 'reduce' });
 
@@ -108,6 +112,15 @@ for (const topic of ['equalities', 'groups', 'share', 'bag']) {
     expect(statement.result.response.split('[,]')).toHaveLength(6);
   });
 }
+
+test('texts kept with entities by the platform show as text', async ({ page }) => {
+  const frame = await open(page, 'en');
+  const texts = await frame.evaluate((l10n) => {
+    const scale = new H5P.BalanceScale({ l10n }, 999);
+    return [scale.l10n.retry, scale.l10n.cheerKeep];
+  }, { retry: escapeAsH5P('Play again & "win"'), cheerKeep: escapeAsH5P("Don't give up!") });
+  expect(texts).toEqual(['Play again & "win"', "Don't give up!"]);
+});
 
 test('the scale is painted, and what is put on it flies to the equality written under it', async ({ page }) => {
   const frame = await open(page);

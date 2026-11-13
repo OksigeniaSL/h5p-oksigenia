@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Alphabet Wheel 1.0.5 (13 November 2026)
+## Alphabet Wheel 1.0.6 (not released yet)
 
 - A picture can be the clue of a letter, beside its text or instead of it, as a teacher asked. With the wheel beside
   the clue, it goes in the middle of the wheel, so it does not push the answer field down, with the letter as a badge
@@ -19,16 +19,29 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 - In a frame of another site, whose page it cannot read (as in the Moodle app's online player), it follows the dark
   mode of the device. A package exported by Moodle, which carries the library's name as its title, shows no title.
 - The dark mode of the page comes from the same styles as in the other games.
+- Texts of the game with an apostrophe or quotes (in French and Italian) showed as codes such as «&#039;» once the
+  package was uploaded to a platform, which keeps them that way; they show as text again. In French and Italian the
+  result reads well with any number: «Lettres trouvées : 1 sur 26».
 
-Version 1.0.4 was a test version, not released.
+Versions 1.0.4 and 1.0.5 were test versions on a development site, not released.
 
-## Number Line 1.0.3 (13 November 2026)
+## Number Line 1.0.4 (not released yet)
 
 - The piece lands with weight: it squashes a little on its foot and comes back with a small bounce, not when the system
   asks for less motion. Each right round in a row rings a little higher.
 - The volume has a wide slider with a big thumb, easy to touch on a board, and it is dimmed while the sound is muted.
 - In a frame of another site, whose page it cannot read (as in the Moodle app's online player), it follows the dark
   mode of the device. A package exported by Moodle, which carries the library's name as its title, shows no title.
+- Texts of the game with an apostrophe or quotes (in English, French and Italian) showed as codes such as «&#039;» once
+  the package was uploaded to a platform, which keeps them that way; they show as text again.
+
+Version 1.0.3 was a test version on a development site, not released.
+
+## Balance Scale 1.0.1 (not released yet)
+
+- Texts of the game with an apostrophe or quotes (in English, French and Italian) showed as codes such as «&#039;» once
+  the package was uploaded to a platform, which keeps them that way; they show as text again.
+- The volume slider is dimmed while the sound is muted, so a muted game does not look as if it sounded low.
 
 ## Balance Scale 1.0.0 (7 November 2026)
 

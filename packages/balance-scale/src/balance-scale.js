@@ -8,7 +8,7 @@
 import semantics from '../semantics.json';
 import library from '../library.json';
 import {
-  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, watchPageColourMode,
+  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, texts, watchPageColourMode,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, reducedMotion, scoreRing } from '../../shared/cheer.js';
@@ -109,7 +109,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     params = params || {};
     this.contentId = contentId;
     this.extras = extras;
-    this.l10n = { ...L10N, ...(params.l10n || {}) };
+    this.l10n = texts(L10N, params.l10n);
     this.behaviour = { ...BEHAVIOUR, ...(params.behaviour || {}) };
     this.tuning = { ...TUNING, ...(params.tuning || {}) };
     // A package exported by Moodle carries the library's name as its title («Balance Scale», in English): not shown.
@@ -480,6 +480,8 @@ export default class BalanceScale extends H5P.EventDispatcher {
     // An icon button: the speaker is known to everyone, and its name is there for screen readers.
     this.soundButton.replaceChildren(icon(off ? 'soundOff' : 'soundOn'));
     this.soundButton.setAttribute('aria-label', this.sounds.muted ? t.soundOn : t.soundOff);
+    // Dimmed while muted, so a muted game does not look as if it sounded low.
+    this.volume.classList.toggle('bs-volume-off', this.sounds.muted);
     this.volume.style.setProperty('--bs-filled', `${Math.round(this.sounds.volume * 100)}%`);
     this.volume.setAttribute('aria-valuetext', `${Math.round(this.sounds.volume * 100)} %`);
   }

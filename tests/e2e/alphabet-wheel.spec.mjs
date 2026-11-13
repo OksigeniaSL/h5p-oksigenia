@@ -7,6 +7,10 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readFileSync } from 'node:fs';
 
+/** What H5P does to plain text fields when a package is uploaded: htmlspecialchars, quotes included. */
+const escapeAsH5P = (text) => String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+
 const example = (lang) => JSON.parse(readFileSync(
   new URL(`../../packages/alphabet-wheel/content/${lang}/content/content.json`, import.meta.url), 'utf8',
 ));
@@ -378,6 +382,36 @@ test('a double tap on a button does not count twice', async ({ page }) => {
   await frame.page().waitForTimeout(PERSON_MS);
   await frame.locator('.aw-row button.aw-secondary').click();
   await expect(frame.locator('.aw-letter.aw-passed')).toHaveCount(2);
+});
+
+test('texts kept with entities by the platform show as text, and the French end screen reads well', async ({ page }) => {
+  const frame = await open(page, 'fr');
+  const fr = JSON.parse(readFileSync(new URL('../../packages/alphabet-wheel/language/fr.json', import.meta.url), 'utf8'));
+  const semantics = JSON.parse(readFileSync(new URL('../../packages/alphabet-wheel/semantics.json', import.meta.url), 'utf8'));
+  const index = semantics.findIndex((f) => f.name === 'l10n');
+  const l10n = Object.fromEntries(semantics[index].fields.map((f, i) => [f.name, escapeAsH5P(fr.semantics[index].fields[i].default)]));
+  const shown = await frame.evaluate((texts) => {
+    const box = document.createElement('div');
+    document.body.append(box);
+    const wheel = new H5P.AlphabetWheel({ items: [
+      { letter: 'A', kind: 'starts', clue: 'Fruit', answer: 'Abricot' },
+      { letter: 'B', kind: 'starts', clue: 'Couleur', answer: 'Bleu' },
+      { letter: 'C', kind: 'starts', clue: 'Animal', answer: 'Chat' },
+    ], l10n: texts }, 999);
+    wheel.attach(H5P.jQuery(box));
+    wheel.start();
+    wheel.input.value = 'abricot';
+    wheel.check();
+    wheel.game.finish('stopped');
+    wheel.afterFinish('');
+    return [box.querySelector('.aw-cheer-title').textContent, box.querySelector('.aw-result-title').textContent];
+  }, l10n);
+  const french = (name) => fr.semantics[index].fields[semantics[index].fields.findIndex((f) => f.name === name)].default;
+  expect(l10n.cheerKeep).toContain('&#039;');
+  // French puts a thin space before «!»: the texts are compared with the language file, unescaped.
+  expect(shown).toEqual([french('cheerKeep'), french('resultTitle').replace('@score', '1').replace('@total', '3')]);
+  expect(shown[0]).toMatch(/^Continue à t'entraîner\s!$/);
+  expect(shown[1]).toBe('Lettres trouvées : 1 sur 3');
 });
 
 test('the Ñ is not the N', async ({ page }) => {

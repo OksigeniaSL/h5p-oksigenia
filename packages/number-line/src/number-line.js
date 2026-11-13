@@ -6,7 +6,7 @@
 
 import semantics from '../semantics.json';
 import {
-  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, watchPageColourMode,
+  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, texts, watchPageColourMode,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
@@ -101,7 +101,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     params = params || {};
     this.contentId = contentId;
     this.extras = extras;
-    this.l10n = { ...L10N, ...(params.l10n || {}) };
+    this.l10n = texts(L10N, params.l10n);
     this.behaviour = { ...BEHAVIOUR, ...(params.behaviour || {}) };
     // A package exported by Moodle carries the library's name as its title («Number Line», in English): not shown.
     this.title = plain(extras.metadata && extras.metadata.title);

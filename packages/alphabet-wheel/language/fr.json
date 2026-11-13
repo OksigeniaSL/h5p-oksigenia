@@ -261,7 +261,7 @@
         },
         {
           "label": "Résultat (@score, @total)",
-          "default": "@score lettres trouvées sur @total"
+          "default": "Lettres trouvées : @score sur @total"
         },
         {
           "label": "Message final : toutes les lettres trouvées",

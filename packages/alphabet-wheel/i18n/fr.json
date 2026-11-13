@@ -102,7 +102,7 @@
     "Round (@round)": "Tour (@round)",
     "Round @round": "Tour @round",
     "Result (@score, @total)": "Résultat (@score, @total)",
-    "@score of @total letters right": "@score lettres trouvées sur @total",
+    "@score of @total letters right": "Lettres trouvées : @score sur @total",
     "End message: every letter right": "Message final : toutes les lettres trouvées",
     "Perfect wheel!": "Roue complète !",
     "End message: 80 % or more": "Message final : 80 % ou plus",

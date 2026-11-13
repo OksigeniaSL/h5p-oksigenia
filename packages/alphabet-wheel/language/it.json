@@ -261,7 +261,7 @@
         },
         {
           "label": "Risultato (@score, @total)",
-          "default": "@score lettere giuste su @total"
+          "default": "Lettere giuste: @score su @total"
         },
         {
           "label": "Messaggio finale: tutte le lettere giuste",
