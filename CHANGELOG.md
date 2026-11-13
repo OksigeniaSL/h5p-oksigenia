@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Alphabet Wheel 1.0.5 (not released yet)
+## Alphabet Wheel 1.0.5 (13 November 2026)
 
 - A picture can be the clue of a letter, beside its text or instead of it, as a teacher asked. With the wheel beside
   the clue, it goes in the middle of the wheel, so it does not push the answer field down, with the letter as a badge
@@ -22,7 +22,7 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
 Version 1.0.4 was a test version, not released.
 
-## Number Line 1.0.3 (not released yet)
+## Number Line 1.0.3 (13 November 2026)
 
 - The piece lands with weight: it squashes a little on its foot and comes back with a small bounce, not when the system
   asks for less motion. Each right round in a row rings a little higher.
