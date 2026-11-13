@@ -41,6 +41,9 @@ const TICK_FROM = 5;
 const ANNOUNCED = { 60: 'oneMinuteLeft', 10: 'tenSecondsLeft' };
 /** Wait for the end bells, so they come after the sound of the last answer. */
 const CHEER_DELAY_MS = 500;
+/** After a move, the buttons do not take a tap for this long: a double tap on a slow board would pass the next letter
+ * unseen, or wipe the result of the last one with an empty answer. */
+const DOUBLE_TAP_MS = 400;
 /** Confetti pieces by how the game went. */
 const CONFETTI = { perfect: 90, great: 40 };
 
@@ -123,6 +126,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.streak = 0;
     /** @type {{index: number, result: string}|null} The letter just answered, which jumps or shakes once. */
     this.flash = null;
+    /** When the last move was made, in ms: taps on the buttons right after it are a double tap. */
+    this.movedAt = 0;
 
     let timeLeft = this.timeLimit;
     const state = extras.previousState;
@@ -250,9 +255,12 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       return li;
     });
     this.hubLetter = el('span', { class: 'aw-hub-letter', 'aria-hidden': 'true' });
-    // The picture of a clue goes in the middle of the wheel, where it does not push the answer field down; the letter
-    // becomes a small badge under it. They load with the game, so each letter shows its own at once.
+    // The picture of a clue goes in the middle of the wheel when the panel is beside it, where it does not push the
+    // answer field down, and the letter becomes a small badge under it. When the wheel is above the panel (a phone), it
+    // goes beside the clue instead, just above the field: the keyboard of a phone covers the wheel. The styles show one or
+    // the other. They load with the game, so each letter shows its own at once.
     this.pictures = this.items.map((it) => (it.image ? this.picture(it, 'aw-hub-image', '') : null));
+    this.panelPictures = this.items.map((it) => (it.image ? this.picture(it, 'aw-clue-image', '') : null));
     this.hubPicture = el('span', { class: 'aw-hub-picture' });
     this.wheel = el('div', { class: 'aw-wheel' }, [
       el('ol', { class: 'aw-letters', 'aria-label': t.wheel }, this.letters),
@@ -271,6 +279,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.volume = volumeSlider(this.sounds, t.volume, 'aw-volume', () => this.render());
     this.kind = el('p', { class: 'aw-kind' });
     this.clue = el('p', { class: 'aw-clue' });
+    this.cluePicture = el('span', { class: 'aw-clue-picture-box' });
     // What the picture shows, where a screen reader finds it again: the picture itself is in the hidden middle.
     this.clueOfPicture = el('span', { class: 'aw-clue-picture h5p-oksigenia-sr-only' });
     this.input = /** @type {HTMLInputElement} */ (el('input', {
@@ -279,9 +288,15 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       // result of the last letter. The clue is announced once, after that result (announceCurrent).
       enterkeyhint: 'done', maxlength: '100',
     }));
-    this.passButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pass', onclick: () => this.pass() }, [icon('passed'), t.pass]);
+    this.passButton = el('button', {
+      type: 'button', class: 'aw-button aw-secondary aw-pass', onclick: () => !this.tooSoon() && this.pass(),
+    }, [icon('passed'), t.pass]);
     const onsubmit = (e) => {
       e.preventDefault();
+      // An empty answer right after a move is the second tap of a double tap: the result of the last letter stays.
+      if (!this.input.value.trim() && this.tooSoon()) {
+        return;
+      }
       this.check();
     };
     this.form = el('form', { class: 'aw-form', novalidate: true, onsubmit }, [
@@ -292,7 +307,9 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
         this.passButton,
       ]),
     ]);
-    this.question = el('div', { class: 'aw-question' }, [this.kind, this.clue, this.clueOfPicture, this.form]);
+    this.question = el('div', { class: 'aw-question' }, [
+      this.kind, el('div', { class: 'aw-clue-row' }, [this.cluePicture, this.clue]), this.clueOfPicture, this.form,
+    ]);
     this.pausedNote = el('p', { class: 'aw-paused', text: t.paused });
     this.feedbackLine = el('p', { class: 'aw-feedback' });
     this.counts = el('p', { class: 'aw-counts' });
@@ -352,9 +369,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       return;
     }
     const fit = () => {
-      const style = getComputedStyle(this.root);
-      const inner = this.root.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-      this.root.classList.toggle('aw-wide', inner >= WIDE_EM * parseFloat(style.fontSize));
+      this.root.classList.toggle('aw-wide', this.isWide());
       const wheel = this.wheel.clientWidth;
       this.wheel.style.setProperty('--aw-dot-px', `${(wheel * this.dotShare) / 100}px`);
       this.wheel.style.setProperty('--aw-hub-px', `${wheel * HUB_SHARE}px`);
@@ -362,6 +377,18 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     const observer = new ResizeObserver(fit);
     observer.observe(this.root);
     observer.observe(this.wheel);
+  }
+
+  /** @returns {boolean} Whether the game is wide enough for the wheel beside the panel (WIDE_EM, as the styles). */
+  isWide() {
+    const style = getComputedStyle(this.root);
+    const inner = this.root.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    return inner >= WIDE_EM * parseFloat(style.fontSize);
+  }
+
+  /** @returns {boolean} Whether a tap on a button comes too soon after the last move: a double tap. */
+  tooSoon() {
+    return Date.now() - this.movedAt < DOUBLE_TAP_MS;
   }
 
   /**
@@ -447,6 +474,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       const picture = this.paused ? null : this.pictures[g.pos];
       this.hubPicture.replaceChildren(picture || '');
       this.wheel.classList.toggle('aw-with-picture', !!picture);
+      this.cluePicture.replaceChildren(this.panelPictures[g.pos] || '');
+      this.question.classList.toggle('aw-with-picture', !!picture);
       this.round.textContent = fill(t.round, { round: g.round });
       this.kind.textContent = this.kindText(it);
       this.clue.textContent = it.clue;
@@ -613,6 +642,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
    */
   afterMove(said) {
     this.confirmingFinish = false;
+    this.movedAt = Date.now();
     if (this.game.phase === 'finished') {
       this.afterFinish(said);
       return;
@@ -620,6 +650,11 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.triggerXAPI('progressed');
     this.render();
     this.input.focus();
+    // On a phone the keyboard stays open over the lower half, and the page does not always learn of it (the Moodle app):
+    // the field and the clue above it go back to the top after each move, as at the start.
+    if (!this.isWide() && matchMedia('(pointer: coarse)').matches) {
+      bringIntoView(this.input, { keyboard: true });
+    }
     this.announceCurrent(said);
   }
 

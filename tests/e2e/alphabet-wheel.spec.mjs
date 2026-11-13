@@ -28,6 +28,17 @@ async function open(page, lang, session = 'null') {
 const currentLetter = (frame) => frame.locator('.aw-letter[aria-current] .aw-letter-text').textContent();
 const verbs = (frame) => frame.evaluate(() => window.statements.map((s) => s.verb.id.split('/').pop()));
 
+/** After a move the buttons ignore taps for 400 ms (a double tap on a slow board): a person is never quicker. */
+const PERSON_MS = 450;
+
+/** Passes letters, at a person's pace, until the given one is asked. */
+async function passTo(frame, letter) {
+  while (await currentLetter(frame) !== letter) {
+    await frame.locator('.aw-row button.aw-secondary').click();
+    await frame.page().waitForTimeout(PERSON_MS);
+  }
+}
+
 async function startWithKeyboard(page, frame) {
   await frame.locator('.aw-intro button').focus();
   await page.keyboard.press('Enter');
@@ -44,6 +55,7 @@ test('a whole wheel played with the keyboard sends one result, with one point pe
     const letter = await currentLetter(frame);
     if (letter === 'E' && !passedE) {
       passedE = true;
+      await page.waitForTimeout(PERSON_MS);
       await page.keyboard.press('Tab');
       await page.keyboard.press('Tab');
       await expect(frame.locator('.aw-row button.aw-secondary')).toBeFocused();
@@ -165,6 +177,7 @@ test('answers sound, and the mute button silences them and is remembered', async
   const before = await oscillators(frame);
   await frame.locator('.aw-input').fill('bote');
   await frame.locator('.aw-input').press('Enter');
+  await page.waitForTimeout(PERSON_MS);
   await frame.locator('.aw-row button.aw-secondary').click();
   await page.waitForTimeout(300);
   expect(await oscillators(frame)).toBe(before);
@@ -250,9 +263,7 @@ test('a picture can be the clue, alone or beside the text, in the middle of the 
   const frame = await open(page, 'en');
   const moon = example('en').items.find((it) => it.letter === 'M');
   await frame.locator('.aw-intro button').click();
-  while (await currentLetter(frame) !== 'M') {
-    await frame.locator('.aw-row button.aw-secondary').click();
-  }
+  await passTo(frame, 'M');
   // The Moon: a picture and no text. The picture is in the middle, loaded, and the letter is a badge under it.
   await expect(frame.locator('.aw-wheel')).toHaveClass(/aw-with-picture/);
   const hubImage = frame.locator('.aw-hub-image');
@@ -286,9 +297,7 @@ test('a picture can be the clue, alone or beside the text, in the middle of the 
   await expect(frame.locator('.aw-clue-picture')).toHaveText('');
 
   // The Sun: the picture and the text.
-  while (await currentLetter(frame) !== 'S') {
-    await frame.locator('.aw-row button.aw-secondary').click();
-  }
+  await passTo(frame, 'S');
   const sun = example('en').items.find((it) => it.letter === 'S');
   await expect(frame.locator('.aw-wheel')).toHaveClass(/aw-with-picture/);
   await expect(frame.locator('.aw-clue')).toHaveText(sun.clue);
@@ -346,12 +355,35 @@ test('a package exported by Moodle, titled with the name of the library, shows n
   expect(titles).toEqual([0, 1]);
 });
 
+test('a double tap on a button does not count twice', async ({ page }) => {
+  const frame = await open(page, 'en');
+  await frame.locator('.aw-intro button').click();
+  // Two taps on «Pass» at once pass one letter.
+  await frame.evaluate(() => {
+    const pass = /** @type {HTMLElement} */ (document.querySelector('.aw-row button.aw-secondary'));
+    pass.click();
+    pass.click();
+  });
+  await expect(frame.locator('.aw-letter.aw-passed')).toHaveCount(1);
+  await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('B');
+  // A right answer and, at once, an empty one: the result of the right answer stays.
+  await frame.locator('.aw-input').fill('bicycle');
+  await frame.evaluate(() => {
+    const form = /** @type {HTMLFormElement} */ (document.querySelector('.aw-form'));
+    form.requestSubmit();
+    form.requestSubmit();
+  });
+  await expect(frame.locator('.aw-feedback')).toHaveClass(/aw-feedback-ok/);
+  // At a person's pace, both buttons work.
+  await frame.page().waitForTimeout(PERSON_MS);
+  await frame.locator('.aw-row button.aw-secondary').click();
+  await expect(frame.locator('.aw-letter.aw-passed')).toHaveCount(2);
+});
+
 test('the Ñ is not the N', async ({ page }) => {
   const frame = await open(page, 'es');
   await frame.locator('.aw-intro button').click();
-  while (await currentLetter(frame) !== 'Ñ') {
-    await frame.locator('.aw-row button.aw-secondary').click();
-  }
+  await passTo(frame, 'Ñ');
   await frame.locator('.aw-input').fill('arana');
   await frame.locator('.aw-input').press('Enter');
   await expect(frame.locator('.aw-feedback')).toContainText('Era «Araña»');
@@ -365,6 +397,7 @@ test('a reload in the middle of the game takes it up again, paused', async ({ pa
   await frame.locator('.aw-input').press('Enter');
   await frame.locator('.aw-input').fill('car');
   await frame.locator('.aw-input').press('Enter');
+  await page.waitForTimeout(PERSON_MS);
   await frame.locator('.aw-row button.aw-secondary').click();
   // H5P saves the state three seconds after each move.
   await page.waitForTimeout(3500);
@@ -505,6 +538,40 @@ test.describe('on a touch screen', () => {
     await frame.locator('.aw-pause').tap();
     await clear();
   });
+
+  test('a picture goes beside the clue, above the field, and they come back to the upper part after each move', async ({ page }) => {
+    const frame = await open(page, 'en');
+    await page.evaluate(() => {
+      const spacer = () => Object.assign(document.createElement('div'), { style: 'height: 500px' });
+      document.body.prepend(spacer());
+      document.body.append(spacer());
+    });
+    await frame.locator('.aw-intro button').tap();
+    await passTo(frame, 'M');
+    // The wheel keeps the big letter; the picture is in the panel, loaded, beside where the clue goes.
+    await expect(frame.locator('.aw-hub-picture')).toBeHidden();
+    await expect(frame.locator('.aw-hub-letter')).toHaveText('M');
+    const picture = frame.locator('.aw-clue-image');
+    await expect(picture).toBeVisible();
+    await expect.poll(() => picture.evaluate((img) => /** @type {HTMLImageElement} */ (img).naturalWidth)).toBe(480);
+    expect((await picture.boundingBox()).height).toBeGreaterThan(70);
+    const clear = () => expect.poll(async () => {
+      const box = await picture.boundingBox();
+      const field = await frame.locator('.aw-input').boundingBox();
+      return !!box && !!field && box.y >= 0 && field.y + field.height <= height * 0.6;
+    }, { message: 'picture and field above the keyboard' }).toBe(true);
+    await clear();
+
+    // The page scrolled away, as when the frames around grow after a move: an answer brings the field and the picture
+    // of the next clue back. The Sun comes after passing to it.
+    await passTo(frame, 'R');
+    await page.waitForTimeout(PERSON_MS);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await frame.locator('.aw-input').fill('rainbow');
+    await frame.locator('.aw-input').press('Enter');
+    await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('S');
+    await clear();
+  });
 });
 
 test('the game changes along with the dark mode of the page, and stays light without it', async ({ page }) => {
@@ -554,6 +621,7 @@ for (const [width, theme] of SCREENS) {
     await frame.locator('.aw-input').press('Enter');
     await frame.locator('.aw-input').fill('bote');
     await frame.locator('.aw-input').press('Enter');
+    await page.waitForTimeout(PERSON_MS);
     await frame.locator('.aw-row button.aw-secondary').click();
     await axe('game');
     await frame.locator('.aw-finish').click();

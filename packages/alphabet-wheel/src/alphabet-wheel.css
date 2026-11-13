@@ -26,7 +26,8 @@
 
   position: relative;
 
-  container-type: inline-size;
+  /* Named: the wheel is a container too, and what is inside it asks about the width of the whole game. */
+  container: aw / inline-size;
   padding: 1em;
   color: var(--aw-ink);
   background: var(--aw-surface);
@@ -193,7 +194,7 @@
 }
 
 /* 34em, 26cqi and the letters' --aw-dot are also in the script (WIDE_EM, HUB_SHARE, dotShare), for the browsers below. */
-@container (min-width: 34em) {
+@container aw (min-width: 34em) {
   .h5p-alphabet-wheel .aw-game {
     grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
   }
@@ -351,17 +352,11 @@
   line-height: 1;
 }
 
-/* A clue with a picture: the picture in the middle, inside a square that fits in the circle whatever its shape, and the
-   letter as a badge on the lower edge. */
+/* A clue with a picture. With the panel beside the wheel, the picture goes in the middle, inside a square that fits in the
+   circle whatever its shape, and the letter is a badge on the lower edge. With the wheel above the panel (a phone), the
+   picture goes beside the clue, just above the answer field, and the middle keeps the big letter. */
 .h5p-alphabet-wheel .aw-hub-picture {
   display: none;
-}
-
-.h5p-alphabet-wheel .aw-with-picture .aw-hub-picture {
-  display: grid;
-  place-items: center;
-  width: 70%;
-  height: 70%;
 }
 
 .h5p-alphabet-wheel .aw-hub-image {
@@ -371,20 +366,51 @@
   object-fit: contain;
 }
 
-.h5p-alphabet-wheel .aw-with-picture .aw-hub-letter {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  display: grid;
-  place-items: center;
-  width: 1.7em;
-  aspect-ratio: 1;
-  border: 2px solid var(--aw-card);
-  border-radius: 50%;
-  background: var(--aw-main);
-  color: var(--aw-on-main);
-  font-size: 8cqi;
-  transform: translate(-50%, 45%);
+.h5p-alphabet-wheel .aw-clue-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.h5p-alphabet-wheel .aw-clue-picture-box:empty {
+  display: none;
+}
+
+.h5p-alphabet-wheel .aw-clue-image {
+  display: block;
+  flex: none;
+  width: 5.5em;
+  height: 5.5em;
+  object-fit: contain;
+}
+
+@container aw (min-width: 34em) {
+  .h5p-alphabet-wheel .aw-wheel.aw-with-picture .aw-hub-picture {
+    display: grid;
+    place-items: center;
+    width: 70%;
+    height: 70%;
+  }
+
+  .h5p-alphabet-wheel .aw-wheel.aw-with-picture .aw-hub-letter {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 1.7em;
+    aspect-ratio: 1;
+    border: 2px solid var(--aw-card);
+    border-radius: 50%;
+    background: var(--aw-main);
+    color: var(--aw-on-main);
+    font-size: 8cqi;
+    transform: translate(-50%, 45%);
+  }
+
+  .h5p-alphabet-wheel .aw-clue-picture-box {
+    display: none;
+  }
 }
 
 /* Without container queries (Firefox before 110, on some classroom boards with Android 8), the script measures the game
@@ -407,8 +433,31 @@
     font-size: var(--aw-hub-px, 3.9em);
   }
 
-  .h5p-alphabet-wheel .aw-with-picture .aw-hub-letter {
+  .h5p-alphabet-wheel .aw-wide .aw-wheel.aw-with-picture .aw-hub-picture {
+    display: grid;
+    place-items: center;
+    width: 70%;
+    height: 70%;
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-wheel.aw-with-picture .aw-hub-letter {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 1.7em;
+    aspect-ratio: 1;
+    border: 2px solid var(--aw-card);
+    border-radius: 50%;
+    background: var(--aw-main);
+    color: var(--aw-on-main);
     font-size: calc(var(--aw-hub-px, 3.9em) * 0.31);
+    transform: translate(-50%, 45%);
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-clue-picture-box {
+    display: none;
   }
 }
 

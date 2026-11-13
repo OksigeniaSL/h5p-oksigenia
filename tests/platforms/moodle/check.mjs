@@ -145,6 +145,8 @@ try {
     await game().locator('.aw-input').fill(answers[await letter()]);
     await game().locator('.aw-input').press('Enter');
   }
+  // After a move the buttons ignore taps for 400 ms (a double tap): a person is never quicker.
+  await page.waitForTimeout(450);
   await game().locator('.aw-row button.aw-secondary').click();
   const before = await letter();
   await page.waitForTimeout(4500);
