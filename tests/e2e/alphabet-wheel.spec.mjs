@@ -709,9 +709,17 @@ test('letter tiles: a reload in the middle takes the game up again, paused, with
   const session = `tiles-${Date.now()}`;
   const url = `/view/h5p-alphabet-wheel/alphabet-wheel-tiles-en?session=${session}`;
   const answers = answersOf('en');
+  /** Opens the page and lets it settle, as a person does: the frame grows to the game a moment after it loads. */
+  const settled = async () => {
+    const f = await (await page.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
+    await f.waitForSelector('.aw');
+    await page.waitForTimeout(LOOK_MS);
+    return f;
+  };
   await page.goto(url);
-  let frame = await (await page.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
+  let frame = await settled();
   await frame.locator('.aw-intro button').click();
+  await expect(frame.locator('.aw-tile').first()).toBeVisible();
   await page.waitForTimeout(LOOK_MS);
   await tapLetters(frame, answers.A);
   await frame.locator('.aw-check').click();
@@ -720,7 +728,7 @@ test('letter tiles: a reload in the middle takes the game up again, paused, with
   // H5P saves the state three seconds after each move.
   await page.waitForTimeout(3500);
   await page.reload();
-  frame = await (await page.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
+  frame = await settled();
   await expect(frame.locator('.aw-paused')).toBeVisible();
   await expect(frame.locator('.aw-letter.aw-ok')).toHaveCount(1);
   await frame.locator('.aw-pause').click();
