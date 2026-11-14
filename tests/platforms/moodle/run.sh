@@ -1,6 +1,7 @@
 #!/bin/sh
 # Plays the games in a throwaway Moodle and checks attempts, grades and resume: the Alphabet Wheel (check.mjs), also
-# with letter tiles (tiles.mjs), the Number Line (number-line.mjs) and the Balance Scale (balance-scale.mjs).
+# with letter tiles (tiles.mjs) and with its time running out (timeup.mjs), the Number Line (number-line.mjs) and the
+# Balance Scale (balance-scale.mjs).
 #
 #   tests/platforms/moodle/run.sh 4.5|5.3
 #
@@ -107,6 +108,24 @@ docker exec $c chown www-data /tmp/tiles.h5p
 tiles_cmid=$(docker exec -u www-data $c php /tmp/setup.php /tmp/tiles.h5p 3 'Rueda con fichas' | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s.trim().split("\n").pop()).cmid))')
 node "$here/tiles.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$tiles_cmid" --container $c --db h5p-moodle-db-1 \
   --db-password "$db_password" --admin-password "$admin_password" --shots "$work/../report-moodle-$branch"
+
+# The time running out on its own: one attempt. The Spanish package with a time limit of six seconds.
+python3 - "$package" "$work/timed.h5p" <<'PY'
+import json, sys, zipfile
+src, dst = sys.argv[1:3]
+with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zout:
+    for item in zin.infolist():
+        data = zin.read(item.filename)
+        if item.filename == 'content/content.json':
+            content = json.loads(data)
+            content['timeLimit'] = 6
+            data = json.dumps(content, ensure_ascii=False).encode()
+        zout.writestr(item.filename, data)
+PY
+docker cp "$work/timed.h5p" $c:/tmp/timed.h5p
+docker exec $c chown www-data /tmp/timed.h5p
+timed_cmid=$(docker exec -u www-data $c php /tmp/setup.php /tmp/timed.h5p 3 'Rueda de seis segundos' | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s.trim().split("\n").pop()).cmid))')
+node "$here/timeup.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$timed_cmid" --db h5p-moodle-db-1 --db-password "$db_password"
 
 if [ -n "${H5P_PREVIOUS:-}" ]; then
   node "$here/upgrade.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$old_cmid" --db h5p-moodle-db-1 \

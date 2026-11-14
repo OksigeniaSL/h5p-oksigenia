@@ -523,6 +523,30 @@ test('a game taken up again has the focus where it goes on, unless it is inside 
   expect(focused).toEqual({ stayed: false, back: true });
 });
 
+test('when the time runs out, the game sends one result, not two', async ({ page }) => {
+  const frame = await open(page, 'en');
+  const sent = await frame.evaluate(async () => {
+    const box = document.createElement('div');
+    document.body.append(box);
+    const wheel = new H5P.AlphabetWheel({ items: [
+      { letter: 'A', kind: 'starts', clue: 'Insect that makes honey', answer: 'Bee' },
+      { letter: 'B', kind: 'starts', clue: 'Two wheels and pedals', answer: 'Bicycle' },
+    ], timeLimit: 2 }, H5P.instances[0].contentId, { standalone: true });
+    // Errors inside the clock's callbacks would cut the second ending short and hide it: none are expected.
+    const errors = [];
+    window.addEventListener('error', (e) => errors.push(e.message));
+    let answered = 0;
+    wheel.on('xAPI', (e) => {
+      answered += e.data.statement.verb.id.endsWith('/answered') ? 1 : 0;
+    });
+    wheel.attach(H5P.jQuery(box));
+    wheel.start();
+    await new Promise((resolve) => setTimeout(resolve, 3500));
+    return { answered, phase: wheel.game.phase, reason: wheel.game.endReason, errors };
+  });
+  expect(sent).toEqual({ answered: 1, phase: 'finished', reason: 'time', errors: [] });
+});
+
 test('the pause hides the clue and stops the clock', async ({ page }) => {
   const frame = await open(page, 'en');
   await frame.locator('.aw-intro button').click();

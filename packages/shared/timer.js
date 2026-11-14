@@ -38,7 +38,11 @@ export class Countdown {
     clearInterval(this.handle);
   }
 
-  /** Brings the time left up to date; called by the interval and before reading it. */
+  /**
+   * Brings the time left up to date; called by the interval and before reading it. When the time is up it stops before
+   * calling anyone: a tick that reads the time left comes back here, and would end the game a second time (two results
+   * sent, two attempts in Moodle, seen on a phone on 14 November 2026).
+   */
   update() {
     if (!this.running) {
       return;
@@ -47,12 +51,15 @@ export class Countdown {
     const before = Math.ceil(this.left);
     this.left = Math.max(0, this.left - (now - this.last) / 1000);
     this.last = now;
+    const over = this.left <= 0;
+    if (over) {
+      this.running = false;
+      clearInterval(this.handle);
+    }
     if (Math.ceil(this.left) !== before) {
       this.onTick(Math.ceil(this.left));
     }
-    if (this.left <= 0) {
-      this.running = false;
-      clearInterval(this.handle);
+    if (over) {
       this.onEnd();
     }
   }
