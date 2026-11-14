@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Alphabet Wheel 1.0.7 (not released yet)
+## Alphabet Wheel 1.0.8 (not released yet)
 
 - Letter tiles instead of typing, for players who are still learning to write, as a teacher who plays the wheel with
   the youngest pupils of his school did by hand in each clue: the letters of the answer come jumbled on a rack, under
@@ -14,6 +14,20 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
   and accents, and are a finger wide on a phone; beside the wheel, a long word narrows them to keep one row. Authors
   tick «Letter tiles instead of typing», under the list of letters.
 - The counts and «Finish» share the last line, which leaves more room on a board.
+- On a slow machine (a board, a site under load) the next step comes into view even when the frames of the platform
+  grow late: the game looks again one and two seconds later, and still not after the player has touched anything.
+
+Version 1.0.7 was a test version on a development site, not released.
+
+## Number Line 1.0.5 (not released yet)
+
+- On a slow machine (a board, a site under load) the next step comes into view even when the frames of the platform
+  grow late: the game looks again one and two seconds later, and still not after the player has touched anything.
+
+## Balance Scale 1.0.2 (not released yet)
+
+- On a slow machine (a board, a site under load) the next step comes into view even when the frames of the platform
+  grow late: the game looks again one and two seconds later, and still not after the player has touched anything.
 
 ## Alphabet Wheel 1.0.6 (13 November 2026)
 

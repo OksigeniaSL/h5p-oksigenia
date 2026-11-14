@@ -151,8 +151,9 @@ function inView(node) {
 /**
  * Brings the next step of a game into view when it is out of it, at the top of the window; `scroll-margin-top` in the
  * styles of each element keeps room above it. The frames around H5P content grow a moment after the content does, and
- * only then is its place known, so it looks more than once. It jumps instead of gliding, so it also suits those who ask
- * for less motion.
+ * only then is its place known, so it looks more than once: up to two seconds later, since on a slow machine (a board, a
+ * site under load) Moodle's frames were seen to grow after the first 600 ms. It jumps instead of gliding, so it also
+ * suits those who ask for less motion.
  *
  * On a touch screen, a field goes to the top even if it shows now: the keyboard is about to cover the lower half, and
  * the page is not always told (the Moodle app does not resize its page for the keyboard). A press on the page stops the
@@ -170,7 +171,7 @@ export function bringIntoView(node, { keyboard = false, through = null } = {}) {
     pressed = true;
   };
   document.addEventListener('pointerdown', press, { capture: true, once: true });
-  const looks = [50, 250, 600];
+  const looks = [50, 250, 600, 1200, 2000];
   looks.forEach((ms, i) => setTimeout(() => {
     if (!pressed && (touch || !inView(node) || (through && !inView(through)))) {
       node.scrollIntoView({ block: 'start' });
