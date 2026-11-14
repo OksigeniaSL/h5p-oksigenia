@@ -664,7 +664,7 @@
    of tiles. */
 @container aw (min-width: 34em) {
   .h5p-alphabet-wheel .aw-tile {
-    width: clamp(1.6em, calc((100cqi - 2.75rem - var(--aw-n, 1) * 0.35rem) / var(--aw-n, 1)), 2.1em);
+    width: clamp(1.6em, calc((100cqi - 3.25rem - var(--aw-n, 1) * 0.35rem) / var(--aw-n, 1)), 2.1em);
     height: 2em;
     min-width: 0;
     min-height: 0;
@@ -745,8 +745,10 @@
   width: 0.6em;
 }
 
-/* The key that erases ends the rack, on the right as on a keyboard. */
+/* The key that erases ends the rack, on the right as on a keyboard. The tiles leave it its 2.75rem and half a rem more,
+   for the rounding of old browsers on screens at ×1.5. */
 .h5p-alphabet-wheel .aw-erase {
+  box-sizing: border-box;
   flex: none;
   width: 2.75rem;
   margin-inline-start: auto;

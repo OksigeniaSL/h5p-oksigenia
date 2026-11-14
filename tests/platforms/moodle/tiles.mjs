@@ -172,7 +172,12 @@ try {
       + 'set_config("defaultcolourmode", "dark", "theme_boost"); purge_all_caches();']);
     await page.waitForTimeout(4000);
     await openActivity();
-    await game().locator('.aw-intro button').click();
+    // The phone left a game started: it comes back paused, and «Resume» shows the tiles again.
+    if (await game().locator('.aw-intro button').isVisible()) {
+      await game().locator('.aw-intro button').click();
+    } else {
+      await game().locator('.aw-pause').click();
+    }
     await game().locator('.aw-tile').first().waitFor();
     await page.waitForTimeout(1000);
     const tile = await game().locator('.aw-tile').first().evaluate((node) => getComputedStyle(node).backgroundColor);

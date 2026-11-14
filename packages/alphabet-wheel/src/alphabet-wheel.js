@@ -590,7 +590,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
 
   /**
    * Without container queries, the width of a tile beside the wheel, so a long word keeps its tiles on one row: the room
-   * of the rack, less the key that erases and the gaps, shared among the tiles (as the styles do with 100cqi).
+   * of the rack, less the key that erases (with half a rem to spare) and the gaps, shared among the tiles (as the styles
+   * do with 100cqi).
    */
   fitTiles() {
     if (!this.tilesMode || !this.tileTray || containerQueries()) {
@@ -600,7 +601,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     const room = this.tileTray.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
     const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
     const n = Math.max(1, this.tileButtons.length);
-    this.tileTray.style.setProperty('--aw-tile-px', `${(room - 2.75 * rem - n * 0.35 * rem) / n}px`);
+    this.tileTray.style.setProperty('--aw-tile-px', `${(room - 3.25 * rem - n * 0.35 * rem) / n}px`);
   }
 
   /** @returns {boolean} Whether the game is wide enough for the wheel beside the panel (WIDE_EM, as the styles). */
