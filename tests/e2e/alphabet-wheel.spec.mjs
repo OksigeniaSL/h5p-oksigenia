@@ -34,6 +34,9 @@ const verbs = (frame) => frame.evaluate(() => window.statements.map((s) => s.ver
 
 /** After a move the buttons ignore taps for 400 ms (a double tap on a slow board): a person is never quicker. */
 const PERSON_MS = 450;
+/** A person does not tap a tile the moment the game shows: it first brings the clue and the tiles into view (50 ms), and a
+ * tap at that very moment lands where the tile was (recipes, «Una prueba no puede tocar antes que una persona»). */
+const LOOK_MS = 650;
 
 /** Passes letters, at a person's pace, until the given one is asked. */
 async function passTo(frame, letter) {
@@ -620,6 +623,7 @@ for (const [width, height] of [[1100, 540], [360, 640]]) {
 test('letter tiles: the answer is made by tapping, a letter goes back, the key erases, and a word with gaps is not checked', async ({ page }) => {
   const frame = await openTiles(page);
   await frame.locator('.aw-intro button').click();
+  await page.waitForTimeout(LOOK_MS);
   // No field: nothing to type on, and no keyboard on a tablet. The focus is on the first tile.
   await expect(frame.locator('.aw-input')).toHaveCount(0);
   await expect(frame.locator('.aw-tile').first()).toBeFocused();
@@ -708,6 +712,7 @@ test('letter tiles: a reload in the middle takes the game up again, paused, with
   await page.goto(url);
   let frame = await (await page.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
   await frame.locator('.aw-intro button').click();
+  await page.waitForTimeout(LOOK_MS);
   await tapLetters(frame, answers.A);
   await frame.locator('.aw-check').click();
   await page.waitForTimeout(PERSON_MS);
@@ -729,6 +734,7 @@ test('letter tiles: a reload in the middle takes the game up again, paused, with
 test('letter tiles: a double tap after a move does not put a letter of the next word', async ({ page }) => {
   const frame = await openTiles(page);
   await frame.locator('.aw-intro button').click();
+  await page.waitForTimeout(LOOK_MS);
   await tapLetters(frame, 'abeille');
   // «Check» and, at once, a tap on a tile of the next word, as a slow board gives a double tap.
   await frame.locator('.aw-check').click();
@@ -815,6 +821,7 @@ test.describe('on a touch screen', () => {
       return !!clue && !!check && clue.y >= 0 && check.y + check.height <= height;
     }, { message: 'clue and «Check» in view' }).toBe(true);
     await frame.locator('.aw-intro button').tap();
+    await page.waitForTimeout(LOOK_MS);
     await inView();
     for (const letter of 'abeille') {
       await frame.locator('.aw-tile:not(.aw-tile-used)', { hasText: new RegExp(`^${letter}$`) }).first().tap();

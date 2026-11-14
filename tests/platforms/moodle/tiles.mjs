@@ -88,6 +88,8 @@ try {
   await openActivity();
   await game().locator('.aw-intro button').click();
   await game().locator('.aw-tile').first().waitFor();
+  // A person looks before tapping: the game brings the clue and the tiles into view first.
+  await page.waitForTimeout(650);
   check('no answer field: the answer is made with the tiles', await game().locator('.aw-input').count() === 0);
   await page.screenshot({ path: `${opt.shots}/moodle-tiles-game.png` });
   // Two letters right.
@@ -147,6 +149,7 @@ try {
   await touch.goto(`${opt.url}/mod/h5pactivity/view.php?id=${opt.cmid}`);
   await touchGame.locator('.aw-intro button').tap();
   await touchGame.locator('.aw-tile').first().waitFor();
+  await touch.waitForTimeout(650);
   let clue = null, button = null;
   for (let i = 0; i < 25; i++) {
     clue = await touchGame.locator('.aw-clue').boundingBox();
