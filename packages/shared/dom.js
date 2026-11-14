@@ -138,6 +138,26 @@ function readableWindows() {
  * @returns {boolean} Whether the element shows in the outermost window that can be read, clear of its bars.
  */
 function inView(node) {
+  const { top, height, room } = placeOf(node);
+  return top >= VIEW_MARGIN && top + height <= room - VIEW_MARGIN;
+}
+
+/**
+ * @param {Element} node
+ * @returns {boolean} Whether nothing of the element shows in the outermost window that can be read: no one can be about
+ *   to press it.
+ */
+function outOfSight(node) {
+  const { top, height, room } = placeOf(node);
+  return top >= room || top + height <= 0;
+}
+
+/**
+ * @param {Element} node
+ * @returns {{top: number, height: number, room: number}} Where the element is in the outermost window that can be read,
+ *   and the height of that window.
+ */
+function placeOf(node) {
   const box = node.getBoundingClientRect();
   const windows = readableWindows();
   let top = box.top;
@@ -145,15 +165,19 @@ function inView(node) {
     const frame = win.frameElement;
     top += frame ? frame.getBoundingClientRect().top : 0;
   });
-  return top >= VIEW_MARGIN && top + box.height <= windows[windows.length - 1].innerHeight - VIEW_MARGIN;
+  return { top, height: box.height, room: windows[windows.length - 1].innerHeight };
 }
 
 /**
  * Brings the next step of a game into view when it is out of it, at the top of the window; `scroll-margin-top` in the
  * styles of each element keeps room above it. The frames around H5P content grow a moment after the content does, and
- * only then is its place known, so it looks more than once: up to two seconds later, since on a slow machine (a board, a
- * site under load) Moodle's frames were seen to grow after the first 600 ms. It jumps instead of gliding, so it also
- * suits those who ask for less motion.
+ * only then is its place known, so it looks more than once. It jumps instead of gliding, so it also suits those who ask
+ * for less motion.
+ *
+ * On a slow machine (a board, a site under load) Moodle's frames were seen to grow after the first 600 ms, and leave the
+ * next step below the window. Two later looks, at one and two seconds, rescue it, but only when nothing of it shows:
+ * a jump while a player is about to press something in view would put the press somewhere else (seen in a test that
+ * tapped tiles at once).
  *
  * On a touch screen, a field goes to the top even if it shows now: the keyboard is about to cover the lower half, and
  * the page is not always told (the Moodle app does not resize its page for the keyboard). A press on the page stops the
@@ -173,7 +197,8 @@ export function bringIntoView(node, { keyboard = false, through = null } = {}) {
   document.addEventListener('pointerdown', press, { capture: true, once: true });
   const looks = [50, 250, 600, 1200, 2000];
   looks.forEach((ms, i) => setTimeout(() => {
-    if (!pressed && (touch || !inView(node) || (through && !inView(through)))) {
+    const due = ms > 600 ? outOfSight(node) : touch || !inView(node) || (through && !inView(through));
+    if (!pressed && due) {
       node.scrollIntoView({ block: 'start' });
     }
     if (i === looks.length - 1) {
