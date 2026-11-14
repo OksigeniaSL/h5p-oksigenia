@@ -84,6 +84,14 @@
     }
   },
   {
+    "name": "letterTiles",
+    "type": "boolean",
+    "label": "Letter tiles instead of typing",
+    "description": "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.",
+    "importance": "medium",
+    "default": false
+  },
+  {
     "name": "timeLimit",
     "type": "number",
     "label": "Time limit, in seconds",
@@ -191,10 +199,15 @@
       { "name": "introTime", "type": "text", "label": "Time limit (@time)", "importance": "low", "default": "Time: @time" },
       { "name": "introNoTime", "type": "text", "label": "No time limit", "importance": "low", "default": "No time limit" },
       { "name": "introHelp", "type": "text", "label": "How to play", "importance": "low", "default": "Type the answer for each letter. If you do not know it, pass: the letter comes back in the next round." },
+      { "name": "introHelpTiles", "type": "text", "label": "How to play, with letter tiles", "importance": "low", "default": "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round." },
       { "name": "startsWith", "type": "text", "label": "The answer starts with (@letter)", "importance": "low", "default": "Starts with @letter" },
       { "name": "contains", "type": "text", "label": "The answer contains (@letter)", "importance": "low", "default": "Contains @letter" },
       { "name": "picture", "type": "text", "label": "The picture of a clue, for screen readers (@description)", "importance": "low", "default": "Picture: @description" },
       { "name": "yourAnswer", "type": "text", "label": "Answer field", "importance": "low", "default": "Your answer" },
+      { "name": "tiles", "type": "text", "label": "The letter tiles (for screen readers)", "importance": "low", "default": "Letters to put in order" },
+      { "name": "tilesSoFar", "type": "text", "label": "The letters put so far (for screen readers, @letters)", "importance": "low", "default": "Your answer so far: @letters" },
+      { "name": "eraseLetter", "type": "text", "label": "Erase button of the letter tiles", "importance": "low", "default": "Erase the last letter" },
+      { "name": "tilesIncomplete", "type": "text", "label": "Letter tiles still to put", "importance": "low", "default": "Put every letter in its place, or pass." },
       { "name": "check", "type": "text", "label": "Check button", "importance": "low", "default": "Check" },
       { "name": "pass", "type": "text", "label": "Pass button", "importance": "low", "default": "Pass" },
       { "name": "pause", "type": "text", "label": "Pause button", "importance": "low", "default": "Pause" },

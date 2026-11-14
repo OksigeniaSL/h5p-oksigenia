@@ -1,6 +1,7 @@
 // Prepares the h5p-cli dev server in .h5p-dev/ and starts it: H5P core on the first run, then a copy (not a link:
 // the h5p-cli export does not follow links) of each built game and its example content, one folder per language
-// (alphabet-wheel-es…). The games are then at http://localhost:<port>/view/h5p-alphabet-wheel/alphabet-wheel-es.
+// (alphabet-wheel-es…). The games are then at http://localhost:<port>/view/h5p-alphabet-wheel/alphabet-wheel-es, and the
+// wheel with letter tiles at …/alphabet-wheel-tiles-es.
 //
 //   node tools/dev.mjs [--port 8080] [--no-serve] [--no-watch]
 //
@@ -45,6 +46,13 @@ for (const pkg of packages()) {
     cpSync(join(contentBase, lang, 'h5p.json'), join(target, 'h5p.json'));
     const content = withTexts(pkg.dir, JSON.parse(readFileSync(join(target, 'content.json'), 'utf8')), lang);
     writeFileSync(join(target, 'content.json'), `${JSON.stringify(content, null, 2)}\n`);
+    // The wheel is also played with letter tiles, as the youngest play it: alphabet-wheel-tiles-es…
+    if (pkg.name === 'alphabet-wheel') {
+      const tiles = join(dev, 'content', `${pkg.name}-tiles-${lang}`);
+      rmSync(tiles, { recursive: true, force: true });
+      cpSync(target, tiles, { recursive: true });
+      writeFileSync(join(tiles, 'content.json'), `${JSON.stringify({ ...content, letterTiles: true }, null, 2)}\n`);
+    }
   }
   console.log(`dev: ${pkg.folder} and its examples are in .h5p-dev`);
 }

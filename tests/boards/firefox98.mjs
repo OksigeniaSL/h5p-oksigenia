@@ -107,6 +107,45 @@ const GAMES = {
       return { wheel: Math.round(wheel.width), letter: Math.round(letter.width), hub: Math.round(hub) };`,
     shapeOk: (s) => s.letter >= 0.06 * s.wheel && s.hub >= 0.2 * s.wheel,
   },
+  // The wheel with letter tiles: real taps on the tiles, in the order of the answer.
+  'alphabet-wheel-tiles': {
+    root: '.aw',
+    view: 'h5p-alphabet-wheel/alphabet-wheel-tiles',
+    async start() {
+      await click('.aw-intro button');
+      await until('.aw-tile');
+    },
+    async move() {
+      const letter = await js("return document.querySelector('.aw-letter[aria-current] .aw-letter-text').textContent;");
+      await tapAnswer(answers[letter]);
+      await click('.aw-check');
+    },
+    /** The tallest moment: the longest answer, «Check» with one place empty, and the note under it. */
+    async answer() {
+      const [longest] = Object.entries(answers).sort(([, a], [, b]) => b.length - a.length);
+      for (let i = 0; i < 40; i++) {
+        if (await js("return document.querySelector('.aw-letter[aria-current] .aw-letter-text').textContent;") === longest[0]) {
+          break;
+        }
+        await sleep(450);
+        await click('.aw-pass');
+      }
+      await sleep(450);
+      await tapAnswer(longest[1].slice(0, -1));
+      await click('.aw-check');
+    },
+    state: `var current = document.querySelector('.aw-letter[aria-current] .aw-letter-text');
+      var word = [].map.call(document.querySelectorAll('.aw-slot'), function (s) { return s.textContent || '_'; }).join('');
+      return [current && current.textContent, document.querySelector('.aw-counts').textContent, word].join(' | ');`,
+    shape: `var wheel = document.querySelector('.aw-wheel').getBoundingClientRect();
+      var tile = document.querySelector('.aw-tile').getBoundingClientRect();
+      var middles = [].map.call(document.querySelectorAll('.aw-word > *'), function (e) {
+        var r = e.getBoundingClientRect(); return r.top + r.height / 2;
+      });
+      return { wheel: Math.round(wheel.width), tile: Math.round(Math.min(tile.width, tile.height)),
+        wordLines: Math.max.apply(null, middles) - Math.min.apply(null, middles) < 10 ? 1 : 2 };`,
+    shapeOk: (s) => s.tile >= 32 && s.wordLines === 1 && s.wheel > 100,
+  },
   'number-line': {
     root: '.nl',
     async start() {
@@ -183,9 +222,19 @@ const GAMES = {
   },
 };
 
+/** Taps, with real clicks, a free tile for each letter of the text. */
+async function tapAnswer(text) {
+  for (const letter of text) {
+    const index = await js(`var tiles = document.querySelectorAll('.aw-tiles > .aw-tile');
+      for (var k = 0; k < tiles.length; k++) { if (!tiles[k].disabled && tiles[k].textContent === arguments[0]) { return k; } }
+      return -1;`, letter);
+    await click(`.aw-tiles > :nth-child(${index + 1})`);
+  }
+}
+
 async function open(name) {
   await inSession('POST', '/frame', { id: null });
-  await inSession('POST', '/url', { url: `${base}/view/h5p-${name}/${name}-es?session=null` });
+  await inSession('POST', '/url', { url: `${base}/view/${GAMES[name].view || `h5p-${name}/${name}`}-es?session=null` });
   await inSession('POST', '/frame', { id: { [ELEMENT]: await find('iframe.h5p-iframe') } });
   await until(GAMES[name].root);
   await js(`window.boardErrors = [];

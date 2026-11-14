@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Lettertegels in plaats van typen",
+      "description": "Voor wie nog leert schrijven: de letters van elk antwoord komen door elkaar, en ze worden op volgorde aangetikt. De tegels tonen het antwoord zoals het geschreven is, met hoofdletters en accenten."
+    },
+    {
       "label": "Tijdslimiet, in seconden",
       "description": "0 of leeg: geen tijdslimiet. Spelers kunnen de klok op elk moment pauzeren."
     },
@@ -144,6 +148,10 @@
           "default": "Typ het antwoord bij elke letter. Weet je het niet, pas dan: de letter komt terug in de volgende ronde."
         },
         {
+          "label": "Zo speel je, met lettertegels",
+          "default": "Tik de letters op volgorde aan om het antwoord te maken. Weet je het niet, pas dan: de letter komt terug in de volgende ronde."
+        },
+        {
           "label": "Het antwoord begint met (@letter)",
           "default": "Begint met de @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Antwoordveld",
           "default": "Jouw antwoord"
+        },
+        {
+          "label": "De lettertegels (voor schermlezers)",
+          "default": "Letters om op volgorde te leggen"
+        },
+        {
+          "label": "De letters die al liggen (voor schermlezers, @letters)",
+          "default": "Jouw antwoord tot nu toe: @letters"
+        },
+        {
+          "label": "Wisknop van de lettertegels",
+          "default": "Laatste letter wissen"
+        },
+        {
+          "label": "Lettertegels die nog gelegd moeten worden",
+          "default": "Leg elke letter op zijn plek, of pas."
         },
         {
           "label": "Knop om te controleren",

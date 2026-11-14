@@ -149,6 +149,18 @@
     "What the picture shows": "Was das Bild zeigt",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Für alle, die das Bild nicht sehen können: Screenreader lesen diesen Text vor. Beschreiben, ohne die Antwort zu verraten: „ein gelber Kreis mit Strahlen“, nicht „die Sonne“.",
     "The picture of a clue, for screen readers (@description)": "Das Bild eines Hinweises, für Screenreader (@description)",
-    "Picture: @description": "Bild: @description"
+    "Picture: @description": "Bild: @description",
+    "Letter tiles instead of typing": "Buchstabenkärtchen statt Schreiben",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "Für alle, die noch schreiben lernen: Die Buchstaben jeder Antwort kommen durcheinander, und sie werden der Reihe nach angetippt. Die Kärtchen zeigen die Antwort so, wie sie geschrieben ist, mit Groß- und Kleinbuchstaben und Akzenten.",
+    "How to play, with letter tiles": "So wird gespielt, mit Buchstabenkärtchen",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Tippe die Buchstaben der Reihe nach an, um die Antwort zu legen. Wenn du sie nicht weißt, passe: Der Buchstabe kommt in der nächsten Runde wieder.",
+    "The letter tiles (for screen readers)": "Die Buchstabenkärtchen (für Screenreader)",
+    "Letters to put in order": "Buchstaben zum Ordnen",
+    "The letters put so far (for screen readers, @letters)": "Die bisher gelegten Buchstaben (für Screenreader, @letters)",
+    "Your answer so far: @letters": "Deine Antwort bisher: @letters",
+    "Erase button of the letter tiles": "Löschtaste der Buchstabenkärtchen",
+    "Erase the last letter": "Letzten Buchstaben löschen",
+    "Letter tiles still to put": "Buchstabenkärtchen, die noch fehlen",
+    "Put every letter in its place, or pass.": "Leg jeden Buchstaben an seinen Platz oder passe."
   }
 }

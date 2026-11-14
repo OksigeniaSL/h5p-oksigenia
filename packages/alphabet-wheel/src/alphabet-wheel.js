@@ -13,6 +13,7 @@ import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
 import { Sounds, volumeSlider } from '../../shared/sound.js';
 import { WheelGame } from './game.js';
+import { TileBoard } from './tiles.js';
 import '../../shared/dark.css';
 import './alphabet-wheel.css';
 
@@ -55,9 +56,11 @@ const ICONS = {
   soundOff: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 6h2.6L8 3v10L4.6 10H2zM10.6 6.2l3.6 3.6M14.2 6.2l-3.6 3.6" /></svg>',
   // Four corners pointing in: out of full screen.
   exitFull: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5V6H2.5M10 2.5V6h3.5M6 13.5V10H2.5M10 13.5V10h3.5" /></svg>',
+  // The backspace key of a keyboard: the last letter goes back to its tile.
+  erase: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.6 3.2h8.6v9.6H5.6L1.6 8zM8.2 6l3.6 4M11.8 6l-3.6 4" /></svg>',
 };
 
-/** @typedef {'ok'|'bad'|'passed'|'soundOn'|'soundOff'|'exitFull'} IconName */
+/** @typedef {'ok'|'bad'|'passed'|'soundOn'|'soundOff'|'exitFull'|'erase'} IconName */
 
 /**
  * @param {IconName} name
@@ -128,6 +131,10 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.flash = null;
     /** When the last move was made, in ms: taps on the buttons right after it are a double tap. */
     this.movedAt = 0;
+    /** Letter tiles instead of the answer field, for players who cannot type yet. */
+    this.tilesMode = params.letterTiles === true;
+    /** @type {TileBoard|null} The tiles of the current letter; made again for each letter and each time it comes back. */
+    this.board = null;
 
     let timeLeft = this.timeLimit;
     const state = extras.previousState;
@@ -189,10 +196,14 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.render();
     if (this.takenUp && this.isRoot()) {
       this.takenUp = false;
-      // What is typed has to go somewhere: to the field or, if the game came back paused, to the button that resumes it.
-      const next = this.paused ? this.pauseButton : this.input;
-      next.focus({ preventScroll: true });
-      bringIntoView(next, { keyboard: !this.paused });
+      // What is typed has to go somewhere: to the answer or, if the game came back paused, to the button that resumes it.
+      if (this.paused) {
+        this.pauseButton.focus({ preventScroll: true });
+        bringIntoView(this.pauseButton);
+      } else {
+        this.focusAnswer();
+        this.bringAnswerIntoView();
+      }
     }
     // Inside another content type, the game keeps the colours of what is around it.
     if (this.isRoot() && !this.colourWatched) {
@@ -229,7 +240,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
         fill(t.introLetters, { count: this.items.length }),
         this.timeLimit ? fill(t.introTime, { time: formatTime(this.timeLimit) }) : t.introNoTime,
       ].join(' · ') }),
-      el('p', { class: 'aw-help', text: t.introHelp }),
+      el('p', { class: 'aw-help', text: this.tilesMode ? t.introHelpTiles : t.introHelp }),
       this.introButton,
     ]);
 
@@ -282,34 +293,26 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.cluePicture = el('span', { class: 'aw-clue-picture-box' });
     // What the picture shows, where a screen reader finds it again: the picture itself is in the hidden middle.
     this.clueOfPicture = el('span', { class: 'aw-clue-picture h5p-oksigenia-sr-only' });
-    this.input = /** @type {HTMLInputElement} */ (el('input', {
-      id: ids.input, class: 'aw-input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false',
-      // No description pointing at the clue: screen readers would read it again each time it changes, before the
-      // result of the last letter. The clue is announced once, after that result (announceCurrent).
-      enterkeyhint: 'done', maxlength: '100',
-    }));
     this.passButton = el('button', {
       type: 'button', class: 'aw-button aw-secondary aw-pass', onclick: () => !this.tooSoon() && this.pass(),
     }, [icon('passed'), t.pass]);
+    this.checkButton = el('button', { type: 'submit', class: 'aw-button aw-primary aw-check' }, [icon('ok'), t.check]);
     const onsubmit = (e) => {
       e.preventDefault();
       // An empty answer right after a move is the second tap of a double tap: the result of the last letter stays.
-      if (!this.input.value.trim() && this.tooSoon()) {
+      if (this.answerIsEmpty() && this.tooSoon()) {
         return;
       }
       this.check();
     };
-    this.form = el('form', { class: 'aw-form', novalidate: true, onsubmit }, [
-      el('label', { class: 'aw-label', for: ids.input, text: t.yourAnswer }),
-      el('div', { class: 'aw-row' }, [
-        this.input,
-        el('button', { type: 'submit', class: 'aw-button aw-primary aw-check' }, [icon('ok'), t.check]),
-        this.passButton,
-      ]),
-    ]);
-    this.question = el('div', { class: 'aw-question' }, [
+    this.form = el('form', { class: 'aw-form', novalidate: true, onsubmit },
+      this.tilesMode ? this.buildTiles(ids) : this.buildField(ids));
+    this.question = el('div', { class: `aw-question${this.tilesMode ? ' aw-with-tiles' : ''}` }, [
       this.kind, el('div', { class: 'aw-clue-row' }, [this.cluePicture, this.clue]), this.clueOfPicture, this.form,
     ]);
+    if (this.tilesMode) {
+      this.question.addEventListener('keydown', (e) => this.tileKey(e));
+    }
     this.pausedNote = el('p', { class: 'aw-paused', text: t.paused });
     this.feedbackLine = el('p', { class: 'aw-feedback' });
     this.counts = el('p', { class: 'aw-counts' });
@@ -321,9 +324,10 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
           this.soundButton, this.volume,
         ]) : '',
       ]),
-      this.question, this.pausedNote, this.feedbackLine, this.counts, this.finishButton,
+      // The counts and «Finish» share the last line: room for the tiles on a board.
+      this.question, this.pausedNote, this.feedbackLine, el('div', { class: 'aw-foot' }, [this.counts, this.finishButton]),
     ]);
-    this.gameView = el('div', { class: 'aw-game' }, [this.wheel, this.panel]);
+    this.gameView = el('div', { class: `aw-game${this.tilesMode ? ' aw-game-tiles' : ''}` }, [this.wheel, this.panel]);
 
     // After the game: a cheer that matches the score, then the review of every letter.
     this.ring = el('div', { class: 'aw-ring' });
@@ -360,6 +364,210 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
   }
 
   /**
+   * @param {Object<string, string>} ids
+   * @returns {HTMLElement[]} The answer field, with «Check» and «Pass» on its row.
+   */
+  buildField(ids) {
+    const t = this.l10n;
+    this.input = /** @type {HTMLInputElement} */ (el('input', {
+      id: ids.input, class: 'aw-input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false',
+      // No description pointing at the clue: screen readers would read it again each time it changes, before the
+      // result of the last letter. The clue is announced once, after that result (announceCurrent).
+      enterkeyhint: 'done', maxlength: '100',
+    }));
+    return [
+      el('label', { class: 'aw-label', for: ids.input, text: t.yourAnswer }),
+      el('div', { class: 'aw-row' }, [this.input, this.checkButton, this.passButton]),
+    ];
+  }
+
+  /**
+   * The answer made with tiles: the places of the word, the jumbled letters with the key that erases at the end of the
+   * rack (where a keyboard has it), and «Check» and «Pass» under them. A tile goes to the first empty place; a letter in the word, tapped, goes back to its tile. With a
+   * keyboard, a letter key takes its tile and the backspace erases. The places are drawn for the eyes; a screen reader
+   * hears the letters put so far instead.
+   * @param {Object<string, string>} ids
+   * @returns {HTMLElement[]}
+   */
+  buildTiles(ids) {
+    const t = this.l10n;
+    this.input = null;
+    this.word = el('div', { class: 'aw-word', onclick: (e) => this.tapSlot(e) });
+    this.eraseButton = el('button', {
+      type: 'button', class: 'aw-button aw-secondary aw-erase', 'aria-label': t.eraseLetter, onclick: () => this.erase(),
+    }, [icon('erase')]);
+    this.soFar = el('p', { class: 'aw-so-far h5p-oksigenia-sr-only', id: `${ids.input}-so-far` });
+    this.tileTray = el('div', { class: 'aw-tiles', role: 'group', 'aria-label': t.tiles });
+    this.slotNodes = [];
+    this.tileButtons = [];
+    // No «Your answer» over the places: the word is plain to see, and a board has no height to spare.
+    return [
+      this.word,
+      this.soFar,
+      this.tileTray,
+      el('div', { class: 'aw-row' }, [this.checkButton, this.passButton]),
+    ];
+  }
+
+  /** Makes the tiles of the current letter when it changes or comes back, jumbled again. */
+  syncBoard() {
+    if (!this.tilesMode || this.board) {
+      return;
+    }
+    const it = this.game.current;
+    if (!it) {
+      return;
+    }
+    this.board = new TileBoard(it.answers[0]);
+    this.slotNodes = this.board.slots.map((slot) => el('span', {
+      class: `aw-slot${slot.fixed === ' ' ? ' aw-slot-space' : slot.fixed !== null ? ' aw-slot-fixed' : ''}`,
+      'aria-hidden': 'true',
+    }));
+    this.word.replaceChildren(...this.slotNodes);
+    this.tileButtons = this.board.tiles.map((tile, i) => el('button', {
+      type: 'button', class: 'aw-tile', text: tile.letter,
+      // A tap right after a move is the second tap of a double tap, on a tile of the next letter; a key is never one.
+      onclick: (e) => !(e.detail > 0 && this.tooSoon()) && this.tapTile(i),
+    }));
+    this.tileTray.replaceChildren(...this.tileButtons, this.eraseButton);
+    this.tileTray.style.setProperty('--aw-n', String(this.tileButtons.length));
+    this.landed = -1;
+    this.paintBoard();
+  }
+
+  /** Shows each place and each tile as they stand: the letters put, the next place, and the tiles already used. */
+  paintBoard() {
+    const b = this.board;
+    if (!b) {
+      return;
+    }
+    const next = b.next;
+    this.slotNodes.forEach((node, i) => {
+      const slot = b.slots[i];
+      const letter = slot.fixed === null && slot.tile !== null;
+      node.textContent = slot.fixed === ' ' ? '' : b.shown(i);
+      node.classList.toggle('aw-slot-filled', letter);
+      node.classList.toggle('aw-slot-next', i === next);
+      node.classList.toggle('aw-slot-landed', i === this.landed);
+    });
+    this.tileButtons.forEach((button, i) => {
+      const used = b.tiles[i].used;
+      button.classList.toggle('aw-tile-used', used);
+      button.disabled = used;
+      button.toggleAttribute('aria-hidden', used);
+    });
+    this.eraseButton.classList.toggle('aw-erase-idle', b.empty);
+    this.eraseButton.setAttribute('aria-disabled', String(b.empty));
+    this.soFar.textContent = b.empty ? '' : fill(this.l10n.tilesSoFar, { letters: b.spelled.join(' ') });
+  }
+
+  /**
+   * A tile tapped, or its key pressed: its letter goes to the next place of the word.
+   * @param {number} i
+   */
+  tapTile(i) {
+    if (!this.board || this.game.phase !== 'playing' || this.paused) {
+      return;
+    }
+    const slot = this.board.place(i);
+    if (slot < 0) {
+      return;
+    }
+    this.landed = slot;
+    this.sounds.play('drop', 1);
+    this.afterTileMove();
+    // The next step under the finger or the keys: the next free tile, or «Check» once the word is complete.
+    const free = this.board.tiles.findIndex((tile, k) => !tile.used && k > i);
+    const first = this.board.tiles.findIndex((tile) => !tile.used);
+    const next = free >= 0 ? free : first;
+    (next >= 0 ? this.tileButtons[next] : this.checkButton).focus({ preventScroll: true });
+  }
+
+  /**
+   * A letter of the word tapped: it goes back to its tile.
+   * @param {Event} e
+   */
+  tapSlot(e) {
+    const node = e.target instanceof Element ? e.target.closest('.aw-slot') : null;
+    const slot = node ? this.slotNodes.indexOf(/** @type {HTMLElement} */ (node)) : -1;
+    if (!this.board || slot < 0 || this.paused || this.tooSoon()) {
+      return;
+    }
+    if (this.board.takeBack(slot) >= 0) {
+      this.landed = -1;
+      this.sounds.play('take');
+      this.afterTileMove();
+    }
+  }
+
+  /** The key that erases: the last letter of the word goes back to its tile. */
+  erase() {
+    if (!this.board || this.paused || this.board.eraseLast() < 0) {
+      return;
+    }
+    this.landed = -1;
+    this.sounds.play('take');
+    this.afterTileMove();
+  }
+
+  /** After a tile goes or comes back: the word is shown again, a screen reader hears it, and a «missing» note goes. */
+  afterTileMove() {
+    if (this.feedback && this.feedback.result === 'empty') {
+      this.feedback = null;
+      this.paintFeedback();
+    }
+    this.paintBoard();
+    this.announcer.say(this.soFar.textContent);
+  }
+
+  /**
+   * Keys over the tiles: a letter takes a free tile with it, the backspace erases.
+   * @param {KeyboardEvent} e
+   */
+  tileKey(e) {
+    if (!this.board || e.ctrlKey || e.metaKey || e.altKey || e.isComposing) {
+      return;
+    }
+    if (e.key === 'Backspace') {
+      e.preventDefault();
+      this.erase();
+      return;
+    }
+    const tile = this.board.tileForKey(e.key);
+    if (tile >= 0) {
+      e.preventDefault();
+      this.tapTile(tile);
+    }
+  }
+
+  /** @returns {boolean} Whether nothing has been typed or put yet. */
+  answerIsEmpty() {
+    return this.tilesMode ? !this.board || this.board.empty : !this.input.value.trim();
+  }
+
+  /** Focus where the answer goes on: the field, or the first free tile (or «Check», with the word complete). */
+  focusAnswer() {
+    if (!this.tilesMode) {
+      this.input.focus();
+      return;
+    }
+    const free = this.board ? this.board.tiles.findIndex((tile) => !tile.used) : -1;
+    (free >= 0 ? this.tileButtons[free] : this.checkButton).focus({ preventScroll: true });
+  }
+
+  /**
+   * The answer in view. The field goes up with the clue above it on a phone, where the keyboard covers the lower half;
+   * the tiles open no keyboard, so they move only when the clue or «Check» is out of view.
+   */
+  bringAnswerIntoView() {
+    if (this.tilesMode) {
+      bringIntoView(this.question, { through: this.checkButton });
+    } else {
+      bringIntoView(this.input, { keyboard: true });
+    }
+  }
+
+  /**
    * Without container queries, the sizes the styles take from the game and from the wheel are measured here and given
    * in pixels: side by side from WIDE_EM, the letters around and the one in the middle. On every change of size, as
    * when a board is plugged into a laptop in the middle of a game.
@@ -373,10 +581,26 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       const wheel = this.wheel.clientWidth;
       this.wheel.style.setProperty('--aw-dot-px', `${(wheel * this.dotShare) / 100}px`);
       this.wheel.style.setProperty('--aw-hub-px', `${wheel * HUB_SHARE}px`);
+      this.fitTiles();
     };
     const observer = new ResizeObserver(fit);
     observer.observe(this.root);
     observer.observe(this.wheel);
+  }
+
+  /**
+   * Without container queries, the width of a tile beside the wheel, so a long word keeps its tiles on one row: the room
+   * of the rack, less the key that erases and the gaps, shared among the tiles (as the styles do with 100cqi).
+   */
+  fitTiles() {
+    if (!this.tilesMode || !this.tileTray || containerQueries()) {
+      return;
+    }
+    const style = getComputedStyle(this.tileTray);
+    const room = this.tileTray.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const n = Math.max(1, this.tileButtons.length);
+    this.tileTray.style.setProperty('--aw-tile-px', `${(room - 2.75 * rem - n * 0.35 * rem) / n}px`);
   }
 
   /** @returns {boolean} Whether the game is wide enough for the wheel beside the panel (WIDE_EM, as the styles). */
@@ -476,6 +700,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.wheel.classList.toggle('aw-with-picture', !!picture);
       this.cluePicture.replaceChildren(this.panelPictures[g.pos] || '');
       this.question.classList.toggle('aw-with-picture', !!picture);
+      this.syncBoard();
       this.round.textContent = fill(t.round, { round: g.round });
       this.kind.textContent = this.kindText(it);
       this.clue.textContent = it.clue;
@@ -483,6 +708,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.clueOfPicture.textContent = this.pictureText(it);
       this.question.hidden = this.paused;
       this.pausedNote.hidden = !this.paused;
+      this.fitTiles();
       this.pauseButton.textContent = this.paused ? t.resume : t.pause;
       // An icon button: the speaker is known to everyone, and its name is there for screen readers.
       this.paintSound();
@@ -578,8 +804,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.timer.start();
     }
     this.render();
-    this.input.focus();
-    bringIntoView(this.input, { keyboard: true });
+    this.focusAnswer();
+    this.bringAnswerIntoView();
     this.announceCurrent('');
   }
 
@@ -601,12 +827,16 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       return;
     }
     const t = this.l10n;
-    const { result, index } = this.game.answer(this.input.value);
+    // With tiles, a word with places still empty is not checked: a tap on «Check» too soon does not lose the letter.
+    const missing = this.tilesMode && !(this.board && this.board.full);
+    const { result, index } = missing ? { result: 'empty', index: this.game.pos }
+      : this.game.answer(this.tilesMode ? this.board.text : this.input.value);
     if (result === 'empty') {
-      this.feedback = { result: 'empty', text: t.emptyAnswer };
+      const text = this.tilesMode ? t.tilesIncomplete : t.emptyAnswer;
+      this.feedback = { result: 'empty', text };
       this.render();
-      this.announcer.say(t.emptyAnswer);
-      this.input.focus();
+      this.announcer.say(text);
+      this.focusAnswer();
       return;
     }
     const it = this.items[index];
@@ -618,7 +848,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       text += ` ${fill(t.answerWas, { answer: it.answers[0] })}`;
     }
     this.feedback = { result, text };
-    this.input.value = '';
+    this.clearAnswer();
     this.afterMove(text);
   }
 
@@ -632,8 +862,17 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.streak = 0;
     const text = fill(this.l10n.passedFeedback, { letter: this.items[index].letter });
     this.feedback = { result: 'passed', text };
-    this.input.value = '';
+    this.clearAnswer();
     this.afterMove(text);
+  }
+
+  /** The answer field empty again, or new tiles for the next letter (also when the same letter comes back). */
+  clearAnswer() {
+    if (this.tilesMode) {
+      this.board = null;
+    } else {
+      this.input.value = '';
+    }
   }
 
   /**
@@ -649,11 +888,12 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     this.triggerXAPI('progressed');
     this.render();
-    this.input.focus();
+    this.focusAnswer();
     // On a phone the keyboard stays open over the lower half, and the page does not always learn of it (the Moodle app):
-    // the field and the clue above it go back to the top after each move, as at the start.
-    if (!this.isWide() && matchMedia('(pointer: coarse)').matches) {
-      bringIntoView(this.input, { keyboard: true });
+    // the field and the clue above it go back to the top after each move, as at the start. The tiles open no keyboard:
+    // they only come back into view if they left it.
+    if (this.tilesMode || (!this.isWide() && matchMedia('(pointer: coarse)').matches)) {
+      this.bringAnswerIntoView();
     }
     this.announceCurrent(said);
   }
@@ -681,8 +921,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.announcer.say(this.l10n.paused);
     } else {
       if (moveFocus) {
-        this.input.focus();
-        bringIntoView(this.input, { keyboard: true });
+        this.focusAnswer();
+        this.bringAnswerIntoView();
       }
       this.announceCurrent('');
     }
@@ -807,6 +1047,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
   /** Back to the start, as a new attempt. */
   resetTask() {
     this.game.reset();
+    this.board = null;
     if (this.lastMove) {
       this.lastMove.textContent = '';
     }

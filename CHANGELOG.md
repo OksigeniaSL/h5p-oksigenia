@@ -2,6 +2,19 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Alphabet Wheel 1.0.7 (not released yet)
+
+- Letter tiles instead of typing, for players who are still learning to write, as a teacher who plays the wheel with
+  the youngest pupils of his school did by hand in each clue: the letters of the answer come jumbled on a rack, under
+  the places of the word, and they tap them in order. A tile goes to the first empty place, and a letter of the word,
+  tapped, goes back to its tile; the key at the end of the rack erases the last one, where a keyboard has it. Spaces,
+  hyphens and apostrophes are already in their place. «Check» with places still empty asks for the missing letters and
+  does not lose the letter. There is no answer field, so no keyboard covers a tablet or a phone; with a keyboard, a
+  letter key takes its tile and the backspace erases. The tiles show the answer as it is written, with its capitals
+  and accents, and are a finger wide on a phone; beside the wheel, a long word narrows them to keep one row. Authors
+  tick «Letter tiles instead of typing», under the list of letters.
+- The counts and «Finish» share the last line, which leaves more room on a board.
+
 ## Alphabet Wheel 1.0.6 (13 November 2026)
 
 - A picture can be the clue of a letter, beside its text or instead of it, as a teacher asked. With the wheel beside

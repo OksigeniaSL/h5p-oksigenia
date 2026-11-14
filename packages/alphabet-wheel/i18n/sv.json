@@ -149,6 +149,18 @@
     "What the picture shows": "Vad bilden visar",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "För den som inte kan se bilden: skärmläsare läser upp texten. Beskriv den utan att avslöja svaret: ”en gul cirkel med strålar”, inte ”solen”.",
     "The picture of a clue, for screen readers (@description)": "Bilden till en ledtråd, för skärmläsare (@description)",
-    "Picture: @description": "Bild: @description"
+    "Picture: @description": "Bild: @description",
+    "Letter tiles instead of typing": "Bokstavsbrickor i stället för att skriva",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "För den som fortfarande lär sig skriva: bokstäverna i varje svar kommer i oordning, och man trycker på dem i rätt ordning. Brickorna visar svaret som det är skrivet, med stora bokstäver och accenter.",
+    "How to play, with letter tiles": "Så spelar du, med bokstavsbrickor",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Tryck på bokstäverna i rätt ordning för att bilda svaret. Om du inte kan det, säg pass: bokstaven kommer tillbaka i nästa omgång.",
+    "The letter tiles (for screen readers)": "Bokstavsbrickorna (för skärmläsare)",
+    "Letters to put in order": "Bokstäver att lägga i ordning",
+    "The letters put so far (for screen readers, @letters)": "Bokstäverna som lagts hittills (för skärmläsare, @letters)",
+    "Your answer so far: @letters": "Ditt svar hittills: @letters",
+    "Erase button of the letter tiles": "Raderknapp för bokstavsbrickorna",
+    "Erase the last letter": "Radera sista bokstaven",
+    "Letter tiles still to put": "Bokstavsbrickor som är kvar att lägga",
+    "Put every letter in its place, or pass.": "Lägg varje bokstav på sin plats, eller säg pass."
   }
 }

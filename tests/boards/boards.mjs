@@ -62,6 +62,50 @@ const GAMES = {
     }),
     shapeOk: (s) => s.letter >= 0.06 * s.wheel && s.hub >= 0.2 * s.wheel,
   },
+  // The same wheel with letter tiles instead of the field, for the youngest: the word and the rack under the clue.
+  'alphabet-wheel-tiles': {
+    root: '.aw',
+    view: 'h5p-alphabet-wheel/alphabet-wheel-tiles',
+    async start(frame) {
+      await frame.locator('.aw-intro button').click();
+      await frame.locator('.aw-tile').first().waitFor();
+    },
+    /** One move: the right answer to the current letter, tile by tile. */
+    async move(frame) {
+      const letter = await frame.locator('.aw-letter[aria-current] .aw-letter-text').textContent();
+      await tapAnswer(frame, answers[letter]);
+      await frame.locator('.aw-check').click();
+    },
+    /** The tallest moment: the longest answer of the wheel, «Check» with one place empty, and the note under it. */
+    async answer(frame) {
+      const [longest] = Object.entries(answers).sort(([, a], [, b]) => b.length - a.length);
+      for (let i = 0; i < 40 && await frame.locator('.aw-letter[aria-current] .aw-letter-text').textContent() !== longest[0]; i++) {
+        await frame.waitForTimeout(450);
+        await frame.locator('.aw-pass').click();
+      }
+      await frame.waitForTimeout(450);
+      await tapAnswer(frame, longest[1].slice(0, -1));
+      await frame.locator('.aw-check').click();
+    },
+    state: (frame) => frame.evaluate(() => {
+      const current = document.querySelector('.aw-letter[aria-current] .aw-letter-text');
+      const word = [...document.querySelectorAll('.aw-slot')].map((s) => s.textContent || '_').join('');
+      return [current && current.textContent, document.querySelector('.aw-counts').textContent, word].join(' | ');
+    }),
+    shape: (frame) => frame.evaluate(() => {
+      const wheel = document.querySelector('.aw-wheel').getBoundingClientRect();
+      const tile = document.querySelector('.aw-tile').getBoundingClientRect();
+      const middles = [...document.querySelectorAll('.aw-word > *')].map((e) => {
+        const box = e.getBoundingClientRect();
+        return box.top + box.height / 2;
+      });
+      return { wheel: Math.round(wheel.width), tile: Math.round(Math.min(tile.width, tile.height)),
+        wordLines: Math.max(...middles) - Math.min(...middles) < 10 ? 1 : 2 };
+    }),
+    // A board is big: 32 px is some 4 cm on a 75-inch one, twice the 2 cm a small child needs. A phone keeps 44 px
+    // (the end-to-end test «on a touch screen»).
+    shapeOk: (s) => s.tile >= 32 && s.wordLines === 1 && s.wheel > 100,
+  },
   'number-line': {
     root: '.nl',
     async start(frame) {
@@ -151,8 +195,16 @@ const GAMES = {
   },
 };
 
+/** Taps, in order, a free tile for each letter of the text. */
+async function tapAnswer(frame, text) {
+  for (const letter of text) {
+    const exact = new RegExp(`^${letter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`);
+    await frame.locator('.aw-tile:not(.aw-tile-used)', { hasText: exact }).first().click();
+  }
+}
+
 async function openGame(page, name) {
-  await page.goto(`${base}/view/h5p-${name}/${name}-es?session=null`);
+  await page.goto(`${base}/view/${GAMES[name].view || `h5p-${name}/${name}`}-es?session=null`);
   const handle = await page.locator('iframe.h5p-iframe').elementHandle();
   const frame = await handle.contentFrame();
   await frame.waitForSelector(GAMES[name].root);

@@ -149,6 +149,18 @@
     "What the picture shows": "Che cosa mostra l'immagine",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Per chi non può vederla: i lettori di schermo leggono questo testo ad alta voce. Descrivila senza svelare la risposta: «un cerchio giallo con dei raggi», non «il sole».",
     "The picture of a clue, for screen readers (@description)": "L'immagine di un indizio, per i lettori di schermo (@description)",
-    "Picture: @description": "Immagine: @description"
+    "Picture: @description": "Immagine: @description",
+    "Letter tiles instead of typing": "Lettere mobili invece di scrivere",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "Per chi sta ancora imparando a scrivere: le lettere di ogni risposta arrivano in disordine e si toccano nell'ordine giusto. Le lettere riprendono la risposta com'è scritta, con maiuscole e accenti.",
+    "How to play, with letter tiles": "Come si gioca, con le lettere mobili",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Tocca le lettere nell'ordine giusto per formare la risposta. Se non la sai, passa: la lettera tornerà nel giro successivo.",
+    "The letter tiles (for screen readers)": "Le lettere mobili (per i lettori di schermo)",
+    "Letters to put in order": "Lettere da mettere in ordine",
+    "The letters put so far (for screen readers, @letters)": "Le lettere messe finora (per i lettori di schermo, @letters)",
+    "Your answer so far: @letters": "La tua risposta finora: @letters",
+    "Erase button of the letter tiles": "Pulsante per cancellare delle lettere mobili",
+    "Erase the last letter": "Cancella l'ultima lettera",
+    "Letter tiles still to put": "Lettere mobili ancora da mettere",
+    "Put every letter in its place, or pass.": "Metti ogni lettera al suo posto, o passa."
   }
 }

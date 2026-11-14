@@ -149,6 +149,18 @@
     "What the picture shows": "Ce que montre l'image",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Pour les joueurs qui ne peuvent pas la voir : les lecteurs d'écran lisent ce texte à voix haute. Décrivez l'image sans donner la réponse : « un disque jaune entouré de rayons », pas « le soleil ».",
     "The picture of a clue, for screen readers (@description)": "L'image d'un indice, pour les lecteurs d'écran (@description)",
-    "Picture: @description": "Image : @description"
+    "Picture: @description": "Image : @description",
+    "Letter tiles instead of typing": "Lettres mobiles au lieu d'écrire",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "Pour ceux qui apprennent encore à écrire : les lettres de chaque réponse arrivent dans le désordre, et on les touche dans l'ordre. Les lettres reprennent la réponse telle qu'elle est écrite, avec ses majuscules et ses accents.",
+    "How to play, with letter tiles": "Comment jouer, avec les lettres mobiles",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Touche les lettres dans l'ordre pour former la réponse. Si tu ne la sais pas, passe : la lettre reviendra au tour suivant.",
+    "The letter tiles (for screen readers)": "Les lettres mobiles (pour les lecteurs d'écran)",
+    "Letters to put in order": "Lettres à remettre dans l'ordre",
+    "The letters put so far (for screen readers, @letters)": "Les lettres déjà placées (pour les lecteurs d'écran, @letters)",
+    "Your answer so far: @letters": "Ta réponse pour l'instant : @letters",
+    "Erase button of the letter tiles": "Bouton pour effacer, avec les lettres mobiles",
+    "Erase the last letter": "Effacer la dernière lettre",
+    "Letter tiles still to put": "Lettres mobiles encore à placer",
+    "Put every letter in its place, or pass.": "Mets chaque lettre à sa place, ou passe."
   }
 }

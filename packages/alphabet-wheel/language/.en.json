@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Letter tiles instead of typing",
+      "description": "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents."
+    },
+    {
       "label": "Time limit, in seconds",
       "description": "0 or empty for no time limit. Players can pause the clock at any time."
     },
@@ -143,6 +147,10 @@
           "default": "Type the answer for each letter. If you do not know it, pass: the letter comes back in the next round."
         },
         {
+          "label": "How to play, with letter tiles",
+          "default": "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round."
+        },
+        {
           "label": "The answer starts with (@letter)",
           "default": "Starts with @letter"
         },
@@ -157,6 +165,22 @@
         {
           "label": "Answer field",
           "default": "Your answer"
+        },
+        {
+          "label": "The letter tiles (for screen readers)",
+          "default": "Letters to put in order"
+        },
+        {
+          "label": "The letters put so far (for screen readers, @letters)",
+          "default": "Your answer so far: @letters"
+        },
+        {
+          "label": "Erase button of the letter tiles",
+          "default": "Erase the last letter"
+        },
+        {
+          "label": "Letter tiles still to put",
+          "default": "Put every letter in its place, or pass."
         },
         {
           "label": "Check button",

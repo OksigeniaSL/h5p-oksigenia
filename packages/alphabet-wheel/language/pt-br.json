@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Alfabeto móvel em vez de escrever",
+      "description": "Para quem ainda está aprendendo a escrever: as letras de cada resposta aparecem embaralhadas, e são tocadas na ordem certa. As letras mostram a resposta como está escrita, com maiúsculas e acentos."
+    },
+    {
       "label": "Limite de tempo, em segundos",
       "description": "0 ou vazio: sem limite de tempo. Os jogadores podem pausar o relógio a qualquer momento."
     },
@@ -144,6 +148,10 @@
           "default": "Escreva a resposta de cada letra. Se não souber, passe: a letra volta na próxima rodada."
         },
         {
+          "label": "Como jogar, com o alfabeto móvel",
+          "default": "Toque nas letras na ordem certa para formar a resposta. Se não souber, passe: a letra volta na próxima rodada."
+        },
+        {
           "label": "A resposta começa com (@letter)",
           "default": "Começa com @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Campo de resposta",
           "default": "Sua resposta"
+        },
+        {
+          "label": "As letras do alfabeto móvel (para leitores de tela)",
+          "default": "Letras para pôr em ordem"
+        },
+        {
+          "label": "As letras colocadas até agora (para leitores de tela, @letters)",
+          "default": "Sua resposta até agora: @letters"
+        },
+        {
+          "label": "Botão de apagar do alfabeto móvel",
+          "default": "Apagar a última letra"
+        },
+        {
+          "label": "Letras do alfabeto móvel ainda por colocar",
+          "default": "Coloque cada letra no seu lugar, ou passe."
         },
         {
           "label": "Botão para verificar",

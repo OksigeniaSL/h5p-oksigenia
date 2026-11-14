@@ -3,7 +3,7 @@
 # virtual screen and no access to the host's screen, sound or input, reads the Spanish example in Firefox ESR; the
 # speech it would give is cut out step by step from its debug log.
 #
-#   tests/platforms/orca/run.sh [alphabet-wheel|number-line]
+#   tests/platforms/orca/run.sh [alphabet-wheel|alphabet-wheel-tiles|number-line|balance-scale]
 #
 # Needs Docker, the built example packages (npm run pack) and the dev server's H5P core (.h5p-dev, npm run dev once).
 # Output: $H5P_PLATFORM_DIR/orca (default ~/.cache/h5p-oksigenia/orca): orca.log, steps.log and speech.txt.

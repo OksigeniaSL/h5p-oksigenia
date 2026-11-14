@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Buchstabenkärtchen statt Schreiben",
+      "description": "Für alle, die noch schreiben lernen: Die Buchstaben jeder Antwort kommen durcheinander, und sie werden der Reihe nach angetippt. Die Kärtchen zeigen die Antwort so, wie sie geschrieben ist, mit Groß- und Kleinbuchstaben und Akzenten."
+    },
+    {
       "label": "Zeitlimit in Sekunden",
       "description": "0 oder leer: ohne Zeitlimit. Die Spieler können die Uhr jederzeit anhalten."
     },
@@ -144,6 +148,10 @@
           "default": "Schreib die Antwort zu jedem Buchstaben. Wenn du sie nicht weißt, passe: Der Buchstabe kommt in der nächsten Runde wieder."
         },
         {
+          "label": "So wird gespielt, mit Buchstabenkärtchen",
+          "default": "Tippe die Buchstaben der Reihe nach an, um die Antwort zu legen. Wenn du sie nicht weißt, passe: Der Buchstabe kommt in der nächsten Runde wieder."
+        },
+        {
           "label": "Die Antwort beginnt mit (@letter)",
           "default": "Beginnt mit @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Antwortfeld",
           "default": "Deine Antwort"
+        },
+        {
+          "label": "Die Buchstabenkärtchen (für Screenreader)",
+          "default": "Buchstaben zum Ordnen"
+        },
+        {
+          "label": "Die bisher gelegten Buchstaben (für Screenreader, @letters)",
+          "default": "Deine Antwort bisher: @letters"
+        },
+        {
+          "label": "Löschtaste der Buchstabenkärtchen",
+          "default": "Letzten Buchstaben löschen"
+        },
+        {
+          "label": "Buchstabenkärtchen, die noch fehlen",
+          "default": "Leg jeden Buchstaben an seinen Platz oder passe."
         },
         {
           "label": "Schaltfläche zum Prüfen",

@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Fichas de letras en vez de escribir",
+      "description": "Para quien aún está aprendiendo a escribir: las letras de cada respuesta salen desordenadas y se tocan en orden. Las fichas muestran la respuesta tal como está escrita, con sus mayúsculas y acentos."
+    },
+    {
       "label": "Tiempo límite, en segundos",
       "description": "0 o vacío para jugar sin tiempo. El alumno puede pausar el reloj cuando quiera."
     },
@@ -144,6 +148,10 @@
           "default": "Escribe la respuesta de cada letra. Si no la sabes, pasa y la letra volverá en la siguiente ronda."
         },
         {
+          "label": "Cómo se juega, con fichas de letras",
+          "default": "Toca las letras en orden para formar la respuesta. Si no la sabes, pasa y la letra volverá en la siguiente ronda."
+        },
+        {
           "label": "La respuesta empieza por (@letter)",
           "default": "Empieza por la @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Campo de respuesta",
           "default": "Tu respuesta"
+        },
+        {
+          "label": "Las fichas de letras (para lectores de pantalla)",
+          "default": "Letras para ordenar"
+        },
+        {
+          "label": "Las letras puestas hasta ahora (para lectores de pantalla, @letters)",
+          "default": "Tu respuesta por ahora: @letters"
+        },
+        {
+          "label": "Botón de borrar de las fichas de letras",
+          "default": "Borrar la última letra"
+        },
+        {
+          "label": "Fichas de letras por colocar",
+          "default": "Coloca cada letra en su sitio o pasa."
         },
         {
           "label": "Botón de comprobar",

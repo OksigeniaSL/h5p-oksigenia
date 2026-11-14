@@ -43,10 +43,56 @@ async function passTo(frame, letter) {
   }
 }
 
-async function startWithKeyboard(page, frame) {
+async function startWithKeyboard(page, frame, focused = '.aw-input') {
   await frame.locator('.aw-intro button').focus();
   await page.keyboard.press('Enter');
-  await expect(frame.locator('.aw-input')).toBeFocused();
+  await expect(frame.locator(focused).first()).toBeFocused();
+}
+
+/** A French wheel for the youngest, as a teacher made one: letter tiles instead of typing. */
+const TILE_ITEMS = [
+  { letter: 'A', kind: 'starts', clue: 'Insecte qui fabrique le miel.', answer: 'abeille' },
+  { letter: 'C', kind: 'contains', clue: 'Les couleurs après la pluie.', answer: 'arc-en-ciel' },
+  { letter: 'D', kind: 'starts', clue: 'Il saute hors de la mer.', answer: 'dauphin' },
+];
+
+/**
+ * Opens the French example and puts in its place a wheel with letter tiles, in the same frame.
+ * @param {import('@playwright/test').Page} page
+ * @param {object[]} [items]
+ */
+async function openTiles(page, items = TILE_ITEMS) {
+  const frame = await open(page, 'fr');
+  // The French texts, as the editor fills them in and as the platform keeps them (escaped).
+  const fr = JSON.parse(readFileSync(new URL('../../packages/alphabet-wheel/language/fr.json', import.meta.url), 'utf8'));
+  const semantics = JSON.parse(readFileSync(new URL('../../packages/alphabet-wheel/semantics.json', import.meta.url), 'utf8'));
+  const index = semantics.findIndex((f) => f.name === 'l10n');
+  const l10n = Object.fromEntries(semantics[index].fields.map((f, i) => [f.name, escapeAsH5P(fr.semantics[index].fields[i].default)]));
+  await frame.evaluate(([its, texts]) => {
+    const old = H5P.instances[0];
+    const box = /** @type {HTMLElement} */ (document.querySelector('.h5p-alphabet-wheel'));
+    const wheel = new H5P.AlphabetWheel({ items: its, language: 'fr', letterTiles: true, l10n: texts },
+      old.contentId, { standalone: true, metadata: { title: 'Alphabet des animaux' } });
+    H5P.instances[0] = wheel;
+    // The frame follows the height of the new wheel, as H5P makes it follow the one it started.
+    wheel.on('resize', () => old.trigger('resize'));
+    box.replaceChildren();
+    wheel.attach(H5P.jQuery(box));
+  }, [items, l10n]);
+  await expect(frame.locator('.aw-help')).toContainText('Touche les lettres');
+  return frame;
+}
+
+/** The letters of the free tiles, in the order of the rack. */
+const freeTiles = (frame) => frame.locator('.aw-tile:not(.aw-tile-used)').allTextContents();
+/** What the word shows, an empty place as «_». */
+const word = (frame) => frame.locator('.aw-slot').evaluateAll((els) => els.map((e) => e.textContent || (e.classList.contains('aw-slot-space') ? ' ' : '_')).join(''));
+
+/** Taps, in order, a free tile for each letter of the text. */
+async function tapLetters(frame, text) {
+  for (const letter of text) {
+    await frame.locator('.aw-tile:not(.aw-tile-used)', { hasText: new RegExp(`^${letter}$`) }).first().click();
+  }
 }
 
 test('a whole wheel played with the keyboard sends one result, with one point per letter', async ({ page }) => {
@@ -547,6 +593,131 @@ for (const [width, height] of [[1100, 540], [360, 640]]) {
   });
 }
 
+test('letter tiles: the answer is made by tapping, a letter goes back, the key erases, and a word with gaps is not checked', async ({ page }) => {
+  const frame = await openTiles(page);
+  await frame.locator('.aw-intro button').click();
+  // No field: nothing to type on, and no keyboard on a tablet. The focus is on the first tile.
+  await expect(frame.locator('.aw-input')).toHaveCount(0);
+  await expect(frame.locator('.aw-tile').first()).toBeFocused();
+  const tiles = await freeTiles(frame);
+  expect(tiles.slice().sort().join('')).toBe([...'abeille'].sort().join(''));
+  expect(tiles.join('')).not.toBe('abeille');
+  await expect.poll(() => word(frame)).toBe('_______');
+  await expect(frame.locator('.aw-slot').first()).toHaveClass(/aw-slot-next/);
+  await expect(frame.locator('.aw-erase')).toHaveAttribute('aria-disabled', 'true');
+
+  // A tile goes to the first place, and leaves its outline in the rack.
+  await tapLetters(frame, 'ab');
+  await expect.poll(() => word(frame)).toBe('ab_____');
+  await expect(frame.locator('.aw-tile.aw-tile-used')).toHaveCount(2);
+  await expect(frame.locator('.aw-slot').nth(2)).toHaveClass(/aw-slot-next/);
+  await expect(frame.locator('[aria-live]')).toHaveText("Ta réponse pour l'instant\u00a0: a b");
+  // «Check» with places still empty: a note, and the letter is not lost.
+  await frame.locator('.aw-check').click();
+  await expect(frame.locator('.aw-feedback')).toHaveText('Mets chaque lettre à sa place, ou passe.');
+  await expect(frame.locator('.aw-letter.aw-bad')).toHaveCount(0);
+  await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('A');
+  // A letter of the word, tapped, goes back to its tile; the next tile fills that place, and the note goes.
+  await frame.locator('.aw-slot').first().click();
+  await expect.poll(() => word(frame)).toBe('_b_____');
+  await expect(frame.locator('.aw-feedback')).toHaveText('');
+  await tapLetters(frame, 'a');
+  await expect.poll(() => word(frame)).toBe('ab_____');
+  // The key that erases takes the last letter back.
+  await frame.locator('.aw-erase').click();
+  await expect.poll(() => word(frame)).toBe('a______');
+  await tapLetters(frame, 'beille');
+  await expect.poll(() => word(frame)).toBe('abeille');
+  // The word complete, the next step is «Check».
+  await expect(frame.locator('.aw-check')).toBeFocused();
+  await expect(frame.locator('.aw-tile:not(.aw-tile-used)')).toHaveCount(0);
+  const axe = await new AxeBuilder({ page }).include({ fromFrames: ['iframe.h5p-iframe', '.aw'] })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
+  expect(axe.violations.map((v) => `${v.id} (${v.nodes.length})`)).toEqual([]);
+  await frame.locator('.aw-check').click();
+  await expect(frame.locator('.aw-letter.aw-ok')).toHaveCount(1);
+
+  // Hyphens are in their place already: only the letters are tiles.
+  await expect.poll(() => word(frame)).toBe('___-__-____');
+  await expect(frame.locator('.aw-tile')).toHaveCount(9);
+  await expect(frame.locator('.aw-slot.aw-slot-fixed')).toHaveCount(2);
+  await page.waitForTimeout(PERSON_MS);
+  await frame.locator('.aw-pass').click();
+  // A wrong order is a wrong answer, with the right one shown.
+  await page.waitForTimeout(PERSON_MS);
+  await tapLetters(frame, 'dauphni');
+  await frame.locator('.aw-check').click();
+  await expect(frame.locator('.aw-feedback')).toContainText('dauphin');
+  await expect(frame.locator('.aw-letter.aw-bad')).toHaveCount(1);
+  // The passed letter comes back with all its tiles free, jumbled again.
+  await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('C');
+  await expect(frame.locator('.aw-tile.aw-tile-used')).toHaveCount(0);
+  await page.waitForTimeout(PERSON_MS);
+  await tapLetters(frame, 'arcenciel');
+  await expect.poll(() => word(frame)).toBe('arc-en-ciel');
+  await frame.locator('.aw-check').click();
+  await expect(frame.locator('.aw-results')).toBeVisible();
+  const result = await frame.evaluate(() => window.statements.filter((s) => s.verb.id.endsWith('/answered'))
+    .map((s) => [s.result.score.raw, s.result.score.max, s.result.response]));
+  expect(result).toEqual([[2, 3, 'abeille[,]arc-en-ciel[,]dauphni']]);
+});
+
+test('letter tiles with a keyboard: a letter key takes its tile, without minding capitals or accents, and the backspace erases', async ({ page }) => {
+  const frame = await openTiles(page, [{ letter: 'H', kind: 'starts', clue: 'Petit animal couvert de piquants.', answer: 'Hérisson' }]);
+  await startWithKeyboard(page, frame, '.aw-tile');
+  await page.keyboard.type('herix');
+  // The x has no tile: nothing happens.
+  await expect.poll(() => word(frame)).toBe('Héri____');
+  await page.keyboard.press('Backspace');
+  await expect.poll(() => word(frame)).toBe('Hér_____');
+  await page.keyboard.type('isson');
+  await expect(frame.locator('.aw-check')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(frame.locator('.aw-results')).toBeVisible();
+  await expect(frame.locator('.aw-review-item.aw-ok')).toHaveCount(1);
+});
+
+test('letter tiles: a reload in the middle takes the game up again, paused, with the tiles of the letter', async ({ page }) => {
+  const session = `tiles-${Date.now()}`;
+  const url = `/view/h5p-alphabet-wheel/alphabet-wheel-tiles-en?session=${session}`;
+  const answers = answersOf('en');
+  await page.goto(url);
+  let frame = await (await page.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
+  await frame.locator('.aw-intro button').click();
+  await tapLetters(frame, answers.A);
+  await frame.locator('.aw-check').click();
+  await page.waitForTimeout(PERSON_MS);
+  await tapLetters(frame, answers.B.slice(0, 2));
+  // H5P saves the state three seconds after each move.
+  await page.waitForTimeout(3500);
+  await page.reload();
+  frame = await (await page.locator('iframe.h5p-iframe').elementHandle()).contentFrame();
+  await expect(frame.locator('.aw-paused')).toBeVisible();
+  await expect(frame.locator('.aw-letter.aw-ok')).toHaveCount(1);
+  await frame.locator('.aw-pause').click();
+  // The letter goes on with all its tiles free: what was put and not checked is not kept.
+  await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('B');
+  await expect(frame.locator('.aw-tile')).toHaveCount(answers.B.length);
+  await expect(frame.locator('.aw-tile.aw-tile-used')).toHaveCount(0);
+  await expect(frame.locator('.aw-tile').first()).toBeFocused();
+});
+
+test('letter tiles: a double tap after a move does not put a letter of the next word', async ({ page }) => {
+  const frame = await openTiles(page);
+  await frame.locator('.aw-intro button').click();
+  await tapLetters(frame, 'abeille');
+  // «Check» and, at once, a tap on a tile of the next word, as a slow board gives a double tap.
+  await frame.locator('.aw-check').click();
+  await frame.evaluate(() => {
+    const tile = /** @type {HTMLElement} */ (document.querySelector('.aw-tile'));
+    tile.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 }));
+  });
+  await expect(frame.locator('.aw-tile.aw-tile-used')).toHaveCount(0);
+  await page.waitForTimeout(PERSON_MS);
+  await frame.locator('.aw-tile').first().click();
+  await expect(frame.locator('.aw-tile.aw-tile-used')).toHaveCount(1);
+});
+
 test.describe('on a touch screen', () => {
   // The Moodle app does not resize its page for the keyboard, which covers the lower part of the screen.
   const height = 844;
@@ -605,6 +776,41 @@ test.describe('on a touch screen', () => {
     await frame.locator('.aw-input').press('Enter');
     await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('S');
     await clear();
+  });
+
+  test('letter tiles open no keyboard: the clue, the word, the tiles and «Check» stay in view as they are tapped', async ({ page }) => {
+    const frame = await openTiles(page);
+    await page.evaluate(() => {
+      const spacer = () => Object.assign(document.createElement('div'), { style: 'height: 500px' });
+      document.body.prepend(spacer());
+      document.body.append(spacer());
+    });
+    const inView = () => expect.poll(async () => {
+      const clue = await frame.locator('.aw-clue').boundingBox();
+      const check = await frame.locator('.aw-check').boundingBox();
+      return !!clue && !!check && clue.y >= 0 && check.y + check.height <= height;
+    }, { message: 'clue and «Check» in view' }).toBe(true);
+    await frame.locator('.aw-intro button').tap();
+    await inView();
+    for (const letter of 'abeille') {
+      await frame.locator('.aw-tile:not(.aw-tile-used)', { hasText: new RegExp(`^${letter}$`) }).first().tap();
+    }
+    await expect.poll(() => word(frame)).toBe('abeille');
+    await frame.locator('.aw-check').tap();
+    await inView();
+    // Big enough for a finger: every tile at least 44 px. The places of a long word narrow, but not below 24 px.
+    const smallest = (selector) => frame.locator(selector).evaluateAll((els) => Math.min(...els.map((e) => {
+      const box = e.getBoundingClientRect();
+      return Math.min(box.width, box.height);
+    })));
+    expect(await smallest('.aw-tile')).toBeGreaterThanOrEqual(44);
+    expect(await smallest('.aw-slot:not(.aw-slot-fixed)')).toBeGreaterThanOrEqual(24);
+    // The word stays on one line, with the key that erases right after it.
+    const middles = await frame.locator('.aw-word > *').evaluateAll((els) => els.map((e) => {
+      const box = e.getBoundingClientRect();
+      return box.top + box.height / 2;
+    }));
+    expect(Math.max(...middles) - Math.min(...middles)).toBeLessThan(10);
   });
 });
 

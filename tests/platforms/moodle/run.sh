@@ -1,6 +1,6 @@
 #!/bin/sh
-# Plays the games in a throwaway Moodle and checks attempts, grades and resume: the Alphabet Wheel (check.mjs), the
-# Number Line (number-line.mjs) and the Balance Scale (balance-scale.mjs).
+# Plays the games in a throwaway Moodle and checks attempts, grades and resume: the Alphabet Wheel (check.mjs), also
+# with letter tiles (tiles.mjs), the Number Line (number-line.mjs) and the Balance Scale (balance-scale.mjs).
 #
 #   tests/platforms/moodle/run.sh 4.5|5.3
 #
@@ -87,6 +87,25 @@ docker exec h5p-moodle-moodle-1 chown www-data /tmp/setup.php /tmp/alphabet-whee
 cmid=$(docker exec -u www-data h5p-moodle-moodle-1 php /tmp/setup.php /tmp/alphabet-wheel-es.h5p 3 | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s.trim().split("\n").pop()).cmid))')
 
 node "$here/check.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$cmid" --container h5p-moodle-moodle-1 --db h5p-moodle-db-1 \
+  --db-password "$db_password" --admin-password "$admin_password" --shots "$work/../report-moodle-$branch"
+
+# The same wheel with letter tiles, as the youngest play it: the Spanish package with the box ticked.
+python3 - "$package" "$work/tiles.h5p" <<'PY'
+import json, sys, zipfile
+src, dst = sys.argv[1:3]
+with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zout:
+    for item in zin.infolist():
+        data = zin.read(item.filename)
+        if item.filename == 'content/content.json':
+            content = json.loads(data)
+            content['letterTiles'] = True
+            data = json.dumps(content, ensure_ascii=False).encode()
+        zout.writestr(item.filename, data)
+PY
+docker cp "$work/tiles.h5p" $c:/tmp/tiles.h5p
+docker exec $c chown www-data /tmp/tiles.h5p
+tiles_cmid=$(docker exec -u www-data $c php /tmp/setup.php /tmp/tiles.h5p 3 'Rueda con fichas' | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s.trim().split("\n").pop()).cmid))')
+node "$here/tiles.mjs" --url "http://localhost:$H5P_MOODLE_PORT" --cmid "$tiles_cmid" --container $c --db h5p-moodle-db-1 \
   --db-password "$db_password" --admin-password "$admin_password" --shots "$work/../report-moodle-$branch"
 
 if [ -n "${H5P_PREVIOUS:-}" ]; then

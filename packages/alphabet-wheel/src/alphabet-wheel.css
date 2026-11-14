@@ -199,6 +199,11 @@
     grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
   }
 
+  /* With tiles the panel takes more of the width, so a word of ten letters has its tiles on one row. */
+  .h5p-alphabet-wheel .aw-game.aw-game-tiles {
+    grid-template-columns: minmax(0, 2fr) minmax(16em, 3fr);
+  }
+
   .h5p-alphabet-wheel .aw-wheel {
     width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
   }
@@ -420,6 +425,10 @@
     grid-template-columns: minmax(0, 1fr) minmax(16em, 1fr);
   }
 
+  .h5p-alphabet-wheel .aw-wide .aw-game.aw-game-tiles {
+    grid-template-columns: minmax(0, 2fr) minmax(16em, 3fr);
+  }
+
   .h5p-alphabet-wheel .aw-wide .aw-wheel {
     width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
   }
@@ -614,6 +623,183 @@
   gap: 0.5em;
 }
 
+/* Letter tiles, for players who cannot type yet. The word is a row of places, with the next one marked; under it, the
+   jumbled letters on a rack, each a tile with some thickness that sinks when pressed. A used tile leaves its outline,
+   so the rack keeps its shape and nothing jumps under the finger. Tiles and places are as big as a button: a finger of
+   a six-year-old on a board. */
+.h5p-alphabet-wheel .aw-with-tiles {
+  scroll-margin-top: 5em;
+}
+
+/* The word: its places, which narrow on a long word before it breaks into two lines. */
+.h5p-alphabet-wheel .aw-word {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.h5p-alphabet-wheel .aw-slot,
+.h5p-alphabet-wheel .aw-tile {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  height: 2.1em;
+  min-height: 2.75rem;
+  padding: 0;
+  border-radius: var(--aw-radius);
+  font: inherit;
+  font-size: 1.3em;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.h5p-alphabet-wheel .aw-tile {
+  width: 2.1em;
+  min-width: 2.75rem;
+}
+
+/* Beside the wheel (a board, a laptop), a long word narrows its tiles to keep them on one row: there they are still
+   several centimetres wide. On a phone they keep the size of a finger and go on to a second row. --aw-n is the number
+   of tiles. */
+@container aw (min-width: 34em) {
+  .h5p-alphabet-wheel .aw-tile {
+    width: clamp(1.6em, calc((100cqi - 2.75rem - var(--aw-n, 1) * 0.35rem) / var(--aw-n, 1)), 2.1em);
+    height: 2em;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  /* The key that erases, as high as the tiles beside it (2em of their 1.3em). */
+  .h5p-alphabet-wheel .aw-erase {
+    height: 2.6em;
+    min-height: 0;
+  }
+}
+
+@supports not (container-type: inline-size) {
+  .h5p-alphabet-wheel .aw-wide .aw-tile {
+    width: clamp(1.6em, var(--aw-tile-px, 1.95em), 2.1em);
+    height: 2em;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-erase {
+    height: 2.6em;
+    min-height: 0;
+  }
+}
+
+.h5p-alphabet-wheel .aw-slot {
+  flex: 1 1 1.2em;
+  max-width: max(2.1em, 2.75rem);
+  height: 1.75em;
+  min-height: 0;
+  border: 2px solid transparent;
+  border-bottom: 3px solid var(--aw-line);
+  border-radius: 0.2em;
+  background: var(--aw-hub);
+  color: var(--aw-ink);
+}
+
+.h5p-alphabet-wheel .aw-slot.aw-slot-next {
+  border-bottom: 4px solid var(--aw-main-text);
+}
+
+/* A letter in the word looks like the tile it came from, and goes back to it when tapped. */
+.h5p-alphabet-wheel .aw-slot.aw-slot-filled {
+  border: 2px solid var(--aw-main-text);
+  border-radius: var(--aw-radius);
+  background: var(--aw-card);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.h5p-alphabet-wheel .aw-slot.aw-slot-landed {
+  animation: aw-land 0.18s ease-out;
+}
+
+@keyframes aw-land {
+  from {
+    transform: scale(0.6);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Spaces, hyphens and apostrophes of the answer: already in their place, not tiles. */
+.h5p-alphabet-wheel .aw-slot.aw-slot-fixed,
+.h5p-alphabet-wheel .aw-slot.aw-slot-space {
+  flex: none;
+  width: auto;
+  min-width: 0.4em;
+  border: 0;
+  background: transparent;
+  color: var(--aw-soft-ink);
+}
+
+.h5p-alphabet-wheel .aw-slot.aw-slot-space {
+  width: 0.6em;
+}
+
+/* The key that erases ends the rack, on the right as on a keyboard. */
+.h5p-alphabet-wheel .aw-erase {
+  flex: none;
+  width: 2.75rem;
+  margin-inline-start: auto;
+  padding: 0;
+}
+
+.h5p-alphabet-wheel .aw-erase .aw-icon {
+  width: 1.4em;
+  height: 1.4em;
+}
+
+.h5p-alphabet-wheel .aw-erase.aw-erase-idle {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.h5p-alphabet-wheel .aw-tiles {
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.35em 0.35em 0.5em;
+  border-radius: var(--aw-radius);
+  background: var(--aw-hub);
+}
+
+.h5p-alphabet-wheel .aw-tile {
+  border: 2px solid var(--aw-main-text);
+  background: var(--aw-card);
+  box-shadow: 0 0.15em 0 var(--aw-main-text);
+  color: var(--aw-ink);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.h5p-alphabet-wheel .aw-tile:active {
+  transform: translateY(0.12em);
+  box-shadow: 0 0.03em 0 var(--aw-main-text);
+}
+
+.h5p-alphabet-wheel .aw-tile:focus-visible {
+  outline: 3px solid var(--aw-focus);
+  outline-offset: 2px;
+}
+
+.h5p-alphabet-wheel .aw-tile.aw-tile-used {
+  border: 2px dashed var(--aw-line);
+  background: transparent;
+  box-shadow: none;
+  color: transparent;
+  cursor: default;
+}
+
 .h5p-alphabet-wheel .aw-paused {
   padding: 0.8em;
   border-radius: var(--aw-radius);
@@ -667,8 +853,12 @@
   color: var(--aw-bad);
 }
 
-.h5p-alphabet-wheel .aw-finish {
-  align-self: flex-start;
+.h5p-alphabet-wheel .aw-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 1em;
 }
 
 /* After the game */
@@ -862,6 +1052,12 @@
   .h5p-alphabet-wheel .aw-letter {
     transition: none;
     animation: none !important;
+  }
+
+  .h5p-alphabet-wheel .aw-slot,
+  .h5p-alphabet-wheel .aw-tile {
+    animation: none !important;
+    transform: none !important;
   }
 
   .h5p-alphabet-wheel .aw-cheer-title {

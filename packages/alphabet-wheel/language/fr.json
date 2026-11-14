@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Lettres mobiles au lieu d'écrire",
+      "description": "Pour ceux qui apprennent encore à écrire : les lettres de chaque réponse arrivent dans le désordre, et on les touche dans l'ordre. Les lettres reprennent la réponse telle qu'elle est écrite, avec ses majuscules et ses accents."
+    },
+    {
       "label": "Limite de temps, en secondes",
       "description": "0 ou vide : pas de limite de temps. Les joueurs peuvent mettre l'horloge en pause à tout moment."
     },
@@ -144,6 +148,10 @@
           "default": "Écris la réponse pour chaque lettre. Si tu ne la sais pas, passe : la lettre reviendra au tour suivant."
         },
         {
+          "label": "Comment jouer, avec les lettres mobiles",
+          "default": "Touche les lettres dans l'ordre pour former la réponse. Si tu ne la sais pas, passe : la lettre reviendra au tour suivant."
+        },
+        {
           "label": "La réponse commence par (@letter)",
           "default": "Commence par @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Champ de réponse",
           "default": "Ta réponse"
+        },
+        {
+          "label": "Les lettres mobiles (pour les lecteurs d'écran)",
+          "default": "Lettres à remettre dans l'ordre"
+        },
+        {
+          "label": "Les lettres déjà placées (pour les lecteurs d'écran, @letters)",
+          "default": "Ta réponse pour l'instant : @letters"
+        },
+        {
+          "label": "Bouton pour effacer, avec les lettres mobiles",
+          "default": "Effacer la dernière lettre"
+        },
+        {
+          "label": "Lettres mobiles encore à placer",
+          "default": "Mets chaque lettre à sa place, ou passe."
         },
         {
           "label": "Bouton pour vérifier",

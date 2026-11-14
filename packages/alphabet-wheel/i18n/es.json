@@ -149,6 +149,18 @@
     "What the picture shows": "Qué se ve en la imagen",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Para quien no puede verla: los lectores de pantalla la leen en voz alta. Descríbela sin dar la respuesta: «un círculo amarillo con rayos», no «el sol».",
     "The picture of a clue, for screen readers (@description)": "La imagen de una pista, para lectores de pantalla (@description)",
-    "Picture: @description": "Imagen: @description"
+    "Picture: @description": "Imagen: @description",
+    "Letter tiles instead of typing": "Fichas de letras en vez de escribir",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "Para quien aún está aprendiendo a escribir: las letras de cada respuesta salen desordenadas y se tocan en orden. Las fichas muestran la respuesta tal como está escrita, con sus mayúsculas y acentos.",
+    "How to play, with letter tiles": "Cómo se juega, con fichas de letras",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Toca las letras en orden para formar la respuesta. Si no la sabes, pasa y la letra volverá en la siguiente ronda.",
+    "The letter tiles (for screen readers)": "Las fichas de letras (para lectores de pantalla)",
+    "Letters to put in order": "Letras para ordenar",
+    "The letters put so far (for screen readers, @letters)": "Las letras puestas hasta ahora (para lectores de pantalla, @letters)",
+    "Your answer so far: @letters": "Tu respuesta por ahora: @letters",
+    "Erase button of the letter tiles": "Botón de borrar de las fichas de letras",
+    "Erase the last letter": "Borrar la última letra",
+    "Letter tiles still to put": "Fichas de letras por colocar",
+    "Put every letter in its place, or pass.": "Coloca cada letra en su sitio o pasa."
   }
 }

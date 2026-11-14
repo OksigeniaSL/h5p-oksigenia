@@ -149,6 +149,18 @@
     "What the picture shows": "Wat er op de afbeelding staat",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Voor wie de afbeelding niet kan zien: schermlezers lezen deze tekst voor. Beschrijf wat erop staat zonder het antwoord te verklappen: ‘een gele cirkel met stralen’, niet ‘de zon’.",
     "The picture of a clue, for screen readers (@description)": "De afbeelding bij een hint, voor schermlezers (@description)",
-    "Picture: @description": "Afbeelding: @description"
+    "Picture: @description": "Afbeelding: @description",
+    "Letter tiles instead of typing": "Lettertegels in plaats van typen",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "Voor wie nog leert schrijven: de letters van elk antwoord komen door elkaar, en ze worden op volgorde aangetikt. De tegels tonen het antwoord zoals het geschreven is, met hoofdletters en accenten.",
+    "How to play, with letter tiles": "Zo speel je, met lettertegels",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Tik de letters op volgorde aan om het antwoord te maken. Weet je het niet, pas dan: de letter komt terug in de volgende ronde.",
+    "The letter tiles (for screen readers)": "De lettertegels (voor schermlezers)",
+    "Letters to put in order": "Letters om op volgorde te leggen",
+    "The letters put so far (for screen readers, @letters)": "De letters die al liggen (voor schermlezers, @letters)",
+    "Your answer so far: @letters": "Jouw antwoord tot nu toe: @letters",
+    "Erase button of the letter tiles": "Wisknop van de lettertegels",
+    "Erase the last letter": "Laatste letter wissen",
+    "Letter tiles still to put": "Lettertegels die nog gelegd moeten worden",
+    "Put every letter in its place, or pass.": "Leg elke letter op zijn plek, of pas."
   }
 }

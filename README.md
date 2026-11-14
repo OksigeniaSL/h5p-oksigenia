@@ -20,7 +20,8 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
 ## Games
 
 - **Alphabet Wheel** (`H5P.AlphabetWheel`): a clue for each letter of the alphabet, in words, in a picture or both. The
-  student types the answer or passes the letter to the next round. One point per letter. At the end, the student sees the score and how each letter
+  student types the answer or passes the letter to the next round; those who are still learning to write can make it
+  with letter tiles instead, the letters of the answer jumbled. One point per letter. At the end, the student sees the score and how each letter
   went, and the teacher has every attempt in the report of the activity.
 
   <img src="docs/img/alphabet-wheel-end.webp" width="676" alt="The end of a game: a score ring with 24 of 26, a message, the buttons to see the answers or play again, and the first letters with their answers.">

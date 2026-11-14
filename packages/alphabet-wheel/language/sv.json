@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Bokstavsbrickor i stället för att skriva",
+      "description": "För den som fortfarande lär sig skriva: bokstäverna i varje svar kommer i oordning, och man trycker på dem i rätt ordning. Brickorna visar svaret som det är skrivet, med stora bokstäver och accenter."
+    },
+    {
       "label": "Tidsgräns i sekunder",
       "description": "0 eller tomt: ingen tidsgräns. Spelarna kan pausa klockan när som helst."
     },
@@ -144,6 +148,10 @@
           "default": "Skriv svaret för varje bokstav. Om du inte kan det, säg pass: bokstaven kommer tillbaka i nästa omgång."
         },
         {
+          "label": "Så spelar du, med bokstavsbrickor",
+          "default": "Tryck på bokstäverna i rätt ordning för att bilda svaret. Om du inte kan det, säg pass: bokstaven kommer tillbaka i nästa omgång."
+        },
+        {
           "label": "Svaret börjar på (@letter)",
           "default": "Börjar på @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Svarsfält",
           "default": "Ditt svar"
+        },
+        {
+          "label": "Bokstavsbrickorna (för skärmläsare)",
+          "default": "Bokstäver att lägga i ordning"
+        },
+        {
+          "label": "Bokstäverna som lagts hittills (för skärmläsare, @letters)",
+          "default": "Ditt svar hittills: @letters"
+        },
+        {
+          "label": "Raderknapp för bokstavsbrickorna",
+          "default": "Radera sista bokstaven"
+        },
+        {
+          "label": "Bokstavsbrickor som är kvar att lägga",
+          "default": "Lägg varje bokstav på sin plats, eller säg pass."
         },
         {
           "label": "Knapp för att kontrollera",

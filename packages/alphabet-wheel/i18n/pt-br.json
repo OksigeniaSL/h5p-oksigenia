@@ -149,6 +149,18 @@
     "What the picture shows": "O que a imagem mostra",
     "For players who cannot see it: screen readers read it aloud. Describe it without giving the answer away: “a yellow circle with rays”, not “the sun”.": "Para quem não pode vê-la: os leitores de tela leem este texto em voz alta. Descreva a imagem sem entregar a resposta: “um círculo amarelo com raios”, não “o sol”.",
     "The picture of a clue, for screen readers (@description)": "A imagem de uma pista, para leitores de tela (@description)",
-    "Picture: @description": "Imagem: @description"
+    "Picture: @description": "Imagem: @description",
+    "Letter tiles instead of typing": "Alfabeto móvel em vez de escrever",
+    "For players who are still learning to write: the letters of each answer come jumbled, and they tap them in order. The tiles show the answer as it is written, with its capitals and accents.": "Para quem ainda está aprendendo a escrever: as letras de cada resposta aparecem embaralhadas, e são tocadas na ordem certa. As letras mostram a resposta como está escrita, com maiúsculas e acentos.",
+    "How to play, with letter tiles": "Como jogar, com o alfabeto móvel",
+    "Tap the letters in order to make the answer. If you do not know it, pass: the letter comes back in the next round.": "Toque nas letras na ordem certa para formar a resposta. Se não souber, passe: a letra volta na próxima rodada.",
+    "The letter tiles (for screen readers)": "As letras do alfabeto móvel (para leitores de tela)",
+    "Letters to put in order": "Letras para pôr em ordem",
+    "The letters put so far (for screen readers, @letters)": "As letras colocadas até agora (para leitores de tela, @letters)",
+    "Your answer so far: @letters": "Sua resposta até agora: @letters",
+    "Erase button of the letter tiles": "Botão de apagar do alfabeto móvel",
+    "Erase the last letter": "Apagar a última letra",
+    "Letter tiles still to put": "Letras do alfabeto móvel ainda por colocar",
+    "Put every letter in its place, or pass.": "Coloque cada letra no seu lugar, ou passe."
   }
 }

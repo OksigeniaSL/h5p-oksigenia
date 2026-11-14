@@ -44,6 +44,10 @@
       }
     },
     {
+      "label": "Lettere mobili invece di scrivere",
+      "description": "Per chi sta ancora imparando a scrivere: le lettere di ogni risposta arrivano in disordine e si toccano nell'ordine giusto. Le lettere riprendono la risposta com'è scritta, con maiuscole e accenti."
+    },
+    {
       "label": "Limite di tempo, in secondi",
       "description": "0 o vuoto: senza limite di tempo. I giocatori possono mettere in pausa l'orologio in qualsiasi momento."
     },
@@ -144,6 +148,10 @@
           "default": "Scrivi la risposta per ogni lettera. Se non la sai, passa: la lettera tornerà nel giro successivo."
         },
         {
+          "label": "Come si gioca, con le lettere mobili",
+          "default": "Tocca le lettere nell'ordine giusto per formare la risposta. Se non la sai, passa: la lettera tornerà nel giro successivo."
+        },
+        {
           "label": "La risposta inizia con (@letter)",
           "default": "Inizia con la @letter"
         },
@@ -158,6 +166,22 @@
         {
           "label": "Campo della risposta",
           "default": "La tua risposta"
+        },
+        {
+          "label": "Le lettere mobili (per i lettori di schermo)",
+          "default": "Lettere da mettere in ordine"
+        },
+        {
+          "label": "Le lettere messe finora (per i lettori di schermo, @letters)",
+          "default": "La tua risposta finora: @letters"
+        },
+        {
+          "label": "Pulsante per cancellare delle lettere mobili",
+          "default": "Cancella l'ultima lettera"
+        },
+        {
+          "label": "Lettere mobili ancora da mettere",
+          "default": "Metti ogni lettera al suo posto, o passa."
         },
         {
           "label": "Pulsante per controllare",
