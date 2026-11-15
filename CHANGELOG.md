@@ -2,6 +2,20 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Balance Scale 1.0.3 (15 November 2026)
+
+- A picture of each topic on its scale, on the first screen, for those who do not read yet: a teacher who put the game
+  on his school's site for his youngest pupils explained every topic under it with screenshots. Each card shows its
+  example on the scale chosen, and changes with it; the buttons of the market, the laboratory and the notebook show
+  their scale too. With the topic set by the author, the first screen shows that scale, bigger, with its numbers.
+- The instructions are recorded in the eight languages of the game: French, German, Italian, Dutch, Brazilian
+  Portuguese and Swedish join Spanish and English, each with a native voice.
+- On a phone, the first round left the scale at its smallest: it was measured in the frame of the longer first screen.
+  And where the scale would have little room, the weights of the tray are drawn smaller, so they take two rows, not
+  three, and «Empty the pan» stays on the screen (seen in the Moodle app).
+- Under a page with more fixed bars than Moodle's (104 px on campus.oksigenia.com), the whole round fits under them:
+  the game measures them, not just Moodle's 60 px.
+
 ## Alphabet Wheel 1.0.10 (14 November 2026)
 
 - Letter tiles instead of typing, for players who are still learning to write, as a teacher who plays the wheel with

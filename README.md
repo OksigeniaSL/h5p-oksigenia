@@ -42,8 +42,9 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
   (multiplying and dividing), sharing out every weight and a mystery bag. By default the scale leans at once, which is
   what works best in studies with on-screen balances; it can also be held until it is let go. Each game makes up its own
   numbers, a round that goes wrong comes back later with other numbers, and every round goes to the report of the
-  activity. Three painted scales to choose from (a market, a laboratory and a pencil drawing on squared paper), the
-  instructions recorded in Spanish and English, and a free balance with no points, for a board.
+  activity. Three painted scales to choose from (a market, a laboratory and a pencil drawing on squared paper), a picture
+  of each topic on its scale for those who do not read yet, the instructions recorded in its eight languages, and a free
+  balance with no points, for a board.
   **[Play it now](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D79)**, in Spanish.
 
   <picture>

@@ -138,7 +138,7 @@
         "label": "Offer to listen to the instructions",
         "importance": "low",
         "default": true,
-        "description": "Recorded in Spanish and English. In other languages the text goes without voice."
+        "description": "Recorded in the eight languages the game comes in. In other languages the text goes without voice."
       },
       {
         "name": "enableRetry",

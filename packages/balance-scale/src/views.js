@@ -25,6 +25,8 @@ export const VIEWS = { market: ['puesto', market], laboratory: ['precision', lab
 const D2R = Math.PI / 180;
 /** Room left under the hook of a hanging pan, in units of the view: the ring and where the chains meet. */
 const HOOK_CLEARANCE = 34;
+/** A still picture smaller than this (px of the screen for a unit of the view) has no numbers: they would not read. */
+const MIN_INK_SCALE = 0.3;
 
 /** @typedef {import('./game.js').Thing} Thing */
 /**
@@ -93,6 +95,8 @@ export class View {
     this.ctx = null;
     this.layer = null;
     this.cam = { s: 1, vx: 0, vy: 0, W: 0, H: 0, dpr: 1 };
+    /** @type {{font: string}|null} While a still picture is drawn: the font of its numbers, which go on the canvas. */
+    this.stilled = null;
   }
 
   /** @returns {Promise<void>} The pictures, loaded once. */
@@ -439,13 +443,17 @@ export class View {
         const x0 = q.x0, y0 = q.y0 + dy;
         this.underlay(c, x0, y0, q.k, !q.t.fixed);
         if (!this.paper && this.border[n]) {
-          const r = 2.6 / s;
+          // The border of «yours», thinner in a small picture so the thing still shows.
+          const r = (this.stilled ? 1.2 : 2.6) / s;
           for (let j = 0; j < 12; j++) {
             const t = (j * Math.PI) / 6;
             ctx.drawImage(this.border[n], x0 + r * Math.cos(t), y0 + r * Math.sin(t), w, h);
           }
         }
         ctx.drawImage(this.art(n), x0, y0, w, h);
+        if (this.stilled && s >= MIN_INK_SCALE) {
+          this.ink(q, x0, y0, scene);
+        }
         const box = this.boxes.get(q.t.id);
         if (box) {
           const [sx, sy] = this.toScreen(x0, y0), nb = c.numero;
@@ -478,6 +486,51 @@ export class View {
       ctx.globalAlpha = 1;
     }
     ctx.drawImage(this.art('brazo'), -B.ancla.x, -B.ancla.y, B.w, B.h);
+    ctx.restore();
+  }
+
+  /**
+   * A still picture of a scene in a canvas of its own, for the first screen: the topics and the scales to choose.
+   * Nothing to touch, and the numbers drawn on the picture.
+   * @param {HTMLCanvasElement} canvas Inside a box that gives it its size.
+   * @param {Scene} scene
+   */
+  still(canvas, scene) {
+    if (!this.ready || !canvas.parentElement || !canvas.parentElement.clientWidth) {
+      return;
+    }
+    const live = { canvas: this.canvas, ctx: this.ctx, cam: this.cam, boxes: this.boxes, drop: this.drop };
+    Object.assign(this, { canvas, ctx: canvas.getContext('2d'), boxes: new Map(), drop: null,
+      stilled: { font: getComputedStyle(this.host.root).fontFamily || 'sans-serif' } });
+    try {
+      this.paint(scene);
+    } finally {
+      Object.assign(this, live, { stilled: null });
+    }
+  }
+
+  /**
+   * The number of a thing, on the canvas of a still picture, in the ink of its picture.
+   * @param {{t: Thing, c: Object, k: number}} q
+   * @param {number} x0
+   * @param {number} y0
+   * @param {Scene} scene
+   */
+  ink(q, x0, y0, scene) {
+    const { ctx, cam } = this, nb = q.c.numero, size = nb.h * q.k * 0.95;
+    const tried = scene.tried !== null && scene.tried !== undefined;
+    ctx.save();
+    ctx.font = `800 ${size.toFixed(1)}px ${this.stilled.font}`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = q.c.tinta === 'claro' ? '#fff' : q.c.tinta === 'oscuro' ? '#2b1d0e' : this.C.lapiz;
+    if (q.c.tinta === 'claro') {
+      ctx.shadowColor = 'rgba(0,0,0,0.55)';
+      ctx.shadowOffsetY = cam.dpr;
+      ctx.shadowBlur = 2 * cam.dpr;
+    }
+    const text = q.t.kind === 'mystery' ? (tried ? String(scene.tried) : '?') : String(q.t.v);
+    ctx.fillText(text, x0 + (nb.x + nb.w / 2) * q.k, y0 + (nb.y + nb.h / 2) * q.k);
     ctx.restore();
   }
 

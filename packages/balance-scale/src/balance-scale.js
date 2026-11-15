@@ -42,14 +42,36 @@ const CHOICES = [
   ['bag', 'topicBag', 'topicBagLine', '? + ? + 3 = 11'],
   ['free', 'topicFree', 'topicFreeLine', '5 + 5 = 10'],
 ];
-/** Languages with the instructions recorded (Mira, a neutral voice of Spain, and Mira EN). */
-const VOICES = ['es', 'en'];
+/**
+ * The picture of each topic on the first screen: its example, on the scale, as a round of it looks. For those who do
+ * not read yet: a teacher in France explained every topic to his young pupils with screenshots of the game.
+ */
+const STILLS = (() => {
+  let n = 0;
+  const put = (v, kind = 'w') => ({ id: `still-${++n}`, v, kind, fixed: true });
+  const mine = (v) => ({ id: `still-${++n}`, v, kind: 'w', fixed: false });
+  return {
+    equalities: { left: [put(8), put(5)], right: [put(6), mine(4)] },
+    groups: { left: [put(4, 'bag'), put(4, 'bag'), put(4, 'bag')], right: [mine(6)] },
+    share: { left: [mine(7), mine(2)], right: [mine(5), mine(4)] },
+    bag: { left: [put(4, 'mystery'), put(4, 'mystery'), put(3)], right: [put(11)] },
+    free: { left: [mine(5), mine(5)], right: [mine(10)] },
+  };
+})();
+/**
+ * Languages with the instructions recorded, by the first part of the language code, and their folder: Mira, a neutral
+ * voice of Spain; Mira EN; and Victoria, of Paris, for the youngest pupils of a school in France who play it.
+ */
+const VOICES = { es: 'es', en: 'en', fr: 'fr' };
 /** The beam leans this much at most, on its stop. */
 const MAX_ANGLE = 12;
 /** The fixed bar of an LMS page, which stays over the game: the game fits under it. */
 const BAR = 60;
 /** The smallest the scene gets, so the scale and its numbers still read. */
 const MIN_SCENE = 190;
+/** Less room than this for the scene, and the weights of the tray are drawn smaller: they took three rows on a phone and
+ * left the scale at its smallest (seen in the Moodle app, 7 November 2026). */
+const ROOMY_SCENE = 260;
 /** From this width of the game on, the tray goes beside the scale: a Moodle page at 1100 px with its course index open
  * leaves the game about 670 px, and one above the other did not fit in the height left. */
 const WIDE = 600;
@@ -94,6 +116,20 @@ const btn = (attrs) => /** @type {HTMLButtonElement} */ (el('button', attrs));
 const other = (side) => (side === 'left' ? 'right' : 'left');
 const sum = (list) => list.reduce((s, x) => s + x, 0);
 
+/**
+ * @param {number} left
+ * @param {number} right
+ * @returns {number} Where the beam of a free scale goes: level, or towards the heavier side, more the more it weighs.
+ */
+const tilt = (left, right) => {
+  const d = left - right;
+  if (!d) {
+    return 0;
+  }
+  const size = 4 + (MAX_ANGLE - 4) * Math.min(1, Math.abs(d) / Math.max(3, Math.max(left, right) * 0.3));
+  return d > 0 ? -size : size;
+};
+
 /** @typedef {import('./game.js').Thing} Thing */
 
 let uid = 0;
@@ -128,7 +164,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.sounds = new Sounds({ enabled: this.behaviour.enableSound !== false });
     const lang = String(this.locale || '').toLowerCase().split('-')[0];
     /** The language of the recorded instructions, or nothing: then there is no button to listen. */
-    this.voice = this.behaviour.enableVoice !== false && VOICES.includes(lang) ? lang : null;
+    this.voice = this.behaviour.enableVoice !== false && Object.prototype.hasOwnProperty.call(VOICES, lang) ? VOICES[lang] : null;
     /** @type {BalanceGame|null} */
     this.game = null;
     /** @type {Object<string, View>} */
@@ -199,15 +235,20 @@ export default class BalanceScale extends H5P.EventDispatcher {
 
   /** @returns {View} The view of the chosen scale, made once. */
   view() {
-    if (!this.views[this.viewName]) {
-      this.views[this.viewName] = new View(/** @type {any} */ (this.viewName), `${this.libraryPath()}/assets/views`, {
+    return this.viewOf(this.viewName);
+  }
+
+  /** @param {string} name @returns {View} A view, made once. */
+  viewOf(name) {
+    if (!this.views[name]) {
+      this.views[name] = new View(/** @type {any} */ (name), `${this.libraryPath()}/assets/views`, {
         root: this.root,
         dark: () => document.documentElement.classList.contains('h5p-oksigenia-dark'),
         reduced: reducedMotion,
         label: (thing, side) => fill(side === 'left' ? this.l10n.onLeftPan : this.l10n.onRightPan, { thing: this.thingName(thing) }),
       });
     }
-    return this.views[this.viewName];
+    return this.views[name];
   }
 
   /**
@@ -255,6 +296,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
         document.documentElement.classList.toggle('h5p-oksigenia-dark', dark);
         paintOuterFrames(dark ? getComputedStyle(this.root).backgroundColor : '');
         Object.values(this.views).forEach((v) => v.ready && v.theme());
+        this.paintStills();
         if (this.game && this.game.phase === 'playing') {
           this.fillTray();
           this.paint();
@@ -379,10 +421,11 @@ export default class BalanceScale extends H5P.EventDispatcher {
       return '';
     }
     const t = this.l10n;
-    this.pickButtons = VIEW_NAMES.map(([name, text]) => ({
-      name,
-      button: btn({ type: 'button', class: `bs-button bs-secondary bs-pick bs-pick-${name}`, text: t[text], onclick: () => this.pickView(name) }),
-    }));
+    this.pickButtons = VIEW_NAMES.map(([name, text]) => {
+      const button = btn({ type: 'button', class: `bs-button bs-secondary bs-pick bs-pick-${name}`, onclick: () => this.pickView(name) });
+      button.append(this.stillBox('bs-pick-picture', name, null), el('span', { text: t[text] }));
+      return { name, button };
+    });
     this.picker = el('div', { class: 'bs-picker', role: 'group', 'aria-label': t.viewTitle }, [
       el('span', { class: 'bs-picker-title', text: t.viewTitle }), ...this.pickButtons.map(({ button }) => button),
     ]);
@@ -403,7 +446,43 @@ export default class BalanceScale extends H5P.EventDispatcher {
       // Not remembered, but it still applies to this game.
     }
     this.paintPicker();
-    this.view().load().catch(() => {});
+    this.view().load().then(() => this.paintStills()).catch(() => {});
+  }
+
+  /**
+   * A box for a still picture of the scale, painted once its view has loaded and again when the size, the scale or the
+   * colours change.
+   * @param {string} className
+   * @param {string|null} view The scale it always shows, or null for the chosen one.
+   * @param {string|null} topic The example it shows, or null for the empty scale.
+   * @returns {HTMLElement}
+   */
+  stillBox(className, view, topic) {
+    const box = el('span', { class: `bs-still ${className}`, 'aria-hidden': 'true' }, [el('canvas')]);
+    box.dataset.view = view || '';
+    box.dataset.topic = topic || '';
+    return box;
+  }
+
+  /** Paints the still pictures of the first screen that are in view. */
+  paintStills() {
+    if (!this.root || this.intro.hidden) {
+      return;
+    }
+    this.intro.querySelectorAll('.bs-still').forEach((/** @type {HTMLElement} */ box) => {
+      const view = this.viewOf(box.dataset.view || this.viewName), example = STILLS[box.dataset.topic];
+      const scene = example
+        ? { angle: tilt(sum(example.left.map((x) => x.v)), sum(example.right.map((x) => x.v))), stop: 1, left: example.left,
+          right: example.right, tried: null, aim: null }
+        : { angle: 0, stop: 1, left: [], right: [], tried: null, aim: null };
+      box.dataset.shows = view.name;
+      view.load().then(() => {
+        // The chosen scale may have changed while this one was loading.
+        if (box.isConnected && box.dataset.shows === view.name) {
+          view.still(/** @type {HTMLCanvasElement} */ (box.firstChild), /** @type {any} */ (scene));
+        }
+      }).catch(() => {});
+    });
   }
 
   /** The first screen: what can be chosen or, if the author chose, what it is about and «Start». */
@@ -414,8 +493,10 @@ export default class BalanceScale extends H5P.EventDispatcher {
       this.intro.replaceChildren(title, this.buildPicker(), el('p', { class: 'bs-summary', text: t.chooseTitle }),
         el('div', { class: 'bs-choices' }, CHOICES.map(([name, text, line, sample]) => {
           const b = btn({ type: 'button', class: `bs-button bs-secondary bs-choice bs-choice-${name}`, onclick: () => this.choose(name) });
-          b.append(el('span', { class: 'bs-choice-name', text: t[text] }), el('span', { class: 'bs-choice-sample', text: sample }),
-            el('span', { class: 'bs-choice-line', text: t[line] }));
+          b.append(this.stillBox('bs-choice-picture', null, name), el('span', { class: 'bs-choice-text' }, [
+            el('span', { class: 'bs-choice-name', text: t[text] }), el('span', { class: 'bs-choice-sample', text: sample }),
+            el('span', { class: 'bs-choice-line', text: t[line] }),
+          ]));
           return b;
         })));
       return;
@@ -423,6 +504,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     const [, text, line] = CHOICES.find(([name]) => name === this.topic) || CHOICES[0];
     this.intro.replaceChildren(
       title,
+      this.stillBox('bs-topic-picture', null, this.topic),
       el('p', { class: 'bs-summary', text: t[text] }),
       el('p', { class: 'bs-help', text: this.topic === 'free' ? t[line] : fill(t.introSummary, { count: this.game.rounds }) }),
       this.buildPicker(),
@@ -444,6 +526,9 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.intro.hidden = phase !== 'intro';
     this.gameView.hidden = phase !== 'playing';
     this.results.hidden = phase !== 'finished';
+    if (phase === 'intro') {
+      this.paintStills();
+    }
     if (phase === 'playing') {
       this.paintProgress();
       this.levelText.textContent = g.free ? t.topicFree : [t.levelOne, t.levelTwo, t.levelThree][g.level];
@@ -649,12 +734,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     const scene = this.frozen;
     const weigh = (side) => (scene
       ? sum(scene[side].map((x) => (x.kind === 'mystery' ? (scene.tried ?? g.current.x) : x.v))) : g.weight(side));
-    const L = weigh('left'), R = weigh('right'), d = L - R;
-    if (!d) {
-      return 0;
-    }
-    const size = 4 + (MAX_ANGLE - 4) * Math.min(1, Math.abs(d) / Math.max(3, Math.max(L, R) * 0.3));
-    return d > 0 ? -size : size;
+    return tilt(weigh('left'), weigh('right'));
   }
 
   /** Draws the scene again from scratch: after something was put on or taken off. */
@@ -1588,17 +1668,70 @@ export default class BalanceScale extends H5P.EventDispatcher {
   }
 
   /**
+   * @returns {number} The bars fixed at the top of the page that stay over the game: Moodle's 60 px at least, and more
+   *   where a site stacks more (campus.oksigenia.com has 104 px, and covered the dots of the rounds at 1280 × 600).
+   */
+  topBar() {
+    let bottom = 0;
+    try {
+      /** @type {Window} */
+      let win = window;
+      while (win.parent !== win && win.parent.document) {
+        win = win.parent;
+      }
+      if (win !== window) {
+        const doc = win.document;
+        // Down the stack of bars: each fixed or sticky one under the last, at three points across the page.
+        for (let k = 0; k < 4; k++) {
+          const before = bottom;
+          for (const x of [0.25, 0.5, 0.75]) {
+            for (let n = doc.elementFromPoint(win.innerWidth * x, bottom + 2); n && n !== doc.body && n !== doc.documentElement; n = n.parentElement) {
+              const position = win.getComputedStyle(n).position;
+              if (position === 'fixed' || position === 'sticky') {
+                bottom = Math.max(bottom, n.getBoundingClientRect().bottom);
+                break;
+              }
+            }
+          }
+          if (bottom <= before) {
+            break;
+          }
+        }
+        // Not a bar: something fixed that covers the page (a dialog, a drawer).
+        if (bottom > win.innerHeight / 3) {
+          bottom = 0;
+        }
+      }
+    } catch (e) {
+      // A frame of another site: Moodle's bar.
+    }
+    return Math.max(BAR, Math.round(bottom));
+  }
+
+  /**
    * The whole round fits on a classroom board under the bar of the page (1280×600, 960×540…): side by side on wide
    * screens, the scale takes the height that is left.
    */
   fit() {
-    if (!this.root || this.gameView.hidden || !this.scene.isConnected) {
+    if (!this.root) {
+      return;
+    }
+    // The pictures of the first screen change size with the width of the game.
+    this.paintStills();
+    if (this.gameView.hidden || !this.scene.isConnected) {
       return;
     }
     this.root.classList.toggle('bs-wide', this.root.clientWidth >= WIDE);
     const full = !!(this.container && this.container.closest('.h5p-fullscreen, .h5p-semi-fullscreen'));
-    // On a short board the weights of the tray are drawn smaller, so it takes fewer rows.
-    const scale = this.viewHeight() - (full ? 0 : BAR) < 600 ? 0.62 : 0.8;
+    // On a short board the weights of the tray are drawn smaller, so it takes fewer rows; and wherever the scale would
+    // be left with little room, which stays so while the room is the same, not to swing between the two.
+    const bar = full ? 0 : this.topBar();
+    const tall = this.viewHeight() - bar, roomKey = `${this.root.clientWidth}×${tall}`;
+    if (roomKey !== this.roomKey) {
+      this.roomKey = roomKey;
+      this.smallTray = tall < 600;
+    }
+    const scale = this.smallTray ? 0.62 : 0.8;
     if (scale !== this.trayScale) {
       this.trayScale = scale;
       if (this.game && this.game.current && !this.game.roundOver) {
@@ -1606,16 +1739,25 @@ export default class BalanceScale extends H5P.EventDispatcher {
       }
     }
     const wide = this.root.classList.contains('bs-wide');
+    // Down to the end of the content and its bar, not the height of the frame: H5P shrinks the frame only after this,
+    // and the first round, measured in the frame of the longer first screen, left the scale at its smallest.
+    const content = /** @type {HTMLElement} */ (this.root.closest('.h5p-content') || document.body);
+    let room = Infinity;
     for (let k = 0; k < 3; k++) {
-      const page = document.documentElement.scrollHeight;
+      const page = content.getBoundingClientRect().bottom - document.documentElement.getBoundingClientRect().top;
       const used = page - this.scene.getBoundingClientRect().height;
-      const room = this.viewHeight() - (full ? 0 : BAR + (wide ? 0 : BOTTOM_BAR)) - used - 10;
+      room = this.viewHeight() - (full ? 0 : bar + (wide ? 0 : BOTTOM_BAR)) - used - 10;
       const height = Math.round(Math.max(MIN_SCENE, Math.min(room, 560, this.scene.clientWidth / (wide ? 1.15 : 1.35))));
       const now = parseFloat(this.root.style.getPropertyValue('--bs-scene-h')) || 0;
       if (Math.abs(now - height) < 2) {
         break;
       }
       this.root.style.setProperty('--bs-scene-h', `${height}px`);
+    }
+    if (!this.smallTray && room < ROOMY_SCENE && this.game && this.game.current && !this.game.roundOver) {
+      this.smallTray = true;
+      this.fit();
+      return;
     }
     this.paint();
     this.trigger('resize');

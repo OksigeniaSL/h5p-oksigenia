@@ -205,24 +205,129 @@ test('the scale: three to choose from, without ages, remembered on this device',
   await expect(frame.locator('.bs-scene.bs-painted')).toHaveAttribute('data-view', 'notebook');
 });
 
-test('the instruction can be heard in Spanish and English, and there is no button in other languages', async ({ page }) => {
-  let frame = await open(page);
-  await frame.locator('.bs-choice-equalities').click();
-  await expect(frame.locator('.bs-listen')).toBeVisible();
-  const src = await frame.evaluate(() => {
-    const sources = [];
-    window.Audio = /** @type {any} */ (function Audio(url) {
-      sources.push(url);
-      return { play: () => Promise.resolve(), pause: () => {}, addEventListener: () => {}, volume: 1 };
-    });
-    /** @type {HTMLElement} */ (document.querySelector('.bs-listen')).click();
-    return sources[0];
+/** A fingerprint of what a canvas shows, and how much of it is painted. */
+const picture = (frame, selector) => frame.locator(selector).evaluate((canvas) => {
+  const c = /** @type {HTMLCanvasElement} */ (canvas), data = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+  let painted = 0, hash = 0;
+  for (let i = 3; i < data.length; i += 4) {
+    painted += data[i] > 0 ? 1 : 0;
+    hash = (hash * 31 + data[i - 3] + data[i - 2] * 7 + data[i - 1] * 13) % 1000003;
+  }
+  return { painted: painted / (data.length / 4), hash, width: c.width };
+});
+
+test('the first screen shows each topic on its scale and each scale to choose, for those who do not read yet', async ({ page }) => {
+  const frame = await open(page, 'fr');
+  for (const topic of ['equalities', 'groups', 'share', 'bag', 'free']) {
+    const canvas = `.bs-choice-${topic} .bs-choice-picture canvas`;
+    await expect.poll(async () => (await picture(frame, canvas)).painted, topic).toBeGreaterThan(0.9);
+    await expect(frame.locator(`.bs-choice-${topic} .bs-choice-picture`)).toHaveAttribute('aria-hidden', 'true');
+  }
+  // The name of a card is its text, and the picture adds nothing to it.
+  await expect(frame.locator('.bs-choice-share')).toHaveAccessibleName(/^Répartir/);
+  for (const view of ['market', 'laboratory', 'notebook']) {
+    await expect.poll(async () => (await picture(frame, `.bs-pick-${view} canvas`)).painted, view).toBeGreaterThan(0.9);
+  }
+  // The pictures of the topics change with the scale chosen.
+  const before = await picture(frame, '.bs-choice-bag canvas');
+  await frame.locator('.bs-pick-laboratory').click();
+  await expect.poll(async () => (await picture(frame, '.bs-choice-bag canvas')).hash).not.toBe(before.hash);
+  // On a phone the three scales keep one row, and the pictures are drawn again at their new size.
+  await page.setViewportSize({ width: 360, height: 640 });
+  await expect.poll(async () => (await picture(frame, '.bs-choice-bag canvas')).width).not.toBe(before.width);
+  const tops = await frame.locator('.bs-pick').evaluateAll((list) => list.map((b) => Math.round(b.getBoundingClientRect().top)));
+  expect(new Set(tops).size, 'one row').toBe(1);
+  // Back from a game, the pictures are there again.
+  await frame.locator('.bs-choice-free').click();
+  await frame.evaluate(() => H5P.instances[0].chooseAgain());
+  await expect.poll(async () => (await picture(frame, '.bs-choice-free canvas')).painted).toBeGreaterThan(0.9);
+});
+
+test('a teacher who sets the topic: the first screen shows its scale, with the numbers of its example', async ({ page }) => {
+  const frame = await open(page, 'fr');
+  await frame.evaluate(() => {
+    const game = H5P.instances[0];
+    game.topic = 'bag';
+    game.game = game.newGame('bag');
+    game.fillIntro();
+    game.render();
   });
-  expect(src).toMatch(/assets\/voice\/es\/igualdades-(der|izq)\.mp3$/);
-  expect((await page.request.get(src)).ok()).toBe(true);
-  frame = await open(page, 'de');
+  await expect.poll(async () => (await picture(frame, '.bs-topic-picture canvas')).painted).toBeGreaterThan(0.9);
+  await expect(frame.locator('.bs-start')).toBeVisible();
+});
+
+test('on a phone, the tray takes two rows and the scale keeps its room from the first round', async ({ page }) => {
+  await page.setViewportSize({ width: 412, height: 915 });
+  const frame = await open(page, 'fr');
   await frame.locator('.bs-choice-equalities').click();
-  await expect(frame.locator('.bs-listen')).toBeHidden();
+  await page.waitForTimeout(650);
+  const scene = await frame.locator('.bs-scene').boundingBox();
+  expect(scene.height, 'the scale, not at its smallest').toBeGreaterThan(240);
+  // Weights of different sizes in one row: a row starts where a weight begins below the bottom of the one before.
+  const rows = await frame.locator('.bs-tray .bs-weight').evaluateAll((list) => {
+    let count = 0, bottom = -Infinity;
+    for (const r of list.map((b) => b.getBoundingClientRect())) {
+      if (r.top >= bottom - 1) {
+        count += 1;
+      }
+      bottom = Math.max(bottom, r.bottom);
+    }
+    return count;
+  });
+  expect(rows, 'rows of weights').toBeLessThanOrEqual(2);
+  const bottom = await frame.locator('.bs-actions button:visible').last().evaluate((b) => b.getBoundingClientRect().bottom);
+  expect(bottom, 'the last button above the bottom bar of a phone').toBeLessThan(915 - 65);
+});
+
+test('under a page bar taller than Moodle\'s, the whole round still fits under it', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 600 });
+  const frame = await open(page, 'fr');
+  // Two fixed bars, 104 px in all, as on campus.oksigenia.com.
+  await page.evaluate(() => {
+    const bar = (top, height) => {
+      const d = document.createElement('div');
+      d.style.cssText = `position:fixed;left:0;right:0;top:${top}px;height:${height}px;background:#333;z-index:9`;
+      document.body.append(d);
+    };
+    bar(0, 60);
+    bar(60, 44);
+    document.body.style.paddingTop = '104px';
+  });
+  await frame.locator('.bs-choice-equalities').click();
+  await page.waitForTimeout(650);
+  expect(await frame.evaluate(() => H5P.instances[0].topBar())).toBe(104);
+  const game = await page.locator('iframe.h5p-iframe').boundingBox();
+  const inner = await frame.locator('.bs').boundingBox();
+  expect(inner.height, 'the game fits in what the bars leave').toBeLessThanOrEqual(600 - 104);
+  expect(game.height).toBeGreaterThan(0);
+});
+
+/** The languages with the instructions recorded, and the folder of each; the others show no button to listen. */
+const VOICED = { es: 'es', en: 'en', fr: 'fr' };
+const SILENT = ['de', 'it', 'nl', 'pt-br', 'sv'].filter((lang) => !(lang in VOICED));
+
+test('the instruction can be heard in every language with a recorded voice, and there is no button in the others', async ({ page }) => {
+  for (const [lang, folder] of Object.entries(VOICED)) {
+    const frame = await open(page, lang);
+    await frame.locator('.bs-choice-equalities').click();
+    await expect(frame.locator('.bs-listen')).toBeVisible();
+    const src = await frame.evaluate(() => {
+      const sources = [];
+      window.Audio = /** @type {any} */ (function Audio(url) {
+        sources.push(url);
+        return { play: () => Promise.resolve(), pause: () => {}, addEventListener: () => {}, volume: 1 };
+      });
+      /** @type {HTMLElement} */ (document.querySelector('.bs-listen')).click();
+      return sources[0];
+    });
+    expect(src, lang).toMatch(new RegExp(`assets/voice/${folder}/igualdades-(der|izq)\\.mp3$`));
+    expect((await page.request.get(src)).ok(), lang).toBe(true);
+  }
+  for (const lang of SILENT) {
+    const frame = await open(page, lang);
+    await frame.locator('.bs-choice-equalities').click();
+    await expect(frame.locator('.bs-listen'), lang).toBeHidden();
+  }
 });
 
 test('a reload in the middle takes the game up again, with what was already on the scale', async ({ page }) => {
