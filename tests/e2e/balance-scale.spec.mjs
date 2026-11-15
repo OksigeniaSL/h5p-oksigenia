@@ -279,6 +279,22 @@ test('on a phone, the tray takes two rows and the scale keeps its room from the 
   expect(bottom, 'the last button above the bottom bar of a phone').toBeLessThan(915 - 65);
 });
 
+test('in the Moodle app, which measures the game before H5P shrinks its frame, the frame fits the game that starts', async ({ page }) => {
+  await page.setViewportSize({ width: 412, height: 915 });
+  const frame = await open(page, 'fr');
+  await frame.evaluate(() => {
+    window.measured = [];
+    // As the embed page of the Moodle app does: on each resize, 0 ms later, the height of the body of the game's frame,
+    // which H5P shrinks 1 ms after the resize.
+    H5P.instances[0].on('resize', () => setTimeout(() => window.measured.push(document.body.scrollHeight), 0));
+  });
+  // The first screen is taller than a round on a phone: the frame has to shrink.
+  await frame.locator('.bs-choice-free').click();
+  await page.waitForTimeout(800);
+  const { last, now } = await frame.evaluate(() => ({ last: window.measured[window.measured.length - 1], now: document.body.scrollHeight }));
+  expect(last, 'the last height the app was told').toBe(now);
+});
+
 test('under a page bar taller than Moodle\'s, the whole round still fits under it', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 600 });
   const frame = await open(page, 'fr');

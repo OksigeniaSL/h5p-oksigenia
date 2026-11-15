@@ -168,6 +168,24 @@ function placeOf(node) {
   return { top, height: box.height, room: windows[windows.length - 1].innerHeight };
 }
 
+/** After a resize, the time H5P's own resize of the inner frame takes (1 ms), and some. */
+const RESIZE_AGAIN_MS = 120;
+
+/**
+ * Tells H5P the game changed screen (from the first screen to the game, from the game to its end), and again a moment
+ * later. The Moodle app measures the game 0 ms after a resize and H5P shrinks the inner frame 1 ms after it, so a game
+ * that got shorter was measured at its old height, and the app's frame shrank only at the next resize: the first tap
+ * after «Start» moved the whole game (seen with the Balance Scale on a phone, 15 November 2026). Moodle in a browser
+ * waits 150 ms and is not affected. Only on a change of screen: a second resize after every move came with clicks lost
+ * now and then in Firefox.
+ * @param {any} instance The game, an H5P.EventDispatcher.
+ */
+export function resizeFrames(instance) {
+  instance.trigger('resize');
+  clearTimeout(instance.resizeAgain);
+  instance.resizeAgain = setTimeout(() => instance.trigger('resize'), RESIZE_AGAIN_MS);
+}
+
 /**
  * Brings the next step of a game into view when it is out of it, at the top of the window; `scroll-margin-top` in the
  * styles of each element keeps room above it. The frames around H5P content grow a moment after the content does, and

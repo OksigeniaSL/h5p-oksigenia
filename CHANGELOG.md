@@ -15,6 +15,9 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
   three, and «Empty the pan» stays on the screen (seen in the Moodle app).
 - Under a page with more fixed bars than Moodle's (104 px on campus.oksigenia.com), the whole round fits under them:
   the game measures them, not just Moodle's 60 px.
+- In the Moodle app, the first tap after choosing a topic moved the whole game down, and a quick second tap could miss
+  its weight: the app measures the game before H5P shrinks its frame, so a game that got shorter kept its old height
+  until the next change. When it changes screen, the game tells H5P its size again a moment later.
 
 ## Alphabet Wheel 1.0.10 (14 November 2026)
 

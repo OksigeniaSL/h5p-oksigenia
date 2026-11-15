@@ -8,6 +8,7 @@ interface Window {
   H5P: any;
   statements: any[];
   oscillators: number;
+  measured: number[];
 }
 
 declare module '*.css';

@@ -8,7 +8,8 @@
 import semantics from '../semantics.json';
 import library from '../library.json';
 import {
-  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, texts, watchPageColourMode,
+  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, resizeFrames, texts,
+  watchPageColourMode,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, reducedMotion, scoreRing } from '../../shared/cheer.js';
@@ -73,6 +74,8 @@ const MIN_SCENE = 190;
 /** Less room than this for the scene, and the weights of the tray are drawn smaller: they took three rows on a phone and
  * left the scale at its smallest (seen in the Moodle app, 7 November 2026). */
 const ROOMY_SCENE = 260;
+/** A change of the room bigger than this (px) is a new room: a scrollbar that comes and goes is not. */
+const ROOM_CHANGE = 48;
 /** From this width of the game on, the tray goes beside the scale: a Moodle page at 1100 px with its course index open
  * leaves the game about 670 px, and one above the other did not fit in the height left. */
 const WIDE = 600;
@@ -542,7 +545,12 @@ export default class BalanceScale extends H5P.EventDispatcher {
     if (phase === 'finished') {
       this.renderResults();
     }
-    this.trigger('resize');
+    if (phase !== this.shownPhase) {
+      this.shownPhase = phase;
+      resizeFrames(this);
+    } else {
+      this.trigger('resize');
+    }
   }
 
   paintProgress() {
@@ -1726,11 +1734,12 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.root.classList.toggle('bs-wide', this.root.clientWidth >= WIDE);
     const full = !!(this.container && this.container.closest('.h5p-fullscreen, .h5p-semi-fullscreen'));
     // On a short board the weights of the tray are drawn smaller, so it takes fewer rows; and wherever the scale would
-    // be left with little room, which stays so while the room is the same, not to swing between the two.
+    // be left with little room. That stays so until the room changes for real (a turned phone, full screen), not to
+    // swing between the two: the bigger tray made the page scroll, the scrollbar narrowed the game, and so on, in Firefox.
     const bar = full ? 0 : this.topBar();
-    const tall = this.viewHeight() - bar, roomKey = `${this.root.clientWidth}×${tall}`;
-    if (roomKey !== this.roomKey) {
-      this.roomKey = roomKey;
+    const tall = this.viewHeight() - bar, wide0 = this.root.clientWidth, seen = this.roomSeen;
+    if (!seen || Math.abs(seen.wide - wide0) > ROOM_CHANGE || Math.abs(seen.tall - tall) > ROOM_CHANGE) {
+      this.roomSeen = { wide: wide0, tall };
       this.smallTray = tall < 600;
     }
     const scale = this.smallTray ? 0.62 : 0.8;
