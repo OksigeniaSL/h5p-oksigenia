@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Balance Scale 1.0.3 (15 November 2026)
+## Balance Scale 1.0.4 (15 November 2026)
 
 - A picture of each topic on its scale, on the first screen, for those who do not read yet: a teacher who put the game
   on his school's site for his youngest pupils explained every topic under it with screenshots. Each card shows its
@@ -18,6 +18,8 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 - In the Moodle app, the first tap after choosing a topic moved the whole game down, and a quick second tap could miss
   its weight: the app measures the game before H5P shrinks its frame, so a game that got shorter kept its old height
   until the next change. When it changes screen, the game tells H5P its size again a moment later.
+
+Version 1.0.3 was a test version on a development site, not released.
 
 ## Alphabet Wheel 1.0.10 (14 November 2026)
 
