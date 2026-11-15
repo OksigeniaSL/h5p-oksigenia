@@ -89,6 +89,12 @@ try {
     await page.waitForTimeout(650);
     await game.locator('.bs-next').click();
   };
+  const pictures = [];
+  page.on('response', (response) => {
+    if (/H5P\.BalanceScale[^/]*\/assets\//.test(response.url())) {
+      pictures.push(response.status());
+    }
+  });
   await open();
   // A game at rest asks for nothing: no request keeps going in the background.
   const requests = [];
@@ -97,13 +103,8 @@ try {
   await page.waitForTimeout(3000);
   page.off('request', note);
   check('at rest, the game makes no requests', requests.length === 0, requests.slice(0, 3).join(' '));
-  // The painted scale loads its pictures from the library folder of the site.
-  const pictures = [];
-  page.on('response', (response) => {
-    if (/H5P\.BalanceScale[^/]*\/assets\//.test(response.url())) {
-      pictures.push(response.status());
-    }
-  });
+  // The painted scales load their pictures from the library folder of the site, from the first screen on: its cards
+  // show each topic on its scale.
   await game.locator('.bs-choice-equalities').click();
   await game.locator('.bs-scene.bs-painted canvas').waitFor();
   check('the painted scale loads its pictures from the site', pictures.length > 0 && pictures.every((s) => s === 200 || s === 304),
