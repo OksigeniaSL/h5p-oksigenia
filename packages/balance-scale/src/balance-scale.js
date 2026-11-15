@@ -59,10 +59,11 @@ const STILLS = (() => {
   };
 })();
 /**
- * Languages with the instructions recorded, by the first part of the language code, and their folder: Mira, a neutral
- * voice of Spain; Mira EN; and Victoria, of Paris, for the youngest pupils of a school in France who play it.
+ * Languages with the instructions recorded, by the first part of the language code, and their folder: a native voice
+ * for each, from Mira, a neutral voice of Spain, to Victoria, of Paris, for the youngest pupils of a school in France
+ * who play it (the others: Mira EN, Annika, Luna, Ruth, Carla and Sanna).
  */
-const VOICES = { es: 'es', en: 'en', fr: 'fr' };
+const VOICES = { es: 'es', en: 'en', fr: 'fr', de: 'de', it: 'it', nl: 'nl', pt: 'pt-br', sv: 'sv' };
 /** The beam leans this much at most, on its stop. */
 const MAX_ANGLE = 12;
 /** The fixed bar of an LMS page, which stays over the game: the game fits under it. */
@@ -1681,14 +1682,19 @@ export default class BalanceScale extends H5P.EventDispatcher {
       }
       if (win !== window) {
         const doc = win.document;
-        // Down the stack of bars: each fixed or sticky one under the last, at three points across the page.
+        // Down the stack of bars: each fixed or sticky one under the last, at three points across the page. A bar is
+        // wide and low; a drawer at the side (Moodle's course index) or a dialog is not.
+        const isBar = (r) => r.width >= win.innerWidth / 2 && r.height < win.innerHeight / 3 && r.top <= bottom + 4;
         for (let k = 0; k < 4; k++) {
           const before = bottom;
           for (const x of [0.25, 0.5, 0.75]) {
             for (let n = doc.elementFromPoint(win.innerWidth * x, bottom + 2); n && n !== doc.body && n !== doc.documentElement; n = n.parentElement) {
               const position = win.getComputedStyle(n).position;
               if (position === 'fixed' || position === 'sticky') {
-                bottom = Math.max(bottom, n.getBoundingClientRect().bottom);
+                const r = n.getBoundingClientRect();
+                if (isBar(r)) {
+                  bottom = Math.max(bottom, r.bottom);
+                }
                 break;
               }
             }
@@ -1696,10 +1702,6 @@ export default class BalanceScale extends H5P.EventDispatcher {
           if (bottom <= before) {
             break;
           }
-        }
-        // Not a bar: something fixed that covers the page (a dialog, a drawer).
-        if (bottom > win.innerHeight / 3) {
-          bottom = 0;
         }
       }
     } catch (e) {

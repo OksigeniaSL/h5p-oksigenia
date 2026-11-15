@@ -282,15 +282,16 @@ test('on a phone, the tray takes two rows and the scale keeps its room from the 
 test('under a page bar taller than Moodle\'s, the whole round still fits under it', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 600 });
   const frame = await open(page, 'fr');
-  // Two fixed bars, 104 px in all, as on campus.oksigenia.com.
+  // Two fixed bars, 104 px in all, as on campus.oksigenia.com, and a drawer fixed at the side, which is no bar.
   await page.evaluate(() => {
-    const bar = (top, height) => {
+    const fixed = (css) => {
       const d = document.createElement('div');
-      d.style.cssText = `position:fixed;left:0;right:0;top:${top}px;height:${height}px;background:#333;z-index:9`;
+      d.style.cssText = `position:fixed;background:#333;z-index:9;${css}`;
       document.body.append(d);
     };
-    bar(0, 60);
-    bar(60, 44);
+    fixed('left:0;right:0;top:0;height:60px');
+    fixed('left:0;right:0;top:60px;height:44px');
+    fixed('right:0;width:400px;top:104px;bottom:0;opacity:0.2');
     document.body.style.paddingTop = '104px';
   });
   await frame.locator('.bs-choice-equalities').click();
@@ -302,9 +303,8 @@ test('under a page bar taller than Moodle\'s, the whole round still fits under i
   expect(game.height).toBeGreaterThan(0);
 });
 
-/** The languages with the instructions recorded, and the folder of each; the others show no button to listen. */
-const VOICED = { es: 'es', en: 'en', fr: 'fr' };
-const SILENT = ['de', 'it', 'nl', 'pt-br', 'sv'].filter((lang) => !(lang in VOICED));
+/** The languages of the examples, with the folder of the recorded instructions of each. */
+const VOICED = { es: 'es', en: 'en', fr: 'fr', de: 'de', it: 'it', nl: 'nl', 'pt-br': 'pt-br', sv: 'sv' };
 
 test('the instruction can be heard in every language with a recorded voice, and there is no button in the others', async ({ page }) => {
   for (const [lang, folder] of Object.entries(VOICED)) {
@@ -323,11 +323,10 @@ test('the instruction can be heard in every language with a recorded voice, and 
     expect(src, lang).toMatch(new RegExp(`assets/voice/${folder}/igualdades-(der|izq)\\.mp3$`));
     expect((await page.request.get(src)).ok(), lang).toBe(true);
   }
-  for (const lang of SILENT) {
-    const frame = await open(page, lang);
-    await frame.locator('.bs-choice-equalities').click();
-    await expect(frame.locator('.bs-listen'), lang).toBeHidden();
-  }
+  // A language without a voice, as a teacher's own translation: the sentence, without a button.
+  const frame = await open(page, 'es');
+  const voices = await frame.evaluate(() => ['pl', 'pt-BR', 'fr-CA'].map((lang) => new H5P.BalanceScale({}, 0, { metadata: { defaultLanguage: lang } }).voice));
+  expect(voices).toEqual([null, 'pt-br', 'fr']);
 });
 
 test('a reload in the middle takes the game up again, with what was already on the scale', async ({ page }) => {
