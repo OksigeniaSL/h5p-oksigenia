@@ -298,7 +298,13 @@ export default class BalanceScale extends H5P.EventDispatcher {
     this.render();
     if (this.takenUp && this.isRoot() && this.game.phase === 'playing') {
       this.takenUp = false;
-      bringIntoView(this.ask, { through: this.board });
+      // Taken up after a round: only «Next» is left, and it comes into view as after any round. The instruction above it
+      // showed while «Next» was still below the window on a slow machine (Moodle 5.3, 18 November 2026).
+      if (this.game.roundOver && this.nextButton) {
+        bringIntoView(this.nextButton);
+      } else {
+        bringIntoView(this.ask, { through: this.board });
+      }
     }
     // Inside another content type, the game keeps the colours of what is around it.
     if (this.isRoot() && !this.colourWatched) {

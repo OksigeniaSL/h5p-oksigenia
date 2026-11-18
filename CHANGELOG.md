@@ -14,12 +14,16 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
   tap, which then moved the whole game. When it changes screen, the game tells H5P its size again a moment later.
 - Under a page with fixed bars taller than Moodle's, the next step brought into view stops below them.
 
-## Balance Scale 1.0.5 (18 November 2026)
+## Balance Scale 1.0.6 (18 November 2026)
 
 - The player can choose how many rounds, from 5 to 10, on the first screen, as in the Number Line: authors tick «The
   player chooses how many rounds», and «Rounds in a game» is the number marked at first. A reload in the middle keeps
   the number chosen.
 - Under a page with fixed bars taller than Moodle's, the next step brought into view stops below them.
+- A game taken up after a round brings «Next» into view, as after any round: on a slow machine the instruction showed
+  while «Next» stayed below the window.
+
+Version 1.0.5 was a test version on a development site, not released.
 
 ## Balance Scale 1.0.4 (15 November 2026)
 
