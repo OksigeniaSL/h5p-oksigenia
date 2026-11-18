@@ -139,7 +139,8 @@ function readableWindows() {
  */
 function inView(node) {
   const { top, height, room } = placeOf(node);
-  return top >= VIEW_MARGIN && top + height <= room - VIEW_MARGIN;
+  // Below the bars at the top of the page, which may be taller than Moodle's.
+  return top >= Math.max(VIEW_MARGIN, pageBar() + BAR_GAP) && top + height <= room - VIEW_MARGIN;
 }
 
 /**
@@ -166,6 +167,62 @@ function placeOf(node) {
     top += frame ? frame.getBoundingClientRect().top : 0;
   });
   return { top, height: box.height, room: windows[windows.length - 1].innerHeight };
+}
+
+/** Moodle's fixed bar: the least there is over a game in the page of a platform. */
+const LMS_BAR = 60;
+/** Room between the bars at the top of the page and what is brought into view under them. */
+const BAR_GAP = 20;
+
+/**
+ * @returns {number} The bars fixed at the top of the outermost page that can be read, which stay over the game:
+ *   Moodle's 60 px at least, and more where a site stacks more (campus.oksigenia.com has 104 px, and covered the dots of
+ *   the rounds of the Balance Scale at 1280 × 600). A bar is wide and low; a drawer at the side (Moodle's course index)
+ *   or a dialog is not.
+ */
+export function pageBar() {
+  let bottom = 0;
+  const windows = readableWindows(), win = windows[windows.length - 1];
+  if (win !== window) {
+    const doc = win.document;
+    const isBar = (r) => r.width >= win.innerWidth / 2 && r.height < win.innerHeight / 3 && r.top <= bottom + 4;
+    // Down the stack of bars: each fixed or sticky one under the last, at three points across the page.
+    for (let k = 0; k < 4; k++) {
+      const before = bottom;
+      for (const x of [0.25, 0.5, 0.75]) {
+        for (let n = doc.elementFromPoint(win.innerWidth * x, bottom + 2); n && n !== doc.body && n !== doc.documentElement; n = n.parentElement) {
+          const position = win.getComputedStyle(n).position;
+          if (position === 'fixed' || position === 'sticky') {
+            const r = n.getBoundingClientRect();
+            if (isBar(r)) {
+              bottom = Math.max(bottom, r.bottom);
+            }
+            break;
+          }
+        }
+      }
+      if (bottom <= before) {
+        break;
+      }
+    }
+  }
+  return Math.max(LMS_BAR, Math.round(bottom));
+}
+
+/**
+ * The room above a step brought into view: its own `scroll-margin-top`, or more if the bars of the page are taller.
+ * @param {Element} node
+ */
+function clearOfBars(node) {
+  const style = /** @type {HTMLElement} */ (node).style;
+  if (!style) {
+    return;
+  }
+  style.scrollMarginTop = '';
+  const own = parseFloat(getComputedStyle(node).scrollMarginTop) || 0, want = pageBar() + BAR_GAP;
+  if (want > own) {
+    style.scrollMarginTop = `${want}px`;
+  }
 }
 
 /** After a resize, the time H5P's own resize of the inner frame takes (1 ms), and some. */
@@ -217,6 +274,7 @@ export function bringIntoView(node, { keyboard = false, through = null } = {}) {
   looks.forEach((ms, i) => setTimeout(() => {
     const due = ms > 600 ? outOfSight(node) : touch || !inView(node) || (through && !inView(through));
     if (!pressed && due) {
+      clearOfBars(node);
       node.scrollIntoView({ block: 'start' });
     }
     if (i === looks.length - 1) {

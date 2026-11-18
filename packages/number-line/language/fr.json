@@ -49,6 +49,10 @@
       "label": "Manches par partie"
     },
     {
+      "label": "La personne qui joue choisit le nombre de manches",
+      "description": "Sur le premier écran, de 5 à 10. « Manches par partie » est le nombre coché au départ."
+    },
+    {
       "label": "Réglages fins",
       "description": "Facultatif. Ce que vous remplissez ici crée un seul niveau avec ces nombres. Le reste peut rester vide.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Titre des pions",
           "default": "Choisis ton pion"
+        },
+        {
+          "label": "Titre du nombre de manches",
+          "default": "Combien de manches ?"
+        },
+        {
+          "label": "Un nombre de manches, pour les lecteurs d'écran (@count : manches)",
+          "default": "@count manches"
         },
         {
           "label": "Pion : ressort",

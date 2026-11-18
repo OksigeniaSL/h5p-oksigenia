@@ -58,6 +58,10 @@
       "label": "Runden pro Spiel"
     },
     {
+      "label": "Die spielende Person wählt die Zahl der Runden",
+      "description": "Auf dem ersten Bildschirm, von 5 bis 10. „Runden pro Spiel“ ist zu Beginn markiert."
+    },
+    {
       "label": "Feineinstellung",
       "description": "Optional. Wo das Spiel beginnt; mit drei guten Runden hintereinander geht es eine Stufe höher.",
       "fields": [
@@ -151,6 +155,14 @@
         {
           "label": "Überschrift der Waagen",
           "default": "Wähle deine Waage"
+        },
+        {
+          "label": "Überschrift der Rundenzahl",
+          "default": "Wie viele Runden?"
+        },
+        {
+          "label": "Eine Rundenzahl, für Bildschirmleser (@count: Runden)",
+          "default": "@count Runden"
         },
         {
           "label": "Waage: Markt",

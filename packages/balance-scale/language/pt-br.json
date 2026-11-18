@@ -58,6 +58,10 @@
       "label": "Rodadas por partida"
     },
     {
+      "label": "Quem joga escolhe quantas rodadas",
+      "description": "Na primeira tela, de 5 a 10. “Rodadas por partida” é o que aparece marcado no começo."
+    },
+    {
       "label": "Ajuste fino",
       "description": "Opcional. Onde o jogo começa; ele sobe de nível com três rodadas boas seguidas.",
       "fields": [
@@ -151,6 +155,14 @@
         {
           "label": "Título das balanças",
           "default": "Escolha sua balança"
+        },
+        {
+          "label": "Título do número de rodadas",
+          "default": "Quantas rodadas?"
+        },
+        {
+          "label": "Um número de rodadas, para leitores de tela (@count: rodadas)",
+          "default": "@count rodadas"
         },
         {
           "label": "Balança: feira",

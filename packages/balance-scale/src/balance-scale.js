@@ -8,7 +8,7 @@
 import semantics from '../semantics.json';
 import library from '../library.json';
 import {
-  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, resizeFrames, texts,
+  Announcer, bringIntoView, el, exitFullScreenButton, fill, pageBar, paintOuterFrames, plain, resizeFrames, texts,
   watchPageColourMode,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
@@ -35,6 +35,10 @@ const FALLBACK_TITLE = 'Balance Scale';
 const VIEW_KEY = 'h5p-oksigenia-scale';
 /** The views, with the name of their text. */
 const VIEW_NAMES = [['market', 'viewMarket'], ['laboratory', 'viewLaboratory'], ['notebook', 'viewNotebook']];
+/** How many rounds the player can choose, when the author lets them (a teacher asked for 5 to 10). */
+const ROUND_CHOICES = [5, 6, 7, 8, 9, 10];
+/** @param {*} n @returns {number} The choice nearest to the author's number of rounds. */
+const nearestRounds = (n) => Math.max(ROUND_CHOICES[0], Math.min(ROUND_CHOICES[ROUND_CHOICES.length - 1], Math.round(Number(n)) || 6));
 /** What can be chosen on the first screen: the topic, its texts and an example. */
 const CHOICES = [
   ['equalities', 'topicEqualities', 'topicEqualitiesLine', '8 + 5 = 6 + ?'],
@@ -67,8 +71,6 @@ const STILLS = (() => {
 const VOICES = { es: 'es', en: 'en', fr: 'fr', de: 'de', it: 'it', nl: 'nl', pt: 'pt-br', sv: 'sv' };
 /** The beam leans this much at most, on its stop. */
 const MAX_ANGLE = 12;
-/** The fixed bar of an LMS page, which stays over the game: the game fits under it. */
-const BAR = 60;
 /** The smallest the scene gets, so the scale and its numbers still read. */
 const MIN_SCENE = 190;
 /** Less room than this for the scene, and the weights of the tray are drawn smaller: they took three rows on a phone and
@@ -164,7 +166,9 @@ export default class BalanceScale extends H5P.EventDispatcher {
     /** Whether the player chooses the scale, or the author fixed one. */
     this.choosesView = !(params.view in VIEWS);
     this.viewName = this.choosesView ? this.savedView() : params.view;
-    this.roundsWanted = params.rounds;
+    /** Whether the player chooses how many rounds on the first screen; the author's number is the one marked at first. */
+    this.choosesRounds = params.chooseRounds === true;
+    this.roundsWanted = this.choosesRounds ? nearestRounds(params.rounds) : params.rounds;
     this.sounds = new Sounds({ enabled: this.behaviour.enableSound !== false });
     const lang = String(this.locale || '').toLowerCase().split('-')[0];
     /** The language of the recorded instructions, or nothing: then there is no button to listen. */
@@ -192,6 +196,9 @@ export default class BalanceScale extends H5P.EventDispatcher {
     const state = extras.previousState;
     const saved = state && (this.topic === 'choose' ? state.topic : this.topic);
     if (saved && saved !== 'free') {
+      if (this.choosesRounds && ROUND_CHOICES.includes(state.rounds)) {
+        this.roundsWanted = state.rounds;
+      }
       const game = this.newGame(saved);
       if (game.restore(state)) {
         this.game = game;
@@ -441,6 +448,44 @@ export default class BalanceScale extends H5P.EventDispatcher {
     (this.pickButtons || []).forEach(({ name, button }) => button.setAttribute('aria-pressed', String(name === this.viewName)));
   }
 
+  /** @returns {HTMLElement|string} The row to choose how many rounds, or nothing if the author fixed the number. */
+  buildRoundsPicker() {
+    if (!this.choosesRounds) {
+      return '';
+    }
+    const t = this.l10n;
+    this.roundButtons = ROUND_CHOICES.map((count) => {
+      const button = btn({
+        type: 'button', class: 'bs-button bs-secondary bs-pick bs-rounds-pick', text: String(count),
+        'aria-label': fill(t.roundsCount, { count }), onclick: () => this.pickRounds(count),
+      });
+      button.dataset.count = String(count);
+      return button;
+    });
+    const row = el('div', { class: 'bs-picker bs-rounds', role: 'group', 'aria-label': t.roundsTitle }, [
+      el('span', { class: 'bs-picker-title', text: t.roundsTitle }), ...this.roundButtons,
+    ]);
+    this.paintRounds();
+    return row;
+  }
+
+  paintRounds() {
+    (this.roundButtons || []).forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.count) === this.roundsWanted)));
+  }
+
+  /** @param {number} count The rounds of the next game. */
+  pickRounds(count) {
+    this.roundsWanted = count;
+    this.paintRounds();
+    // With the topic set by the author, the game waiting behind «Start» takes the new number.
+    if (this.game && this.game.phase === 'intro') {
+      this.game = this.newGame(this.topic);
+      if (this.summaryLine) {
+        this.summaryLine.textContent = fill(this.l10n.introSummary, { count: this.game.rounds });
+      }
+    }
+  }
+
   /** @param {string} name The scale from now on, remembered on this device. */
   pickView(name) {
     this.viewName = name;
@@ -494,7 +539,7 @@ export default class BalanceScale extends H5P.EventDispatcher {
     const t = this.l10n;
     const title = this.title ? el('p', { class: 'bs-title', text: this.title }) : '';
     if (this.topic === 'choose') {
-      this.intro.replaceChildren(title, this.buildPicker(), el('p', { class: 'bs-summary', text: t.chooseTitle }),
+      this.intro.replaceChildren(title, this.buildPicker(), this.buildRoundsPicker(), el('p', { class: 'bs-summary', text: t.chooseTitle }),
         el('div', { class: 'bs-choices' }, CHOICES.map(([name, text, line, sample]) => {
           const b = btn({ type: 'button', class: `bs-button bs-secondary bs-choice bs-choice-${name}`, onclick: () => this.choose(name) });
           b.append(this.stillBox('bs-choice-picture', null, name), el('span', { class: 'bs-choice-text' }, [
@@ -510,8 +555,9 @@ export default class BalanceScale extends H5P.EventDispatcher {
       title,
       this.stillBox('bs-topic-picture', null, this.topic),
       el('p', { class: 'bs-summary', text: t[text] }),
-      el('p', { class: 'bs-help', text: this.topic === 'free' ? t[line] : fill(t.introSummary, { count: this.game.rounds }) }),
+      this.summaryLine = el('p', { class: 'bs-help', text: this.topic === 'free' ? t[line] : fill(t.introSummary, { count: this.game.rounds }) }),
       this.buildPicker(),
+      this.topic === 'free' ? '' : this.buildRoundsPicker(),
       btn({ type: 'button', class: 'bs-button bs-primary bs-start', text: t.start, onclick: () => this.start() }),
     );
   }
@@ -1676,46 +1722,9 @@ export default class BalanceScale extends H5P.EventDispatcher {
     return height;
   }
 
-  /**
-   * @returns {number} The bars fixed at the top of the page that stay over the game: Moodle's 60 px at least, and more
-   *   where a site stacks more (campus.oksigenia.com has 104 px, and covered the dots of the rounds at 1280 × 600).
-   */
+  /** @returns {number} The bars fixed at the top of the page that stay over the game (`pageBar` in shared/dom.js). */
   topBar() {
-    let bottom = 0;
-    try {
-      /** @type {Window} */
-      let win = window;
-      while (win.parent !== win && win.parent.document) {
-        win = win.parent;
-      }
-      if (win !== window) {
-        const doc = win.document;
-        // Down the stack of bars: each fixed or sticky one under the last, at three points across the page. A bar is
-        // wide and low; a drawer at the side (Moodle's course index) or a dialog is not.
-        const isBar = (r) => r.width >= win.innerWidth / 2 && r.height < win.innerHeight / 3 && r.top <= bottom + 4;
-        for (let k = 0; k < 4; k++) {
-          const before = bottom;
-          for (const x of [0.25, 0.5, 0.75]) {
-            for (let n = doc.elementFromPoint(win.innerWidth * x, bottom + 2); n && n !== doc.body && n !== doc.documentElement; n = n.parentElement) {
-              const position = win.getComputedStyle(n).position;
-              if (position === 'fixed' || position === 'sticky') {
-                const r = n.getBoundingClientRect();
-                if (isBar(r)) {
-                  bottom = Math.max(bottom, r.bottom);
-                }
-                break;
-              }
-            }
-          }
-          if (bottom <= before) {
-            break;
-          }
-        }
-      }
-    } catch (e) {
-      // A frame of another site: Moodle's bar.
-    }
-    return Math.max(BAR, Math.round(bottom));
+    return pageBar();
   }
 
   /**

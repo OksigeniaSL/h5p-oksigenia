@@ -58,6 +58,10 @@
       "label": "Manches par partie"
     },
     {
+      "label": "La personne qui joue choisit le nombre de manches",
+      "description": "Sur le premier écran, de 5 à 10. « Manches par partie » est le nombre coché au départ."
+    },
+    {
       "label": "Réglages fins",
       "description": "Facultatif. Où commence le jeu ; il monte d'un niveau avec trois bonnes manches d'affilée.",
       "fields": [
@@ -151,6 +155,14 @@
         {
           "label": "Titre des balances",
           "default": "Choisis ta balance"
+        },
+        {
+          "label": "Titre du nombre de manches",
+          "default": "Combien de manches ?"
+        },
+        {
+          "label": "Un nombre de manches, pour les lecteurs d'écran (@count : manches)",
+          "default": "@count manches"
         },
         {
           "label": "Balance : marché",

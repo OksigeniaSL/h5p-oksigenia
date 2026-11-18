@@ -49,6 +49,10 @@
       "label": "Rondes per spel"
     },
     {
+      "label": "Wie speelt, kiest het aantal rondes",
+      "description": "Op het eerste scherm, van 5 tot 10. ‘Rondes per spel’ is in het begin gekozen."
+    },
+    {
       "label": "Fijnafstelling",
       "description": "Optioneel. Wat je hier invult, maakt één niveau met die getallen. De rest mag leeg blijven.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Kop van de figuurtjes",
           "default": "Kies je figuurtje"
+        },
+        {
+          "label": "Kop van het aantal rondes",
+          "default": "Hoeveel rondes?"
+        },
+        {
+          "label": "Een aantal rondes, voor schermlezers (@count: rondes)",
+          "default": "@count rondes"
         },
         {
           "label": "Figuurtje: veer",

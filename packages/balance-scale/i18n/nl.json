@@ -249,7 +249,13 @@
     "In the review: done together (@tries)": "In het overzicht: samen gedaan (@tries)",
     "done together (tried @tries)": "samen gedaan (pogingen: @tries)",
     "In the review: done together after taking some off (@count)": "In het overzicht: samen gedaan na weghalen (@count)",
-    "done together, after taking off @count": "samen gedaan, na @count keer weghalen"
+    "done together, after taking off @count": "samen gedaan, na @count keer weghalen",
+    "The player chooses how many rounds": "Wie speelt, kiest het aantal rondes",
+    "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.": "Op het eerste scherm, van 5 tot 10. ‘Rondes per spel’ is in het begin gekozen.",
+    "Heading of the number of rounds": "Kop van het aantal rondes",
+    "How many rounds?": "Hoeveel rondes?",
+    "A number of rounds, for screen readers (@count: rounds)": "Een aantal rondes, voor schermlezers (@count: rondes)",
+    "@count rounds": "@count rondes"
   },
   "defaults": {
     "hintMissingOne": "Op de schaal @side ontbreekt nog @amount (@relation).",

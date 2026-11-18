@@ -49,6 +49,10 @@
       "label": "Turni per partita"
     },
     {
+      "label": "Chi gioca sceglie quanti turni",
+      "description": "Nella prima schermata, da 5 a 10. «Turni per partita» è quello segnato all'inizio."
+    },
+    {
       "label": "Regolazioni fini",
       "description": "Facoltativo. Ciò che compili qui crea un solo livello con quei numeri. Il resto può restare vuoto.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Titolo delle pedine",
           "default": "Scegli la tua pedina"
+        },
+        {
+          "label": "Titolo del numero di turni",
+          "default": "Quanti turni?"
+        },
+        {
+          "label": "Un numero di turni, per i lettori di schermo (@count: turni)",
+          "default": "@count turni"
         },
         {
           "label": "Pedina: molla",

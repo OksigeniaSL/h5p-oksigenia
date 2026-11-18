@@ -58,6 +58,10 @@
       "label": "Omgångar per spel"
     },
     {
+      "label": "Den som spelar väljer antalet omgångar",
+      "description": "På första skärmen, från 5 till 10. ”Omgångar per spel” är markerat från början."
+    },
+    {
       "label": "Finjustering",
       "description": "Valfritt. Var spelet börjar; det går upp en nivå efter tre bra omgångar i rad.",
       "fields": [
@@ -151,6 +155,14 @@
         {
           "label": "Rubrik för vågarna",
           "default": "Välj din våg"
+        },
+        {
+          "label": "Rubrik för antalet omgångar",
+          "default": "Hur många omgångar?"
+        },
+        {
+          "label": "Ett antal omgångar, för skärmläsare (@count: omgångar)",
+          "default": "@count omgångar"
         },
         {
           "label": "Våg: marknad",

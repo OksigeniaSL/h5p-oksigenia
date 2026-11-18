@@ -243,6 +243,28 @@ test('the first screen shows each topic on its scale and each scale to choose, f
   await expect.poll(async () => (await picture(frame, '.bs-choice-free canvas')).painted).toBeGreaterThan(0.9);
 });
 
+test('the player chooses how many rounds, from 5 to 10, when the teacher lets them; kept on a reload', async ({ page }) => {
+  let frame = await open(page, 'fr');
+  await expect(frame.locator('.bs-rounds')).toHaveCount(0);
+  const session = `bs-rounds-${test.info().project.name}`;
+  frame = await open(page, 'rounds-fr', session);
+  await expect(frame.locator('.bs-rounds-pick')).toHaveCount(6);
+  await expect(frame.locator('.bs-rounds')).toHaveAccessibleName('Combien de manches ?');
+  await expect(frame.locator('.bs-rounds-pick[aria-pressed="true"]')).toHaveText('6');
+  await frame.locator('.bs-rounds-pick', { hasText: /^5$/ }).click();
+  await expect(frame.locator('.bs-rounds-pick[aria-pressed="true"]')).toHaveText('5');
+  await frame.locator('.bs-choice-equalities').click();
+  await expect(frame.locator('.bs-progress')).toHaveAccessibleName(/^Manche 1 sur 5\./);
+  await frame.evaluate(() => {
+    H5P.setUserData(H5P.instances[0].contentId, 'state', H5P.instances[0].getCurrentState(), { deleteOnChange: true });
+  });
+  await page.waitForTimeout(500);
+  frame = await open(page, 'rounds-fr', session);
+  await expect(frame.locator('.bs-progress')).toHaveAccessibleName(/^Manche 1 sur 5\./);
+  expect(await frame.evaluate(() => H5P.instances[0].getMaxScore())).toBe(10);
+  await frame.evaluate(() => H5P.deleteUserData(H5P.instances[0].contentId, 'state', 0));
+});
+
 test('a teacher who sets the topic: the first screen shows its scale, with the numbers of its example', async ({ page }) => {
   const frame = await open(page, 'fr');
   await frame.evaluate(() => {
@@ -317,6 +339,13 @@ test('under a page bar taller than Moodle\'s, the whole round still fits under i
   const inner = await frame.locator('.bs').boundingBox();
   expect(inner.height, 'the game fits in what the bars leave').toBeLessThanOrEqual(600 - 104);
   expect(game.height).toBeGreaterThan(0);
+  // Brought into view again from further down the page, the instruction stops under the bars, not behind them.
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await frame.evaluate(() => H5P.instances[0].focusRound());
+  await page.waitForTimeout(800);
+  const ask = await frame.locator('.bs-instruction').boundingBox();
+  expect(ask.y, 'under the 104 px of bars').toBeGreaterThanOrEqual(104);
+  expect(ask.y, 'and not far below').toBeLessThan(104 + 60);
 });
 
 /** The languages of the examples, with the folder of the recorded instructions of each. */

@@ -49,6 +49,10 @@
       "label": "Rodadas por partida"
     },
     {
+      "label": "Quem joga escolhe quantas rodadas",
+      "description": "Na primeira tela, de 5 a 10. “Rodadas por partida” é o que aparece marcado no começo."
+    },
+    {
       "label": "Ajuste fino",
       "description": "Opcional. O que você preencher aqui cria um único nível com esses números. O resto pode ficar vazio.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Título das peças",
           "default": "Escolha sua peça"
+        },
+        {
+          "label": "Título do número de rodadas",
+          "default": "Quantas rodadas?"
+        },
+        {
+          "label": "Um número de rodadas, para leitores de tela (@count: rodadas)",
+          "default": "@count rodadas"
         },
         {
           "label": "Peça: mola",

@@ -49,6 +49,10 @@
       "label": "Omgångar per spel"
     },
     {
+      "label": "Den som spelar väljer antalet omgångar",
+      "description": "På första skärmen, från 5 till 10. ”Omgångar per spel” är markerat från början."
+    },
+    {
       "label": "Finjustering",
       "description": "Valfritt. Det du fyller i här blir en enda nivå med de talen. Resten kan lämnas tomt.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Rubrik för pjäserna",
           "default": "Välj din pjäs"
+        },
+        {
+          "label": "Rubrik för antalet omgångar",
+          "default": "Hur många omgångar?"
+        },
+        {
+          "label": "Ett antal omgångar, för skärmläsare (@count: omgångar)",
+          "default": "@count omgångar"
         },
         {
           "label": "Pjäs: fjäder",

@@ -249,7 +249,13 @@
     "In the review: done together (@tries)": "En el repaso: hecho juntos (@tries)",
     "done together (tried @tries)": "hecho juntos (intentos: @tries)",
     "In the review: done together after taking some off (@count)": "En el repaso: hecho juntos tras quitar alguna (@count)",
-    "done together, after taking off @count": "hecho juntos, tras quitar @count"
+    "done together, after taking off @count": "hecho juntos, tras quitar @count",
+    "The player chooses how many rounds": "Quien juega elige cuántas rondas",
+    "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.": "En la primera pantalla, de 5 a 10. «Rondas de cada partida» es la que sale marcada al principio.",
+    "Heading of the number of rounds": "Título del número de rondas",
+    "How many rounds?": "¿Cuántas rondas?",
+    "A number of rounds, for screen readers (@count: rounds)": "Un número de rondas, para lectores de pantalla (@count: rondas)",
+    "@count rounds": "@count rondas"
   },
   "defaults": {
     "hintMissingOne": "En la @side falta @amount (@relation).",

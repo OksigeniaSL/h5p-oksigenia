@@ -28,8 +28,8 @@ libro de calificaciones: en Moodle™ cuenta como una actividad calificada, igua
 
 - **Recta numérica** (`H5P.NumberLine`): sumas, restas, tablas, números y fracciones como saltos en una recta. Los saltos
   son la respuesta, no una pregunta antes de saltar: no hay reloj, y un intento fallido enseña dónde ha caído. Cada
-  partida genera sus números, así que el docente solo elige qué se practica, o deja la elección para la primera pantalla.
-  Cada ronda queda en el informe de la actividad. Hay tres piezas a elegir, para que no resulte infantil a ninguna edad, y
+  partida genera sus números, así que el docente solo elige qué se practica, o deja la elección para la primera pantalla,
+  y el número de rondas también. Cada ronda queda en el informe de la actividad. Hay tres piezas a elegir, para que no resulte infantil a ninguna edad, y
   una recta libre, sin puntos, para la pizarra. **[Juega ahora](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D78)**.
 
   <picture>

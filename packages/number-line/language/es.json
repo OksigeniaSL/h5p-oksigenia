@@ -49,6 +49,10 @@
       "label": "Rondas de cada partida"
     },
     {
+      "label": "Quien juega elige cuántas rondas",
+      "description": "En la primera pantalla, de 5 a 10. «Rondas de cada partida» es la que sale marcada al principio."
+    },
+    {
       "label": "Ajuste fino",
       "description": "Opcional. Lo que rellenes aquí hace un único nivel con esos números. Lo demás puede quedar vacío.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Título de las piezas",
           "default": "Elige tu pieza"
+        },
+        {
+          "label": "Título del número de rondas",
+          "default": "¿Cuántas rondas?"
+        },
+        {
+          "label": "Un número de rondas, para lectores de pantalla (@count: rondas)",
+          "default": "@count rondas"
         },
         {
           "label": "Pieza: muelle",

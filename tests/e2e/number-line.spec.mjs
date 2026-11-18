@@ -235,6 +235,93 @@ test('a reload in the middle takes the game up again, with the same numbers', as
   await expect(frame.locator('.nl-count').first()).toBeFocused();
 });
 
+test('the player chooses how many rounds, from 5 to 10, when the teacher lets them; kept on a reload', async ({ page }) => {
+  let frame = await open(page, 'fr');
+  await expect(frame.locator('.nl-rounds')).toHaveCount(0);
+  const session = `nl-rounds-${test.info().project.name}`;
+  frame = await open(page, 'rounds-fr', session);
+  await expect(frame.locator('.nl-rounds-pick')).toHaveCount(6);
+  await expect(frame.locator('.nl-rounds')).toHaveAccessibleName('Combien de manches ?');
+  await expect(frame.locator('.nl-rounds-pick[aria-pressed="true"]')).toHaveText('6');
+  const eight = frame.locator('.nl-rounds-pick', { hasText: /^8$/ });
+  await expect(eight).toHaveAccessibleName('8 manches');
+  await eight.click();
+  await expect(frame.locator('.nl-rounds-pick[aria-pressed="true"]')).toHaveText('8');
+  await frame.locator('.nl-choice-add20').click();
+  await expect(frame.locator('.nl-round')).toHaveText('Manche 1 sur 8');
+  await frame.evaluate(() => {
+    H5P.setUserData(H5P.instances[0].contentId, 'state', H5P.instances[0].getCurrentState(), { deleteOnChange: true });
+  });
+  await page.waitForTimeout(500);
+  frame = await open(page, 'rounds-fr', session);
+  await expect(frame.locator('.nl-round')).toHaveText('Manche 1 sur 8');
+  expect(await frame.evaluate(() => H5P.instances[0].getMaxScore())).toBe(16);
+  // With the topic set by the teacher, «Start» takes the number chosen, and the first screen says it.
+  const fixed = await frame.evaluate(() => {
+    const box = document.createElement('div');
+    document.body.append(box);
+    const game = new H5P.NumberLine({ topic: 'add20', rounds: 7, chooseRounds: true }, 0, {});
+    game.attach(box);
+    const pressed = box.querySelector('.nl-rounds-pick[aria-pressed="true"]').textContent;
+    /** @type {HTMLElement} */ ([...box.querySelectorAll('.nl-rounds-pick')].find((b) => b.textContent === '9')).click();
+    const result = { pressed, summary: box.querySelector('.nl-summary').textContent, rounds: game.game.rounds };
+    box.remove();
+    return result;
+  });
+  expect(fixed).toEqual({ pressed: '7', summary: 'Rounds: 9. No clock.', rounds: 9 });
+  await frame.evaluate(() => H5P.deleteUserData(H5P.instances[0].contentId, 'state', 0));
+});
+
+for (const [width, height] of [[1280, 600], [360, 640]]) {
+  test(`«Where did you land?» goes with its cards once the jumps are made, at ${width}×${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    const frame = await open(page, 'fr');
+    await frame.locator('.nl-choice-add20').click();
+    await page.waitForTimeout(650);
+    await expect(frame.locator('.nl-where-ask')).toHaveCount(0);
+    const r = await round(frame);
+    for (let i = 0; i < 40 && !(await frame.locator('.nl-option').count()); i++) {
+      const position = await frame.evaluate(() => H5P.instances[0].game.position);
+      await jumpOnce(frame, r.target - position);
+    }
+    await expect(frame.locator('.nl-where')).toHaveAccessibleName('Où es-tu tombé ?');
+    // Up with the sum there is no question any more: it is where the player looks to answer.
+    await expect(frame.locator('.nl-hint')).toHaveText('');
+    // Both measured in the frame of the game.
+    const ask = await frame.locator('.nl-where-ask').evaluate((p) => {
+      const box = p.getBoundingClientRect();
+      return { x: box.x, y: box.y, height: box.height };
+    });
+    const cards = await frame.locator('.nl-option').evaluateAll((list) => list.map((b) => {
+      const box = b.getBoundingClientRect();
+      return { x: box.x, y: box.y };
+    }));
+    expect(new Set(cards.map((c) => Math.round(c.y))).size, 'the cards in one row').toBe(1);
+    if (width > 600) {
+      expect(ask.x, 'beside the cards, before them').toBeLessThan(cards[0].x);
+      expect(ask.y + ask.height, 'on their row').toBeGreaterThan(cards[0].y);
+    } else {
+      expect(ask.y + ask.height, 'above the cards').toBeLessThanOrEqual(cards[0].y + 1);
+    }
+  });
+}
+
+test('in the Moodle app, which measures the game before H5P shrinks its frame, the frame fits the round that starts', async ({ page }) => {
+  await page.setViewportSize({ width: 412, height: 915 });
+  const frame = await open(page, 'fr');
+  await frame.evaluate(() => {
+    window.measured = [];
+    // As the embed page of the Moodle app does: on each resize, 0 ms later, the height of the body of the game's frame,
+    // which H5P shrinks 1 ms after the resize.
+    H5P.instances[0].on('resize', () => setTimeout(() => window.measured.push(document.body.scrollHeight), 0));
+  });
+  // The first screen is taller than a round on a phone: the frame has to shrink.
+  await frame.locator('.nl-choice-add20').click();
+  await page.waitForTimeout(800);
+  const { last, now } = await frame.evaluate(() => ({ last: window.measured[window.measured.length - 1], now: document.body.scrollHeight }));
+  expect(last, 'the last height the app was told').toBe(now);
+});
+
 test('a reload in the middle of a sum keeps the jumps already made', async ({ page }) => {
   const session = `nl-jumps-${test.info().project.name}`;
   let frame = await open(page, 'es', session);

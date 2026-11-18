@@ -58,6 +58,10 @@
       "label": "Rondes per spel"
     },
     {
+      "label": "Wie speelt, kiest het aantal rondes",
+      "description": "Op het eerste scherm, van 5 tot 10. ‘Rondes per spel’ is in het begin gekozen."
+    },
+    {
       "label": "Fijnafstelling",
       "description": "Optioneel. Waar het spel begint; met drie goede rondes op rij gaat het een niveau omhoog.",
       "fields": [
@@ -151,6 +155,14 @@
         {
           "label": "Kop van de balansen",
           "default": "Kies je balans"
+        },
+        {
+          "label": "Kop van het aantal rondes",
+          "default": "Hoeveel rondes?"
+        },
+        {
+          "label": "Een aantal rondes, voor schermlezers (@count: rondes)",
+          "default": "@count rondes"
         },
         {
           "label": "Balans: markt",

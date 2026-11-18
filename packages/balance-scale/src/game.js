@@ -697,7 +697,8 @@ export class BalanceGame {
   /** @returns {Object} What is saved to take the game up again where it was, with what is on the scale. */
   toState() {
     return {
-      topic: this.topic, held: this.held, phase: this.phase, number: this.number, level: this.level, streak: this.streak,
+      topic: this.topic, held: this.held, rounds: this.rounds, phase: this.phase, number: this.number, level: this.level,
+      streak: this.streak,
       current: this.current, log: this.log, again: this.again, ids: this.ids, attempts: this.attempts, backs: this.backs,
       tries: this.tries, tried: this.tried, guess: this.guess, review: this.review, roundOver: this.roundOver,
     };

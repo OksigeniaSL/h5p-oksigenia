@@ -175,6 +175,12 @@
     "Choose your piece": "Escolha sua peça",
     "Piece: spring": "Peça: mola",
     "Piece: rocket": "Peça: foguete",
-    "Piece: dice": "Peça: dado"
+    "Piece: dice": "Peça: dado",
+    "The player chooses how many rounds": "Quem joga escolhe quantas rodadas",
+    "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.": "Na primeira tela, de 5 a 10. “Rodadas por partida” é o que aparece marcado no começo.",
+    "Heading of the number of rounds": "Título do número de rodadas",
+    "How many rounds?": "Quantas rodadas?",
+    "A number of rounds, for screen readers (@count: rounds)": "Um número de rodadas, para leitores de tela (@count: rodadas)",
+    "@count rounds": "@count rodadas"
   }
 }

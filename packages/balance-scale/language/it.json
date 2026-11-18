@@ -58,6 +58,10 @@
       "label": "Turni per partita"
     },
     {
+      "label": "Chi gioca sceglie quanti turni",
+      "description": "Nella prima schermata, da 5 a 10. «Turni per partita» è quello segnato all'inizio."
+    },
+    {
       "label": "Regolazioni fini",
       "description": "Facoltativo. Da dove parte il gioco; sale di livello con tre turni buoni di fila.",
       "fields": [
@@ -151,6 +155,14 @@
         {
           "label": "Titolo delle bilance",
           "default": "Scegli la tua bilancia"
+        },
+        {
+          "label": "Titolo del numero di turni",
+          "default": "Quanti turni?"
+        },
+        {
+          "label": "Un numero di turni, per i lettori di schermo (@count: turni)",
+          "default": "@count turni"
         },
         {
           "label": "Bilancia: mercato",

@@ -6,7 +6,8 @@
 
 import semantics from '../semantics.json';
 import {
-  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, texts, watchPageColourMode,
+  Announcer, bringIntoView, el, exitFullScreenButton, fill, paintOuterFrames, plain, resizeFrames, texts,
+  watchPageColourMode,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
@@ -37,6 +38,10 @@ const SHOW_WRONG_MS = 1200;
 const PIECE_KEY = 'h5p-oksigenia-piece';
 /** The pieces, with the name of their text. */
 const PIECE_NAMES = [['muelle', 'pieceSpring'], ['cohete', 'pieceRocket'], ['dado', 'pieceDice']];
+/** How many rounds the player can choose, when the author lets them (a teacher asked for 5 to 10). */
+const ROUND_CHOICES = [5, 6, 7, 8, 9, 10];
+/** @param {*} n @returns {number} The choice nearest to the author's number of rounds. */
+const nearestRounds = (n) => Math.max(ROUND_CHOICES[0], Math.min(ROUND_CHOICES[ROUND_CHOICES.length - 1], Math.round(Number(n)) || 6));
 /** What can be chosen on the first screen, with the name of its text. */
 const CHOICES = [
   ['add20', 'topicAdd20'], ['add100', 'topicAdd100'], ['tables', 'topicTables'], ['place1000', 'topicPlace'],
@@ -114,7 +119,9 @@ export default class NumberLine extends H5P.EventDispatcher {
     /** Whether the player chooses the piece, or the author fixed one. */
     this.choosesPiece = !(params.character in PIECES);
     this.character = this.choosesPiece ? this.savedPiece() : params.character;
-    this.roundsWanted = params.rounds;
+    /** Whether the player chooses how many rounds on the first screen; the author's number is the one marked at first. */
+    this.choosesRounds = params.chooseRounds === true;
+    this.roundsWanted = this.choosesRounds ? nearestRounds(params.rounds) : params.rounds;
     this.tuning = { ...TUNING, ...(params.tuning || {}) };
     this.sounds = new Sounds({ enabled: this.behaviour.enableSound !== false });
     /** @type {NumberLineGame|null} The game being played: none on the first screen if the player has to choose. */
@@ -131,6 +138,9 @@ export default class NumberLine extends H5P.EventDispatcher {
     const state = extras.previousState;
     const saved = state && (this.topic === 'choose' ? state.topic : this.topic);
     if (saved) {
+      if (this.choosesRounds && ROUND_CHOICES.includes(state.rounds)) {
+        this.roundsWanted = state.rounds;
+      }
       const game = this.newGame(saved);
       if (game.restore(state)) {
         this.game = game;
@@ -189,6 +199,44 @@ export default class NumberLine extends H5P.EventDispatcher {
 
   paintPicker() {
     this.pickButtons.forEach(({ name, button }) => button.setAttribute('aria-pressed', String(name === this.character)));
+  }
+
+  /** @returns {HTMLElement|string} The row to choose how many rounds, or nothing if the author fixed the number. */
+  buildRoundsPicker() {
+    if (!this.choosesRounds) {
+      return '';
+    }
+    const t = this.l10n;
+    this.roundButtons = ROUND_CHOICES.map((count) => {
+      const button = btn({
+        type: 'button', class: 'nl-button nl-secondary nl-pick nl-rounds-pick', text: String(count),
+        'aria-label': fill(t.roundsCount, { count }), onclick: () => this.pickRounds(count),
+      });
+      button.dataset.count = String(count);
+      return button;
+    });
+    const row = el('div', { class: 'nl-picker nl-rounds', role: 'group', 'aria-label': t.roundsTitle }, [
+      el('span', { class: 'nl-picker-title', text: t.roundsTitle }), ...this.roundButtons,
+    ]);
+    this.paintRounds();
+    return row;
+  }
+
+  paintRounds() {
+    (this.roundButtons || []).forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.count) === this.roundsWanted)));
+  }
+
+  /** @param {number} count The rounds of the next game. */
+  pickRounds(count) {
+    this.roundsWanted = count;
+    this.paintRounds();
+    // With the topic set by the author, the game waiting behind «Start» takes the new number.
+    if (this.game && this.game.phase === 'intro') {
+      this.game = this.newGame(this.game.topic);
+      if (this.summaryLine) {
+        this.summaryLine.textContent = fill(this.l10n.introSummary, { count: this.game.rounds });
+      }
+    }
   }
 
   /** @param {string} name The piece that jumps from now on, remembered on this device. */
@@ -323,7 +371,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     // No heading tags: the game does not know at which level of the page it ends up.
     const title = this.title ? el('p', { class: 'nl-title', text: this.title }) : '';
     if (this.topic === 'choose') {
-      this.intro.replaceChildren(title, this.buildPicker(), el('p', { class: 'nl-summary', text: t.chooseTitle }), el('div', { class: 'nl-choices' },
+      this.intro.replaceChildren(title, this.buildPicker(), this.buildRoundsPicker(), el('p', { class: 'nl-summary', text: t.chooseTitle }), el('div', { class: 'nl-choices' },
         CHOICES.map(([name, text]) => btn({
           type: 'button', class: `nl-button nl-secondary nl-choice nl-choice-${name}`, text: t[text], onclick: () => this.choose(name),
         }))));
@@ -334,11 +382,13 @@ export default class NumberLine extends H5P.EventDispatcher {
     }
     const mode = this.game.plan.modes[0];
     const help = mode === 'exact' ? t.introTables : mode === 'place' ? t.introPlace : t.introSums;
+    this.summaryLine = el('p', { class: 'nl-summary', text: fill(t.introSummary, { count: this.game.rounds }) });
     this.intro.replaceChildren(
       title,
-      el('p', { class: 'nl-summary', text: fill(t.introSummary, { count: this.game.rounds }) }),
+      this.summaryLine,
       el('p', { class: 'nl-help', text: help }),
       this.buildPicker(),
+      this.buildRoundsPicker(),
       btn({ type: 'button', class: 'nl-button nl-primary nl-start', text: t.start, onclick: () => this.start() }),
     );
   }
@@ -388,7 +438,12 @@ export default class NumberLine extends H5P.EventDispatcher {
     if (this.line && !this.gameView.hidden) {
       this.line.fit();
     }
-    this.trigger('resize');
+    if (phase !== this.shownPhase) {
+      this.shownPhase = phase;
+      resizeFrames(this);
+    } else {
+      this.trigger('resize');
+    }
   }
 
   /**
@@ -490,7 +545,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     }
     if (this.game.roundOver) {
       // The game was taken up again after this round was over: only «Next» is left.
-      [...this.controls.children, ...this.extraControls.children].forEach((b) => {
+      [...this.controls.querySelectorAll('button'), ...this.extraControls.querySelectorAll('button')].forEach((b) => {
         /** @type {HTMLButtonElement} */ (b).disabled = true; 
       });
     }
@@ -695,11 +750,16 @@ export default class NumberLine extends H5P.EventDispatcher {
    */
   askWhere(round, moveFocus = true) {
     const t = this.l10n;
-    this.hint.textContent = t.landAsk;
+    // The question goes with its cards, where the player looks once the jumps are made, not up with the sum (a teacher
+    // in France saw his pupils miss it there).
+    this.hint.textContent = '';
     this.extraControls.replaceChildren();
-    this.controls.replaceChildren(...round.options.map((value) => btn({
-      type: 'button', class: 'nl-button nl-secondary nl-option', text: this.format(value), onclick: () => this.answer(value),
-    })));
+    this.controls.replaceChildren(el('div', { class: 'nl-where', role: 'group', 'aria-labelledby': `${this.id}-where` }, [
+      el('p', { class: 'nl-where-ask', id: `${this.id}-where`, text: t.landAsk }),
+      ...round.options.map((value) => btn({
+        type: 'button', class: 'nl-button nl-secondary nl-option', text: this.format(value), onclick: () => this.answer(value),
+      })),
+    ]));
     this.message = null;
     this.render();
     if (moveFocus) {
@@ -717,7 +777,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     if (!result) {
       return;
     }
-    [...this.controls.children].forEach((b) => {
+    [...this.controls.querySelectorAll('button')].forEach((b) => {
       /** @type {HTMLButtonElement} */ (b).disabled = true; 
     });
     const target = this.format(round.target);
@@ -791,7 +851,7 @@ export default class NumberLine extends H5P.EventDispatcher {
       this.say({ text: wrong, kind: 'bad' });
     }
     if (result.shown) {
-      [...this.controls.children].forEach((b) => {
+      [...this.controls.querySelectorAll('button')].forEach((b) => {
         /** @type {HTMLButtonElement} */ (b).disabled = true; 
       });
       await wait(SHOW_WRONG_MS);
@@ -802,7 +862,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     }
     this.busy = false;
     if (result.right) {
-      [...this.controls.children].forEach((b) => {
+      [...this.controls.querySelectorAll('button')].forEach((b) => {
         /** @type {HTMLButtonElement} */ (b).disabled = true; 
       });
       this.afterRound(fill(result.got ? t.exactRight : t.exactLater, sum), 'ok', result.got ? 'ok' : 'pass', result.levelUp);

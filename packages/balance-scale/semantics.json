@@ -87,6 +87,15 @@
     "default": 6
   },
   {
+    "name": "chooseRounds",
+    "type": "boolean",
+    "label": "The player chooses how many rounds",
+    "description": "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.",
+    "importance": "medium",
+    "default": false,
+    "optional": true
+  },
+  {
     "name": "tuning",
     "type": "group",
     "label": "Fine tuning",
@@ -253,6 +262,20 @@
         "label": "Heading of the scales",
         "importance": "low",
         "default": "Choose your scale"
+      },
+      {
+        "name": "roundsTitle",
+        "type": "text",
+        "label": "Heading of the number of rounds",
+        "importance": "low",
+        "default": "How many rounds?"
+      },
+      {
+        "name": "roundsCount",
+        "type": "text",
+        "label": "A number of rounds, for screen readers (@count: rounds)",
+        "importance": "low",
+        "default": "@count rounds"
       },
       {
         "name": "viewMarket",

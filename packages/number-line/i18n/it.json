@@ -175,6 +175,12 @@
     "Choose your piece": "Scegli la tua pedina",
     "Piece: spring": "Pedina: molla",
     "Piece: rocket": "Pedina: razzo",
-    "Piece: dice": "Pedina: dado"
+    "Piece: dice": "Pedina: dado",
+    "The player chooses how many rounds": "Chi gioca sceglie quanti turni",
+    "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.": "Nella prima schermata, da 5 a 10. «Turni per partita» è quello segnato all'inizio.",
+    "Heading of the number of rounds": "Titolo del numero di turni",
+    "How many rounds?": "Quanti turni?",
+    "A number of rounds, for screen readers (@count: rounds)": "Un numero di turni, per i lettori di schermo (@count: turni)",
+    "@count rounds": "@count turni"
   }
 }

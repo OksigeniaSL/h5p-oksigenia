@@ -323,6 +323,21 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   display: none;
 }
 
+/* «Where did you land?» with its cards: beside them where there is room, so a round on a board is no taller, and above
+   them where there is not. */
+.h5p-number-line .nl-where {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.h5p-number-line .nl-where-ask {
+  margin-inline-end: 0.5em;
+  font-size: 1.1em;
+  font-weight: 800;
+}
+
 /* The jumps and, at the other end of the same row where there is room, the help. */
 .h5p-number-line .nl-moves {
   display: flex;
@@ -540,6 +555,34 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
 .h5p-number-line .nl-pick[aria-pressed="true"]::after {
   content: "✓";
   font-weight: 800;
+}
+
+.h5p-number-line .nl-rounds-pick {
+  min-width: 2.75rem;
+  padding: 0.25em 0.6em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The number chosen: filled as well as the thicker border, and without the tick, so the six keep one row on a phone. */
+.h5p-number-line .nl-rounds-pick[aria-pressed="true"] {
+  background: var(--nl-main);
+  color: var(--nl-on-main);
+}
+
+.h5p-number-line .nl-rounds-pick[aria-pressed="true"]::after {
+  content: none;
+}
+
+@media (max-width: 520px) {
+  /* The heading over the six numbers, and the question over its cards. */
+  .h5p-number-line .nl-rounds .nl-picker-title,
+  .h5p-number-line .nl-where-ask {
+    width: 100%;
+  }
+
+  .h5p-number-line .nl-rounds {
+    gap: 0.4em;
+  }
 }
 
 .h5p-number-line .nl-pick-icon {

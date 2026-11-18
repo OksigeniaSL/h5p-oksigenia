@@ -169,6 +169,12 @@
   border-radius: 0.3em;
 }
 
+.h5p-balance-scale .bs-rounds-pick {
+  min-width: 2.75rem;
+  padding-inline: 0.6em;
+  font-variant-numeric: tabular-nums;
+}
+
 .h5p-balance-scale .bs-pick[aria-pressed="true"] {
   background: var(--bs-main);
   border-color: var(--bs-main);

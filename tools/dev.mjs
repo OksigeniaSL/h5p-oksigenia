@@ -1,7 +1,8 @@
 // Prepares the h5p-cli dev server in .h5p-dev/ and starts it: H5P core on the first run, then a copy (not a link:
 // the h5p-cli export does not follow links) of each built game and its example content, one folder per language
 // (alphabet-wheel-es…). The games are then at http://localhost:<port>/view/h5p-alphabet-wheel/alphabet-wheel-es, and the
-// wheel with letter tiles at …/alphabet-wheel-tiles-es.
+// wheel with letter tiles at …/alphabet-wheel-tiles-es, and the math games with the rounds chosen by the player at
+// …/number-line-rounds-es and …/balance-scale-rounds-es.
 //
 //   node tools/dev.mjs [--port 8080] [--no-serve] [--no-watch]
 //
@@ -52,6 +53,13 @@ for (const pkg of packages()) {
       rmSync(tiles, { recursive: true, force: true });
       cpSync(target, tiles, { recursive: true });
       writeFileSync(join(tiles, 'content.json'), `${JSON.stringify({ ...content, letterTiles: true }, null, 2)}\n`);
+    }
+    // The math games also let the player choose how many rounds: number-line-rounds-es, balance-scale-rounds-es…
+    if (pkg.name === 'number-line' || pkg.name === 'balance-scale') {
+      const rounds = join(dev, 'content', `${pkg.name}-rounds-${lang}`);
+      rmSync(rounds, { recursive: true, force: true });
+      cpSync(target, rounds, { recursive: true });
+      writeFileSync(join(rounds, 'content.json'), `${JSON.stringify({ ...content, chooseRounds: true }, null, 2)}\n`);
     }
   }
   console.log(`dev: ${pkg.folder} and its examples are in .h5p-dev`);

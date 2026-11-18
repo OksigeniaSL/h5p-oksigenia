@@ -49,6 +49,10 @@
       "label": "Runden pro Spiel"
     },
     {
+      "label": "Die spielende Person wählt die Zahl der Runden",
+      "description": "Auf dem ersten Bildschirm, von 5 bis 10. „Runden pro Spiel“ ist zu Beginn markiert."
+    },
+    {
       "label": "Feineinstellung",
       "description": "Optional. Was du hier einträgst, ergibt eine einzige Stufe mit diesen Zahlen. Der Rest kann leer bleiben.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Überschrift der Figuren",
           "default": "Wähle deine Figur"
+        },
+        {
+          "label": "Überschrift der Rundenzahl",
+          "default": "Wie viele Runden?"
+        },
+        {
+          "label": "Eine Rundenzahl, für Bildschirmleser (@count: Runden)",
+          "default": "@count Runden"
         },
         {
           "label": "Figur: Feder",

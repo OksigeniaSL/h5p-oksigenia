@@ -510,7 +510,7 @@ export class NumberLineGame {
   /** @returns {Object} What is saved to take the game up again where it was, with the jumps already made. */
   toState() {
     return {
-      topic: this.topic, phase: this.phase, number: this.number, level: this.level, streak: this.streak,
+      topic: this.topic, rounds: this.rounds, phase: this.phase, number: this.number, level: this.level, streak: this.streak,
       current: this.current, log: this.log, moves: this.moves, restarted: this.restarted, helped: this.helped,
     };
   }

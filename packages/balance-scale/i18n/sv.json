@@ -249,6 +249,12 @@
     "In the review: done together (@tries)": "I översikten: gjort tillsammans (@tries)",
     "done together (tried @tries)": "gjort tillsammans (försök: @tries)",
     "In the review: done together after taking some off (@count)": "I översikten: gjort tillsammans efter att ha tagit bort (@count)",
-    "done together, after taking off @count": "gjort tillsammans, efter att ha tagit bort @count gånger"
+    "done together, after taking off @count": "gjort tillsammans, efter att ha tagit bort @count gånger",
+    "The player chooses how many rounds": "Den som spelar väljer antalet omgångar",
+    "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.": "På första skärmen, från 5 till 10. ”Omgångar per spel” är markerat från början.",
+    "Heading of the number of rounds": "Rubrik för antalet omgångar",
+    "How many rounds?": "Hur många omgångar?",
+    "A number of rounds, for screen readers (@count: rounds)": "Ett antal omgångar, för skärmläsare (@count: omgångar)",
+    "@count rounds": "@count omgångar"
   }
 }

@@ -49,6 +49,10 @@
       "label": "Rounds in a game"
     },
     {
+      "label": "The player chooses how many rounds",
+      "description": "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first."
+    },
+    {
       "label": "Fine tuning",
       "description": "Optional. What you fill in here makes a single level with those numbers. The rest can stay empty.",
       "fields": [
@@ -92,6 +96,14 @@
         {
           "label": "Heading of the pieces",
           "default": "Choose your piece"
+        },
+        {
+          "label": "Heading of the number of rounds",
+          "default": "How many rounds?"
+        },
+        {
+          "label": "A number of rounds, for screen readers (@count: rounds)",
+          "default": "@count rounds"
         },
         {
           "label": "Piece: spring",

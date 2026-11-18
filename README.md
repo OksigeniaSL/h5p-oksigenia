@@ -29,7 +29,7 @@ to the gradebook, so a game counts as a graded activity in Moodle™ like any ot
 - **Number Line** (`H5P.NumberLine`): addition, subtraction, times tables, whole numbers and fractions as jumps on a
   number line. The jumps are the answer, not a question before them: there is no clock, and a wrong try shows where it
   landed. Each game makes up its own numbers, so the teacher only chooses what to practise, or leaves the choice for the
-  first screen. Every round goes to the report of the activity. There are three pieces to choose from, so it does not feel
+  first screen, and the number of rounds too. Every round goes to the report of the activity. There are three pieces to choose from, so it does not feel
   childish at any age, and a free line with no points, for a board. **[Play it now](https://campus.oksigenia.com/local/oksigeniacampus/demo.php?as=alumno&course=DEMO-AULA&to=%2Fmod%2Fh5pactivity%2Fview.php%3Fid%3D78)**, in Spanish.
 
   <picture>

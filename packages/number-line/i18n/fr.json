@@ -175,6 +175,12 @@
     "Choose your piece": "Choisis ton pion",
     "Piece: spring": "Pion : ressort",
     "Piece: rocket": "Pion : fusée",
-    "Piece: dice": "Pion : dé"
+    "Piece: dice": "Pion : dé",
+    "The player chooses how many rounds": "La personne qui joue choisit le nombre de manches",
+    "On the first screen, from 5 to 10. «Rounds in a game» is the one marked at first.": "Sur le premier écran, de 5 à 10. « Manches par partie » est le nombre coché au départ.",
+    "Heading of the number of rounds": "Titre du nombre de manches",
+    "How many rounds?": "Combien de manches ?",
+    "A number of rounds, for screen readers (@count: rounds)": "Un nombre de manches, pour les lecteurs d'écran (@count : manches)",
+    "@count rounds": "@count manches"
   }
 }
