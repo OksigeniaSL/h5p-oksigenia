@@ -279,14 +279,17 @@ for (const [width, height] of [[1280, 600], [360, 640]]) {
     await frame.locator('.nl-choice-add20').click();
     await page.waitForTimeout(650);
     await expect(frame.locator('.nl-where-ask')).toHaveCount(0);
+    const lineAt = () => frame.locator('.nl-line').evaluate((n) => Math.round(n.getBoundingClientRect().top));
+    const before = await lineAt();
     const r = await round(frame);
     for (let i = 0; i < 40 && !(await frame.locator('.nl-option').count()); i++) {
       const position = await frame.evaluate(() => H5P.instances[0].game.position);
       await jumpOnce(frame, r.target - position);
     }
     await expect(frame.locator('.nl-where')).toHaveAccessibleName('Où es-tu tombé ?');
-    // Up with the sum there is no question any more: it is where the player looks to answer.
-    await expect(frame.locator('.nl-hint')).toHaveText('');
+    // Up with the sum the hint of the jumps goes, but keeps its room: the line does not move while the player looks at it.
+    await expect(frame.locator('.nl-hint')).toBeHidden();
+    expect(await lineAt(), 'the line where it was').toBe(before);
     // Both measured in the frame of the game.
     const ask = await frame.locator('.nl-where-ask').evaluate((p) => {
       const box = p.getBoundingClientRect();
@@ -305,6 +308,23 @@ for (const [width, height] of [[1280, 600], [360, 640]]) {
     }
   });
 }
+
+test('the label of a short jump that lands next to the piece goes over the piece, not under it', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 640 });
+  const frame = await open(page, 'fr');
+  await frame.locator('.nl-choice-add20').click();
+  await page.waitForTimeout(650);
+  const overlap = await frame.evaluate(() => {
+    const line = H5P.instances[0].line;
+    line.arcs = [{ from: 14, to: 19, text: '+5', off: false }, { from: 19, to: 20, text: '+1', off: false }];
+    line.piece = 20;
+    line.draw();
+    const label = [...document.querySelectorAll('.nl-arc-text')].find((t) => t.textContent === '+1').getBoundingClientRect();
+    const piece = document.querySelector('.nl-piece').getBoundingClientRect();
+    return label.bottom > piece.top + 1 && label.right > piece.left && label.left < piece.right;
+  });
+  expect(overlap, '«+1» clear of the piece').toBe(false);
+});
 
 test('in the Moodle app, which measures the game before H5P shrinks its frame, the frame fits the round that starts', async ({ page }) => {
   await page.setViewportSize({ width: 412, height: 915 });

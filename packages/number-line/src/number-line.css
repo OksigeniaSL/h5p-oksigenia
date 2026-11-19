@@ -308,6 +308,10 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   font-weight: 700;
 }
 
+.h5p-number-line .nl-hint-spent {
+  visibility: hidden;
+}
+
 .h5p-number-line .nl-line-box {
   width: 100%;
   min-width: 0;

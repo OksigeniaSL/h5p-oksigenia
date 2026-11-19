@@ -11,6 +11,10 @@ const SVG = 'http://www.w3.org/2000/svg';
 const PADDING = 26;
 const HEIGHT = 190;
 const BASELINE = 130;
+/** Half the width of the piece on the line, and some: a label this close to it would be under it. */
+const PIECE_REACH = 24;
+/** Over the top of the piece, where a label next to it still reads. */
+const PIECE_TOP = 46;
 /** How long a piece takes to settle after a jump, in ms. */
 const SETTLE_MS = 160;
 /** The steps labels can go by: the first one that leaves them room. */
@@ -247,8 +251,12 @@ export class Line {
       d: `M ${start} ${BASELINE} Q ${middle} ${BASELINE - rise * 2} ${end} ${BASELINE}`,
     }));
     if (text) {
+      // Over the piece when the jump is short and the piece stands next to its label, which it covered (a «+1» landing
+      // on 20, seen on a phone).
+      const piece = this.piece === null || this.flying ? null : this.x(this.piece);
+      const y = piece !== null && Math.abs(middle - piece) < PIECE_REACH ? Math.min(BASELINE - rise - 5, BASELINE - PIECE_TOP) : BASELINE - rise - 5;
       this.node.append(svg('text', {
-        class: `nl-arc-text${off ? ' nl-arc-off-text' : ''}`, x: middle, y: BASELINE - rise - 5, 'text-anchor': 'middle',
+        class: `nl-arc-text${off ? ' nl-arc-off-text' : ''}`, x: middle, y, 'text-anchor': 'middle',
       }, text));
     }
   }

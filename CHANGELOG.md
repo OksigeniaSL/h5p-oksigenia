@@ -2,17 +2,20 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Number Line 1.0.6 (18 November 2026)
+## Number Line 1.0.7 (19 November 2026)
 
 - «Where did you land?» goes with its cards once the jumps are made: before them on a board, so the round is no
   taller, and above them on a phone. It was up with the sum, where a teacher who plays the game with his pupils saw it
-  is not where they look to answer.
+  is not where they look to answer. The hint of the jumps goes, but keeps its room, so the line does not move.
 - The player can choose how many rounds, from 5 to 10, on the first screen, as the same teacher asked: authors tick
   «The player chooses how many rounds», and «Rounds in a game» is the number marked at first. A reload in the middle
   keeps the number chosen.
 - In the Moodle app, a game that gets shorter (from the first screen to a round) kept its old height until the next
   tap, which then moved the whole game. When it changes screen, the game tells H5P its size again a moment later.
 - Under a page with fixed bars taller than Moodle's, the next step brought into view stops below them.
+- The label of a short jump that lands next to the piece goes over the piece, which covered it.
+
+Version 1.0.6 was a test version on a development site, not released.
 
 ## Balance Scale 1.0.6 (18 November 2026)
 

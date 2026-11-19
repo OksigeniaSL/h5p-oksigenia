@@ -528,6 +528,7 @@ export default class NumberLine extends H5P.EventDispatcher {
     const round = this.game.current;
     this.message = null;
     this.busy = false;
+    this.hint.classList.remove('nl-hint-spent');
     this.controls.replaceChildren();
     this.extraControls.replaceChildren();
     if (round.mode === 'goal') {
@@ -751,8 +752,9 @@ export default class NumberLine extends H5P.EventDispatcher {
   askWhere(round, moveFocus = true) {
     const t = this.l10n;
     // The question goes with its cards, where the player looks once the jumps are made, not up with the sum (a teacher
-    // in France saw his pupils miss it there).
-    this.hint.textContent = '';
+    // in France saw his pupils miss it there). The hint of the jumps goes, but keeps its room: the line does not move
+    // while the player looks at it (seen on a phone).
+    this.hint.classList.add('nl-hint-spent');
     this.extraControls.replaceChildren();
     this.controls.replaceChildren(el('div', { class: 'nl-where', role: 'group', 'aria-labelledby': `${this.id}-where` }, [
       el('p', { class: 'nl-where-ask', id: `${this.id}-where`, text: t.landAsk }),
