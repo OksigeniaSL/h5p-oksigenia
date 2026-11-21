@@ -28,7 +28,7 @@ services:
       db:
         condition: service_healthy
     ports:
-      - "127.0.0.1:8098:80"
+      - "127.0.0.1:${WP_PORT:-8098}:80"
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wordpress

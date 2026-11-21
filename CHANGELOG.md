@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Number Line 1.0.9 (not released yet)
+## Number Line 1.0.9 (21 November 2026)
 
 - On a phone, the bar of a round has the round and its level on the first line and the points and the sound on the
   second, each at its end. With a long level («Sentier de la Rivière») the points went down beside the sound and were
@@ -13,7 +13,7 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
 Version 1.0.8 was a test version on a development site, not released.
 
-## Alphabet Wheel 1.0.12 (not released yet)
+## Alphabet Wheel 1.0.12 (21 November 2026)
 
 - In the Moodle app, a wheel that gets shorter (paused, it hides the clue) kept its old height until the next tap, which
   then moved the whole game. When it changes screen (the game, the pause, the end), the game tells H5P its size again a

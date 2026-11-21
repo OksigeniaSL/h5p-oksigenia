@@ -4,6 +4,7 @@
 #
 #   tests/platforms/wordpress/run.sh
 #
+# The site listens on 127.0.0.1:8098; H5P_WP_PORT=<port> moves it, when another site on the machine has that one.
 # Needs Docker and the built example packages (npm run pack). WP-CLI is downloaded once and checked against its
 # published SHA-512. The site gets random passwords, runs with capped memory and CPU (compose.yaml) and is removed with
 # its volumes at the end, also when something fails. Screenshots go to $H5P_PLATFORM_DIR/report-wordpress.
@@ -19,6 +20,7 @@ work=$base/wordpress
 package="$root/dist/alphabet-wheel-$(node -p "const l=require('$root/packages/alphabet-wheel/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
 [ -f "$package" ] || { echo "No $package: run «npm run pack» first" >&2; exit 1; }
 WPCLI_VERSION=2.12.0
+port=${H5P_WP_PORT:-8098}
 
 mkdir -p "$work" "$base/wp-cli"
 if [ ! -f "$base/wp-cli/wp-cli-$WPCLI_VERSION.phar" ]; then
@@ -35,6 +37,7 @@ student_password="Alumno-$(od -An -N6 -tx1 /dev/urandom | tr -d ' \n')"
 db_password=$(od -An -N12 -tx1 /dev/urandom | tr -d ' \n')
 umask 077
 cat > "$work/.env" <<ENV
+WP_PORT=$port
 DB_PASSWORD=$db_password
 DB_ROOT_PASSWORD=$(od -An -N12 -tx1 /dev/urandom | tr -d ' \n')
 ENV
@@ -48,7 +51,7 @@ fi
 
 compose up -d
 i=0
-until curl -s -o /dev/null http://localhost:8098/wp-admin/install.php; do
+until curl -s -o /dev/null http://localhost:$port/wp-admin/install.php; do
   i=$((i + 1))
   [ $i -lt 60 ] || { echo "WordPress did not start" >&2; exit 1; }
   sleep 2
@@ -58,7 +61,7 @@ c=h5p-wordpress-wordpress-1
 docker cp "$base/wp-cli/wp-cli-$WPCLI_VERSION.phar" $c:/usr/local/bin/wp
 docker exec $c chmod 755 /usr/local/bin/wp
 wp() { docker exec -u www-data $c wp "$@"; }
-wp core install --url=http://localhost:8098 --title='Pruebas H5P (datos de ejemplo)' --admin_user=admin \
+wp core install --url=http://localhost:$port --title='Pruebas H5P (datos de ejemplo)' --admin_user=admin \
   --admin_password="$admin_password" --admin_email=admin@example.org --skip-email
 wp plugin install h5p --activate
 wp option update h5p_save_content_state 1
@@ -69,18 +72,18 @@ wp user create alumno1 alumno1@example.org --role=subscriber --user_pass="$stude
   --last_name=Pruebas
 docker cp "$package" $c:/tmp/alphabet-wheel-es.h5p
 
-node "$here/check.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
+node "$here/check.mjs" --url http://localhost:$port --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
   --admin-password "$admin_password" --student-password "$student_password" --package "$package" \
   --shots "$base/report-wordpress"
 
 # The number line, on the same site: the second game of the repository.
 line_package="$root/dist/number-line-$(node -p "const l=require('$root/packages/number-line/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
-node "$here/number-line.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
+node "$here/number-line.mjs" --url http://localhost:$port --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
   --admin-password "$admin_password" --student-password "$student_password" --package "$line_package" \
   --shots "$base/report-wordpress"
 
 # The balance scale, on the same site: the third game.
 scale_package="$root/dist/balance-scale-$(node -p "const l=require('$root/packages/balance-scale/library.json');[l.majorVersion,l.minorVersion,l.patchVersion].join('.')")-es.h5p"
-node "$here/balance-scale.mjs" --url http://localhost:8098 --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
+node "$here/balance-scale.mjs" --url http://localhost:$port --container $c --db h5p-wordpress-db-1 --db-password "$db_password" \
   --admin-password "$admin_password" --student-password "$student_password" --package "$scale_package" \
   --shots "$base/report-wordpress"
