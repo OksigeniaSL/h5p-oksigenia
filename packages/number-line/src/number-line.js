@@ -331,14 +331,15 @@ export default class NumberLine extends H5P.EventDispatcher {
     // beside the jumps, and the message beside «Next», so answering does not make the round taller.
     this.moves = el('div', { class: 'nl-moves' }, [this.controls, this.extraControls]);
     this.after = el('div', { class: 'nl-after' }, [this.nextButton, this.messageLine]);
-    this.gameView = el('div', { class: 'nl-game' }, [
-      el('div', { class: 'nl-bar' }, [
-        this.roundText, this.levelText, this.pointsText,
-        this.sounds.enabled ? el('span', { class: 'nl-sound-group' }, [
-          this.soundButton, this.volume,
-        ]) : '',
+    // The points and the sound go together at the end: on a phone, on a line of their own (the styles).
+    this.bar = el('div', { class: 'nl-bar' }, [
+      this.roundText, this.levelText, el('span', { class: 'nl-bar-end' }, [
+        this.pointsText,
+        this.sounds.enabled ? el('span', { class: 'nl-sound-group' }, [this.soundButton, this.volume]) : '',
       ]),
-      el('div', { class: 'nl-ask' }, [this.challenge, this.hint]), this.lineBox, this.moves, this.after,
+    ]);
+    this.gameView = el('div', { class: 'nl-game' }, [
+      this.bar, el('div', { class: 'nl-ask' }, [this.challenge, this.hint]), this.lineBox, this.moves, this.after,
     ]);
 
     // After the game: a cheer that matches the score, the buttons and the review of every round.
@@ -413,6 +414,8 @@ export default class NumberLine extends H5P.EventDispatcher {
 
     if (phase === 'playing' || phase === 'free') {
       const playing = phase === 'playing';
+      // On a phone, a game in rounds lays its bar out in two lines (the styles); the free line has only the sound.
+      this.bar.classList.toggle('nl-bar-rounds', playing);
       this.roundText.textContent = playing ? fill(t.round, { round: g.number, total: g.rounds }) : '';
       const levels = [t.levelOne, t.levelTwo, t.levelThree];
       this.levelText.textContent = playing && g.plan.levels.length > 1 ? levels[g.level] : '';

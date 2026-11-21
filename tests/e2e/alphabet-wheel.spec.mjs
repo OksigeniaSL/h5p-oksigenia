@@ -586,6 +586,34 @@ test('finishing early asks twice and leaves the open letters without a point', a
   expect((await verbs(frame)).filter((v) => v === 'attempted')).toHaveLength(2);
 });
 
+test('in the Moodle app, which measures the game before H5P shrinks its frame, the frame fits each new screen', async ({ page }) => {
+  await page.setViewportSize({ width: 412, height: 915 });
+  const frame = await open(page, 'fr');
+  await frame.evaluate(() => {
+    window.measured = [];
+    // As the embed page of the Moodle app does: on each resize, 0 ms later, the height of the body of the game's frame,
+    // which H5P shrinks 1 ms after the resize.
+    H5P.instances[0].on('resize', () => setTimeout(() => window.measured.push(document.body.scrollHeight), 0));
+  });
+  const told = () => frame.evaluate(() => ({ last: window.measured[window.measured.length - 1], now: document.body.scrollHeight }));
+  await frame.locator('.aw-intro button').click();
+  await page.waitForTimeout(LOOK_MS);
+  let { last, now } = await told();
+  expect(last, 'the game: the last height the app was told').toBe(now);
+  // Paused, the clue hides and the game is shorter.
+  await frame.locator('.aw-pause').click();
+  await page.waitForTimeout(LOOK_MS);
+  ({ last, now } = await told());
+  expect(last, 'the pause: the last height the app was told').toBe(now);
+  await frame.locator('.aw-pause').click();
+  await page.waitForTimeout(LOOK_MS);
+  await frame.locator('.aw-finish').click();
+  await frame.locator('.aw-finish').click();
+  await page.waitForTimeout(LOOK_MS);
+  ({ last, now } = await told());
+  expect(last, 'the end: the last height the app was told').toBe(now);
+});
+
 test('the size of the H5P theme changes the text and the wheel', async ({ page }) => {
   const frame = await open(page, 'es');
   await frame.locator('.aw-intro button').click();

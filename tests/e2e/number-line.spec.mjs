@@ -326,6 +326,82 @@ test('the label of a short jump that lands next to the piece goes over the piece
   expect(overlap, '«+1» clear of the piece').toBe(false);
 });
 
+test('the labels of short jumps in a row do not touch on a narrow line', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 640 });
+  const frame = await open(page, 'fr');
+  await frame.locator('.nl-choice-add20').click();
+  await page.waitForTimeout(650);
+  const boxes = await frame.evaluate(() => {
+    const line = H5P.instances[0].line;
+    line.arcs = [3, 4, 5, 6].map((from) => ({ from, to: from + 1, text: '+1', off: false }));
+    line.piece = 18;
+    line.draw();
+    return [...document.querySelectorAll('.nl-arc-text')].map((t) => {
+      const r = t.getBoundingClientRect();
+      return { left: r.left, right: r.right, y: Number(t.getAttribute('y')) * line.scale };
+    });
+  });
+  expect(boxes).toHaveLength(4);
+  // Apart side by side, or one over the other by more than the height of the figures (13 px): the box of a text is
+  // taller than its ink in Firefox. Up and down by turns, not a staircase.
+  for (let i = 1; i < boxes.length; i++) {
+    const a = boxes[i - 1], b = boxes[i];
+    const apart = b.left - a.right >= 2 || Math.abs(b.y - a.y) >= 14;
+    expect(apart, `label ${i + 1} clear of label ${i}`).toBe(true);
+  }
+  expect(boxes[0].y, 'the third label down again').toBeCloseTo(boxes[2].y, 1);
+  expect(boxes[1].y, 'the fourth label up again').toBeCloseTo(boxes[3].y, 1);
+});
+
+for (const width of [320, 360, 412]) {
+  test(`on a phone, the bar has the round and its level above, and the points and the sound below, at ${width} px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    const frame = await open(page, 'fr');
+    await frame.locator('.nl-choice-add20').click();
+    for (const level of [0, 1, 2]) {
+      const box = await frame.evaluate((n) => {
+        const game = H5P.instances[0];
+        game.game.level = n;
+        game.render();
+        const of = (selector) => document.querySelector(selector).getBoundingClientRect();
+        const middle = (r) => r.top + r.height / 2;
+        const [round, name, points, sound, bar] = ['.nl-round', '.nl-level', '.nl-points', '.nl-sound-group', '.nl-bar'].map(of);
+        return {
+          // Beside the round, or on a line of its own on the narrowest phones.
+          firstLine: Math.min(Math.abs(round.top - name.top), Math.abs(name.left - bar.left)),
+          secondLine: Math.abs(middle(points) - middle(sound)),
+          below: points.top - Math.max(round.bottom, name.bottom), pointsStart: points.left - bar.left,
+          // As tall as the points, which are one line of the same text.
+          roundOneLine: round.height <= points.height + 2,
+          soundEnd: bar.right - parseFloat(getComputedStyle(document.querySelector('.nl-bar')).paddingInlineEnd) - sound.right,
+        };
+      }, level);
+      expect(box.firstLine, `level ${level + 1}: the level beside the round, or at the start of its own line`).toBeLessThan(4);
+      expect(box.roundOneLine, `level ${level + 1}: the round in one line`).toBe(true);
+      expect(box.secondLine, `level ${level + 1}: the points and the sound on one line`).toBeLessThan(4);
+      expect(box.below, `level ${level + 1}: the points below the level`).toBeGreaterThanOrEqual(0);
+      expect(box.pointsStart, `level ${level + 1}: the points at the start`).toBeLessThan(2);
+      expect(Math.abs(box.soundEnd), `level ${level + 1}: the sound at the end`).toBeLessThan(2);
+    }
+  });
+}
+
+test('on a board, the bar stays on one line', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 600 });
+  const frame = await open(page, 'fr');
+  await frame.locator('.nl-choice-add20').click();
+  const middles = await frame.evaluate(() => {
+    const game = H5P.instances[0];
+    game.game.level = 0;
+    game.render();
+    return ['.nl-round', '.nl-level', '.nl-points', '.nl-sound-group'].map((selector) => {
+      const r = document.querySelector(selector).getBoundingClientRect();
+      return r.top + r.height / 2;
+    });
+  });
+  expect(Math.max(...middles) - Math.min(...middles)).toBeLessThan(6);
+});
+
 test('in the Moodle app, which measures the game before H5P shrinks its frame, the frame fits the round that starts', async ({ page }) => {
   await page.setViewportSize({ width: 412, height: 915 });
   const frame = await open(page, 'fr');

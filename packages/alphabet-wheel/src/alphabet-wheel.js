@@ -7,7 +7,8 @@ import semantics from '../semantics.json';
 import { createMatcher, splitAlternatives } from '../../shared/answer.js';
 import { Countdown, formatTime } from '../../shared/timer.js';
 import {
-  Announcer, bringIntoView, containerQueries, el, exitFullScreenButton, fill, paintOuterFrames, plain, texts, watchPageColourMode,
+  Announcer, bringIntoView, containerQueries, el, exitFullScreenButton, fill, paintOuterFrames, plain, resizeFrames, texts,
+  watchPageColourMode,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
@@ -726,7 +727,14 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     if (phase === 'finished') {
       this.renderResults();
     }
-    this.trigger('resize');
+    // A new screen (the first one, the game, the pause, the end) is told twice, for the Moodle app (resizeFrames).
+    const screen = none ? 'empty' : `${phase}${phase === 'playing' && this.paused ? '-paused' : ''}`;
+    if (screen !== this.shownScreen) {
+      this.shownScreen = screen;
+      resizeFrames(this);
+    } else {
+      this.trigger('resize');
+    }
   }
 
   /** Shows the time left, marked when little is left. */

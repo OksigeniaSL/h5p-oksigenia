@@ -195,8 +195,15 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   color: var(--nl-main-text);
 }
 
-.h5p-number-line .nl-points {
+.h5p-number-line .nl-bar-end {
   margin-inline-start: auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em 1em;
+}
+
+.h5p-number-line .nl-points {
   font-variant-numeric: tabular-nums;
 }
 
@@ -204,6 +211,45 @@ html.h5p-oksigenia-dark .h5p-number-line .nl {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
+}
+
+/* On a phone, the round and its level on the first line and the points and the sound on the second, each at its end: with
+   a long level («Sentier de la Rivière») the points went down beside the sound and were left loose. The round never
+   breaks into lines. Boards keep one line. */
+@media (max-width: 520px) {
+  .h5p-number-line .nl-bar.nl-bar-rounds {
+    align-items: baseline;
+  }
+
+  .h5p-number-line .nl-bar-rounds .nl-round {
+    white-space: nowrap;
+  }
+
+  /* Beside the round while it has room for two lines at most; on the narrowest phones, a line of its own. */
+  .h5p-number-line .nl-bar-rounds .nl-level {
+    flex: 1 1 6.5em;
+    min-width: 0;
+  }
+
+  .h5p-number-line .nl-bar-rounds .nl-bar-end {
+    flex: 1 0 100%;
+    margin-inline-start: 0;
+  }
+
+  .h5p-number-line .nl-bar-rounds .nl-sound-group {
+    margin-inline-start: auto;
+  }
+}
+
+/* The narrowest phones (320 px, or a little more inside the Moodle app): the points and the sound still share a line. */
+@media (max-width: 380px) {
+  .h5p-number-line .nl-bar-rounds .nl-bar-end {
+    column-gap: 0.6em;
+  }
+
+  .h5p-number-line .nl-bar-rounds .nl-volume {
+    width: 5em;
+  }
 }
 
 /* The volume, easy to find and to touch on a board (some boards hide their own buttons): wide, with a big thumb. Dimmed

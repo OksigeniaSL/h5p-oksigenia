@@ -2,6 +2,21 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Number Line 1.0.8 (not released yet)
+
+- On a phone, the bar of a round has the round and its level on the first line and the points and the sound on the
+  second, each at its end. With a long level («Sentier de la Rivière») the points went down beside the sound and were
+  left loose. The round never breaks into lines, and on the narrowest phones the level takes a line of its own. Boards
+  keep the bar on one line, as it was.
+- The labels of short jumps in a row («+1», «+1») go up and down by turns where they would touch, on a narrow line.
+
+## Alphabet Wheel 1.0.11 (not released yet)
+
+- In the Moodle app, a wheel that gets shorter (paused, it hides the clue) kept its old height until the next tap, which
+  then moved the whole game. When it changes screen (the game, the pause, the end), the game tells H5P its size again a
+  moment later, as the Number Line and the Balance Scale do.
+- Under a page with fixed bars taller than Moodle's, the next step brought into view stops below them.
+
 ## Number Line 1.0.7 (19 November 2026)
 
 - «Where did you land?» goes with its cards once the jumps are made: before them on a board, so the round is no

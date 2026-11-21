@@ -30,6 +30,13 @@ const GRAB_MIN = 28;
 const GRAB_SHARE = 0.055;
 /** Below this many pixels per unit, the small ticks would only make a smudge. */
 const TICK_ROOM = 4;
+/** The labels of the arcs: about this wide per character (13 px, bold), with this much room between two of them, and
+ *  this much higher when one has to go over its neighbour. */
+const ARC_TEXT_CHAR = 8;
+const ARC_TEXT_GAP = 5;
+const ARC_TEXT_STEP = 18;
+/** Where the top line of labels of the arcs is, so a raised one is not cut. */
+const ARC_TEXT_TOP = 16;
 
 /**
  * @param {string} tag
@@ -70,6 +77,8 @@ export class Line {
     this.drawing = null;
     /** @type {Array<{from: number, to: number, text: string|null, off: boolean}>} */
     this.arcs = [];
+    /** @type {{x: number, y: number, half: number}[]} The labels of the arcs in the last drawing, so none touches another. */
+    this.arcLabels = [];
     /** @type {number|null} Where the piece is. */
     this.piece = null;
     /** @type {{at: number, lift: number, t: number, dir: number}|null} The piece in the middle of a jump. */
@@ -254,7 +263,17 @@ export class Line {
       // Over the piece when the jump is short and the piece stands next to its label, which it covered (a «+1» landing
       // on 20, seen on a phone).
       const piece = this.piece === null || this.flying ? null : this.x(this.piece);
-      const y = piece !== null && Math.abs(middle - piece) < PIECE_REACH ? Math.min(BASELINE - rise - 5, BASELINE - PIECE_TOP) : BASELINE - rise - 5;
+      let y = piece !== null && Math.abs(middle - piece) < PIECE_REACH ? Math.min(BASELINE - rise - 5, BASELINE - PIECE_TOP) : BASELINE - rise - 5;
+      // Higher than a label it would touch: two short jumps in a row on a narrow line wrote «+1+1» with no room between
+      // them (seen on a phone).
+      const half = (text.length * ARC_TEXT_CHAR) / 2;
+      // Half a pixel spare: a label one step above another is clear of it, whatever the rounding.
+      const touches = () => this.arcLabels.some((other) => Math.abs(other.y - y) < ARC_TEXT_STEP - 0.5
+        && Math.abs(other.x - middle) < other.half + half + ARC_TEXT_GAP);
+      for (let k = 0; k < 3 && y - ARC_TEXT_STEP >= ARC_TEXT_TOP && touches(); k++) {
+        y -= ARC_TEXT_STEP;
+      }
+      this.arcLabels.push({ x: middle, y, half });
       this.node.append(svg('text', {
         class: `nl-arc-text${off ? ' nl-arc-off-text' : ''}`, x: middle, y, 'text-anchor': 'middle',
       }, text));
@@ -306,6 +325,7 @@ export class Line {
       class: 'nl-axis', x1: this.x(0), x2: this.x(this.max), y1: BASELINE, y2: BASELINE,
     }));
     this.drawScale();
+    this.arcLabels = [];
     this.arcs.forEach((arc) => this.drawArc(arc));
     if (this.drawing) {
       const { from, to } = this.drawing;
