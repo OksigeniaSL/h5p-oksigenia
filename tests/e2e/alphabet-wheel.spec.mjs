@@ -565,6 +565,39 @@ test('the pause hides the clue and stops the clock', async ({ page }) => {
   await expect(frame.locator('.aw-clock-value')).not.toHaveText(before);
 });
 
+for (const width of [360, 412, 1280]) {
+  test(`«Pause» and «Resume» stay in the same place, in every language, at ${width} px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: width > 1000 ? 600 : 900 });
+    for (const lang of ['fr', 'es', 'de', 'it', 'pt-br', 'sv', 'nl', 'en']) {
+      const frame = await open(page, lang);
+      await frame.locator('.aw-intro button').click();
+      await page.waitForTimeout(LOOK_MS);
+      const pause = frame.locator('.aw-pause');
+      // Its place in the game: the page around it may scroll when the paused game gets shorter.
+      const place = () => pause.evaluate((b) => {
+        const r = b.getBoundingClientRect(), game = document.querySelector('.aw').getBoundingClientRect();
+        return { x: r.left - game.left, y: r.top - game.top, width: r.width, height: r.height };
+      });
+      const before = await place();
+      const playing = await pause.evaluate((b) => b.innerText.trim());
+      await pause.click();
+      await page.waitForTimeout(LOOK_MS);
+      const after = await place();
+      const paused = await pause.evaluate((b) => b.innerText.trim());
+      expect(paused, `${lang}: the button says something else when paused`).not.toBe(playing);
+      for (const side of ['x', 'y', 'width', 'height']) {
+        expect(Math.abs(after[side] - before[side]), `${lang}: the button keeps its ${side}`).toBeLessThan(1);
+      }
+      // What a screen reader hears is only the word that shows.
+      await expect(pause, `${lang}: its name when paused`).toHaveAccessibleName(paused);
+      // A second tap in the same place goes on.
+      const now = await pause.boundingBox();
+      await page.mouse.click(now.x + now.width / 2, now.y + now.height / 2);
+      await expect(frame.locator('.aw-question'), `${lang}: playing again`).toBeVisible();
+    }
+  });
+}
+
 test('finishing early asks twice and leaves the open letters without a point', async ({ page }) => {
   const frame = await open(page, 'en');
   await frame.locator('.aw-intro button').click();

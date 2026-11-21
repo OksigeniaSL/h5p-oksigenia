@@ -802,6 +802,20 @@
   cursor: default;
 }
 
+/* «Pause» and «Resume» in the same place, the one that does not apply hidden: the button keeps the width of the longer. */
+.h5p-alphabet-wheel .aw-pause-words {
+  display: inline-grid;
+}
+
+.h5p-alphabet-wheel .aw-pause-word {
+  grid-area: 1 / 1;
+  text-align: center;
+}
+
+.h5p-alphabet-wheel .aw-pause-off {
+  visibility: hidden;
+}
+
 .h5p-alphabet-wheel .aw-paused {
   padding: 0.8em;
   border-radius: var(--aw-radius);

@@ -286,7 +286,14 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.clock = el('span', { class: 'aw-clock', role: 'timer', 'aria-label': t.timeLeft }, [
       el('span', { class: 'aw-clock-label', text: t.timeLeft }), this.clockValue,
     ]);
-    this.pauseButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pause', onclick: () => this.setPaused(!this.paused, true) });
+    // Both words are always there, one over the other, and only the one that applies shows: the button is as wide as the
+    // longer one and stays where it is when it changes («Pause» to «Reprendre» went down a line on a phone, and a second
+    // tap in the same place did not resume).
+    this.pauseWord = el('span', { class: 'aw-pause-word', text: t.pause });
+    this.resumeWord = el('span', { class: 'aw-pause-word aw-pause-off', text: t.resume });
+    this.pauseButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-pause', onclick: () => this.setPaused(!this.paused, true) }, [
+      el('span', { class: 'aw-pause-words' }, [this.pauseWord, this.resumeWord]),
+    ]);
     this.soundButton = el('button', { type: 'button', class: 'aw-button aw-secondary aw-sound', onclick: () => this.toggleSound() });
     this.volume = volumeSlider(this.sounds, t.volume, 'aw-volume', () => this.render());
     this.kind = el('p', { class: 'aw-kind' });
@@ -711,7 +718,8 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.question.hidden = this.paused;
       this.pausedNote.hidden = !this.paused;
       this.fitTiles();
-      this.pauseButton.textContent = this.paused ? t.resume : t.pause;
+      this.pauseWord.classList.toggle('aw-pause-off', this.paused);
+      this.resumeWord.classList.toggle('aw-pause-off', !this.paused);
       // An icon button: the speaker is known to everyone, and its name is there for screen readers.
       this.paintSound();
       this.paintClock();

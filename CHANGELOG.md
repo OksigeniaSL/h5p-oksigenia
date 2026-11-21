@@ -10,12 +10,16 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
   keep the bar on one line, as it was.
 - The labels of short jumps in a row («+1», «+1») go up and down by turns where they would touch, on a narrow line.
 
-## Alphabet Wheel 1.0.11 (not released yet)
+## Alphabet Wheel 1.0.12 (not released yet)
 
 - In the Moodle app, a wheel that gets shorter (paused, it hides the clue) kept its old height until the next tap, which
   then moved the whole game. When it changes screen (the game, the pause, the end), the game tells H5P its size again a
   moment later, as the Number Line and the Balance Scale do.
 - Under a page with fixed bars taller than Moodle's, the next step brought into view stops below them.
+- «Pause» and «Resume» stay in the same place: the button is as wide as the longer word. In French, «Reprendre» did not
+  fit beside the clock on a phone and went down a line, so a second tap in the same place did not resume.
+
+Version 1.0.11 was a test version on a development site, not released.
 
 ## Number Line 1.0.7 (19 November 2026)
 
