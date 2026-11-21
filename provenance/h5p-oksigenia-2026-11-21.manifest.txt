@@ -1,0 +1,20 @@
+Provenance seal (OpenTimestamps)
+================================
+
+Repository:   OksigeniaSL/h5p-oksigenia
+Holder:       Oksigenia S.L.
+Commit:       c3594637bac4bbf686b0384d35a056d029e8dd00
+Tree:         362660cce8cc81225b45c7870ef3b7ea66d748c8
+Commit date:  2026-11-21T23:27:38+00:00
+Sealed (UTC): 2026-11-21T23:53:39Z
+Signed tag:   provenance-2026-11-21
+
+This file pins the state of the repository. Its .ots proof anchors it in the
+Bitcoin blockchain through OpenTimestamps: the content existed no later than
+the time of that block. The tree hash identifies the content alone, so a later
+copy with the same files has the same tree. The signed tag adds who sealed it.
+
+Verify:
+  git rev-parse c3594637bac4bbf686b0384d35a056d029e8dd00^{tree}
+  ots verify h5p-oksigenia-2026-11-21.manifest.txt.ots
+  git -c gpg.ssh.allowedSignersFile=provenance/allowed_signers verify-tag provenance-2026-11-21
