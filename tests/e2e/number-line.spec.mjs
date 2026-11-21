@@ -441,11 +441,17 @@ for (const width of [320, 360, 412]) {
     await page.setViewportSize({ width, height: 800 });
     const frame = await open(page);
     await frame.locator('.nl-choice-tables').click();
-    const corner = await frame.locator('.h5p-enable-fullscreen').boundingBox();
-    for (const selector of ['.nl-round', '.nl-level', '.nl-points', '.nl-sound', '.nl-volume']) {
-      const box = await frame.locator(selector).boundingBox();
-      const apart = box.x + box.width <= corner.x || box.y >= corner.y + corner.height;
-      expect(apart, `${selector} clear of the button`).toBe(true);
+    // All at the same moment, once the round has come into view: the page scrolls meanwhile.
+    await page.waitForTimeout(650);
+    const apart = await frame.evaluate(() => {
+      const corner = document.querySelector('.h5p-enable-fullscreen').getBoundingClientRect();
+      return Object.fromEntries(['.nl-round', '.nl-level', '.nl-points', '.nl-sound', '.nl-volume'].map((selector) => {
+        const box = document.querySelector(selector).getBoundingClientRect();
+        return [selector, box.right <= corner.left || box.top >= corner.bottom];
+      }));
+    });
+    for (const [selector, clear] of Object.entries(apart)) {
+      expect(clear, `${selector} clear of the button`).toBe(true);
     }
   });
 }

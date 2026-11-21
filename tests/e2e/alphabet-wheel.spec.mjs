@@ -601,6 +601,9 @@ for (const width of [360, 412, 1280]) {
 test('finishing early asks twice and leaves the open letters without a point', async ({ page }) => {
   const frame = await open(page, 'en');
   await frame.locator('.aw-intro button').click();
+  // As a person: the game comes into view and H5P is told its size twice before anyone can press «Finish» (a click
+  // right after «Start» was lost now and then in Firefox).
+  await page.waitForTimeout(LOOK_MS);
   await frame.locator('.aw-input').fill('apple');
   await frame.locator('.aw-input').press('Enter');
   await frame.locator('.aw-finish').click();
