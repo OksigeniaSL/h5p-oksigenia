@@ -1,4 +1,4 @@
-// The three views of the scale, by age, painted by Gaudí (Oksigenia's art director): a market stall up to 4th grade, a
+// The three views of the scale, by age: a market stall up to 4th grade, a
 // precision scale for 5th and 6th, and a pencil drawing on squared paper from secondary school on. Each view is a set of
 // pictures (assets/views/<view>/) and their geometry (<view>.json). The game gives the angle, the stops and what is on
 // each pan; the view draws it on a canvas, and puts a transparent box on top of every thing on the pans, to touch it,
