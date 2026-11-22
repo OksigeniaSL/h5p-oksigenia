@@ -677,6 +677,8 @@ for (const [width, height] of [[1100, 540], [360, 640]]) {
     }, { message: `${selector} in view` }).toBe(true);
     await frame.locator('.aw-intro button').click();
     await shows('.aw-input');
+    // As a person, and as in «finishing early»: the page settles before «Finish» is pressed twice.
+    await page.waitForTimeout(LOOK_MS);
     await frame.locator('.aw-finish').click();
     await frame.locator('.aw-finish').click();
     await shows('.aw-cheer-title');
