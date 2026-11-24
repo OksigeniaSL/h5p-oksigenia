@@ -207,6 +207,21 @@
   .h5p-alphabet-wheel .aw-wheel {
     width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
   }
+
+  /* With pictures, the wheel grows with the window (--aw-room, from the script; see fitRoom), up to half the game and to
+     half as much again as without them, so the size of the theme still counts. With tiles its column is two fifths, as
+     without pictures, and more only while the panel keeps the width of ten tiles. */
+  .h5p-alphabet-wheel .aw-game.aw-game-pictures {
+    --aw-wheel-size: clamp(14em + 12em * var(--h5p-theme-scaling, 1), var(--aw-room, 0px), 21em + 18em * var(--h5p-theme-scaling, 1));
+  }
+
+  .h5p-alphabet-wheel .aw-game.aw-game-pictures .aw-wheel {
+    width: min(100%, var(--aw-wheel-size));
+  }
+
+  .h5p-alphabet-wheel .aw-game.aw-game-pictures.aw-game-tiles {
+    grid-template-columns: minmax(0, max(calc(40% - 0.4em), min(50%, calc(100% - 34em), var(--aw-wheel-size)))) minmax(16em, 1fr);
+  }
 }
 
 .h5p-alphabet-wheel .aw-letters {
@@ -389,7 +404,18 @@
   object-fit: contain;
 }
 
+/* On its own, with no words beside it and no keyboard to come (the tiles), the picture is larger. */
+.h5p-alphabet-wheel .aw-question.aw-with-tiles.aw-picture-alone .aw-clue-image {
+  width: 9em;
+  height: 9em;
+}
+
 @container aw (min-width: 34em) {
+  /* As wide as the ring of letters leaves it, with the current one, which is larger. */
+  .h5p-alphabet-wheel .aw-wheel.aw-with-picture .aw-hub {
+    inset: 15%;
+  }
+
   .h5p-alphabet-wheel .aw-wheel.aw-with-picture .aw-hub-picture {
     display: grid;
     place-items: center;
@@ -403,14 +429,14 @@
     left: 50%;
     display: grid;
     place-items: center;
-    width: 1.7em;
+    width: 1.55em;
     aspect-ratio: 1;
     border: 2px solid var(--aw-card);
     border-radius: 50%;
     background: var(--aw-main);
     color: var(--aw-on-main);
-    font-size: 8cqi;
-    transform: translate(-50%, 45%);
+    font-size: 7.4cqi;
+    transform: translate(-50%, 0);
   }
 
   .h5p-alphabet-wheel .aw-clue-picture-box {
@@ -433,6 +459,18 @@
     width: min(100%, calc(14em + 12em * var(--h5p-theme-scaling, 1)));
   }
 
+  .h5p-alphabet-wheel .aw-wide .aw-game.aw-game-pictures {
+    --aw-wheel-size: clamp(14em + 12em * var(--h5p-theme-scaling, 1), var(--aw-room, 0px), 21em + 18em * var(--h5p-theme-scaling, 1));
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-game.aw-game-pictures .aw-wheel {
+    width: min(100%, var(--aw-wheel-size));
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-game.aw-game-pictures.aw-game-tiles {
+    grid-template-columns: minmax(0, max(calc(40% - 0.4em), min(50%, calc(100% - 34em), var(--aw-wheel-size)))) minmax(16em, 1fr);
+  }
+
   .h5p-alphabet-wheel .aw-letter {
     width: var(--aw-dot-px, 1.2em);
     font-size: calc(var(--aw-dot-px, 1.2em) * 0.52);
@@ -440,6 +478,10 @@
 
   .h5p-alphabet-wheel .aw-hub-letter {
     font-size: var(--aw-hub-px, 3.9em);
+  }
+
+  .h5p-alphabet-wheel .aw-wide .aw-wheel.aw-with-picture .aw-hub {
+    inset: 15%;
   }
 
   .h5p-alphabet-wheel .aw-wide .aw-wheel.aw-with-picture .aw-hub-picture {
@@ -455,14 +497,14 @@
     left: 50%;
     display: grid;
     place-items: center;
-    width: 1.7em;
+    width: 1.55em;
     aspect-ratio: 1;
     border: 2px solid var(--aw-card);
     border-radius: 50%;
     background: var(--aw-main);
     color: var(--aw-on-main);
-    font-size: calc(var(--aw-hub-px, 3.9em) * 0.31);
-    transform: translate(-50%, 45%);
+    font-size: calc(var(--aw-hub-px, 3.9em) * 0.285);
+    transform: translate(-50%, 0);
   }
 
   .h5p-alphabet-wheel .aw-wide .aw-clue-picture-box {

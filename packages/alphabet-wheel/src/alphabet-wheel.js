@@ -7,8 +7,8 @@ import semantics from '../semantics.json';
 import { createMatcher, splitAlternatives } from '../../shared/answer.js';
 import { Countdown, formatTime } from '../../shared/timer.js';
 import {
-  Announcer, bringIntoView, containerQueries, el, exitFullScreenButton, fill, paintOuterFrames, plain, resizeFrames, texts,
-  watchPageColourMode,
+  Announcer, bringIntoView, containerQueries, el, exitFullScreenButton, fill, paintOuterFrames, plain, resizeFrames,
+  roomInView, texts, watchPageColourMode, watchRoom,
 } from '../../shared/dom.js';
 import { fillInDefinition, fillInResponse } from '../../shared/xapi.js';
 import { cheerTier, confetti, scoreRing } from '../../shared/cheer.js';
@@ -194,6 +194,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.build();
     }
     container.replaceChildren(this.root);
+    this.fitRoom();
     this.render();
     if (this.takenUp && this.isRoot()) {
       this.takenUp = false;
@@ -213,6 +214,11 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
         document.documentElement.classList.toggle('h5p-oksigenia-dark', dark);
         paintOuterFrames(dark ? getComputedStyle(this.root).backgroundColor : '');
       });
+    }
+    // The wheel of a game with pictures takes the room of the window (fitRoom).
+    if (this.hasPictures && this.isRoot() && !this.roomWatched) {
+      this.roomWatched = true;
+      watchRoom(() => this.fitRoom());
     }
     if (this.timer && !this.visibilityWatched) {
       this.visibilityWatched = true;
@@ -273,6 +279,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     // the other. They load with the game, so each letter shows its own at once.
     this.pictures = this.items.map((it) => (it.image ? this.picture(it, 'aw-hub-image', '') : null));
     this.panelPictures = this.items.map((it) => (it.image ? this.picture(it, 'aw-clue-image', '') : null));
+    this.hasPictures = this.pictures.some(Boolean);
     this.hubPicture = el('span', { class: 'aw-hub-picture' });
     this.wheel = el('div', { class: 'aw-wheel' }, [
       el('ol', { class: 'aw-letters', 'aria-label': t.wheel }, this.letters),
@@ -335,7 +342,9 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       // The counts and «Finish» share the last line: room for the tiles on a board.
       this.question, this.pausedNote, this.feedbackLine, el('div', { class: 'aw-foot' }, [this.counts, this.finishButton]),
     ]);
-    this.gameView = el('div', { class: `aw-game${this.tilesMode ? ' aw-game-tiles' : ''}` }, [this.wheel, this.panel]);
+    this.gameView = el('div', {
+      class: `aw-game${this.tilesMode ? ' aw-game-tiles' : ''}${this.hasPictures ? ' aw-game-pictures' : ''}`,
+    }, [this.wheel, this.panel]);
 
     // After the game: a cheer that matches the score, then the review of every letter.
     this.ring = el('div', { class: 'aw-ring' });
@@ -568,7 +577,10 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
    * the tiles open no keyboard, so they move only when the clue or «Check» is out of view.
    */
   bringAnswerIntoView() {
-    if (this.tilesMode) {
+    // Beside the panel, a wheel with pictures holds the clue, and it is taller than the panel: the whole of it.
+    if (this.hasPictures && this.isWide() && (this.tilesMode || !matchMedia('(pointer: coarse)').matches)) {
+      bringIntoView(this.wheel);
+    } else if (this.tilesMode) {
       bringIntoView(this.question, { through: this.checkButton });
     } else {
       bringIntoView(this.input, { keyboard: true });
@@ -709,6 +721,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       this.wheel.classList.toggle('aw-with-picture', !!picture);
       this.cluePicture.replaceChildren(this.panelPictures[g.pos] || '');
       this.question.classList.toggle('aw-with-picture', !!picture);
+      this.question.classList.toggle('aw-picture-alone', !!picture && !it.clue);
       this.syncBoard();
       this.round.textContent = fill(t.round, { round: g.round });
       this.kind.textContent = this.kindText(it);
@@ -805,6 +818,21 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     this.retryButton.hidden = !this.behaviour.enableRetry;
   }
 
+  /**
+   * The height a wheel with pictures can take, for the styles: the picture is the clue, so on a screen with room to spare
+   * the wheel grows with it, as far as it still shows whole. Inside another content type it keeps its size.
+   */
+  fitRoom() {
+    const room = this.hasPictures && this.isRoot() ? Math.round(roomInView()) : 0;
+    if (room !== this.room) {
+      this.room = room;
+      this.root.style.setProperty('--aw-room', `${room}px`);
+      if (this.game.phase === 'playing') {
+        resizeFrames(this);
+      }
+    }
+  }
+
   /** «Start»: the clock runs and the first letter is asked. */
   start() {
     if (this.game.phase !== 'intro' || !this.items.length) {
@@ -815,6 +843,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
     }
     // The click on «Start» is the gesture the browser asks for before any sound.
     this.sounds.wake();
+    this.fitRoom();
     this.game.start();
     this.feedback = null;
     if (this.timer) {

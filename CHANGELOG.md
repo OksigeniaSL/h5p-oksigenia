@@ -2,6 +2,16 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
+## Alphabet Wheel 1.0.13 (not released yet)
+
+- The pictures are larger. Beside the panel, the picture takes as much of the wheel as the ring of letters leaves, and on a
+  screen with room to spare a wheel with pictures grows with the window, as far as it still shows whole and up to half as
+  much again: on a laptop of 1366 × 768, the picture goes from 163 to some 250 px. The wheel comes into view whole when the
+  game starts. A wheel without pictures, a page of another site and a wheel inside another content type keep the size they
+  had.
+- On a phone, a picture on its own (with no words beside it) is larger with the letter tiles: from 88 to 144 px. With
+  typing it keeps its size, because the keyboard takes half of the screen.
+
 ## Number Line 1.0.9 (21 November 2026)
 
 - On a phone, the bar of a round has the round and its level on the first line and the points and the sound on the

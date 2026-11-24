@@ -210,6 +210,26 @@ export function pageBar() {
 }
 
 /**
+ * @returns {number} The height a step can take and still be in view whole, clear of the bars of the page (see `inView`);
+ *   0 when the outermost window cannot be read: what can be read is then a frame as tall as the game, and a game that grew
+ *   with it would never stop growing.
+ */
+export function roomInView() {
+  const windows = readableWindows(), win = windows[windows.length - 1];
+  return win === window.top ? Math.max(0, win.innerHeight - pageBar() - BAR_GAP - VIEW_MARGIN) : 0;
+}
+
+/**
+ * Calls back whenever the outermost window that can be read changes size (a cable plugged into a board, full screen, a
+ * tablet turned round). The frames around a game only tell it about the width.
+ * @param {() => void} onChange
+ */
+export function watchRoom(onChange) {
+  const windows = readableWindows();
+  windows[windows.length - 1].addEventListener('resize', onChange);
+}
+
+/**
  * The room above a step brought into view: its own `scroll-margin-top`, or more if the bars of the page are taller.
  * @param {Element} node
  */

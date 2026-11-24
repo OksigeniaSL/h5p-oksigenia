@@ -363,6 +363,84 @@ test('a picture can be the clue, alone or beside the text, in the middle of the 
   await expect(frame.locator('.aw-review-item.aw-ok .aw-review-image')).toHaveAttribute('alt', moon.imageAlt);
 });
 
+/** The wheel, its picture and where they are in the outer window. */
+const measureWheel = (frame) => frame.evaluate(() => {
+  const top = window.frameElement.getBoundingClientRect().top;
+  const wheel = document.querySelector('.aw-wheel').getBoundingClientRect();
+  const image = document.querySelector('.aw-hub-image').getBoundingClientRect();
+  const hub = document.querySelector('.aw-hub').getBoundingClientRect();
+  const badge = document.querySelector('.aw-hub-letter').getBoundingClientRect();
+  return {
+    wheel: Math.round(wheel.width), image: Math.round(image.width), top: Math.round(top + wheel.top),
+    bottom: Math.round(top + wheel.bottom), height: window.parent.innerHeight, frame: window.innerHeight,
+    // How much of the picture the badge of the letter covers, in height.
+    covered: (image.bottom - badge.top) / image.height, hub: Math.round(hub.width),
+  };
+});
+
+test('a wheel with pictures takes the room of the window, and shows whole', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  const frame = await open(page, 'tiles-en');
+  await frame.locator('.aw-intro button').click();
+  await passTo(frame, 'M');
+  await page.waitForTimeout(LOOK_MS);
+  const tall = await measureWheel(frame);
+  expect(tall.wheel).toBeGreaterThan(480);
+  expect(tall.image).toBeGreaterThan(0.45 * tall.wheel);
+  expect(tall.covered).toBeLessThan(0.06);
+  expect(tall.top).toBeGreaterThanOrEqual(0);
+  expect(tall.bottom).toBeLessThanOrEqual(tall.height);
+  // The panel keeps ten tiles in one row.
+  const tiles = await frame.locator('.aw-tiles').evaluate((e) => e.clientWidth);
+  expect(tiles).toBeGreaterThan(440);
+
+  // A smaller window in the middle of the game: the wheel goes back to its size, still whole, and no letter is lost.
+  await page.setViewportSize({ width: 1600, height: 620 });
+  await expect.poll(async () => (await measureWheel(frame)).wheel).toBeLessThan(470);
+  const low = await measureWheel(frame);
+  expect(low.wheel).toBeGreaterThanOrEqual(400);
+  expect(await currentLetter(frame)).toBe('M');
+  // The frame follows the game, so nothing is cut off.
+  await expect.poll(async () => frame.evaluate(() => document.body.scrollHeight - window.innerHeight)).toBeLessThanOrEqual(1);
+});
+
+test('a wheel with pictures in a page of another site keeps its size', async ({ page, browserName }) => {
+  test.skip(browserName !== 'firefox', 'Chromium keeps a routed page away from the local network, and the code is the same');
+  await page.setViewportSize({ width: 1600, height: 900 });
+  // The page is at 127.0.0.1 and the game at localhost, another site for the browser: what can be read ends at a frame
+  // as tall as the game.
+  const game = new URL('/view/h5p-alphabet-wheel/alphabet-wheel-tiles-en?session=null', test.info().project.use.baseURL);
+  const outer = `http://127.0.0.1:${game.port}/another-site`;
+  await page.route(outer, (route) => route.fulfill({
+    contentType: 'text/html', body: `<!doctype html><iframe src="${game}" style="width: 1400px; height: 800px"></iframe>`,
+  }));
+  await page.goto(outer);
+  const view = await (await page.waitForSelector('iframe')).contentFrame();
+  const handle = await view.waitForSelector('iframe.h5p-iframe');
+  const frame = await handle.contentFrame();
+  await frame.waitForSelector('.aw-intro button');
+  await frame.locator('.aw-intro button').click();
+  await passTo(frame, 'M');
+  const widths = [];
+  for (let i = 0; i < 3; i++) {
+    widths.push(await frame.evaluate(() => Math.round(document.querySelector('.aw-wheel').getBoundingClientRect().width)));
+    await page.waitForTimeout(400);
+  }
+  expect(Math.max(...widths)).toBeLessThanOrEqual(416);
+  expect(new Set(widths).size).toBe(1);
+});
+
+test('a wheel with pictures inside another content type keeps its size', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  const inner = await open(page, 'tiles-en');
+  // Not the root of the content: as a slide of another game.
+  await inner.evaluate(() => {
+    H5P.instances[0].isRoot = () => false;
+  });
+  await inner.locator('.aw-intro button').click();
+  expect(await inner.evaluate(() => getComputedStyle(document.querySelector('.aw')).getPropertyValue('--aw-room').trim())).toBe('0px');
+});
+
 test('pictures: paused, they hide with the clue; a letter with neither text nor picture is left out', async ({ page }) => {
   const frame = await open(page, 'en');
   const result = await frame.evaluate(() => {
@@ -661,7 +739,8 @@ test('the size of the H5P theme changes the text and the wheel', async ({ page }
   await size('small');
   const small = await measure();
   await size('large');
-  await expect.poll(async () => (await measure()).wheel).toBeGreaterThan(small.wheel * 1.2);
+  // The example has pictures, so its wheel takes the room there is: the large one stops at half the game.
+  await expect.poll(async () => (await measure()).wheel).toBeGreaterThan(small.wheel * 1.1);
   expect((await measure()).text).toBeGreaterThan(small.text);
 });
 
@@ -880,6 +959,28 @@ test.describe('on a touch screen', () => {
     await frame.locator('.aw-input').press('Enter');
     await expect(frame.locator('.aw-letter[aria-current] .aw-letter-text')).toHaveText('S');
     await clear();
+  });
+
+  test('a picture on its own is larger with the tiles, which open no keyboard, and stays in view with «Check»', async ({ page }) => {
+    const sizes = {};
+    for (const which of ['en', 'tiles-en']) {
+      const frame = await open(page, which);
+      await frame.locator('.aw-intro button').tap();
+      await passTo(frame, 'M');
+      await page.waitForTimeout(LOOK_MS);
+      sizes[which] = (await frame.locator('.aw-clue-image').boundingBox()).height;
+      if (which === 'tiles-en') {
+        const picture = await frame.locator('.aw-clue-image').boundingBox();
+        const check = await frame.locator('.aw-check').boundingBox();
+        expect(picture.y).toBeGreaterThanOrEqual(0);
+        expect(check.y + check.height).toBeLessThanOrEqual(height);
+        // With words beside it, as the Sun, it keeps its size.
+        await passTo(frame, 'S');
+        expect((await frame.locator('.aw-clue-image').boundingBox()).height).toBeLessThan(100);
+      }
+    }
+    expect(sizes.en).toBeLessThan(100);
+    expect(sizes['tiles-en']).toBeGreaterThan(1.5 * sizes.en);
   });
 
   test('letter tiles open no keyboard: the clue, the word, the tiles and «Check» stay in view as they are tapped', async ({ page }) => {
