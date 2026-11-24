@@ -436,7 +436,7 @@
     background: var(--aw-main);
     color: var(--aw-on-main);
     font-size: 7.4cqi;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -10%);
   }
 
   .h5p-alphabet-wheel .aw-clue-picture-box {
@@ -504,7 +504,7 @@
     background: var(--aw-main);
     color: var(--aw-on-main);
     font-size: calc(var(--aw-hub-px, 3.9em) * 0.285);
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -10%);
   }
 
   .h5p-alphabet-wheel .aw-wide .aw-clue-picture-box {
