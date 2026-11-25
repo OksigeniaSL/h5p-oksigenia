@@ -46,6 +46,8 @@ const CHEER_DELAY_MS = 500;
 /** After a move, the buttons do not take a tap for this long: a double tap on a slow board would pass the next letter
  * unseen, or wipe the result of the last one with an empty answer. */
 const DOUBLE_TAP_MS = 400;
+/** The most tiles the rack of a phone keeps room for: two rows. */
+const ROOM_TILES = 12;
 /** Confetti pieces by how the game went. */
 const CONFETTI = { perfect: 90, great: 40 };
 
@@ -414,7 +416,16 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       type: 'button', class: 'aw-button aw-secondary aw-erase', 'aria-label': t.eraseLetter, onclick: () => this.erase(),
     }, [icon('erase')]);
     this.soFar = el('p', { class: 'aw-so-far h5p-oksigenia-sr-only', id: `${ids.input}-so-far` });
-    this.tileTray = el('div', { class: 'aw-tiles', role: 'group', 'aria-label': t.tiles });
+    this.rack = el('div', { class: 'aw-rack' });
+    // On a phone, as many empty places as the longest word of the wheel has tiles (up to ROOM_TILES) keep the rows of the
+    // rack, so «Check» and what is under it stay where they are from a short word to a long one. The styles hide them
+    // beside the wheel, where every word has its tiles on one row.
+    const longest = Math.max(...this.items.map((it) => new TileBoard(it.answers[0]).tiles.length), 0);
+    const room = Array.from({ length: Math.min(longest, ROOM_TILES) }, () => el('span', { class: 'aw-room' }));
+    this.tileTray = el('div', { class: 'aw-tiles', role: 'group', 'aria-label': t.tiles }, [
+      el('div', { class: 'aw-rack-box' }, [this.rack, el('div', { class: 'aw-rack-room', 'aria-hidden': 'true' }, room)]),
+      this.eraseButton,
+    ]);
     this.slotNodes = [];
     this.tileButtons = [];
     // No «Your answer» over the places: the word is plain to see, and a board has no height to spare.
@@ -446,7 +457,7 @@ export default class AlphabetWheel extends H5P.EventDispatcher {
       // A tap right after a move is the second tap of a double tap, on a tile of the next letter; a key is never one.
       onclick: (e) => !(e.detail > 0 && this.tooSoon()) && this.tapTile(i),
     }));
-    this.tileTray.replaceChildren(...this.tileButtons, this.eraseButton);
+    this.rack.replaceChildren(...this.tileButtons);
     this.tileTray.style.setProperty('--aw-n', String(this.tileButtons.length));
     this.landed = -1;
     this.paintBoard();

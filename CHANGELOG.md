@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Alphabet Wheel 1.0.13 (not released yet)
+## Alphabet Wheel 1.0.14 (not released yet)
 
 - The pictures are larger. Beside the panel, the picture takes as much of the wheel as the ring of letters leaves, and on a
   screen with room to spare a wheel with pictures grows with the window, as far as it still shows whole and up to half as
@@ -11,6 +11,11 @@ Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
   had.
 - On a phone, a picture on its own (with no words beside it) is larger with the letter tiles: from 88 to 144 px. With
   typing it keeps its size, because the keyboard takes half of the screen.
+- With letter tiles on a phone, «Check» and what is under it stay in place from a short word to a long one: the rack keeps
+  the rows of the longest word of the wheel, up to two. The key that erases stays at the end of the last row; with seven
+  letters it went down to a row of its own.
+
+Version 1.0.13 was a test version on a development site, not released.
 
 ## Number Line 1.0.9 (21 November 2026)
 

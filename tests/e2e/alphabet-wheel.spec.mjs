@@ -985,6 +985,41 @@ test.describe('on a touch screen', () => {
     expect(sizes['tiles-en']).toBeGreaterThan(1.5 * sizes.en);
   });
 
+  test('letter tiles: «Check» and the key that erases stay in place from a short word to a long one', async ({ page }) => {
+    for (const width of [320, 360, 390, 412]) {
+      await page.setViewportSize({ width, height });
+      const frame = await openTiles(page, [
+        { letter: 'O', kind: 'starts', clue: 'Nuit', answer: 'OWL' },
+        { letter: 'N', kind: 'starts', clue: 'Mer', answer: 'NARWHAL' },
+        { letter: 'J', kind: 'starts', clue: 'Mer', answer: 'JELLYFISH' },
+      ]);
+      await frame.locator('.aw-intro button').tap();
+      await page.waitForTimeout(LOOK_MS);
+      const places = [];
+      for (let i = 0; i < 3; i++) {
+        places.push(await frame.evaluate(() => {
+          const top = document.querySelector('.aw').getBoundingClientRect().top;
+          const at = (s) => Math.round(document.querySelector(s).getBoundingClientRect().top - top);
+          const tiles = [...document.querySelectorAll('.aw-rack .aw-tile')].map((n) => n.getBoundingClientRect());
+          const erase = document.querySelector('.aw-erase').getBoundingClientRect();
+          return {
+            check: at('.aw-check'), erase: at('.aw-erase'), tile: Math.min(...tiles.map((r) => Math.min(r.width, r.height))),
+            over: tiles.some((r) => r.right > erase.left && r.bottom > erase.top && r.top < erase.bottom),
+            wide: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          };
+        }));
+        await page.waitForTimeout(PERSON_MS);
+        await frame.locator('.aw-pass').tap();
+        await page.waitForTimeout(PERSON_MS);
+      }
+      for (const p of places) {
+        expect(p, `${width} px`).toEqual({ ...p, check: places[0].check, erase: places[0].erase, over: false });
+        expect(p.tile).toBeGreaterThanOrEqual(43.5);
+        expect(p.wide).toBeLessThanOrEqual(0);
+      }
+    }
+  });
+
   test('letter tiles open no keyboard: the clue, the word, the tiles and «Check» stay in view as they are tapped', async ({ page }) => {
     const frame = await openTiles(page);
     await page.evaluate(() => {

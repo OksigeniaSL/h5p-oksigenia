@@ -682,7 +682,8 @@
 }
 
 .h5p-alphabet-wheel .aw-slot,
-.h5p-alphabet-wheel .aw-tile {
+.h5p-alphabet-wheel .aw-tile,
+.h5p-alphabet-wheel .aw-room {
   box-sizing: border-box;
   display: inline-grid;
   place-items: center;
@@ -696,7 +697,8 @@
   line-height: 1;
 }
 
-.h5p-alphabet-wheel .aw-tile {
+.h5p-alphabet-wheel .aw-tile,
+.h5p-alphabet-wheel .aw-room {
   width: 2.1em;
   min-width: 2.75rem;
 }
@@ -717,6 +719,10 @@
     height: 2.6em;
     min-height: 0;
   }
+
+  .h5p-alphabet-wheel .aw-tiles .aw-rack-room {
+    display: none;
+  }
 }
 
 @supports not (container-type: inline-size) {
@@ -731,10 +737,14 @@
     height: 2.6em;
     min-height: 0;
   }
+
+  .h5p-alphabet-wheel .aw-wide .aw-tiles .aw-rack-room {
+    display: none;
+  }
 }
 
 .h5p-alphabet-wheel .aw-slot {
-  flex: 1 1 1.2em;
+  flex: 1 1 1em;
   max-width: max(2.1em, 2.75rem);
   height: 1.75em;
   min-height: 0;
@@ -787,13 +797,13 @@
   width: 0.6em;
 }
 
-/* The key that erases ends the rack, on the right as on a keyboard. The tiles leave it its 2.75rem and half a rem more,
+/* The key that erases ends the rack, on the right as on a keyboard, and stays on its last row. The tiles leave it its 2.75rem and half a rem more,
    for the rounding of old browsers on screens at ×1.5. */
 .h5p-alphabet-wheel .aw-erase {
   box-sizing: border-box;
   flex: none;
+  align-self: flex-end;
   width: 2.75rem;
-  margin-inline-start: auto;
   padding: 0;
 }
 
@@ -810,11 +820,31 @@
 .h5p-alphabet-wheel .aw-tiles {
   container-type: inline-size;
   display: flex;
-  flex-wrap: wrap;
   gap: 0.35rem;
   padding: 0.35em 0.35em 0.5em;
   border-radius: var(--aw-radius);
   background: var(--aw-hub);
+}
+
+/* The tiles and, on a phone, the room of the longest word, one over the other. */
+.h5p-alphabet-wheel .aw-rack-box {
+  display: grid;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.h5p-alphabet-wheel .aw-rack,
+.h5p-alphabet-wheel .aw-rack-room {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: 1 / 1;
+  align-content: flex-start;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.h5p-alphabet-wheel .aw-rack-room {
+  visibility: hidden;
 }
 
 .h5p-alphabet-wheel .aw-tile {

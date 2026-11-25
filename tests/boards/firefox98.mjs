@@ -225,10 +225,10 @@ const GAMES = {
 /** Taps, with real clicks, a free tile for each letter of the text. */
 async function tapAnswer(text) {
   for (const letter of text) {
-    const index = await js(`var tiles = document.querySelectorAll('.aw-tiles > .aw-tile');
+    const index = await js(`var tiles = document.querySelectorAll('.aw-rack > .aw-tile');
       for (var k = 0; k < tiles.length; k++) { if (!tiles[k].disabled && tiles[k].textContent === arguments[0]) { return k; } }
       return -1;`, letter);
-    await click(`.aw-tiles > :nth-child(${index + 1})`);
+    await click(`.aw-rack > :nth-child(${index + 1})`);
   }
 }
 
