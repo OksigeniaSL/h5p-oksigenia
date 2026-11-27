@@ -2,7 +2,7 @@
 
 Each game has its own versions and tags (`alphabet-wheel-v1.0.0`).
 
-## Alphabet Wheel 1.0.14 (not released yet)
+## Alphabet Wheel 1.0.14 (27 November 2026)
 
 - The pictures are larger. Beside the panel, the picture takes as much of the wheel as the ring of letters leaves, and on a
   screen with room to spare a wheel with pictures grows with the window, as far as it still shows whole and up to half as
